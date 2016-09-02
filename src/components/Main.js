@@ -3,7 +3,7 @@ require('styles/App.scss');
 
 import React from 'react';
 import ChatBubbleComponent from './ChatBubbleComponent.js';
-import chatConv from 'sources/conversation.json';
+import chatConv from './conversation.json';
 
 class AppComponent extends React.Component {
   constructor() {
