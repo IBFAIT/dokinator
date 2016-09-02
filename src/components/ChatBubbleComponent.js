@@ -2,17 +2,13 @@
 
 import React from 'react';
 
-require('styles/ChatBubble.css');
+require('styles/ChatBubble.scss');
 
-class ChatBubbleComponent extends React.Component {
-  render() {
-    return (
-      <div className="chatbubble-component">
-        Please edit src/components///ChatBubbleComponent.js to update this component!
-      </div>
-    );
-  }
-}
+const ChatBubbleComponent = ({text}) => (
+  <div className="chatbubble-component">
+    { text }
+  </div>
+);
 
 ChatBubbleComponent.displayName = 'ChatBubbleComponent';
 

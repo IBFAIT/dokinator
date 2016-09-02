@@ -1,0 +1,565 @@
+{
+  "0": {
+    "bot": [{
+      "text": "Hello, I'm an experimental bot.",
+      "avatar": "1"
+    }, {
+      "text": "How are you today?",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "text": "Great! :)",
+      "path": "1",
+      "avatar": "2"
+    }, {
+      "text": "OK.",
+      "path": "2",
+      "avatar": "2"
+    }, {
+      "text": "not too good :(",
+      "path": "3",
+      "avatar": "2"
+    }],
+    "title": "init"
+  },
+  "1": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "2": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "3": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "4": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "5": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "6": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "7": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "8": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "9": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "10": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "11": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "12": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "13": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "14": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "15": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "16": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "17": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "18": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "19": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "20": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "21": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "22": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "23": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "24": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "25": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "26": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  },
+  "27": {
+    "bot": [{
+      "text": "",
+      "avatar": "1"
+    }, {
+      "text": "",
+      "avatar": "1"
+    }],
+    "choices": [{
+      "type": "option",
+      "text": "",
+      "path": "1"
+    }, {
+      "type": "input",
+      "check": "/[myreg]{0,10}/",
+      "submit": "/rest/endpoint",
+      "path": "1"
+    }],
+    "title": ""
+  }
+}
