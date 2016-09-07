@@ -1,0 +1,30 @@
+{
+  "botIdentitys": {
+    "fred": {
+      "name": "Fred",
+      "avatar": {
+        "src": "${avatars.fred}",
+        "alt": "Freds avatar",
+        "title": "Fred"
+      }
+    },
+    "doc": {
+      "name": "Dokinator",
+      "avatar": {
+        "src": "${avatars.doc}",
+        "alt": "Dokinator's avatar",
+        "title": "Dokinator"
+      }
+    }
+  },
+  "user": {
+    "name": "Your Name",
+    "email": "your@email",
+    "fever": 37,
+    "avatar": {
+      "src": "${avatars.user}",
+      "alt": "Your Name's avatar",
+      "title": "You"
+    }
+  }
+}

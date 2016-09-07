@@ -3,6 +3,7 @@ require('styles/App.scss');
 
 import React from 'react';
 import ChatBubbleComponent from './ChatBubbleComponent.js';
+import {botIdentitys, user} from './defaults.json';
 import chatConv from './conversation.json';
 
 class AppComponent extends React.Component {
@@ -11,7 +12,7 @@ class AppComponent extends React.Component {
     this.state = {
       path: '0'
     };
-
+    this.user = user;
   }
   render() {
 
@@ -29,10 +30,10 @@ class AppComponent extends React.Component {
     )
   }
 
-  RenderChatBubbles({ bot, choices, title }) {
-    return bot.map((bubble, key) => {
+  RenderChatBubbles({ bots, user, title }) {
+    return bots.map((bub, key) => {
       return (
-        <ChatBubbleComponent key={key} text={bubble.text} />
+        <ChatBubbleComponent key={key} text={bub.text} user={this.user} />
       )
     });
   }

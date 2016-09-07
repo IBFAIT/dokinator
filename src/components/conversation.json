@@ -1,434 +1,404 @@
 {
-  "botIdentitys": {
-    "fred": {
-      "name": "Fred",
-      "avatar": {
-        "src": "${avatars.fred}",
-        "alt": "Freds avatar",
-        "title": "Fred"
-      }
+  "init": {
+    "bots": [{
+      "text": "Hey du! | Ciao! | Servus!",
+      "id": "fred"
+    }, {
+      "text": "Ich heisse Fred und bin dein Chatbot.",
+      "id": "fred"
+    }, {
+      "text": "Wie heisst du?",
+      "id": "fred"
+    }],
+    "user": {
+      "answers": [{
+        "type": "input",
+        "target": "user.name",
+        "value": "",
+        "placeholder": "Dein Name",
+        "path": "0"
+      }]
     },
-    "doc": {
-      "name": "Dokinator",
-      "avatar": {
-        "src": "${avatars.doc}",
-        "alt": "Dokinator's avatar",
-        "title": "Dokinator"
-      }
-    }
+    "title": "init"
   },
-  "user": {
-    "name": "Your Name",
-    "email": "your@email",
-    "fever": 37,
-    "avatar": {
-      "src": "${avatars.user}",
-      "alt": "Your Name's avatar",
-      "title": "You"
-    }
+  "0": {
+    "bots": [{
+      "text": "`Freut mich, ${user.name}`",
+      "id": "fred"
+    }, {
+      "text": "Wie kann ich dir heute helfen?",
+      "id": "fred"
+    }, {
+      "text": "Sag mir, was interessiert dich mehr?",
+      "id": "fred"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ich möchte mehr über Chatbots erfahren!",
+        "path": "1"
+      }, {
+        "type": "button",
+        "text": "Zeige mir, was du drauf hast!",
+        "path": "2"
+      }, {
+        "type": "button",
+        "text": "Wer hat dich gebaut?",
+        "path": "7"
+      }]
+    },
+    "title": "init"
   },
-  "paths": {
-    "init": {
-      "bots": [{
-        "text": "Hey du! | Ciao! | Servus!",
-        "id": "fred"
+  "1": {
+    "bots": [{
+      "text": "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca | Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
+      "id": "fred"
+    }, {
+      "text": "Möchtest du mehr über Chatbots im Allgemeinen erfahren?",
+      "id": "fred"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Button: Ja, gerne!",
+        "path": "3"
       }, {
-        "text": "Ich heisse Fred und bin dein Chatbot.",
-        "id": "fred"
-      }, {
-        "text": "Wie heisst du?",
-        "id": "fred"
-      }],
-      "user": {
-        "answers": [{
-          "type": "input",
-          "target": "user.name",
-          "value": "",
-          "placeholder": "Dein Name",
-          "path": "0"
-        }]
-      },
-      "title": "init"
+        "type": "button",
+        "text": "Button: Nein danke. Zeig mir, was du sonst noch drauf hast.",
+        "path": "2"
+      }]
     },
-    "0": {
-      "bots": [{
-        "text": "Freut mich, ${user.name}",
-        "id": "fred"
+    "title": "1"
+  },
+  "2": {
+    "bots": [{
+      "id": "fred",
+      "text": "Da gibt’s zum Beispiel ‘Dokinator’."
+    }, {
+      "id": "fred",
+      "text": "Dokinator ist ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben und versicherungstechnische Fragen zu beantworten."
+    }, {
+      "id": "fred",
+      "text": "Es handelt sich um einen Prototypen. Möchtest du ihn testen?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ja, gerne | Yep, nichts wie los!",
+        "path": "4"
       }, {
-        "text": "Wie kann ich dir heute helfen?",
-        "id": "fred"
-      }, {
-        "text": "Sag mir, was interessiert dich mehr?",
-        "id": "fred"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Ich möchte mehr über Chatbots erfahren!",
-          "path": "1"
-        }, {
-          "type": "button",
-          "text": "Zeige mir, was du drauf hast!",
-          "path": "2"
-        }, {
-          "type": "button",
-          "text": "Wer hat dich gebaut?",
-          "path": "7"
-        }]
-      },
-      "title": "init"
+        "type": "button",
+        "text": "Nein, danke | Nope!",
+        "path": "7"
+      }]
     },
-    "1": {
-      "bots": [{
-        "text": "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca | Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
-        "id": "fred"
-      }, {
-        "text": "Möchtest du mehr über Chatbots im Allgemeinen erfahren?",
-        "id": "fred"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Button: Ja, gerne!",
-          "path": "3"
-        }, {
-          "type": "button",
-          "text": "Button: Nein danke. Zeig mir, was du sonst noch drauf hast.",
-          "path": "2"
-        }]
-      },
-      "title": "1"
+    "title": "2"
+  },
+  "3": {
+    "bots": [{
+      "id": "fred",
+      "text": "Cool, dass du dich für Chatbots interessierst. Hier ein paar interessante Fakten..."
+    }, {
+      "id": "fred",
+      "text": "… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+    }, {
+      "id": "fred",
+      "text": "Hinterlasse mir doch deine Email-Adresse. So kann ich dich in Zukunft über Neuigkeiten informieren."
+    }],
+    "user": {
+      "answers": [{
+        "type": "input",
+        "target": "user.email",
+        "value": "",
+        "placeholder": "Deine Email-Adresse",
+        "path": "8"
+      }]
     },
-    "2": {
-      "bots": [{
-        "id": "fred",
-        "text": "Da gibt’s zum Beispiel ‘Dokinator’."
+    "title": "3"
+  },
+  "4": {
+    "bots": [{
+      "id": "doc",
+      "text": "`Ciao ${user.name}!`"
+    }, {
+      "id": "doc",
+      "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
+    }, {
+      "id": "doc",
+      "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Um was für Versicherte handelt es sich?",
+        "path": "5"
       }, {
-        "id": "fred",
-        "text": "Dokinator ist ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben und versicherungstechnische Fragen zu beantworten."
-      }, {
-        "id": "fred",
-        "text": "Es handelt sich um einen Prototypen. Möchtest du ihn testen?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Ja, gerne | Yep, nichts wie los!",
-          "path": "4"
-        }, {
-          "type": "button",
-          "text": "Nein, danke | Nope!",
-          "path": "7"
-        }]
-      },
-      "title": "2"
+        "type": "button",
+        "text": "Sprich weiter!",
+        "path": "6"
+      }]
     },
-    "3": {
-      "bots": [{
-        "id": "fred",
-        "text": "Cool, dass du dich für Chatbots interessierst. Hier ein paar interessante Fakten..."
-      }, {
-        "id": "fred",
-        "text": "… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-      }, {
-        "id": "fred",
-        "text": "Hinterlasse mir doch deine Email-Adresse. So kann ich dich in Zukunft über Neuigkeiten informieren."
-      }],
-      "user": {
-        "answers": [{
-          "type": "input",
-          "target": "user.email",
-          "value": "",
-          "placeholder": "Deine Email-Adresse",
-          "path": "8"
-        }]
-      },
-      "title": "3"
+    "title": "4"
+  },
+  "5": {
+    "bots": [{
+      "id": "doc",
+      "text": "Es handelt sich hier um alle in der Schweiz wohnhaften Personen. Wir alle haben das Privileg, bei einer Krankenkasse versichert zu sein."
+    }, {
+      "id": "doc",
+      "text": "Jetzt aber weiter…"
+    }],
+    "user": {
+      "answers": [{
+        "type": "forward",
+        "path": "6"
+      }]
     },
-    "4": {
-      "bots": [{
-        "id": "doc",
-        "text": "Ciao ${user.name}!"
+    "title": "5"
+  },
+  "6": {
+    "bots": [{
+      "id": "fred",
+      "text": "Alles klar. Stelle dir vor, dass du einen viralen Infekt hast. Das kennst du sicher: Du hast Gliederschmerzen, deine Nase läuft, du hast etwas Fieber und so weiter."
+    }, {
+      "id": "fred",
+      "text": "Ok?"
+    }, {
+      "id": "fred",
+      "text": "…"
+    }, {
+      "id": "fred",
+      "text": "Ok. Es geht los…"
+    }, {
+      "id": "fred",
+      "text": "… dann rufe ich mal den Dokinator …"
+    }, {
+      "id": "doc",
+      "text": "Hi ${user.name}, ich bin Dokinator."
+    }, {
+      "id": "doc",
+      "text": "Wie geht es dir heute?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Hab starke Gliederschmerzen.",
+        "path": "gliederschmerzen"
       }, {
-        "id": "doc",
-        "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
-      }, {
-        "id": "doc",
-        "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Um was für Versicherte handelt es sich?",
-          "path": "5"
-        }, {
-          "type": "button",
-          "text": "Sprich weiter!",
-          "path": "6"
-        }]
-      },
-      "title": "4"
+        "type": "disabled",
+        "text": "Mir gehts eigentlich prima."
+      }]
     },
-    "5": {
-      "bots": [{
-        "id": "doc",
-        "text": "Es handelt sich hier um alle in der Schweiz wohnhaften Personen. Wir alle haben das Privileg, bei einer Krankenkasse versichert zu sein."
+    "title": "6"
+  },
+  "gliederschmerzen": {
+    "bots": [{
+      "id": "doc",
+      "text": "Okay, verstehe. Das ist unangenehm."
+    }, {
+      "id": "doc",
+      "text": "Wie lange bestehen die Schmerzen bereits?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "4 Stunden",
+        "path": "hastDuFieber"
       }, {
-        "id": "doc",
-        "text": "Jetzt aber weiter…"
-      }],
-      "user": {
-        "answers": [{
-          "type": "forward",
-          "path": "6"
-        }]
-      },
-      "title": "5"
+        "type": "disabled",
+        "text": "8 Stunden"
+      }, {
+        "type": "disabled",
+        "text": "Mehr als 8 Stunden"
+      }]
     },
-    "6": {
-      "bots": [{
-        "id": "fred",
-        "text": "Alles klar. Stelle dir vor, dass du einen viralen Infekt hast. Das kennst du sicher: Du hast Gliederschmerzen, deine Nase läuft, du hast etwas Fieber und so weiter."
+    "title": "Gliederschmerzen"
+  },
+  "hastDuFieber": {
+    "bots": [{
+      "id": "doc",
+      "text": "Hast du Fieber?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ja",
+        "path": "wieHoch"
       }, {
-        "id": "fred",
-        "text": "Ok?"
-      }, {
-        "id": "fred",
-        "text": "…"
-      }, {
-        "id": "fred",
-        "text": "Ok. Es geht los…"
-      }, {
-        "id": "fred",
-        "text": "… dann rufe ich mal den Dokinator …"
-      }, {
-        "id": "doc",
-        "text": "Hi ${user.name}, ich bin Dokinator."
-      }, {
-        "id": "doc",
-        "text": "Wie geht es dir heute?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Hab starke Gliederschmerzen.",
-          "path": "gliederschmerzen"
-        }, {
-          "type": "disabled",
-          "text": "Mir gehts eigentlich prima."
-        }]
-      },
-      "title": "6"
+        "type": "disabled",
+        "text": "Nein"
+      }]
     },
-    "gliederschmerzen": {
-      "bots": [{
-        "id": "doc",
-        "text": "Okay, verstehe. Das ist unangenehm."
-      }, {
-        "id": "doc",
-        "text": "Wie lange bestehen die Schmerzen bereits?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "4 Stunden",
-          "path": "hastDuFieber"
-        }, {
-          "type": "disabled",
-          "text": "8 Stunden"
-        }, {
-          "type": "disabled",
-          "text": "Mehr als 8 Stunden"
-        }]
-      },
-      "title": "Gliederschmerzen"
+    "title": "Hast Du Fieber"
+  },
+  "wieHoch": {
+    "bots": [{
+      "id": "doc",
+      "text": "Wie hoch ist das Fieber?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "input",
+        "value": "",
+        "target": "user.fever",
+        "placeholder": "Fieber in °C",
+        "path": "runningNose"
+      }]
     },
-    "hastDuFieber": {
-      "bots": [{
-        "id": "doc",
-        "text": "Hast du Fieber?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Ja",
-          "path": "wieHoch"
-        }, {
-          "type": "disabled",
-          "text": "Nein"
-        }]
-      },
-      "title": "Hast Du Fieber"
-    },
-    "wieHoch": {
-      "bots": [{
-        "id": "doc",
-        "text": "Wie hoch ist das Fieber?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "input",
-          "value": "",
-          "target": "user.fever",
-          "placeholder": "Fieber in °C",
-          "path": "runningNose"
-        }]
-      },
-      "title": "Wie Hoch ist das Fieber"
-    },
-    "runningNose": {
-      "bots": [{
-        "id": "doc",
-        "text": "Läuft deine Nase?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Ja",
-          "path": "viralInfect"
-        }, {
-          "type": "disabled",
-          "text": "Nein"
-        }]
-      },
-      "title": "Läuft die Nase"
-    },
-    "viralInfect": {
-      "bots": [{
-        "id": "doc",
-        "text": "Hmm. Das tönt nach einem viralen Infekt. Könnte dies zutreffen?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Ja",
-          "path": "drink"
-        }, {
-          "type": "disabled",
-          "text": "Nein"
-        }]
-      },
-      "title": "Viraler Infekt"
-    },
-    "drink": {
-      "bots": [{
-        "id": "doc",
-        "text": "Bei viralen Infekten empfiehlt es sich viel zu trinken."
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "OK",
-          "path": "backIn4"
-        }]
-      },
-      "title": "Viel Trinken"
-    },
-    "backIn4": {
-      "bots": [{
-        "id": "doc",
-        "text": "Ich melde mich in 4h wieder bei dir. Ok?"
-      }],
-      "user": {
-        "answers": [{
-          "type": "button",
-          "text": "Ja, danke.",
-          "path": "besserung"
-        }]
-      },
-      "title": "Melde mich in 4 Stunden"
-    },
-    "besserung": {
-      "bots": [{
-        "id": "doc",
-        "text": "Ich wünsche dir gute Besserung, ${user.name}!"
+    "title": "Wie Hoch ist das Fieber"
+  },
+  "runningNose": {
+    "bots": [{
+      "id": "doc",
+      "text": "Läuft deine Nase?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ja",
+        "path": "viralInfect"
       }, {
-        "id": "doc",
-        "text": "Bis Bald!"
-      }],
-      "user": {
-        "answers": [{
-          "type": "forward",
-          "text": "Danke!",
-          "path": "outro"
-        }]
-      },
-      "title": "Gute Besserung"
+        "type": "disabled",
+        "text": "Nein"
+      }]
     },
-    "outro": {
-      "bots": [{
-        "id": "fred",
-        "text": "So, da bin ich wieder."
+    "title": "Läuft die Nase"
+  },
+  "viralInfect": {
+    "bots": [{
+      "id": "doc",
+      "text": "Hmm. Das tönt nach einem viralen Infekt. Könnte dies zutreffen?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ja",
+        "path": "drink"
       }, {
-        "id": "fred",
-        "text": "Schön hast du Dokinator kennen gelernt."
-      }, {
-        "id": "fred",
-        "text": "Das war jezt natürlich nur ein Beispiel."
-      }],
-      "user": {
-        "answers": [{
-          "type": "forward",
-          "path": "7"
-        }]
-      },
-      "title": "Abschluss von Fred"
+        "type": "disabled",
+        "text": "Nein"
+      }]
     },
-    "7": {
-      "bots": [{
-        "id": "fred",
-        "text": "Schau, das sind die Leute, die mich gebaut haben:"
-      }, {
-        "id": "fred",
-        "text": "${persons.flavio.name}: ${persons.flavio.image}"
-      }, {
-        "id": "fred",
-        "text": "${persons.kaspar.name}: ${persons.kaspar.image}"
-      }, {
-        "id": "fred",
-        "text": "Du kannst sie über info@conversational.today kontaktieren."
-      }, {
-        "id": "fred",
-        "text": "Bis bald!"
-      }],
-      "user": {
-        "answers": [{
-          "type": "timeout",
-          "time": 180000,
-          "path": "end"
-        }]
-      },
-      "title": "7"
+    "title": "Viraler Infekt"
+  },
+  "drink": {
+    "bots": [{
+      "id": "doc",
+      "text": "Bei viralen Infekten empfiehlt es sich viel zu trinken."
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "OK",
+        "path": "backIn4"
+      }]
     },
-    "8": {
-      "bots": [{
-        "id": "fred",
-        "text": "Lieben Dank, ${user.name}. | Cool!"
-      }],
-      "user": {
-        "answers": [{
-          "type": "forward",
-          "path": "7"
-        }]
-      },
-      "title": "8"
+    "title": "Viel Trinken"
+  },
+  "backIn4": {
+    "bots": [{
+      "id": "doc",
+      "text": "Ich melde mich in 4h wieder bei dir. Ok?"
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ja, danke.",
+        "path": "besserung"
+      }]
     },
-    "end": {
-      "bots": [{
-        "id": "fred",
-        "text": "Wir wollen jetzt wirklich nichts mehr sagen"
-      }, {
-        "id": "doc",
-        "text": "Ja, auch ich habe jetzt grad nichts mehr zu sagen."
-      }, {
-        "id": "doc",
-        "text": "Wie besprochen schicke ich dir in 4 Stunden eine Mail."
-      }, {
-        "id": "doc",
-        "text": "Gute Besserung!"
-      }],
-      "user": [],
-      "title": "The End."
-    }
+    "title": "Melde mich in 4 Stunden"
+  },
+  "besserung": {
+    "bots": [{
+      "id": "doc",
+      "text": "Ich wünsche dir gute Besserung, ${user.name}!"
+    }, {
+      "id": "doc",
+      "text": "Bis Bald!"
+    }],
+    "user": {
+      "answers": [{
+        "type": "forward",
+        "text": "Danke!",
+        "path": "outro"
+      }]
+    },
+    "title": "Gute Besserung"
+  },
+  "outro": {
+    "bots": [{
+      "id": "fred",
+      "text": "So, da bin ich wieder."
+    }, {
+      "id": "fred",
+      "text": "Schön hast du Dokinator kennen gelernt."
+    }, {
+      "id": "fred",
+      "text": "Das war jezt natürlich nur ein Beispiel."
+    }],
+    "user": {
+      "answers": [{
+        "type": "forward",
+        "path": "7"
+      }]
+    },
+    "title": "Abschluss von Fred"
+  },
+  "7": {
+    "bots": [{
+      "id": "fred",
+      "text": "Schau, das sind die Leute, die mich gebaut haben:"
+    }, {
+      "id": "fred",
+      "text": "${persons.flavio.name}: ${persons.flavio.image}"
+    }, {
+      "id": "fred",
+      "text": "${persons.kaspar.name}: ${persons.kaspar.image}"
+    }, {
+      "id": "fred",
+      "text": "Du kannst sie über info@conversational.today kontaktieren."
+    }, {
+      "id": "fred",
+      "text": "Bis bald!"
+    }],
+    "user": {
+      "answers": [{
+        "type": "timeout",
+        "time": 180000,
+        "path": "end"
+      }]
+    },
+    "title": "7"
+  },
+  "8": {
+    "bots": [{
+      "id": "fred",
+      "text": "Lieben Dank, ${user.name}. | Cool!"
+    }],
+    "user": {
+      "answers": [{
+        "type": "forward",
+        "path": "7"
+      }]
+    },
+    "title": "8"
+  },
+  "end": {
+    "bots": [{
+      "id": "fred",
+      "text": "Wir wollen jetzt wirklich nichts mehr sagen"
+    }, {
+      "id": "doc",
+      "text": "Ja, auch ich habe jetzt grad nichts mehr zu sagen."
+    }, {
+      "id": "doc",
+      "text": "Wie besprochen schicke ich dir in 4 Stunden eine Mail."
+    }, {
+      "id": "doc",
+      "text": "Gute Besserung!"
+    }],
+    "user": [],
+    "title": "The End."
   }
 }
