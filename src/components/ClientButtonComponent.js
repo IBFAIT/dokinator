@@ -5,7 +5,7 @@ import React from 'react';
 require('styles/ClientButton.scss');
 
 let ClientButtonComponent = (props) => (
-  <button className="clientbutton-component" onClick={(e)=>props.updatePathState(e,props)}>
+  <button className="clientbutton-component" onClick={(e)=>props.updatePathState(e,{path: props.path, answerIndex: props.index})}>
     { props.text }
   </button>
 );

@@ -7,6 +7,7 @@ body {
 
   min-height: 100%;
   display: flex;
+  overflow: scroll;
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
@@ -37,5 +38,14 @@ body {
   max-width: 100%;
   .user-answers {
     width: 100%;
+  }
+  .conversation-part, .conversation-part-new {
+    display: flex;
+    flex-basis: auto;
+    align-self: flex-start;
+    flex-direction: column;
+  }
+  .conversation-part-new {
+
   }
 }
