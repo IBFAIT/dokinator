@@ -238,8 +238,7 @@
     "user": {
       "answers": [{
         "type": "input",
-        "value": "",
-        "changeVal": "user.fever",
+        "changeVal": "fieber",
         "placeholder": "Fieber in °C",
         "path": "runningNose"
       }]

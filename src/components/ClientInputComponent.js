@@ -4,11 +4,11 @@ import React from 'react';
 
 require('styles/ClientInput.scss');
 
-let ClientInputComponent = ({placeholder, handleInput, path, handleEnter}) => (
+const ClientInputComponent = ({placeholder, onChange, path, handleEnter}) => (
     <input
       className="clientinput-component"
       placeholder={placeholder}
-      onChange={handleInput}
+      onChange={onChange}
       onKeyPress={(e)=>handleEnter(e, path)}
     />
 );

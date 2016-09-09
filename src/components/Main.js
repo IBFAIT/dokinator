@@ -11,6 +11,7 @@ import chatConv from './conversation.json';
 import BotBubbleComponent from './BotBubbleComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
 import ClientInputComponent from './ClientInputComponent.js';
+import ClientDisabledComponent from './ClientDisabledComponent.js';
 
 class AppComponent extends React.Component {
   constructor() {
@@ -27,7 +28,9 @@ class AppComponent extends React.Component {
     return (
       <div className="index">
         { this.renderBotBubbles(chatConv[this.state.path].bots) }
-        { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
+        <div className="user-answers" >
+          { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
+        </div>
       </div>
     );
   }
@@ -41,11 +44,27 @@ class AppComponent extends React.Component {
   }
 
   handleEmailInput(inputValue) {
-    this.setState({name: inputValue.target.value});
+    this.setState({email: inputValue.target.value});
   }
 
+  handleFieberInput(inputValue) {
+    this.setState({fieber: inputValue.target.value});
+  }
+
+  getCallbackForChangeVal(changeVal) {
+    switch (changeVal) {
+      case 'name':
+        return this.handleNameInput;
+      case 'email':
+        return this.handleEmailInput;
+      case 'fieber':
+        return this.handleFieberInput;
+      default:
+        return this.handleNameInput;
+    }
+  }
   handleEnter(enter, path) {
-    if(enter.key === "Enter") {
+    if(enter.key === 'Enter') {
       this.setState({path: path});
     }
   }
@@ -56,34 +75,16 @@ class AppComponent extends React.Component {
         case 'button':
           return <ClientButtonComponent key={key} text={answer.text} path={answer.path} updatePathState={this.updatePathState.bind(this)} />;
         case 'input':
-          if(answer.changeVal == 'name') {
-            return (
-              <ClientInputComponent
-                key={key}
-                placeholder={answer.placeholder}
-                path={answer.path}
-                changeVal={answer.changeVal}
-                handleInput={this.handleNameInput.bind(this)}
-                handleEnter={this.handleEnter.bind(this)}
-              />
-            );
-          }
-          if(answer.changeVal == 'email') {
-            return (
-              <ClientInputComponent
-                key={key}
-                placeholder={answer.placeholder}
-                path={answer.path}
-                changeVal={answer.changeVal}
-                handleInput={this.handleEmailInput.bind(this)}
-                handleEnter={this.handleEnter.bind(this)}
-              />
-            );
-          }
+          const callback = this.getCallbackForChangeVal(answer.changeVal);
+          return (
+            <ClientInputComponent key={key} placeholder={answer.placeholder} path={answer.path} changeVal={answer.changeVal} onChange={callback.bind(this)} handleEnter={this.handleEnter.bind(this)}
+            />
+          );
         case 'forward':
-          return null;
+          setTimeout(()=>{this.setState({path:answer.path})}, 2500)
+          break;
         case 'disabled':
-          return <ClientDisabledComponent key={key} />;
+          return <ClientDisabledComponent key={key} text={answer.text} />;
         default:
           return null;
       }

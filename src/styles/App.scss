@@ -19,7 +19,7 @@ body {
   align-self: stretch;
   flex-basis: auto;
   background-color: #999;
-  width: 600px;
+  width: 50rem;
   max-width: 100%;
   display: flex;
 }
@@ -35,4 +35,7 @@ body {
   align-items: center;
   align-content: stretch;
   max-width: 100%;
+  .user-answers {
+    width: 100%;
+  }
 }

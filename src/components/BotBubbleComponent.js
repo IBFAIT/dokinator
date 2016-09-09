@@ -6,8 +6,8 @@ require('styles/BotBubble.scss');
 
 let BotBubbleComponent = ({bot, text, name, email, data}) => (
   <div className="botbubble-component">
-    <div>{bot.name} <img src={bot.src} /></div>
-    <div>{eval('`'+text+'`')}</div>
+    <div className="icon">{bot.name} <img src={bot.src} /></div>
+    <div className="text">{eval('`'+text+'`')}</div>
   </div>
 );
 
