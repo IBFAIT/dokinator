@@ -1,6 +1,7 @@
 {
   "botIdentitys": {
     "fred": {
+      "id": "fred",
       "name": "Fred",
       "avatar": {
         "src": "${avatars.fred}",
@@ -9,6 +10,7 @@
       }
     },
     "doc": {
+      "id": "doc",
       "name": "Dokinator",
       "avatar": {
         "src": "${avatars.doc}",
