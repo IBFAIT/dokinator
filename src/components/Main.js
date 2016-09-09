@@ -7,36 +7,81 @@ import React from 'react';
 import Data from './defaults.json';
 import chatConv from './conversation.json';
 
-//.DS_Store
+// Components
 import BotBubbleComponent from './BotBubbleComponent.js';
+import BotBubblePastComponent from './BotBubblePastComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
 import ClientInputComponent from './ClientInputComponent.js';
 import ClientDisabledComponent from './ClientDisabledComponent.js';
+import ClientInputPastComponent from './ClientInputPastComponent.js';
 
 class AppComponent extends React.Component {
   constructor() {
     super();
     this.state = {
       path: 'init',
-      name: 'Jane Doe',
-      email: 'myemail.com',
-      conversation: []
+      name: null,
+      email: null,
+      fieber: null
     };
     this.data = Data;
+    this.data.conversation = [];
   }
   render() {
     return (
       <div className="index">
-        { this.renderBotBubbles(chatConv[this.state.path].bots) }
-        <div className="user-answers" >
-          { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
+        { this.renderConversation(this.data.conversation) }
+        <div className="conversation-part">
+          { this.renderBotBubbles(chatConv[this.state.path].bots) }
+          <div className="user-answers" >
+            { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
+          </div>
         </div>
       </div>
     );
   }
+  renderConversation(conversation) {
+    return conversation.map((step) => {
 
-  updatePathState(evt, props) {
-    this.setState({path: props.path});
+        let stateAtPos = JSON.parse(step.stateAtPos);
+        console.log(step, chatConv[stateAtPos.path].user.answers[step.answerIndex], stateAtPos.path);
+        let clientBubbleParams = {
+          stateAtPos,
+          answer: chatConv[stateAtPos.path].user.answers[step.answerIndex],
+          answerIndex: step.answerIndex
+        };
+      return (
+        <div className="conversation-part">
+          { this.renderBotPastBubbles(chatConv[stateAtPos.path].bots) }
+          <div className="user-answers" >
+            { this.renderClientPastBubble(clientBubbleParams) }
+          </div>
+        </div>
+      );
+    });
+  }
+
+  renderBotPastBubbles(bubbles) {
+    return bubbles.map(({id, text}, key) => {
+      return <BotBubblePastComponent key={key} text={text} bot={Data.botIdentitys[id]} />
+    });
+  }
+
+  renderClientPastBubble({answer, answerIndex, stateAtPos}) {
+    switch (answer.type) {
+      case 'button':
+        return <ClientButtonComponent key={null} index={null} text={answer.text} path={null} />;
+      case 'input':
+        return <ClientInputPastComponent key={null} valueContent={stateAtPos[answer.changeVal]}  />;
+      default:
+       return null;
+
+    }
+  }
+
+  updatePathState(evt, {path, answerIndex = null}) {
+    this.data.conversation.push({stateAtPos: JSON.stringify(this.state), answerIndex});
+    this.setState({path: path});
   }
 
   handleNameInput(inputValue) {
@@ -63,9 +108,9 @@ class AppComponent extends React.Component {
         return this.handleNameInput;
     }
   }
-  handleEnter(enter, path) {
+  handleEnter(enter, path, answerIndex) {
     if(enter.key === 'Enter') {
-      this.setState({path: path});
+      this.updatePathState('', {path, answerIndex});
     }
   }
 
@@ -73,11 +118,11 @@ class AppComponent extends React.Component {
     return answers.map((answer, key) => {
       switch (answer.type) {
         case 'button':
-          return <ClientButtonComponent key={key} text={answer.text} path={answer.path} updatePathState={this.updatePathState.bind(this)} />;
+          return <ClientButtonComponent key={key} index={key} text={answer.text} path={answer.path} updatePathState={this.updatePathState.bind(this)}  />;
         case 'input':
           const callback = this.getCallbackForChangeVal(answer.changeVal);
           return (
-            <ClientInputComponent key={key} placeholder={answer.placeholder} path={answer.path} changeVal={answer.changeVal} onChange={callback.bind(this)} handleEnter={this.handleEnter.bind(this)}
+            <ClientInputComponent key={key} index={key} placeholder={answer.placeholder} path={answer.path} changeVal={answer.changeVal} onChange={callback.bind(this)} handleEnter={this.handleEnter.bind(this)}
             />
           );
         case 'forward':
@@ -91,8 +136,13 @@ class AppComponent extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    ReactDom.findDOMNode(this).scrollIntoView();
+  }
+
   renderBotBubbles(bots) {
     return bots.map(({id, text}, key) => {
+
       return (
         <BotBubbleComponent
           key={key}

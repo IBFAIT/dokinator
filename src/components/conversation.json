@@ -118,7 +118,7 @@
   "4": {
     "bots": [{
       "id": "doc",
-      "text": "Ciao ${data.user.name}!"
+      "text": "Ciao ${name}!"
     }, {
       "id": "doc",
       "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
@@ -173,7 +173,7 @@
       "text": "… dann rufe ich mal den Dokinator …"
     }, {
       "id": "doc",
-      "text": "Hi ${data.user.name}, ich bin Dokinator."
+      "text": "Hi ${name}, ich bin Dokinator."
     }, {
       "id": "doc",
       "text": "Wie geht es dir heute?"
@@ -310,7 +310,7 @@
   "besserung": {
     "bots": [{
       "id": "doc",
-      "text": "Ich wünsche dir gute Besserung, ${data.user.name}!"
+      "text": "Ich wünsche dir gute Besserung, ${name}!"
     }, {
       "id": "doc",
       "text": "Bis Bald!"

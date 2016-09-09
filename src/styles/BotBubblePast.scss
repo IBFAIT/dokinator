@@ -1,0 +1,25 @@
+.botbubblepast-component {
+  max-width: 100%;
+  width: 15rem;
+  margin: .3rem .5rem;
+  background-color: #AAA;
+  padding: .3rem;
+  border: 1px solid black;
+  align-self: flex-start;
+
+  .icon, .text {
+    display: inline-block;
+  }
+  .icon {
+    width: 20%;
+  }
+  .text {
+    width: 79%;
+  }
+  .text[data-botId='fred']{
+    color: blue;
+  }
+  .text[data-botId='doc'] {
+    color: red;
+  }
+}
