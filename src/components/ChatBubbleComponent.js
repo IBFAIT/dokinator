@@ -7,11 +7,10 @@ require('styles/ChatBubble.scss');
 class ChatBubbleComponent extends React.Component {
 
   render() {
-console.log(this.props.text);
-    let newText = `${this.props.text}`;
+    let data = this.props.data;
     return(
       <div className="chatbubble-component">
-        { newText }
+        { eval('`'+this.props.text+'`') }
       </div>
     );
   }

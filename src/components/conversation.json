@@ -13,8 +13,7 @@
     "user": {
       "answers": [{
         "type": "input",
-        "target": "user.name",
-        "value": "",
+        "changeVal": "name",
         "placeholder": "Dein Name",
         "path": "0"
       }]
@@ -23,7 +22,7 @@
   },
   "0": {
     "bots": [{
-      "text": "`Freut mich, ${user.name}`",
+      "text": "Freut mich, ${name}",
       "id": "fred"
     }, {
       "text": "Wie kann ich dir heute helfen?",
@@ -47,7 +46,7 @@
         "path": "7"
       }]
     },
-    "title": "init"
+    "title": "0"
   },
   "1": {
     "bots": [{
@@ -108,7 +107,7 @@
     "user": {
       "answers": [{
         "type": "input",
-        "target": "user.email",
+        "changeVal": "email",
         "value": "",
         "placeholder": "Deine Email-Adresse",
         "path": "8"
@@ -119,7 +118,7 @@
   "4": {
     "bots": [{
       "id": "doc",
-      "text": "`Ciao ${user.name}!`"
+      "text": "Ciao ${data.user.name}!"
     }, {
       "id": "doc",
       "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
@@ -174,7 +173,7 @@
       "text": "… dann rufe ich mal den Dokinator …"
     }, {
       "id": "doc",
-      "text": "Hi ${user.name}, ich bin Dokinator."
+      "text": "Hi ${data.user.name}, ich bin Dokinator."
     }, {
       "id": "doc",
       "text": "Wie geht es dir heute?"
@@ -240,7 +239,7 @@
       "answers": [{
         "type": "input",
         "value": "",
-        "target": "user.fever",
+        "changeVal": "user.fever",
         "placeholder": "Fieber in °C",
         "path": "runningNose"
       }]
@@ -312,7 +311,7 @@
   "besserung": {
     "bots": [{
       "id": "doc",
-      "text": "Ich wünsche dir gute Besserung, ${user.name}!"
+      "text": "Ich wünsche dir gute Besserung, ${data.user.name}!"
     }, {
       "id": "doc",
       "text": "Bis Bald!"
@@ -351,10 +350,10 @@
       "text": "Schau, das sind die Leute, die mich gebaut haben:"
     }, {
       "id": "fred",
-      "text": "${persons.flavio.name}: ${persons.flavio.image}"
+      "text": "${data.persons.flavio.name}: ${data.persons.flavio.image}"
     }, {
       "id": "fred",
-      "text": "${persons.kaspar.name}: ${persons.kaspar.image}"
+      "text": "${data.persons.kaspar.name}: ${data.persons.kaspar.image}"
     }, {
       "id": "fred",
       "text": "Du kannst sie über info@conversational.today kontaktieren."
@@ -374,7 +373,7 @@
   "8": {
     "bots": [{
       "id": "fred",
-      "text": "Lieben Dank, ${user.name}. | Cool!"
+      "text": "Lieben Dank, ${data.user.name}. | Cool!"
     }],
     "user": {
       "answers": [{

@@ -18,13 +18,23 @@
     }
   },
   "user": {
-    "name": "Your Name",
-    "email": "your@email",
+    "name": "",
+    "email": "",
     "fever": 37,
     "avatar": {
       "src": "${avatars.user}",
       "alt": "Your Name's avatar",
       "title": "You"
+    }
+  },
+  "persons": {
+    "flavio": {
+      "name": "Flavio Trolese",
+      "image": ""
+    },
+    "kaspar": {
+      "name": "Kaspar Vollenweider",
+      "image": ""
     }
   }
 }
