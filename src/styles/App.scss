@@ -32,7 +32,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   align-content: stretch;
   max-width: 100%;
@@ -42,7 +42,7 @@ body {
   .conversation-part, .conversation-part-new {
     display: flex;
     flex-basis: auto;
-    align-self: flex-start;
+    align-self: center;
     flex-direction: column;
   }
   .conversation-part-new {
