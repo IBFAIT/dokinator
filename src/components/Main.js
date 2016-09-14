@@ -48,7 +48,7 @@ class AppComponent extends React.Component {
     const itemComponent = this.refs.activePart;
     if (itemComponent) {
       const domNode = ReactDom.findDOMNode(itemComponent);
-      domNode.scrollIntoView(this.refs.activePart);
+      domNode.scrollIntoView({behaviour:"smooth", block:"end"});
     }
   }
 
