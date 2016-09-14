@@ -32,20 +32,20 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   align-content: stretch;
   max-width: 100%;
   .user-answers {
     width: 100%;
   }
-  .conversation-part, .conversation-part-new {
+  .conversation-bubbles {
     display: flex;
     flex-basis: auto;
     align-self: center;
     flex-direction: column;
   }
-  .conversation-part-new {
-
+  .conversation-part {
+    align-self: center;
   }
 }

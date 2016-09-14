@@ -32,13 +32,24 @@ class AppComponent extends React.Component {
   }
 
 
+  componentDidUpdate(prevProps) {
+    const itemComponent = this.refs.activePart;
+    if (itemComponent) {
+      const domNode = ReactDom.findDOMNode(itemComponent);
+      domNode.scrollIntoView({behaviour:"smooth", block:"end"});
+    }
+  }
 
   render() {
     return (
       <div className="index">
-        { this.renderPastConversation(this.data.conversation) }
-        <div className="conversation-part">
+        <div className="conversation-bubbles">
+          { this.renderPastConversation(this.data.conversation) }
+
+
           { this.renderBotBubbles(chatConv[this.state.path].bots) }
+        </div>
+        <div className="conversation-part">
           <div className="user-answers" ref="activePart" >
             { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
           </div>
@@ -47,13 +58,6 @@ class AppComponent extends React.Component {
     );
   }
 
-  componentDidUpdate(prevProps) {
-    const itemComponent = this.refs.activePart;
-    if (itemComponent) {
-      const domNode = ReactDom.findDOMNode(itemComponent);
-      domNode.scrollIntoView({behaviour:"smooth", block:"end"});
-    }
-  }
 
   renderPastConversation(conversation) {
     return conversation.map((step, key) => {
