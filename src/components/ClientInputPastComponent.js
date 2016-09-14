@@ -5,9 +5,7 @@ import React from 'react';
 require('styles/ClientInputPast.scss');
 
 let ClientInputPastComponent = ({valueContent}) => (
-  <div
-    className="clientinputpast-component"
-  >
+  <div className="clientinputpast-component">
     {valueContent}
   </div>
 );
