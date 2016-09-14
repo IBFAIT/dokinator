@@ -115,21 +115,36 @@ class AppComponent extends React.Component {
   }
 
   renderClientBubbles(answers) {
+    let answersLength = answers.length;
     return answers.map((answer, key) => {
+      let props = {
+        key,
+        index: key,
+        text: answer.text,
+        path: answer.path,
+      }
+      if(answersLength == key+1) {
+        props.ref = "activeAnswerBubble"
+      }
       switch (answer.type) {
         case 'button':
-          return <ClientButtonComponent key={key} index={key} text={answer.text} path={answer.path} updatePathState={this.updatePathState.bind(this)}  />;
+          props.updatePathState = this.updatePathState.bind(this);
+          return <ClientButtonComponent {...props} />;
         case 'input':
-          const callback = this.getCallbackForChangeVal(answer.changeVal);
+          let callback = this.getCallbackForChangeVal(answer.changeVal);
+          props.callback = callback.bind(this);
+          props.placeholder = answer.placeholder;
+          props.changeVal = answer.changeVal;
+          props.handleEnter= this.handleEnter.bind(this);
           return (
-            <ClientInputComponent key={key} index={key} placeholder={answer.placeholder} path={answer.path} changeVal={answer.changeVal} onChange={callback.bind(this)} handleEnter={this.handleEnter.bind(this)}
+            <ClientInputComponent {...props} }
             />
           );
         case 'forward':
           setTimeout(()=>{this.setState({path:answer.path})}, 2500)
           break;
         case 'disabled':
-          return <ClientDisabledComponent key={key} text={answer.text} />;
+          return <ClientDisabledComponent {...props} />;
         default:
           return null;
       }
