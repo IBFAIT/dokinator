@@ -9,6 +9,7 @@ import Data                     from './defaults.json';
 import chatConv                 from './conversation.json';
 
 // Components
+// import ConversationComponent from './ConversationComponent.js';
 import BotBubbleComponent from './BotBubbleComponent.js';
 import BotBubblePastComponent from './BotBubblePastComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
@@ -35,35 +36,26 @@ class AppComponent extends React.Component {
   render() {
     return (
       <div className="index">
-        { this.renderConversation(this.data.conversation) }
+        { this.renderPastConversation(this.data.conversation) }
         <div className="conversation-part">
           { this.renderBotBubbles(chatConv[this.state.path].bots) }
-          <div className="user-answers"  ref={(el)=> el.scrollIntoView()}>
+          <div className="user-answers" ref="activePart" >
             { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
           </div>
         </div>
       </div>
     );
   }
-  componentDidMount() {
 
-    // Scroll to the bottom on initialization
-    const node = ReactDOM.findDOMNode(this);
-    if (node) {
-      node.scrollIntoView();
+  componentDidUpdate(prevProps) {
+    const itemComponent = this.refs.activePart;
+    if (itemComponent) {
+      const domNode = ReactDom.findDOMNode(itemComponent);
+      domNode.scrollIntoView(this.refs.activePart);
     }
   }
 
-  componentDidUpdate() {
-    // Scroll as new elements come along
-    const node = ReactDOM.findDOMNode(this);
-    if (node) {
-      node.scrollIntoView();
-    }
-  }
-
-
-  renderConversation(conversation) {
+  renderPastConversation(conversation) {
     return conversation.map((step, key) => {
 
         let stateAtPos = JSON.parse(step.stateAtPos);
@@ -73,9 +65,9 @@ class AppComponent extends React.Component {
           answerIndex: step.answerIndex
         };
       return (
-        <div className="conversation-part" key={key}>
+        <div className="conversation-part-past" key={key}>
           { this.renderBotPastBubbles(chatConv[stateAtPos.path].bots, key) }
-          <div className="user-answers" >
+          <div className="user-answers-past" key={key} >
             { this.renderClientPastBubble(clientBubbleParams, key) }
           </div>
         </div>
