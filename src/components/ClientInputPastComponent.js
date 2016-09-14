@@ -5,10 +5,9 @@ import React from 'react';
 require('styles/ClientInputPast.scss');
 
 let ClientInputPastComponent = ({valueContent}) => (
-  <input
-    className="clientinputpast-component"
-    value={valueContent}
-  />
+  <div className="clientinputpast-component">
+    {valueContent}
+  </div>
 );
 
 ClientInputPastComponent.displayName = 'ClientInputPastComponent';
