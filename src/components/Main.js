@@ -90,11 +90,14 @@ class AppComponent extends React.Component {
   }
 
   renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
+    let props = { key };
     switch (answer.type) {
       case 'button':
-        return <ClientButtonPastComponent key={key} text={answer.text} />;
+        props.text = answer.text;
+        return <ClientButtonPastComponent {...props} />;
       case 'input':
-        return <ClientInputPastComponent key={key} valueContent={stateAtPos[answer.changeVal]}  />;
+        props.valueContent = stateAtPos[answer.changeVal];
+        return <ClientInputPastComponent {...props} />;
       default:
        return null;
 
@@ -147,48 +150,52 @@ class AppComponent extends React.Component {
 
   renderClientBubbles(answers) {
     return answers.map((answer, key) => {
+      let props = {
+        key,
+        index: key
+      }
       switch (answer.type) {
         case 'button':
-          return <ClientButtonComponent key={key} index={key} text={answer.text} path={answer.path} updatePathState={this.updatePathState.bind(this)}  />;
+          props.text = answer.text;
+          props.path = answer.path;
+          props.updatePathState = this.updatePathState.bind(this);
+          return <ClientButtonComponent {...props}  />;
         case 'input':
           const callback = this.getCallbackForChangeVal(answer.changeVal);
+          props.path = answer.path;
+          props.placeholder = answer.placeholder;
+          props.changeVal = answer.changeVal;
+          props.onChange = callback.bind(this);
+          props.handleEnter = this.handleEnter.bind(this);
           return (
-            <ClientInputComponent key={key} index={key} placeholder={answer.placeholder} path={answer.path} changeVal={answer.changeVal} onChange={callback.bind(this)} handleEnter={this.handleEnter.bind(this)}
-            />
+            <ClientInputComponent {...props} />
           );
         case 'forward':
           setTimeout(()=>{this.setState({path:answer.path})}, 2500)
           break;
         case 'disabled':
-          return <ClientDisabledComponent key={key} text={answer.text} />;
+          props.text = answer.text;
+          return <ClientDisabledComponent {...props} />;
         default:
           return null;
       }
     });
   }
 
-
-
   renderBotBubbles(bots) {
     return bots.map(({id, text}, key) => {
-
+      const props = {
+        key,
+        text,
+        name: this.state.name,
+        email: this.state.email,
+        data: Data,
+        bot: Data.botIdentitys[id],
+      };
       return (
-        <BotBubbleComponent
-          key={key}
-          bot={Data.botIdentitys[id]}
-          text={text}
-          name={this.state.name}
-          email={this.state.email}
-          data={Data}
-        />
+        <BotBubbleComponent {...props} />
       );
     });
-  }
-
-  RenderBubbleWithButton({path, text}) {
-    return (
-      <button onClick={() => this.setState({path})}>{text}</button>
-    )
   }
 
 }
