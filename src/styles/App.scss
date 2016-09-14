@@ -42,10 +42,10 @@ body {
   .conversation-bubbles {
     display: flex;
     flex-basis: auto;
-    align-self: center;
+    align-self: stretch;
     flex-direction: column;
   }
   .conversation-part {
-    align-self: center;
+    align-self: stretch;
   }
 }

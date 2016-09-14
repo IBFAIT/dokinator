@@ -1,11 +1,11 @@
 .botbubble-component {
-  max-width: 100%;
-  width: 15rem;
+  max-width: 90%;
+  min-width: 60%;
   margin: .3rem .5rem;
   background-color: #AAA;
   padding: .3rem;
   border: 1px solid black;
-  align-self: flex-start;
+  align-self: stretch;
 
   .icon, .text {
     display: inline-block;
