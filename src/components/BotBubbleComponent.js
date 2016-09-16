@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-require('styles/BotBubble.scss');
-
 let BotBubbleComponent = ({bot, text, name, email, data}) => (
   <div className="botbubble-component">
     <div className="icon">{bot.name} <img src={bot.src} /></div>

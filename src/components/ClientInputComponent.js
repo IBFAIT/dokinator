@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-require('styles/ClientInput.scss');
-
 const ClientInputComponent = ({placeholder, onChange, path, handleEnter, index}) => (
     <input
       className="clientinput-component"

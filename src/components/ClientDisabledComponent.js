@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-require('styles/ClientDisabled.scss');
-
 let ClientDisabledComponent = ({text}) => (
   <button className="clientdisabled-component">
     {text}
