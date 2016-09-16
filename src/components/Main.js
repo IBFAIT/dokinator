@@ -34,9 +34,11 @@ class AppComponent extends React.Component {
 
   componentDidUpdate() {
     const itemComponent = this.refs.activePart;
+    window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
     if (itemComponent) {
-      const domNode = ReactDom.findDOMNode(itemComponent);
-      domNode.scrollIntoView({behaviour:'smooth', block:'end'});
+
+      // const domNode = ReactDom.findDOMNode(itemComponent);
+      // domNode.scrollIntoView({behaviour:'smooth', block:'end'});
     }
   }
 
@@ -49,12 +51,12 @@ class AppComponent extends React.Component {
 
           { this.renderBotBubbles(chatConv[this.state.path].bots) }
         </div>
-        <div className="conversation-part">
+        <div className="conversation-part"  ref="activePart">
           <div className="user-answers" >
             { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
           </div>
 
-          <div ref="activePart" style={{color:'transparent','background-color':'transparent', height:'1px', width:'100%'}}>Platzhalter</div>
+
         </div>
       </div>
     );
