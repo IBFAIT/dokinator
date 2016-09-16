@@ -1,19 +1,14 @@
+// Styles
 require('normalize.css/normalize.css');
 require('styles/App.scss');
 
-
-
 import React from 'react';
-import ReactDom from 'react-dom';
 
-// JSON Data
-
-import Data from './defaults.json';
-import chatConv from './conversation.json';
+// JSON data beeing imported
+import Defaults from './defaults.json';
+import Conversation from './conversation.json';
 
 // Components
-// import ConversationComponent from './ConversationComponent.js';
-
 import BotBubbleComponent from './BotBubbleComponent.js';
 import BotBubblePastComponent from './BotBubblePastComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
@@ -22,28 +17,30 @@ import ClientInputComponent from './ClientInputComponent.js';
 import ClientDisabledComponent from './ClientDisabledComponent.js';
 import ClientInputPastComponent from './ClientInputPastComponent.js';
 
+/**
+ * Main Stateful Componennt
+ */
 class AppComponent extends React.Component {
   constructor() {
     super();
     this.state = {
+      // state holds the current path string
       path: 'init',
+      // states that will hold user inputs
       name: null,
       email: null,
       fieber: null
     };
-    this.data = Data;
+    this.data = Defaults;
+    // This property will get the whole Conversation history appended
     this.data.conversation = [];
   }
 
-
+  /**
+   * Scrolling down to the bottom when new answer bubbles appear
+   */
   componentDidUpdate() {
-    const itemComponent = this.refs.activePart;
     window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
-    if (itemComponent) {
-
-      // const domNode = ReactDom.findDOMNode(itemComponent);
-      // domNode.scrollIntoView({behaviour:'smooth', block:'end'});
-    }
   }
 
   render() {
@@ -51,33 +48,31 @@ class AppComponent extends React.Component {
       <div className="index">
         <div className="conversation-bubbles">
           { this.renderPastConversation(this.data.conversation) }
-
-
-          { this.renderBotBubbles(chatConv[this.state.path].bots) }
+          { this.renderBotBubbles(Conversation[this.state.path].bots) }
         </div>
         <div className="conversation-part"  ref="activePart">
           <div className="user-answers" >
-            { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
+            { this.renderClientBubbles(Conversation[this.state.path].user.answers) }
           </div>
-
-
         </div>
       </div>
     );
   }
 
+  /**
+   * The past Conversation is beeing rendered with the this.data.conversation property
+   */
   renderPastConversation(conversation) {
     return conversation.map((step, key) => {
-
         let stateAtPos = JSON.parse(step.stateAtPos);
         let clientBubbleParams = {
           stateAtPos,
-          answer: chatConv[stateAtPos.path].user.answers[step.answerIndex],
+          answer: Conversation[stateAtPos.path].user.answers[step.answerIndex],
           answerIndex: step.answerIndex
         };
       return (
         <div className="conversation-part-past" key={key}>
-          { this.renderBotPastBubbles(chatConv[stateAtPos.path].bots, key) }
+          { this.renderBotPastBubbles(Conversation[stateAtPos.path].bots, key) }
           <div className="user-answers-past" key={key} >
             { this.renderClientPastBubble(clientBubbleParams, key) }
           </div>
@@ -88,12 +83,12 @@ class AppComponent extends React.Component {
 
   renderBotPastBubbles(bubbles) {
     return bubbles.map(({id, text}, key) => {
-      return <BotBubblePastComponent key={key} text={text} bot={Data.botIdentitys[id]} />
+      return <BotBubblePastComponent key={key} text={text} bot={Defaults.botIdentitys[id]} />
     });
   }
 
   renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
-    let props = { key, name: this.state.name, avatar: Data.user.avatar };
+    let props = { key, name: this.state.name, avatar: Defaults.user.avatar };
     switch (answer.type) {
       case 'button':
         props.text = answer.text;
@@ -101,11 +96,16 @@ class AppComponent extends React.Component {
       case 'input':
         props.valueContent = stateAtPos[answer.changeVal];
         return <ClientInputPastComponent {...props} />;
-      default:
-       return null;
-
     }
   }
+
+/**
+ * CLIENT ANSWERS
+ */
+
+/**
+ * Callbacks for Client Bubbles
+ */
 
   updatePathState(evt, {path, answerIndex = null}) {
     this.data.conversation.push({stateAtPos: JSON.stringify(this.state), answerIndex});
@@ -124,6 +124,13 @@ class AppComponent extends React.Component {
     this.setState({fieber: inputValue.target.value});
   }
 
+  handleEnter(enter, path, answerIndex) {
+    if(enter.key === 'Enter') {
+      this.updatePathState('', {path, answerIndex});
+    }
+  }
+
+  // Uitility to get the right callback
   getCallbackForChangeVal(changeVal) {
     switch (changeVal) {
       case 'name':
@@ -136,17 +143,14 @@ class AppComponent extends React.Component {
         return this.handleNameInput;
     }
   }
-  handleEnter(enter, path, answerIndex) {
-    if(enter.key === 'Enter') {
-      this.updatePathState('', {path, answerIndex});
-    }
-  }
+
+
 
   renderClientBubbles(answers) {
     return answers.map((answer, key) => {
       let props = {
         key,
-        index: key
+        index: key // To be able to give key to the callback
       }
       switch (answer.type) {
         case 'button':
@@ -154,6 +158,7 @@ class AppComponent extends React.Component {
           props.path = answer.path;
           props.updatePathState = this.updatePathState.bind(this);
           return <ClientButtonComponent {...props}  />;
+
         case 'input':
           const callback = this.getCallbackForChangeVal(answer.changeVal);
           props.path = answer.path;
@@ -164,18 +169,18 @@ class AppComponent extends React.Component {
           return (
             <ClientInputComponent {...props} />
           );
+        // Forwarder, that automaticly updates the state to the next path
+        // on tymeout
         case 'forward':
           setTimeout(()=>{this.setState({path:answer.path})}, 2500)
           break;
+        // the disabled button in context
         case 'disabled':
           props.text = answer.text;
           return <ClientDisabledComponent {...props} />;
-        default:
-          return null;
       }
     });
   }
-
 
   renderBotBubbles(bots) {
     return bots.map(({id, text}, key) => {
@@ -184,18 +189,14 @@ class AppComponent extends React.Component {
         text,
         name: this.state.name,
         email: this.state.email,
-        data: Data,
-        bot: Data.botIdentitys[id]
+        data: Defaults,
+        bot: Defaults.botIdentitys[id]
       };
       return (
         <BotBubbleComponent {...props} />
       );
     });
   }
-
 }
-
-AppComponent.defaultProps = {
-};
 
 export default AppComponent;
