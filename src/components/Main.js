@@ -1,6 +1,8 @@
 // Styles
 require('normalize.css/normalize.css');
 require('styles/App.scss');
+import docinator from './images/docinator.jpg';
+import fred from './images/fred.png';
 
 import React from 'react';
 
@@ -184,7 +186,7 @@ class AppComponent extends React.Component {
 
   renderBotBubbles(bots) {
     return bots.map(({id, text}, key) => {
-      const props = {
+      let props = {
         key,
         text,
         name: this.state.name,
@@ -192,6 +194,7 @@ class AppComponent extends React.Component {
         data: Defaults,
         bot: Defaults.botIdentitys[id]
       };
+      props.bot.avatar.src = fred;
       return (
         <BotBubbleComponent {...props} />
       );
