@@ -5,11 +5,13 @@ import React from 'react';
 import ReactDom from 'react-dom';
 
 // JSON Data
+
 import Data from './defaults.json';
 import chatConv from './conversation.json';
 
 // Components
 // import ConversationComponent from './ConversationComponent.js';
+
 import BotBubbleComponent from './BotBubbleComponent.js';
 import BotBubblePastComponent from './BotBubblePastComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
@@ -31,14 +33,14 @@ class AppComponent extends React.Component {
     this.data.conversation = [];
   }
 
-
-    componentDidUpdate(prevProps) {
-      const itemComponent = this.refs.activePart;
-      if (itemComponent) {
-        const domNode = ReactDom.findDOMNode(itemComponent);
-        domNode.scrollIntoView({behaviour:"smooth", block:"end"});
-      }
+  
+  componentDidUpdate() {
+    const itemComponent = this.refs.activePart;
+    if (itemComponent) {
+      const domNode = ReactDom.findDOMNode(itemComponent);
+      domNode.scrollIntoView({behaviour:"smooth", block:"end"});
     }
+  }
 
   render() {
     return (
