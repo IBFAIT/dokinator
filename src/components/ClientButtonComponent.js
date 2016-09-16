@@ -3,9 +3,11 @@
 import React from 'react';
 
 let ClientButtonComponent = (props) => (
-  <button className="clientbutton-component" onClick={(e)=>props.updatePathState(e,{path: props.path, answerIndex: props.index})}>
-    { props.text }
-  </button>
+  <div className="clientbutton-component">
+    <button onClick={(e)=>props.updatePathState(e,{path: props.path, answerIndex: props.index})}>
+      { props.text }
+    </button>
+  </div>
 );
 
 ClientButtonComponent.displayName = 'ClientButtonComponent';

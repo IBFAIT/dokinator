@@ -4,7 +4,6 @@ html {
 }
 
 body {
-
   min-height: 100%;
   display: flex;
   overflow: scroll;
@@ -15,6 +14,7 @@ body {
   color: #fff;
   background: #222;
 }
+
 #app {
   flex: 0 1 0;
   align-self: stretch;
@@ -24,6 +24,7 @@ body {
   max-width: 100%;
   display: flex;
 }
+
 .index {
   flex: 1 0 0;
   align-self: stretch;
@@ -36,83 +37,85 @@ body {
   align-items: center;
   align-content: stretch;
   max-width: 100%;
-  .user-answers {
-    width: 100%;
-  }
-  .conversation-bubbles {
+
+
+
+  .conversation-bubbles,
+  .conversation-part {
     display: flex;
     flex-basis: auto;
     align-self: stretch;
     flex-direction: column;
-  }
-  .conversation-part {
-    align-self: stretch;
-  }
-  .botbubble-component {
-    max-width: 90%;
-    min-width: 60%;
-    margin: .3rem .5rem;
-    background-color: #AAA;
-    padding: .3rem;
-    border: 1px solid black;
-    align-self: stretch;
 
-    .icon, .text {
-      display: inline-block;
-    }
-    .icon {
-      width: 20%;
-    }
-    .text {
-      width: 79%;
-    }
-    .text[data-botId='fred']{
-      color: blue;
-    }
-    .text[data-botId='doc'] {
-      color: red;
-    }
-  }
-  .botbubblepast-component {
-    max-width: 90%;
-    min-width: 60%;
-    margin: .3rem .5rem;
-    background-color: #AAA;
-    padding: .3rem;
-    border: 1px solid black;
-    align-self: stretcht;
+    .botbubble-component,
+    .botbubblepast-component,
+    .clientbutton-component,
+    .clientbuttonpast-component,
+    .clientinput-component,
+    .clientinputpast-component {
+      max-width: 95%;
+      min-width: 60%;
+      margin: 0.3rem 0.5rem;
+      align-self: stretch;
 
-    .icon, .text {
-      display: inline-block;
+      & > div,
+      .icon,
+      .text {
+        display: inline-block;
+      }
+
+      & > button,
+      & > div {
+        padding: 0.3rem;
+        background-color: #AAA;
+        border: 1px solid black;
+
+        .icon {
+          // max-width: 15%;
+          min-width: 4rem;
+          margin-right: .6rem;
+        }
+
+        .text {
+          min-width: 5%;
+          max-width: 78%;
+
+          &[data-botId='fred'] {
+            color: blue;
+          }
+
+          &[data-botId='doc'] {
+            color: red;
+          }
+        }
+      }
     }
-    .icon {
-      width: 20%;
+    .user-answers {
+      width: 100%;
+
+      .clientbutton-component, .clientdisabled-component {
+        display: inline-block;
+        min-width: 10%;
+        & > button, & > input {
+          display: inline-block;
+          background-color: green;
+        }
+      }
+      .clientdisabled-component {
+        background-color: grey;
+      }
     }
-    .text {
-      width: 79%;
-    }
-    .text[data-botId='fred']{
-      color: blue;
-    }
-    .text[data-botId='doc'] {
-      color: red;
-    }
-  }
-  .clientbutton-component {
-    border: 1px black solid;
-    display: inline-block;
-    margin: .2rem .4rem;
-    padding: .2rem;
-    color: black;
-    background-color: green;
-  }
-  .clientinput-component {
-    border: 1px dashed #f00;
-  }
-  .clientinputpast-component {
-    border: 1px dashed #f00;
-  }
-  .clientdisabled-component {
-    border: 1px dashed #f00;
+
+    // .clientinput-component, .clientinputpast-component  {
+    //   &> div {
+    //     display:inline-block;
+    //     border: 1px dashed #f00;
+    //     padding: .4rem;
+    //   }
+    // }
+    //
+    // .clientdisabled-component {
+    //   border: 1px dashed #f00;
+    // }
   }
 }

@@ -4,7 +4,12 @@ import React from 'react';
 
 let ClientInputPastComponent = ({valueContent}) => (
   <div className="clientinputpast-component">
-    {valueContent}
+  <div>
+    <div className="icon">ClientName is very long hey </div>
+    <div className="text">
+      {valueContent}
+    </div>
+    </div>
   </div>
 );
 
