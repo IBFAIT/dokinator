@@ -86,7 +86,7 @@ class AppComponent extends React.Component {
   }
 
   renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
-    let props = { key };
+    let props = { key, name: this.state.name, avatar: Data.user.avatar };
     switch (answer.type) {
       case 'button':
         props.text = answer.text;
