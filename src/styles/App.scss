@@ -102,7 +102,9 @@ body {
         }
       }
       .clientdisabled-component {
-        background-color: grey;
+        & > button {
+          background-color: grey;
+        }
       }
     }
 
