@@ -1,8 +1,8 @@
 require('normalize.css/normalize.css');
 require('styles/App.scss');
 
-import React                    from 'react';
-import ReactDOM                 from 'react-dom';
+import React from 'react';
+import ReactDom from 'react-dom';
 
 // JSON Data
 import Data from './defaults.json';
