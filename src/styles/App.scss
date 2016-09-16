@@ -65,7 +65,7 @@ body {
     .clientdisabled-component,
     .clientinput-component,
     .clientinputpast-component {
-      max-width: 99%;
+      max-width: 80%;
       min-width: 60%;
       margin: 0.3rem 0.5rem;
       align-self: stretch;
@@ -89,6 +89,10 @@ body {
           color: black;
           min-width: 4rem;
           margin-right: 0.6rem;
+          img {
+            height: 30px;
+            width: 30px;
+          }
         }
 
         .text {
