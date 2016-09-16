@@ -1,14 +1,16 @@
+
 $body-background-color: #eee;
 $chat-window-background-color: #eee;
 $bubble-background-color: #fff;
 $bubble-border-color: #000;
 $bubble-shadow-color: rgba(180,180,180,0.5);
 
-
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 /* Base Application Styles */
 html {
   height: 100%;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 body {
