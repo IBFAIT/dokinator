@@ -1,13 +1,10 @@
-
 $body-background-color: #eee;
 $chat-window-background-color: #eee;
 $bubble-background-color: #fff;
 $bubble-border-color: #000;
 $bubble-shadow-color: rgba(180,180,180,0.5);
-
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
-/* Base Application Styles */
 html {
   height: 100%;
   font-family: "Source Sans Pro", sans-serif;
@@ -84,11 +81,10 @@ body {
       & > div {
         padding: 0.5rem;
         background-color: #AAA;
-        border: 1px solid black;
-        border-radius: .3rem;
-
+        border-radius: 0.3rem;
         background-color: $bubble-background-color;
-        box-shadow: .3rem .6rem 1rem 0.5rem  $bubble-shadow-color;
+        box-shadow: 0.01rem 0.05rem 0 0 $bubble-shadow-color;
+
         .icon-component {
           color: black;
           min-width: 4rem;
