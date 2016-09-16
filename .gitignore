@@ -28,5 +28,4 @@ node_modules
 
 # Bower
 bower_components/
-dist/assets/*.png
-dist/assets/*.jpg
+dist/
