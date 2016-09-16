@@ -20,8 +20,6 @@ body {
   align-content: stretch;
   color: #fff;
   background: $body-background-color;
-  margin:0;
-  padding:0;
 }
 
 #app {
@@ -32,8 +30,6 @@ body {
   width: 50rem;
   max-width: 100%;
   display: flex;
-  margin:0;
-  padding:0;
 }
 
 .index {
@@ -48,8 +44,6 @@ body {
   align-items: center;
   align-content: stretch;
   max-width: 100%;
-  margin:0;
-  padding:0;
 
   .conversation-bubbles,
   .conversation-part {
@@ -118,8 +112,6 @@ body {
     .user-answers {
       width: 100%;
       text-align: center;
-      margin:0;
-      padding:0;
 
       .clientbutton-component,
       .clientdisabled-component {
