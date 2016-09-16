@@ -23,6 +23,8 @@ body {
   align-content: stretch;
   color: #fff;
   background: $body-background-color;
+  margin:0;
+  padding:0;
 }
 
 #app {
@@ -33,6 +35,8 @@ body {
   width: 50rem;
   max-width: 100%;
   display: flex;
+  margin:0;
+  padding:0;
 }
 
 .index {
@@ -45,10 +49,10 @@ body {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  align-content: str3etch;
+  align-content: stretch;
   max-width: 100%;
-
-
+  margin:0;
+  padding:0;
 
   .conversation-bubbles,
   .conversation-part {
@@ -69,8 +73,8 @@ body {
       margin: 0.3rem 0.5rem;
       align-self: stretch;
 
-
-      & > div, & > button,
+      & > button,
+      & > div,
       .icon-component,
       .text {
         display: inline-block;
@@ -86,9 +90,9 @@ body {
         background-color: $bubble-background-color;
         box-shadow: .3rem .6rem 1rem 0.5rem  $bubble-shadow-color;
         .icon-component {
-          color:black;
+          color: black;
           min-width: 4rem;
-          margin-right: .6rem;
+          margin-right: 0.6rem;
         }
 
         .text {
@@ -105,20 +109,31 @@ body {
         }
       }
     }
-    .clientinputpast-component, .clientbuttonpast-component {
+
+    .clientbuttonpast-component,
+    .clientinputpast-component {
       text-align: right;
     }
+
     .user-answers {
       width: 100%;
+      text-align: center;
 
-      .clientbutton-component, .clientdisabled-component {
+      margin:0;
+      padding:0;
+
+      .clientbutton-component,
+      .clientdisabled-component {
         display: inline-block;
         min-width: 10%;
-        & > button, & > input {
+
+        & > button,
+        & > input {
           display: inline-block;
           background-color: green;
         }
       }
+
       .clientdisabled-component {
         & > button {
           background-color: grey;
