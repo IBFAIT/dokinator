@@ -2,13 +2,15 @@
 
 import React from 'react';
 
-let ClientInputPastComponent = ({valueContent}) => (
+import IconComponent from './IconComponent.js';
+
+const ClientInputPastComponent = ({valueContent, name, avatar}) => (
   <div className="clientinputpast-component">
   <div>
-    <div className="icon">ClientName is very long hey </div>
-    <div className="text">
-      {valueContent}
-    </div>
+      <IconComponent name={name} src={avatar.src} alt={avatar.alt} />
+      <div className="text">
+        {valueContent}
+      </div>
     </div>
   </div>
 );

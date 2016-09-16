@@ -51,6 +51,7 @@ body {
     .botbubblepast-component,
     .clientbutton-component,
     .clientbuttonpast-component,
+    .clientdisabled-component,
     .clientinput-component,
     .clientinputpast-component {
       max-width: 95%;
@@ -59,7 +60,7 @@ body {
       align-self: stretch;
 
       & > div,
-      .icon,
+      .icon-component,
       .text {
         display: inline-block;
       }
@@ -70,7 +71,7 @@ body {
         background-color: #AAA;
         border: 1px solid black;
 
-        .icon {
+        .icon-component {
           // max-width: 15%;
           min-width: 4rem;
           margin-right: .6rem;

@@ -2,12 +2,14 @@
 
 import React from 'react';
 
-let ClientButtonPastComponent = (props) => (
+import IconComponent from './IconComponent.js';
+
+const ClientButtonPastComponent = ({text,name='DefaultName', avatar}) => (
   <div className="clientbuttonpast-component">
   <div>
-    <div className="icon">ClientName is very long hey </div>
+    <IconComponent name={name} src={avatar.src} alt={avatar.alt} />
     <div className="text">
-      { props.text }
+      { text }
     </div>
     </div>
   </div>
