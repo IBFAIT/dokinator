@@ -1,3 +1,11 @@
+$body-background-color: #eee;
+$chat-window-background-color: #eee;
+$bubble-background-color: #fff;
+$bubble-border-color: #000;
+$bubble-shadow-color: rgba(180,180,180,0.5);
+
+
+
 /* Base Application Styles */
 html {
   height: 100%;
@@ -12,14 +20,14 @@ body {
   align-items: stretch;
   align-content: stretch;
   color: #fff;
-  background: #222;
+  background: $body-background-color;
 }
 
 #app {
   flex: 0 1 0;
   align-self: stretch;
   flex-basis: auto;
-  background-color: #999;
+  background-color: $body-background-color;
   width: 50rem;
   max-width: 100%;
   display: flex;
@@ -29,13 +37,13 @@ body {
   flex: 1 0 0;
   align-self: stretch;
   flex-basis: auto;
-  background-color: #CCC;
+  background-color: $chat-window-background-color;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  align-content: stretch;
+  align-content: str3etch;
   max-width: 100%;
 
 
@@ -54,12 +62,13 @@ body {
     .clientdisabled-component,
     .clientinput-component,
     .clientinputpast-component {
-      max-width: 95%;
+      max-width: 99%;
       min-width: 60%;
       margin: 0.3rem 0.5rem;
       align-self: stretch;
 
-      & > div,
+
+      & > div, & > button,
       .icon-component,
       .text {
         display: inline-block;
@@ -67,12 +76,15 @@ body {
 
       & > button,
       & > div {
-        padding: 0.3rem;
+        padding: 0.5rem;
         background-color: #AAA;
         border: 1px solid black;
+        border-radius: .3rem;
 
+        background-color: $bubble-background-color;
+        box-shadow: .3rem .6rem 1rem 0.5rem  $bubble-shadow-color;
         .icon-component {
-          // max-width: 15%;
+          color:black;
           min-width: 4rem;
           margin-right: .6rem;
         }
@@ -91,6 +103,9 @@ body {
         }
       }
     }
+    .clientinputpast-component, .clientbuttonpast-component {
+      text-align: right;
+    }
     .user-answers {
       width: 100%;
 
@@ -108,17 +123,5 @@ body {
         }
       }
     }
-
-    // .clientinput-component, .clientinputpast-component  {
-    //   &> div {
-    //     display:inline-block;
-    //     border: 1px dashed #f00;
-    //     padding: .4rem;
-    //   }
-    // }
-    //
-    // .clientdisabled-component {
-    //   border: 1px dashed #f00;
-    // }
   }
 }
