@@ -18,7 +18,6 @@ body {
   justify-content: center;
   align-items: stretch;
   align-content: stretch;
-  color: #fff;
   background: $body-background-color;
 }
 
@@ -51,84 +50,116 @@ body {
     flex-basis: auto;
     align-self: stretch;
     flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+  }
 
-    .botbubble-component,
-    .botbubblepast-component,
-    .clientbutton-component,
+  // Past Conversation
+  .conversation-bubbles {
+    padding-bottom: 0.5rem;
+    width: 100%;
+
+    .botbubblepast-component, .botbubble-component {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      margin-top: .5rem;
+      margin-left: .4rem;
+      margin-right: .4rem;
+
+    }
+
     .clientbuttonpast-component,
-    .clientdisabled-component,
-    .clientinput-component,
     .clientinputpast-component {
-      max-width: 80%;
-      min-width: 60%;
-      margin: 0.3rem 0.5rem;
-      align-self: stretch;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      margin-top: .5rem;
+      margin-left: .4rem;
+      margin-right: .4rem;
 
-      & > button,
-      & > div,
-      .icon-component,
-      .text {
-        display: inline-block;
-      }
+    }
+    .botbubblepast-component, .botbubble-component,.clientbuttonpast-component,
+    .clientinputpast-component {
+      .bubble-inner {
 
-      & > button,
-      & > div {
+        max-width: 80%;
         padding: 0.5rem;
-        background-color: #AAA;
+        background-color: #aaa;
         border-radius: 0.3rem;
         background-color: $bubble-background-color;
         box-shadow: 0.01rem 0.05rem 0 0 $bubble-shadow-color;
-
-        .icon-component {
-          color: black;
-          min-width: 4rem;
-          margin-right: 0.6rem;
-          img {
-            height: 30px;
-            width: 30px;
-          }
-        }
-
-        .text {
-          min-width: 5%;
-          max-width: 78%;
-
-          &[data-botId='fred'] {
-            color: blue;
-          }
-
-          &[data-botId='doc'] {
-            color: red;
-          }
-        }
+      }
+    }
+    .icon-component {
+      flex: 0 0 20%;
+      align-self: stretch;
+      display: inline-block;
+      color: black;
+      min-width: 4rem;
+      margin-right: 0.6rem;
+      img {
+        width: 20px;
+        height: 20px;
       }
     }
 
-    .clientbuttonpast-component,
-    .clientinputpast-component {
-      text-align: right;
+    .text {
+      flex: 0 0 60%;
+      align-self: stretch;
+      display: inline-block;
+      min-width: 5%;
+      max-width: 78%;
+      &[data-botId='fred'] {
+        color: blue;
+      }
+      &[data-botId='doc'] {
+        color: red;
+      }
     }
+  }
 
-    .user-answers {
-      width: 100%;
-      text-align: center;
+  // Now answering
+  .conversation-part {
+    text-align: center;
 
-      .clientbutton-component,
-      .clientdisabled-component {
+    .botbubble-component,
+    .clientbutton-component,
+    .clientdisabled-component {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+    }
+  }
+
+
+
+  .conversation-part {
+    .clientbutton-component,
+    .clientdisabled-component,
+    .clientinput-component {
+      display: inline-block;
+      min-width: 10%;
+      button,
+      input {
         display: inline-block;
-        min-width: 10%;
-
-        & > button,
-        & > input {
-          display: inline-block;
-          background-color: green;
-        }
+        margin: .5rem .2rem;
+        padding: .3rem;
+        border-radius: 0.3rem;
+        background-color: $bubble-background-color;
+        box-shadow: 0.03rem 0.07rem 0 0 $bubble-shadow-color;
       }
+    }
 
-      .clientdisabled-component {
-        & > button {
-          background-color: grey;
-        }
+    .clientinput-component input {
+      background-color: white;
+    }
+
+    .clientdisabled-component {
+      & > button {
+        background-color: #aaa;
+        color: #ccc;
       }
     }
   }

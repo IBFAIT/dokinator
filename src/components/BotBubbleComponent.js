@@ -6,7 +6,7 @@ import IconComponent from './IconComponent.js';
 
 let BotBubbleComponent = ({bot, text, name, email, data}) => (
   <div className="botbubble-component">
-    <div>
+    <div className="bubble-inner">
       <IconComponent name={bot.name} src={bot.avatar.src} alt={bot.avatar.alt} />
       <div className="text" data-botId={bot.id}>{eval('`'+text+'`')}</div>
     </div>
