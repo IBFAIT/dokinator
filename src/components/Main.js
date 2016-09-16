@@ -54,14 +54,15 @@ class AppComponent extends React.Component {
           { this.renderBotBubbles(chatConv[this.state.path].bots) }
         </div>
         <div className="conversation-part">
-          <div className="user-answers" ref="activePart" >
+          <div className="user-answers" >
             { this.renderClientBubbles(chatConv[this.state.path].user.answers) }
           </div>
+
+          <div ref="activePart" style={{color:'transparent','background-color':'transparent', height:'1px', width:'100%'}}>Platzhalter</div>
         </div>
       </div>
     );
   }
-
 
   renderPastConversation(conversation) {
     return conversation.map((step, key) => {
