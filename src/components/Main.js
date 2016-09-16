@@ -36,7 +36,7 @@ class AppComponent extends React.Component {
     const itemComponent = this.refs.activePart;
     if (itemComponent) {
       const domNode = ReactDom.findDOMNode(itemComponent);
-      domNode.scrollIntoView({behaviour:"smooth", block:"end"});
+      domNode.scrollIntoView({behaviour:'smooth', block:'end'});
     }
   }
 
@@ -186,7 +186,7 @@ class AppComponent extends React.Component {
         name: this.state.name,
         email: this.state.email,
         data: Data,
-        bot: Data.botIdentitys[id],
+        bot: Data.botIdentitys[id]
       };
       return (
         <BotBubbleComponent {...props} />
