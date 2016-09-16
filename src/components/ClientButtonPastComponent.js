@@ -2,10 +2,8 @@
 
 import React from 'react';
 
-require('styles/ClientButton.scss');
-
 let ClientButtonPastComponent = (props) => (
-  <button className="clientbutton-component">
+  <button className="clientbuttonpast-component">
     { props.text }
   </button>
 );

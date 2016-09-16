@@ -48,4 +48,71 @@ body {
   .conversation-part {
     align-self: stretch;
   }
+  .botbubble-component {
+    max-width: 90%;
+    min-width: 60%;
+    margin: .3rem .5rem;
+    background-color: #AAA;
+    padding: .3rem;
+    border: 1px solid black;
+    align-self: stretch;
+
+    .icon, .text {
+      display: inline-block;
+    }
+    .icon {
+      width: 20%;
+    }
+    .text {
+      width: 79%;
+    }
+    .text[data-botId='fred']{
+      color: blue;
+    }
+    .text[data-botId='doc'] {
+      color: red;
+    }
+  }
+  .botbubblepast-component {
+    max-width: 90%;
+    min-width: 60%;
+    margin: .3rem .5rem;
+    background-color: #AAA;
+    padding: .3rem;
+    border: 1px solid black;
+    align-self: stretcht;
+
+    .icon, .text {
+      display: inline-block;
+    }
+    .icon {
+      width: 20%;
+    }
+    .text {
+      width: 79%;
+    }
+    .text[data-botId='fred']{
+      color: blue;
+    }
+    .text[data-botId='doc'] {
+      color: red;
+    }
+  }
+  .clientbutton-component {
+    border: 1px black solid;
+    display: inline-block;
+    margin: .2rem .4rem;
+    padding: .2rem;
+    color: black;
+    background-color: green;
+  }
+  .clientinput-component {
+    border: 1px dashed #f00;
+  }
+  .clientinputpast-component {
+    border: 1px dashed #f00;
+  }
+  .clientdisabled-component {
+    border: 1px dashed #f00;
+  }
 }
