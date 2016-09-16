@@ -6,7 +6,7 @@ import IconComponent from './IconComponent.js';
 
 const ClientInputPastComponent = ({valueContent, name, avatar}) => (
   <div className="clientinputpast-component">
-  <div>
+  <div className="bubble-inner">
       <IconComponent name={name} src={avatar.src} alt={avatar.alt} />
       <div className="text">
         {valueContent}
