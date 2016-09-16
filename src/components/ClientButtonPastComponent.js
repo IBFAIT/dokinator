@@ -3,9 +3,14 @@
 import React from 'react';
 
 let ClientButtonPastComponent = (props) => (
-  <button className="clientbuttonpast-component">
-    { props.text }
-  </button>
+  <div className="clientbuttonpast-component">
+  <div>
+    <div className="icon">ClientName is very long hey </div>
+    <div className="text">
+      { props.text }
+    </div>
+    </div>
+  </div>
 );
 
 ClientButtonPastComponent.displayName = 'ClientButtonPastComponent';

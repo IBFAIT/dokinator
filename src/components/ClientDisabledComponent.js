@@ -3,9 +3,11 @@
 import React from 'react';
 
 let ClientDisabledComponent = ({text}) => (
-  <button className="clientdisabled-component">
-    {text}
-  </button>
+  <div className="clientdisabled-component">
+    <button>
+      {text}
+    </button>
+  </div>
 );
 
 ClientDisabledComponent.displayName = 'ClientDisabledComponent';
