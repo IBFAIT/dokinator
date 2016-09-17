@@ -4,7 +4,7 @@ import React from 'react';
 
 const IconComponent = ({name = 'DefaultName', src = '', alt = ''}) => (
   <div className="icon-component">
-    <div>{name}</div>
+    <div className="name">{name}</div>
     <div><img src={src} alt={alt} /></div>
   </div>
 );
