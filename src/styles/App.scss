@@ -84,9 +84,9 @@ body {
       .bubble-inner {
         display:flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: center;
         max-width: 80%;
-        padding: 0.5rem;
+        padding: .6rem .6rem .4rem .8rem;
         background-color: #aaa;
         border-radius: 0.3rem;
         background-color: $bubble-background-color;
@@ -99,7 +99,7 @@ body {
       display: inline-block;
       color: black;
       min-width: 40px;
-      max-width: 60px;
+      max-width: 40px;
       margin-right: 0.6rem;
       .name {
         font-size: .8rem;
@@ -118,7 +118,9 @@ body {
       align-self: stretch;
       display: inline-block;
       min-width: 5%;
-      padding: .4rem;
+      min-height: 30px;
+      margin: 0;
+      padding: 0;
       &[data-botId='fred'] {
         color: blue;
       }
