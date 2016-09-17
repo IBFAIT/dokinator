@@ -15,7 +15,7 @@ import Conversation from './conversation.json';
 
 // Components
 import BotBubbleComponent from './BotBubbleComponent.js';
-import BotBubblePastComponent from './BotBubblePastComponent.js';
+import BotBubblePastComponent from './BotBubbleComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
 import ClientInputComponent from './ClientInputComponent.js';
@@ -88,7 +88,7 @@ class AppComponent extends React.Component {
 
   renderBotPastBubbles(bubbles) {
     return bubbles.map(({id, text}, key) => {
-      return <BotBubblePastComponent key={key} text={text} bot={Defaults.botIdentitys[id]} />
+      return <BotBubblePastComponent key={key} text={text} classNameing="botbubblepast-component" bot={Defaults.botIdentitys[id]} />
     });
   }
 
