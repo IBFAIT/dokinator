@@ -1,8 +1,11 @@
 // Styles
 require('normalize.css/normalize.css');
 require('styles/App.scss');
-import docinator from './images/docinator.jpg';
-import fred from './images/fred.png';
+const avatarImgs = {
+  doc: require('../images/docinator.jpg'),
+  fred:require('../images/fred.png'),
+  user: require('../images/user.png')
+};
 
 import React from 'react';
 
@@ -91,6 +94,7 @@ class AppComponent extends React.Component {
 
   renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
     let props = { key, name: this.state.name, avatar: Defaults.user.avatar };
+    props.avatar.src = avatarImgs.user;
     switch (answer.type) {
       case 'button':
         props.text = answer.text;
@@ -204,7 +208,7 @@ class AppComponent extends React.Component {
         data: Defaults,
         bot: Defaults.botIdentitys[id]
       };
-      props.bot.avatar.src = fred;
+      props.bot.avatar.src=avatarImgs[props.bot.id];
       return (
         <BotBubbleComponent {...props} />
       );
