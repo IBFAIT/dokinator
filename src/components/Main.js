@@ -114,20 +114,30 @@ class AppComponent extends React.Component {
  */
 
   updatePathState(evt, {path, answerIndex = null}) {
-    this.data.conversation.push({stateAtPos: JSON.stringify(this.state), answerIndex});
-    this.setState({path: path});
+    this.data.conversation.push({
+      stateAtPos: JSON.stringify(this.state),
+      answerIndex
+    });
+    this.setState({
+      path: path
+    });
   }
-
   handleNameInput(inputValue) {
-    this.setState({name: inputValue.target.value});
+    this.setState({
+      name: inputValue.target.value
+    });
   }
 
   handleEmailInput(inputValue) {
-    this.setState({email: inputValue.target.value});
+    this.setState({
+      email: inputValue.target.value
+    });
   }
 
   handleFieberInput(inputValue) {
-    this.setState({fieber: inputValue.target.value});
+    this.setState({
+      fieber: inputValue.target.value
+    });
   }
 
   handleEnter(enter, path, answerIndex) {
