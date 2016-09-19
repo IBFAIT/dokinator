@@ -2,10 +2,10 @@
 
 ## Setup
 
-1. yoman `npm install -g yo`
+1. `npm install -g yo`
 2. `npm install -g generator-react-webpack`
-3. `git clone git@gitlab.com:4quant/conversational.today.git`
-4. `cd conversational.today`
+3. `git clone https://github.com/IBFAIT/dokinator.git`
+4. `cd dokinator`
 5. `npm install`
 6. `npm start`
 7. Your browser opens at `http://localhost:8000`
