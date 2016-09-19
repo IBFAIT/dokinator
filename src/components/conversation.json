@@ -1,7 +1,7 @@
 {
   "init": {
     "bots": [{
-      "text": "Hey du! | Ciao! | Servus!",
+      "text": "Hey du!",
       "id": "fred"
     }, {
       "text": "Ich heisse Fred und bin dein Chatbot.",
@@ -22,13 +22,10 @@
   },
   "0": {
     "bots": [{
-      "text": "Freut mich, ${name}",
+      "text": "Freut mich, ${name}.",
       "id": "fred"
     }, {
       "text": "Wie kann ich dir heute helfen?",
-      "id": "fred"
-    }, {
-      "text": "Sag mir, was interessiert dich mehr?",
       "id": "fred"
     }],
     "user": {
