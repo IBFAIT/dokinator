@@ -146,6 +146,12 @@ class AppComponent extends React.Component {
     }
   }
 
+  handleEnter(enter, path, answerIndex) {
+    if(enter.key === 'Enter') {
+      this.updatePathState('', {path, answerIndex});
+    }
+  }
+
   // Uitility to get the right callback
   getCallbackForChangeVal(changeVal) {
     switch (changeVal) {
