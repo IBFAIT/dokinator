@@ -110,6 +110,25 @@ class AppComponent extends React.Component {
     }
   }
 
+    /**
+     * Bot Bubble render
+     */
+    renderBotBubbles(bots) {
+      return bots.map(({id, texts}, key) => {
+        let props = {
+          key,
+          texts,
+          name: this.state.name,
+          email: this.state.email,
+          data: Defaults,
+          bot: Defaults.botIdentitys[id]
+        };
+        props.bot.avatar.src=avatarImgs[props.bot.id];
+        return (
+          <BotBubbleComponent {...props} />
+        );
+      });
+    }
 /**
  * CLIENT ANSWERS
  */
@@ -209,25 +228,6 @@ class AppComponent extends React.Component {
     });
   }
 
-  /**
-   * Bot Bubble render
-   */
-  renderBotBubbles(bots) {
-    return bots.map(({id, texts}, key) => {
-      let props = {
-        key,
-        texts,
-        name: this.state.name,
-        email: this.state.email,
-        data: Defaults,
-        bot: Defaults.botIdentitys[id]
-      };
-      props.bot.avatar.src=avatarImgs[props.bot.id];
-      return (
-        <BotBubbleComponent {...props} />
-      );
-    });
-  }
 }
 
 export default AppComponent;
