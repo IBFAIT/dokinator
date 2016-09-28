@@ -298,10 +298,7 @@
   "besserung": {
     "bots": [{
       "id": "doc",
-      "texts": ["Ich wünsche dir gute Besserung, ${name}!"]
-    }, {
-      "id": "doc",
-      "text": "Bis Bald!"
+      "texts": ["Ich wünsche dir gute Besserung, ${name}!","Bis Bald!"]
     }],
     "user": {
       "answers": [{
