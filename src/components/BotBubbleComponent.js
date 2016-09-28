@@ -22,8 +22,9 @@ let BotBubbleComponent = ({
     <div className="botbubble-container">
       {
         texts.map((text, key) =>{
+          /* If there is more than one text, display random element */
           text = (Array.isArray(text))? text[Math.floor(Math.random()*text.length)] : text;
-          return <BotSingleBubbleComponent key={key} text={text} data={data} name={name} email={email} data={data}  />
+          return <BotSingleBubbleComponent key={key} text={text} data={data} name={name} email={email} data={data} />
         })
       }
     </div>
