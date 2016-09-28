@@ -218,7 +218,7 @@
   "wieHoch": {
     "bots": [{
       "id": "doc",
-      "text": "Wie hoch ist das Fieber?"
+      "texts": ["Wie hoch ist das Fieber?"]
     }],
     "user": {
       "answers": [{
@@ -372,7 +372,7 @@
         "Wie besprochen schicke ich dir in 4 Stunden eine Mail.",
         "Gute Besserung!"
       ]
-    }],
+    } ],
     "user": [],
     "title": "The End."
   }

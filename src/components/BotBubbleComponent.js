@@ -22,7 +22,7 @@ let BotBubbleComponent = ({
     <div className="botbubble-container">
       {
         texts.map((text, key) =>
-          (<BotSingleBubbleComponent key={key} text={text} />)
+          (<BotSingleBubbleComponent key={key} text={text} data={data} />)
         )
       }
     </div>
