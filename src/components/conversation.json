@@ -1,14 +1,12 @@
 {
   "init": {
     "bots": [{
-      "text": "Hey du!",
-      "id": "fred"
-    }, {
-      "text": "Ich heisse Fred und bin dein Chatbot.",
-      "id": "fred"
-    }, {
-      "text": "Wie heisst du?",
-      "id": "fred"
+      "id": "fred",
+      "texts": [
+        "Hey du!",
+        "Ich heisse Fred und bin dein Chatbot.",
+        "Wie heisst du?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -22,11 +20,11 @@
   },
   "0": {
     "bots": [{
-      "text": "Freut mich, ${name}.",
-      "id": "fred"
-    }, {
-      "text": "Wie kann ich dir heute helfen?",
-      "id": "fred"
+      "id": "fred",
+      "texts": [
+        "Freut mich, ${name}.",
+        "Wie kann ich dir heute helfen?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -47,11 +45,12 @@
   },
   "1": {
     "bots": [{
-      "text": "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca | Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
-      "id": "fred"
-    }, {
-      "text": "Möchtest du mehr über Chatbots im Allgemeinen erfahren?",
-      "id": "fred"
+
+      "id": "fred",
+      "texts": [
+        "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca | Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
+        "Möchtest du mehr über Chatbots im Allgemeinen erfahren?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -69,13 +68,11 @@
   "2": {
     "bots": [{
       "id": "fred",
-      "text": "Da gibt’s zum Beispiel ‘Dokinator’."
-    }, {
-      "id": "fred",
-      "text": "Dokinator ist ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben und versicherungstechnische Fragen zu beantworten."
-    }, {
-      "id": "fred",
-      "text": "Es handelt sich um einen Prototypen. Möchtest du ihn testen?"
+      "texts": [
+        "Da gibt’s zum Beispiel ‘Dokinator’.",
+        "Dokinator ist ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben und versicherungstechnische Fragen zu beantworten.",
+        "Es handelt sich um einen Prototypen. Möchtest du ihn testen?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -93,13 +90,11 @@
   "3": {
     "bots": [{
       "id": "fred",
-      "text": "Cool, dass du dich für Chatbots interessierst. Hier ein paar interessante Fakten..."
-    }, {
-      "id": "fred",
-      "text": "… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-    }, {
-      "id": "fred",
-      "text": "Hinterlasse mir doch deine Email-Adresse. So kann ich dich in Zukunft über Neuigkeiten informieren."
+      "texts": [
+        "Cool, dass du dich für Chatbots interessierst. Hier ein paar interessante Fakten...",
+        "… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+        "Hinterlasse mir doch deine Email-Adresse. So kann ich dich in Zukunft über Neuigkeiten informieren."
+      ]
     }],
     "user": {
       "answers": [{
@@ -115,13 +110,11 @@
   "4": {
     "bots": [{
       "id": "doc",
-      "text": "Ciao ${name}!"
-    }, {
-      "id": "doc",
-      "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
-    }, {
-      "id": "doc",
-      "text": "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
+      "texts": [
+        "Ciao ${name}!",
+        "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben.",
+        "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
+      ]
     }],
     "user": {
       "answers": [{
@@ -139,10 +132,10 @@
   "5": {
     "bots": [{
       "id": "doc",
-      "text": "Es handelt sich hier um alle in der Schweiz wohnhaften Personen. Wir alle haben das Privileg, bei einer Krankenkasse versichert zu sein."
-    }, {
-      "id": "doc",
-      "text": "Jetzt aber weiter…"
+      "texts": [
+        "Es handelt sich hier um alle in der Schweiz wohnhaften Personen. Wir alle haben das Privileg, bei einer Krankenkasse versichert zu sein.",
+        "Jetzt aber weiter…"
+      ]
     }],
     "user": {
       "answers": [{
@@ -155,25 +148,18 @@
   "6": {
     "bots": [{
       "id": "fred",
-      "text": "Alles klar. Stelle dir vor, dass du einen viralen Infekt hast. Das kennst du sicher: Du hast Gliederschmerzen, deine Nase läuft, du hast etwas Fieber und so weiter."
-    }, {
-      "id": "fred",
-      "text": "Ok?"
-    }, {
-      "id": "fred",
-      "text": "…"
-    }, {
-      "id": "fred",
-      "text": "Ok. Es geht los…"
-    }, {
-      "id": "fred",
-      "text": "… dann rufe ich mal den Dokinator …"
+      "texts": [
+        "Alles klar. Stelle dir vor, dass du einen viralen Infekt hast. Das kennst du sicher: Du hast Gliederschmerzen, deine Nase läuft, du hast etwas Fieber und so weiter.",
+        "Ok?",
+        "…",
+        "Ok. Es geht los…", "… dann rufe ich mal den Dokinator …"
+      ]
     }, {
       "id": "doc",
-      "text": "Hi ${name}, ich bin Dokinator."
-    }, {
-      "id": "doc",
-      "text": "Wie geht es dir heute?"
+      "texts": [
+        "Hi ${name}, ich bin Dokinator.",
+        "Wie geht es dir heute?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -190,10 +176,10 @@
   "gliederschmerzen": {
     "bots": [{
       "id": "doc",
-      "text": "Okay, verstehe. Das ist unangenehm."
-    }, {
-      "id": "doc",
-      "text": "Wie lange bestehen die Schmerzen bereits?"
+      "texts": [
+        "Okay, verstehe. Das ist unangenehm.",
+        "Wie lange bestehen die Schmerzen bereits?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -213,7 +199,9 @@
   "hastDuFieber": {
     "bots": [{
       "id": "doc",
-      "text": "Hast du Fieber?"
+      "texts": [
+        "Hast du Fieber?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -245,7 +233,9 @@
   "runningNose": {
     "bots": [{
       "id": "doc",
-      "text": "Läuft deine Nase?"
+      "texts": [
+        "Läuft deine Nase?"
+      ]
     }],
     "user": {
       "answers": [{
@@ -262,7 +252,7 @@
   "viralInfect": {
     "bots": [{
       "id": "doc",
-      "text": "Hmm. Das tönt nach einem viralen Infekt. Könnte dies zutreffen?"
+      "texts": ["Hmm. Das tönt nach einem viralen Infekt. Könnte dies zutreffen?"]
     }],
     "user": {
       "answers": [{
@@ -279,7 +269,7 @@
   "drink": {
     "bots": [{
       "id": "doc",
-      "text": "Bei viralen Infekten empfiehlt es sich viel zu trinken."
+      "texts": ["Bei viralen Infekten empfiehlt es sich viel zu trinken."]
     }],
     "user": {
       "answers": [{
@@ -293,7 +283,7 @@
   "backIn4": {
     "bots": [{
       "id": "doc",
-      "text": "Ich melde mich in 4h wieder bei dir. Ok?"
+      "texts": ["Ich melde mich in 4h wieder bei dir. Ok?"]
     }],
     "user": {
       "answers": [{
@@ -307,7 +297,7 @@
   "besserung": {
     "bots": [{
       "id": "doc",
-      "text": "Ich wünsche dir gute Besserung, ${name}!"
+      "texts": ["Ich wünsche dir gute Besserung, ${name}!"]
     }, {
       "id": "doc",
       "text": "Bis Bald!"
@@ -324,13 +314,11 @@
   "outro": {
     "bots": [{
       "id": "fred",
-      "text": "So, da bin ich wieder."
-    }, {
-      "id": "fred",
-      "text": "Schön hast du Dokinator kennen gelernt."
-    }, {
-      "id": "fred",
-      "text": "Das war jezt natürlich nur ein Beispiel."
+      "texts": [
+        "So, da bin ich wieder.",
+        "Schön hast du Dokinator kennen gelernt.",
+        "Das war jezt natürlich nur ein Beispiel."
+      ]
     }],
     "user": {
       "answers": [{
@@ -343,19 +331,13 @@
   "7": {
     "bots": [{
       "id": "fred",
-      "text": "Schau, das sind die Leute, die mich gebaut haben:"
-    }, {
-      "id": "fred",
-      "text": "${data.persons.flavio.name}: ${data.persons.flavio.image}"
-    }, {
-      "id": "fred",
-      "text": "${data.persons.kaspar.name}: ${data.persons.kaspar.image}"
-    }, {
-      "id": "fred",
-      "text": "Du kannst sie über info@conversational.today kontaktieren."
-    }, {
-      "id": "fred",
-      "text": "Bis bald!"
+      "texts": [
+        "Schau, das sind die Leute, die mich gebaut haben:",
+        "${data.persons.flavio.name}: ${data.persons.flavio.image}",
+        "${data.persons.kaspar.name}: ${data.persons.kaspar.image}",
+        "Du kannst sie über info@conversational.today kontaktieren.",
+        "Bis bald!"
+      ]
     }],
     "user": {
       "answers": [{
@@ -369,7 +351,7 @@
   "8": {
     "bots": [{
       "id": "fred",
-      "text": "Lieben Dank, ${data.user.name}. | Cool!"
+      "texts": ["Lieben Dank, ${data.user.name}. | Cool!"]
     }],
     "user": {
       "answers": [{
@@ -382,16 +364,14 @@
   "end": {
     "bots": [{
       "id": "fred",
-      "text": "Wir wollen jetzt wirklich nichts mehr sagen"
+      "texts": ["Wir wollen jetzt wirklich nichts mehr sagen"]
     }, {
       "id": "doc",
-      "text": "Ja, auch ich habe jetzt grad nichts mehr zu sagen."
-    }, {
-      "id": "doc",
-      "text": "Wie besprochen schicke ich dir in 4 Stunden eine Mail."
-    }, {
-      "id": "doc",
-      "text": "Gute Besserung!"
+      "texts": [
+        "Ja, auch ich habe jetzt grad nichts mehr zu sagen.",
+        "Wie besprochen schicke ich dir in 4 Stunden eine Mail.",
+        "Gute Besserung!"
+      ]
     }],
     "user": [],
     "title": "The End."
