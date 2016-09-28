@@ -87,8 +87,13 @@ class AppComponent extends React.Component {
   }
 
   renderBotPastBubbles(bubbles) {
-    return bubbles.map(({id, text}, key) => {
-      return <BotBubblePastComponent key={key} text={text} classNameing="botbubblepast-component" bot={Defaults.botIdentitys[id]} />
+    return bubbles.map(({id, texts}, key) => {
+      return <BotBubblePastComponent
+                key={key}
+                texts={texts}
+                classNameing="botbubblepast-component"
+                bot={Defaults.botIdentitys[id]}
+              />
     });
   }
 
@@ -204,11 +209,14 @@ class AppComponent extends React.Component {
     });
   }
 
+  /**
+   * Bot Bubble render
+   */
   renderBotBubbles(bots) {
-    return bots.map(({id, text}, key) => {
+    return bots.map(({id, texts}, key) => {
       let props = {
         key,
-        text,
+        texts,
         name: this.state.name,
         email: this.state.email,
         data: Defaults,

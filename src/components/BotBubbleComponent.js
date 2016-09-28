@@ -3,10 +3,11 @@
 import React from 'react';
 
 import IconComponent from './IconComponent.js';
+import BotSingleBubbleComponent from './BotSingleBubbleComponent.js';
 
 let BotBubbleComponent = ({
       bot,
-      text,
+      texts,
       name='',
       email='',
       data='',
@@ -18,11 +19,12 @@ let BotBubbleComponent = ({
       src={bot.avatar.src}
       alt={bot.avatar.alt}
     />
-    <div className="bubble-inner">
-      <div
-        className="text"
-        data-botId={bot.id}>{eval('`'+text+'`')}
-      </div>
+    <div className="botbubble-container">
+      {
+        texts.map((text, key) =>
+          (<BotSingleBubbleComponent key={key} text={text} />)
+        )
+      }
     </div>
   </div>
 );
