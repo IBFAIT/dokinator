@@ -88,12 +88,16 @@ class AppComponent extends React.Component {
 
   renderBotPastBubbles(bubbles) {
     return bubbles.map(({id, texts}, key) => {
-      return <BotBubblePastComponent
-                key={key}
-                texts={texts}
-                classNameing="botbubblepast-component"
-                bot={Defaults.botIdentitys[id]}
-              />
+      let props = {
+        key,
+        texts,
+        name: this.state.name,
+        email: this.state.email,
+        data: Defaults,
+        classNameing: 'botbubblepast-component',
+        bot: Defaults.botIdentitys[id]
+      };
+      return <BotBubblePastComponent {...props} />
     });
   }
 
@@ -117,7 +121,9 @@ class AppComponent extends React.Component {
       return bots.map(({id, texts}, key) => {
         let props = {
           key,
+          index: key,
           texts,
+          bots,
           name: this.state.name,
           email: this.state.email,
           data: Defaults,
@@ -128,6 +134,10 @@ class AppComponent extends React.Component {
           <BotBubbleComponent {...props} />
         );
       });
+    }
+
+    handleMultiBotAnswer(answer) {
+      console.log(answer, this.data.conversation);
     }
 /**
  * CLIENT ANSWERS

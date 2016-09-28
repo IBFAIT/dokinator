@@ -7,6 +7,8 @@ import BotSingleBubbleComponent from './BotSingleBubbleComponent.js';
 
 let BotBubbleComponent = ({
       bot,
+      index,
+      bots,
       texts,
       name='',
       email='',
@@ -23,7 +25,11 @@ let BotBubbleComponent = ({
       {
         texts.map((text, key) =>{
           /* If there is more than one text, display random element */
-          text = (Array.isArray(text))? text[Math.floor(Math.random()*text.length)] : text;
+          if(Array.isArray(text)) {
+            const rand = Math.floor(Math.random()*text.length);
+            bots[index].texts[key] = text[rand];
+            text = text[rand];
+          }
           return <BotSingleBubbleComponent key={key} text={text} data={data} name={name} email={email} data={data} />
         })
       }
