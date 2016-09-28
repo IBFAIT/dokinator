@@ -70,6 +70,10 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        .botsinglebubble-component {
+          margin-top: .2rem;
+          margin-bottom: .2rem;
+        }
       }
     }
 
