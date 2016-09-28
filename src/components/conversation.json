@@ -3,7 +3,7 @@
     "bots": [{
       "id": "fred",
       "texts": [
-        "Hey du!",
+        ["Hey du!", "Ciao!", "Hi..."],
         "Ich heisse Fred und bin dein Chatbot.",
         "Wie heisst du?"
       ]
@@ -47,8 +47,9 @@
     "bots": [{
 
       "id": "fred",
-      "texts": [
-        "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca | Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
+      "texts": [[
+        "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
+        "Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca"],
         "Möchtest du mehr über Chatbots im Allgemeinen erfahren?"
       ]
     }],
@@ -351,7 +352,7 @@
   "8": {
     "bots": [{
       "id": "fred",
-      "texts": ["Lieben Dank, ${data.user.name}. | Cool!"]
+      "texts": [["Lieben Dank, ${data.user.name}.", "Cool!"]]
     }],
     "user": {
       "answers": [{

@@ -21,9 +21,10 @@ let BotBubbleComponent = ({
     />
     <div className="botbubble-container">
       {
-        texts.map((text, key) =>
-          (<BotSingleBubbleComponent key={key} text={text} data={data} />)
-        )
+        texts.map((text, key) =>{
+          text = (Array.isArray(text))? text[Math.floor(Math.random()*text.length)] : text;
+          return <BotSingleBubbleComponent key={key} text={text} data={data} name={name} email={email} data={data}  />
+        })
       }
     </div>
   </div>
