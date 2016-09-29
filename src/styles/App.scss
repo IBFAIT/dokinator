@@ -102,27 +102,28 @@ body {
         }
       }
     }
-    .botbubble-component {
-      .icon-component {
-        img {
-          animation-name: schwups;
-          animation-duration: 2s;
-          animation-timing-function: ease-in;
-          animation-delay: 0s;
-          animation-play-state: running;
-        }
-        @keyframes schwups {
-          from {
-            margin-left: -40px;
-            opacity: 0;
+
+      .botbubble-component {
+        .icon-component {
+          img.schwups {
+            // animation-name: schwups;
+            // animation-duration: 2s;
+            // animation-timing-function: ease-in;
+            // animation-delay: 0s;
+            // animation-iteration-count: 2  ;
           }
-          to {
-            margin-left: 0;
-            opacity: 1;
+          @keyframes schwups {
+            from {
+              margin-left: -40px;
+              opacity: 0;
+            }
+            to {
+              margin-left: 0;
+              opacity: 1;
+            }
           }
         }
       }
-    }
 
     .clientbuttonpast-component,
     .clientinputpast-component {

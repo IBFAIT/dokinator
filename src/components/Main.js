@@ -8,6 +8,7 @@ const avatarImgs = {
 };
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 // JSON data beeing imported
 import Defaults from './defaults.json';
@@ -46,6 +47,34 @@ class AppComponent extends React.Component {
    */
   componentDidUpdate() {
     window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+
+      this.makeAnimation();
+  }
+  componentDidMount() {
+    this.makeAnimation();
+  }
+
+  makeAnimation() {
+    ReactDOM.findDOMNode(this.refs.activePart).childNodes.forEach(botBubble => {
+      const iconImg = botBubble.firstChild.childNodes[1].firstChild;
+      iconImg.className = 'none';
+      iconImg.className = 'schwups';
+      iconImg.style.animationName = 'schwups';
+      iconImg.style.animationDuration = '2s';
+      iconImg.style.animationTimingFunction = 'ease-in';
+      iconImg.style.animationDelay = '0s';
+      // iconImg.addEventListener('animationstart', (evt)=>console.log(evt), false);
+      iconImg.addEventListener('animationend', ()=>{this.removeAnimation()}, false);
+      // iconImg.addEventListener("animationiteration", (evt)=>{console.log(evt); evt.}, false);
+
+    });
+  }
+  removeAnimation() {
+    ReactDOM.findDOMNode(this.refs.activePart).childNodes.forEach(botBubble => {
+      const iconImg = botBubble.firstChild.childNodes[1].firstChild;
+      iconImg.className = 'none';
+      iconImg.style.animation = '';
+    });
   }
 
   render() {
@@ -53,9 +82,11 @@ class AppComponent extends React.Component {
       <div className="index">
         <div className="conversation-bubbles">
           { this.renderPastConversation(this.data.conversation) }
+        <span  ref="activePart">
           { this.renderBotBubbles(Conversation[this.state.path].bots) }
+        </span>
         </div>
-        <div className="conversation-part"  ref="activePart">
+        <div className="conversation-part">
           <div className="user-answers" >
             { this.renderClientBubbles(Conversation[this.state.path].user.answers) }
           </div>
