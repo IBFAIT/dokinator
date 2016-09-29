@@ -71,10 +71,27 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        width: 100%;
 
         .botsinglebubble-component {
           margin-top: .2rem;
           margin-bottom: .2rem;
+          opacity:1;
+          align-self: flex-start;
+        }
+        @keyframes bubbleunroll {
+          0% {
+            opacity: 0;
+            width: 0;
+          }
+          1% {
+            opacity: 1;
+            width: 0;
+          }
+          100% {
+            opacity: 1;
+            width: 50px;
+          }
         }
       }
 
@@ -105,24 +122,47 @@ body {
 
       .botbubble-component {
         .icon-component {
-          img.schwups {
-            // animation-name: schwups;
-            // animation-duration: 2s;
-            // animation-timing-function: ease-in;
-            // animation-delay: 0s;
-            // animation-iteration-count: 2  ;
-          }
-          @keyframes schwups {
-            from {
+          @keyframes inslideavatar {
+            0% {
               margin-left: -40px;
               opacity: 0;
             }
-            to {
+            40% {
+              margin-left: -40px;
+              opacity: 0;
+            }
+            50% {
+              margin-left: -30px;
+              opacity: .3;
+            }
+            60% {
+              margin-left: -15px;
+              opacity: .6;
+            }
+            75% {
+              margin-left: -10px;
+              opacity: .7;
+            }
+            100% {
               margin-left: 0;
               opacity: 1;
             }
           }
+          .name {
+            @keyframes inslidename {
+              from {
+                right: 0;
+                opacity: 0;
+              }
+              to {
+                right: -4rem;
+                opacity: 1;
+              }
+            }
+          }
         }
+
+
       }
 
     .clientbuttonpast-component,

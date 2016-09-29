@@ -47,34 +47,60 @@ class AppComponent extends React.Component {
    */
   componentDidUpdate() {
     window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
-
-      this.makeAnimation();
+    this.makeAnimation();
   }
   componentDidMount() {
     this.makeAnimation();
   }
 
   makeAnimation() {
-    ReactDOM.findDOMNode(this.refs.activePart).childNodes.forEach(botBubble => {
-      const iconImg = botBubble.firstChild.childNodes[1].firstChild;
-      iconImg.className = 'none';
-      iconImg.className = 'schwups';
-      iconImg.style.animationName = 'schwups';
-      iconImg.style.animationDuration = '2s';
+    ReactDOM.findDOMNode(this.refs.activePart).childNodes.forEach((botBubbleDomComp) => {
+      const iconImg = botBubbleDomComp.getElementsByClassName("avatarImg")[0];
+      iconImg.className = 'avatarImg';
+      iconImg.className = 'avatarImg inslideavatar';
+      iconImg.style.animationName = 'inslideavatar';
+      iconImg.style.animationDuration = '1000ms';
       iconImg.style.animationTimingFunction = 'ease-in';
-      iconImg.style.animationDelay = '0s';
-      // iconImg.addEventListener('animationstart', (evt)=>console.log(evt), false);
-      iconImg.addEventListener('animationend', ()=>{this.removeAnimation()}, false);
-      // iconImg.addEventListener("animationiteration", (evt)=>{console.log(evt); evt.}, false);
+      iconImg.style.animationDelay = '0ms';
+      iconImg.addEventListener('animationend', ()=>{this.removeAnimation(iconImg, 'avatarImg')});
+      const nameTxt = botBubbleDomComp.getElementsByClassName('name')[0];
+      nameTxt.className = 'name inslidename';
+      nameTxt.style.animationName = 'inslidename';
+      nameTxt.style.animationDuration = '1000ms';
+      nameTxt.style.animationTimingFunction = 'ease-in';
+      nameTxt.style.animationDelay = '0ms';
+      nameTxt.addEventListener('animationend', ()=>{this.removeAnimation(nameTxt, 'name')});
+      const singleTextBubbles = botBubbleDomComp.getElementsByClassName('botsinglebubble-component');
+      let timeConcat = 800;
 
+      for (var i = 0; i < singleTextBubbles.length; i++) {
+        let elm = singleTextBubbles[i];
+        elm.style.opacity = 0;
+        let txtContent = '';
+        txtContent = elm.firstChild.textContent;
+        elm.firstChild.textContent = '...';
+        let timeRollout = txtContent.length*20;
+        elm.className = 'botsinglebubble-component';
+        elm.className = 'botsinglebubble-component bubbleunroll';
+        elm.style.animationName = 'bubbleunroll';
+        elm.style.animationDuration = '100ms';
+        let delay = timeConcat + 'ms';
+        elm.style.animationDelay = delay;
+        elm.style.animationTimingFunction = 'ease-in';
+        elm.addEventListener('animationend', () => {
+            elm.style.minWidth = '40px';
+            elm.style.opacity = 1;
+            elm.firstChild.textContent = txtContent;
+            this.removeAnimation(elm, 'botsinglebubble-component')
+
+          });
+        timeConcat += timeRollout;
+      }
     });
   }
-  removeAnimation() {
-    ReactDOM.findDOMNode(this.refs.activePart).childNodes.forEach(botBubble => {
-      const iconImg = botBubble.firstChild.childNodes[1].firstChild;
-      iconImg.className = 'none';
-      iconImg.style.animation = '';
-    });
+  removeAnimation(element, formerClassname) {
+      element.className = formerClassname;
+      element.style.animation = '';
   }
 
   render() {
