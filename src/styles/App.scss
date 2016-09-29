@@ -98,6 +98,28 @@ body {
           width: 40px;
           height: 40px;
           margin: -1rem auto 0 auto;
+
+        }
+      }
+    }
+    .botbubble-component {
+      .icon-component {
+        img {
+          animation-name: schwups;
+          animation-duration: 2s;
+          animation-timing-function: ease-in;
+          animation-delay: 0s;
+          animation-play-state: running;
+        }
+        @keyframes schwups {
+          from {
+            margin-left: -40px;
+            opacity: 0;
+          }
+          to {
+            margin-left: 0;
+            opacity: 1;
+          }
         }
       }
     }
