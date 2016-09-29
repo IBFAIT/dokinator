@@ -136,17 +136,9 @@ class AppComponent extends React.Component {
       });
     }
 
-    handleMultiBotAnswer(answer) {
-      console.log(answer, this.data.conversation);
-    }
-/**
- * CLIENT ANSWERS
- */
-
-/**
- * Callbacks for Client Bubbles
- */
-
+  /**
+   * Callbacks for Client Bubbles
+   */
   updatePathState(evt, {path, answerIndex = null}) {
     this.data.conversation.push({
       stateAtPos: JSON.stringify(this.state),
@@ -156,47 +148,16 @@ class AppComponent extends React.Component {
       path: path
     });
   }
-  handleNameInput(inputValue) {
-    this.setState({
-      name: inputValue.target.value
-    });
-  }
 
-  handleEmailInput(inputValue) {
-    this.setState({
-      email: inputValue.target.value
-    });
-  }
-
-  handleFieberInput(inputValue) {
-    this.setState({
-      fieber: inputValue.target.value
-    });
-  }
-
-  handleEnter(enter, path, answerIndex) {
-    if(enter.key === 'Enter') {
-      this.updatePathState('', {path, answerIndex});
-    }
-  }
-
-  handleEnter(enter, path, answerIndex) {
-    if(enter.key === 'Enter') {
-      this.updatePathState('', {path, answerIndex});
-    }
-  }
-
-  // Uitility to get the right callback
-  getCallbackForChangeVal(changeVal) {
-    switch (changeVal) {
-      case 'name':
-        return this.handleNameInput;
-      case 'email':
-        return this.handleEmailInput;
-      case 'fieber':
-        return this.handleFieberInput;
-      default:
-        return this.handleNameInput;
+  handleInputfieldEnter(evt, path, answerIndex, changeVal) {
+    if(evt.key === 'Enter') {
+      this.data.conversation.push({
+        stateAtPos: JSON.stringify(this.state),
+        answerIndex
+      });
+      let state = {path};
+      state[changeVal] = evt.target.value;
+      this.setState(state);
     }
   }
 
@@ -209,24 +170,22 @@ class AppComponent extends React.Component {
         index: key // To be able to give key to the callback
       }
       switch (answer.type) {
+        // Button Component
         case 'button':
           props.text = answer.text;
           props.path = answer.path;
           props.updatePathState = this.updatePathState.bind(this);
           return <ClientButtonComponent {...props}  />;
-
+        // Input Component
         case 'input':
-          const callback = this.getCallbackForChangeVal(answer.changeVal);
           props.path = answer.path;
           props.placeholder = answer.placeholder;
           props.changeVal = answer.changeVal;
-          props.onChange = callback.bind(this);
-          props.handleEnter = this.handleEnter.bind(this);
+          props.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
           return (
             <ClientInputComponent {...props} />
           );
-        // Forwarder, that automaticly updates the state to the next path
-        // on tymeout
+        // Forwarder
         case 'forward':
           setTimeout(()=>{this.setState({path:answer.path})}, 2500)
           break;
