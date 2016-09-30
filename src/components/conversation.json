@@ -155,13 +155,25 @@
         "…",
         "Ok. Es geht los…", "… dann rufe ich mal den Dokinator …"
       ]
-    }, {
-      "id": "doc",
-      "texts": [
-        "Hi ${name}, ich bin Dokinator.",
-        "Wie geht es dir heute?"
-      ]
     }],
+    "user": {
+      "answers": [{
+        "type": "forward",
+        "path": "docAfterfred"
+      }]
+    },
+    "title": "6"
+  },
+  "docAfterfred": {
+    "bots": [
+      {
+        "id": "doc",
+        "texts": [
+          "Hi ${name}, ich bin Dokinator.",
+          "Wie geht es dir heute?"
+        ]
+      }
+    ],
     "user": {
       "answers": [{
         "type": "button",
@@ -172,7 +184,7 @@
         "text": "Mir gehts eigentlich prima."
       }]
     },
-    "title": "6"
+    "title": "docAfterfred"
   },
   "gliederschmerzen": {
     "bots": [{

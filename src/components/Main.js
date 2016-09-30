@@ -56,45 +56,55 @@ class AppComponent extends React.Component {
 
   makeAnimation() {
     let bots = ReactDOM.findDOMNode(this.refs.activePart).childNodes;
-    let partsFinished = this.partAnimation(bots, 0);
-
+    let partsFinished = this.partAnimation(bots);
+    console.log(partsFinished);
   }
 
-  partAnimation(parts, ctr) {
-    let part = parts[ctr]
-    if(typeof part == 'undefined') {
-      return true;
-    }
-    let comps = this.getBubbleComps(part);
-    Promise.all([
+  partAnimation(parts, ctr = 0) {
+      let comps = this.getBubbleComps(parts[ctr]);
       comps.avatar.classList.add('slideInLeft'),
       comps.name.classList.add('slideInLeft')
-    ]).then(()=>(this.delay(1000)))
-      .then(()=>{
+      return this.delay(1000).then(()=>{
+        let comps = this.getBubbleComps(parts[ctr]);
         comps.name.classList.remove('slideInLeft');
         comps.avatar.classList.remove('slideInLeft');
-        let bubAnim, rej, bubProm = new Promise((resolve, reject)=>{
-          bubAnim = this.bubbleAnimation(comps.bubbles, resolve, 0);
-          rej = reject;
+        this.delay(500).then(() => {
+          return this.bubbleAnimation(this.arrayify(comps.bubbles));
         });
-        bubProm.then(()=>{console.log("all the bubbles should have been processed before")});
       });
   }
 
-  bubbleAnimation(bubbles, mainResolver, ctr) {
-    let bubble = bubbles[ctr];
-    if(typeof bubble == 'undefined') {
-      return mainResolver(true);
-    }
-    this.delay(0).then(()=>{
-      bubble.classList.add('openBubble');
-      return this.delay(1000);
+  bubbleAnimation(bubbles, ctr = 0, bubbleProm = this.delay(0)) {
+    bubbleProm.then(()=>{
+      if(typeof bubbles[ctr] == 'undefined') {
+        bubbleProm.cancel();
+        return true;
+      } else {
+        bubbles[ctr].classList.add('openBubble');
+        bubbleProm = this.delay(1000);
+        return bubbleProm;
+      }
     }).then(()=>{
-      bubble.classList.remove('openBubble');
-      this.bubbleAnimation(bubbles, mainResolver, ctr+1);
+      if(typeof bubbles[ctr] == 'undefined') {
+        bubbleProm.cancel();
+        return true;
+      } else {
+        bubbles[ctr].classList.remove('openBubble');
+        bubbleProm = this.delay(1);
+        this.bubbleAnimation(bubbles, ctr+1, bubbleProm);
+      }
     });
+    console.log(bubbleProm);
+    return bubbleProm;
   }
 
+  arrayify(obj) {
+    let arr = [];
+    for (let i = 0; i < obj.length; i++) {
+        arr.push(obj[i]);
+    }
+    return arr;
+  }
   addClass(el, name) {
     return el.classList.add(name);
   }
@@ -108,13 +118,13 @@ class AppComponent extends React.Component {
   }
 
   delay(time) {
-  let tmId, rej, p = new Promise((resolve, reject)=> {
-    tmId = setTimeout(resolve, time);
-    rej = reject;
-  });
-  p.cancel = () => { clearTimeout(tmIx), rej(Error('canceled'))}
-  return p
-}
+    let tmId, rej, p = new Promise((resolve, reject)=> {
+      tmId = setTimeout(resolve, time);
+      rej = reject;
+    });
+    p.cancel = () => { clearTimeout(tmId), rej(Error('canceled'))}
+    return p
+  }
 
   removeAnimation(element, formerClassname) {
       element.className = formerClassname;
@@ -209,6 +219,9 @@ class AppComponent extends React.Component {
           <BotBubbleComponent {...props} />
         );
       });
+      if(prom.PromiseStatus == 'rejected') {
+        return true;
+      }
     }
 
   /**
