@@ -1,0 +1,37 @@
+.slideInLeft {
+  animation-name: slideInLeft;
+  animation-duration: 1000ms;
+  animation-delay: 0;
+}
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform-origin: 0 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: 0 0;
+    transform: translateX(0%);
+  }
+}
+
+.openBubble {
+  animation-name: openBubble;
+  animation-duration: 1200ms;
+  animation-delay: 0;
+}
+@keyframes openBubble {
+  0% {
+    opacity: 0;
+    transform-origin: 50% 100%;
+    transform: scale(.2) translate(0%, 200%);
+  }
+
+  100% {
+    opacity: 1;
+    transform-origin: 50% 100%;
+    transform: scale(1) translate(0%, 0%);
+  }
+}

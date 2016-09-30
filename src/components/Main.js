@@ -1,6 +1,7 @@
 // Styles
 require('normalize.css/normalize.css');
 require('styles/App.scss');
+require('styles/animations.scss');
 const avatarImgs = {
   doc: require('../images/docinator.jpg'),
   fred:require('../images/fred.png'),
@@ -54,50 +55,67 @@ class AppComponent extends React.Component {
   }
 
   makeAnimation() {
-    ReactDOM.findDOMNode(this.refs.activePart).childNodes.forEach((botBubbleDomComp) => {
-      const iconImg = botBubbleDomComp.getElementsByClassName("avatarImg")[0];
-      iconImg.className = 'avatarImg';
-      iconImg.className = 'avatarImg inslideavatar';
-      iconImg.style.animationName = 'inslideavatar';
-      iconImg.style.animationDuration = '1000ms';
-      iconImg.style.animationTimingFunction = 'ease-in';
-      iconImg.style.animationDelay = '0ms';
-      iconImg.addEventListener('animationend', ()=>{this.removeAnimation(iconImg, 'avatarImg')});
-      const nameTxt = botBubbleDomComp.getElementsByClassName('name')[0];
-      nameTxt.className = 'name inslidename';
-      nameTxt.style.animationName = 'inslidename';
-      nameTxt.style.animationDuration = '1000ms';
-      nameTxt.style.animationTimingFunction = 'ease-in';
-      nameTxt.style.animationDelay = '0ms';
-      nameTxt.addEventListener('animationend', ()=>{this.removeAnimation(nameTxt, 'name')});
-      const singleTextBubbles = botBubbleDomComp.getElementsByClassName('botsinglebubble-component');
-      let timeConcat = 800;
+    let bots = ReactDOM.findDOMNode(this.refs.activePart).childNodes;
+    let partsFinished = this.partAnimation(bots, 0);
 
-      for (var i = 0; i < singleTextBubbles.length; i++) {
-        let elm = singleTextBubbles[i];
-        elm.style.opacity = 0;
-        let txtContent = '';
-        txtContent = elm.firstChild.textContent;
-        elm.firstChild.textContent = '...';
-        let timeRollout = txtContent.length*20;
-        elm.className = 'botsinglebubble-component';
-        elm.className = 'botsinglebubble-component bubbleunroll';
-        elm.style.animationName = 'bubbleunroll';
-        elm.style.animationDuration = '100ms';
-        let delay = timeConcat + 'ms';
-        elm.style.animationDelay = delay;
-        elm.style.animationTimingFunction = 'ease-in';
-        elm.addEventListener('animationend', () => {
-            elm.style.minWidth = '40px';
-            elm.style.opacity = 1;
-            elm.firstChild.textContent = txtContent;
-            this.removeAnimation(elm, 'botsinglebubble-component')
+  }
 
-          });
-        timeConcat += timeRollout;
-      }
+  partAnimation(parts, ctr) {
+    let part = parts[ctr]
+    if(typeof part == 'undefined') {
+      return true;
+    }
+    let comps = this.getBubbleComps(part);
+    Promise.all([
+      comps.avatar.classList.add('slideInLeft'),
+      comps.name.classList.add('slideInLeft')
+    ]).then(()=>(this.delay(1000)))
+      .then(()=>{
+        comps.name.classList.remove('slideInLeft');
+        comps.avatar.classList.remove('slideInLeft');
+        let bubAnim, rej, bubProm = new Promise((resolve, reject)=>{
+          bubAnim = this.bubbleAnimation(comps.bubbles, resolve, 0);
+          rej = reject;
+        });
+        bubProm.then(()=>{console.log("all the bubbles should have been processed before")});
+      });
+  }
+
+  bubbleAnimation(bubbles, mainResolver, ctr) {
+    let bubble = bubbles[ctr];
+    if(typeof bubble == 'undefined') {
+      return mainResolver(true);
+    }
+    this.delay(0).then(()=>{
+      bubble.classList.add('openBubble');
+      return this.delay(1000);
+    }).then(()=>{
+      bubble.classList.remove('openBubble');
+      this.bubbleAnimation(bubbles, mainResolver, ctr+1);
     });
   }
+
+  addClass(el, name) {
+    return el.classList.add(name);
+  }
+
+  getBubbleComps(buble) {
+    return {
+      avatar: buble.getElementsByClassName('avatarImg')[0],
+      name: buble.getElementsByClassName('name')[0],
+      bubbles: buble.getElementsByClassName('botsinglebubble-component')
+    };
+  }
+
+  delay(time) {
+  let tmId, rej, p = new Promise((resolve, reject)=> {
+    tmId = setTimeout(resolve, time);
+    rej = reject;
+  });
+  p.cancel = () => { clearTimeout(tmIx), rej(Error('canceled'))}
+  return p
+}
+
   removeAnimation(element, formerClassname) {
       element.className = formerClassname;
       element.style.animation = '';
