@@ -20,7 +20,7 @@ class BotChildBubbleReloadedComponent extends React.Component {
     const {name, email, fieber} = this.props;
     return (
       <div className="botsinglebubble-component" ref="bubble" style={{display: 'inline-block'}}>
-        <div className="text" ref="textContainer">
+        <div className="text" ref="textContainer" style={{display: 'inline-block'}}>
           { this.renderWords(this.props.textChunks) }
         </div>
       </div>

@@ -12,18 +12,29 @@ class BotChildBubbleReloadedComponent extends React.Component {
   }
 
   componentDidMount() {
+    this.wordsAppear();
+  }
+
+  componentDidUpdate() {
+    ReactDOM.findDOMNode(this.refs.bubble).style.dislplay = 'none';
+    this.wordsAppear();
+  }
+
+  wordsAppear() {
+    const ilb = 'inline-block';
     const words = ReactDOM.findDOMNode(this.refs.textContainer).childNodes;
     const bubble = ReactDOM.findDOMNode(this.refs.bubble);
     let delay = new Promise((resolve)=>{setTimeout(resolve, this.props.wait)});
     delay.then(()=>{
-      bubble.style.display = 'inline-block';
+      bubble.style.display = ilb;
+      bubble.firstChild.display = ilb;
       let countUp = 0;
       Object.keys(words).map((key)=> {
         words[key].style.opacity = 0;
         words[key].classList.add('raiseWord');
         words[key].style.animationDelay = countUp + 'ms';
         countUp += words[key].textContent.length * 100;
-        words[key].style.display = 'inline-block';
+        words[key].style.display = ilb;
         words[key].style.width = 0;
         words[key].addEventListener('animationstart', (evt) => {
           evt.target.style.width = 'initial';
@@ -31,16 +42,12 @@ class BotChildBubbleReloadedComponent extends React.Component {
         words[key].addEventListener('animationend', (evt) => {
           evt.target.classList.remove('raiseWord');
           evt.target.style.opacity = 1;
-          evt.target.style.display = 'inline-block';
+          evt.target.style.display = ilb;
         }, false);
       });
     })
   }
-  typewrite(chunks, elm, n) {
-    if(n < chunks.length) {
-      elm.textContent = elm.textContent + ' ' + chunks[n];
-    }
-  }
+
   renderWords(textChunks) {
     return textChunks.map((word, key) => {
       return <span key={key} style={{display: 'none', marginRight: '5px'}}>
@@ -53,7 +60,7 @@ class BotChildBubbleReloadedComponent extends React.Component {
     const {name, email, fieber} = this.props;
     return (
       <div className="botsinglebubble-component" ref="bubble" style={{display: 'none'}}>
-        <div className="text" ref="textContainer">
+        <div className="text" ref="textContainer" >
           { this.renderWords(this.props.textChunks) }
         </div>
       </div>
