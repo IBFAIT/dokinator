@@ -1,23 +1,19 @@
 // Styles
 require('normalize.css/normalize.css');
 require('styles/App.scss');
-require('styles/animations.scss');
-const avatarImgs = {
-  doc: require('../images/docinator.jpg'),
-  fred:require('../images/fred.png'),
-  user: require('../images/user.png')
-};
+
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 // JSON data beeing imported
 import Defaults from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotBubbleComponent from './BotBubbleComponent.js';
-import BotBubblePastComponent from './BotBubbleComponent.js';
+// import BotBubbleComponent from './BotBubbleComponent.js';
+import BotBubbleComponent from './BotBubbleReloadedComponent.js';
+import BotBubblePastComponent from './BotBubbleReloadedComponent.js';
+// import BotBubblePastComponent from './BotBubbleComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
 import ClientInputComponent from './ClientInputComponent.js';
@@ -41,6 +37,7 @@ class AppComponent extends React.Component {
     this.data = Defaults;
     // This property will get the whole Conversation history appended
     this.data.conversation = [];
+    this.botsTime = 0;
   }
 
   /**
@@ -48,88 +45,10 @@ class AppComponent extends React.Component {
    */
   componentDidUpdate() {
     window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
-    this.makeAnimation();
   }
   componentDidMount() {
-    this.makeAnimation();
   }
 
-  makeAnimation() {
-    let bots = ReactDOM.findDOMNode(this.refs.activePart).childNodes;
-    let partsFinished = this.partAnimation(bots);
-    console.log(partsFinished);
-  }
-
-  partAnimation(parts, ctr = 0) {
-      let comps = this.getBubbleComps(parts[ctr]);
-      comps.avatar.classList.add('slideInLeft'),
-      comps.name.classList.add('slideInLeft')
-      return this.delay(1000).then(()=>{
-        let comps = this.getBubbleComps(parts[ctr]);
-        comps.name.classList.remove('slideInLeft');
-        comps.avatar.classList.remove('slideInLeft');
-        this.delay(500).then(() => {
-          return this.bubbleAnimation(this.arrayify(comps.bubbles));
-        });
-      });
-  }
-
-  bubbleAnimation(bubbles, ctr = 0, bubbleProm = this.delay(0)) {
-    bubbleProm.then(()=>{
-      if(typeof bubbles[ctr] == 'undefined') {
-        bubbleProm.cancel();
-        return true;
-      } else {
-        bubbles[ctr].classList.add('openBubble');
-        bubbleProm = this.delay(1000);
-        return bubbleProm;
-      }
-    }).then(()=>{
-      if(typeof bubbles[ctr] == 'undefined') {
-        bubbleProm.cancel();
-        return true;
-      } else {
-        bubbles[ctr].classList.remove('openBubble');
-        bubbleProm = this.delay(1);
-        this.bubbleAnimation(bubbles, ctr+1, bubbleProm);
-      }
-    });
-    console.log(bubbleProm);
-    return bubbleProm;
-  }
-
-  arrayify(obj) {
-    let arr = [];
-    for (let i = 0; i < obj.length; i++) {
-        arr.push(obj[i]);
-    }
-    return arr;
-  }
-  addClass(el, name) {
-    return el.classList.add(name);
-  }
-
-  getBubbleComps(buble) {
-    return {
-      avatar: buble.getElementsByClassName('avatarImg')[0],
-      name: buble.getElementsByClassName('name')[0],
-      bubbles: buble.getElementsByClassName('botsinglebubble-component')
-    };
-  }
-
-  delay(time) {
-    let tmId, rej, p = new Promise((resolve, reject)=> {
-      tmId = setTimeout(resolve, time);
-      rej = reject;
-    });
-    p.cancel = () => { clearTimeout(tmId), rej(Error('canceled'))}
-    return p
-  }
-
-  removeAnimation(element, formerClassname) {
-      element.className = formerClassname;
-      element.style.animation = '';
-  }
 
   render() {
     return (
@@ -188,7 +107,6 @@ class AppComponent extends React.Component {
 
   renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
     let props = { key, name: this.state.name, avatar: Defaults.user.avatar };
-    props.avatar.src = avatarImgs.user;
     switch (answer.type) {
       case 'button':
         props.text = answer.text;
@@ -198,12 +116,16 @@ class AppComponent extends React.Component {
         return <ClientInputPastComponent {...props} />;
     }
   }
-
+  updateBotsMainTimerCb(timepeice) {
+    this.botsTime += timepeice;
+  }
     /**
      * Bot Bubble render
      */
     renderBotBubbles(bots) {
+
       return bots.map(({id, texts}, key) => {
+        let totalBotTime = 0;
         let props = {
           key,
           index: key,
@@ -212,17 +134,19 @@ class AppComponent extends React.Component {
           name: this.state.name,
           email: this.state.email,
           data: Defaults,
-          bot: Defaults.botIdentitys[id]
+          bot: Defaults.botIdentitys[id],
+          tmUpdater: this.updateBotsMainTimerCb.bind(this)
         };
-        props.bot.avatar.src=avatarImgs[props.bot.id];
+        console.log('mains totalBotTime at itr: '+key, totalBotTime);
         return (
           <BotBubbleComponent {...props} />
         );
       });
-      if(prom.PromiseStatus == 'rejected') {
-        return true;
-      }
     }
+
+
+
+
 
   /**
    * Callbacks for Client Bubbles
@@ -236,6 +160,7 @@ class AppComponent extends React.Component {
       path: path
     });
   }
+
 
   handleInputfieldEnter(evt, path, answerIndex, changeVal) {
     if(evt.key === 'Enter') {
