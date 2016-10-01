@@ -12,7 +12,7 @@ import Conversation from './conversation.json';
 // Components
 // import BotBubbleComponent from './BotBubbleComponent.js';
 import BotBubbleComponent from './BotBubbleReloadedComponent.js';
-import BotBubblePastComponent from './BotBubbleReloadedComponent.js';
+import BotBubblePastComponent from './BotBubblePastReloadedComponent.js';
 // import BotBubblePastComponent from './BotBubbleComponent.js';
 import ClientButtonComponent from './ClientButtonComponent.js';
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
