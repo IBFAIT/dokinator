@@ -103,3 +103,34 @@
     transform: perspective(800px);
   }
 }
+
+.answerRisen {
+  opacity: 1;
+  // margin-bottom: 1rem;
+}
+.raiseAnswer {
+  animation-name: raiseAnswer;
+  opacity: 0;
+}
+@keyframes raiseAnswer {
+  0% {
+    opacity: 0;
+    margin-bottom: 0;
+    height: initial;
+    // transform-origin: 0 100%;
+    // transform: translateY(-100%);
+  }
+  70% {
+      opacity: 1;
+      margin-bottom: 0;
+      height: initial;
+  }
+
+  100% {
+    opacity: 1;
+    height: initial;
+    margin-bottom: 0;
+    // transform-origin: 0 100%;
+    // transform: translateY(0%);
+  }
+}

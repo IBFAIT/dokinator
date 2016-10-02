@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Scroll from 'smoothscroll';
 
 require('styles/animations.scss');
 
@@ -98,7 +98,7 @@ class BotChildBubbleReloadedComponent extends React.Component {
         span.addEventListener('animationend', evt => {
           evt.target.classList.remove('raiseWord');
           evt.target.classList.add('raisedWord');
-          window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+          Scroll(evt.target);
         });
         this.elms.spans[key] = span;
         delaySum += wordsDelay; // Update Sum

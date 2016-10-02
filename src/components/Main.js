@@ -4,6 +4,7 @@ require('styles/App.scss');
 
 
 import React from 'react';
+import Scroll from 'smoothscroll';
 
 // JSON data beeing imported
 import Defaults from './defaults.json';
@@ -53,7 +54,7 @@ class AppComponent extends React.Component {
    * Scrolling down to the bottom when new answer bubbles appear
    */
   componentDidUpdate() {
-    window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+
   }
 
   shouldComponentUpdate() {
@@ -145,7 +146,21 @@ class AppComponent extends React.Component {
       this.answerDelay.then(() => {
         this.answerNodes.comp.classList.remove('nope');
         this.answerNodes.comp.classList.remove('noDimensions');
-        window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+        this.answerNodes.comp.style.animationDuration = '1700ms';
+        this.answerNodes.comp.style.animationDelay = '0ms';
+        this.answerNodes.comp.classList.add('raiseAnswer');
+        console.log(this.answerNodes.comp);
+        this.answerNodes.comp.addEventListener('animationstart', (evt) => {
+          Scroll(evt.target.firstChild.lastChild);
+          // window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+        });
+        this.answerNodes.comp.addEventListener('animationend', (evt) => {
+          evt.target.classList.remove('raiseAnswer');
+          evt.target.classList.add('answerRisen');
+          Scroll(evt.target.firstChild.lastChild);
+          // window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+        });
+
       });
 
     }

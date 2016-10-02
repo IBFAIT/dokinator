@@ -50,24 +50,31 @@ class ClientAnswerComponent extends React.Component {
     this.props.giveNodes(this.els)
   }
 
-  delayAppear() {
-    if(typeof this.els.comp == 'undefined') {
-      this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
-    }
-    this.els.comp.classList.add('nope');
-    this.els.comp.classList.add('noDimensions');
-    console.log(this.props);a
-    const p = new Promise((resolve)=>{setTimeout(resolve, this.props.botsTime)});
-    p.then(()=>{
-      this.appear();
-    });
-  }
-
-  appear() {
-    this.els.comp.classList.remove('nope');
-    this.els.comp.classList.remove('noDimensions');
-    this.els.comp.classList.add('initialDimensions');
-  }
+  // delayAppear() {
+  //   if(typeof this.els.comp == 'undefined') {
+  //     this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
+  //   }
+  //   this.els.comp.classList.add('nope');
+  //   this.els.comp.classList.add('noDimensions');
+  //   console.log(this.props);a
+  //   const p = new Promise((resolve)=>{setTimeout(resolve, this.props.botsTime)});
+  //   p.then(()=>{
+  //     this.appear();
+  //   });
+  // }
+  //
+  // appear() {
+  //   this.els.comp.classList.remove('nope');
+  //   this.els.comp.classList.remove('noDimensions');
+  //   this.els.comp.classList.add('initialDimensions');
+  //   this.els.comp.style.animationDuration = '1200ms';
+  //   this.els.comp.style.animationDelay = '0ms';
+  //   this.els.comp.classList.add('raiseAnswer');
+  //   this.els.comp.addEventListener('animationend', (evt) => {
+  //     console.log(evt);
+  //     evt.target.classList.remove('raiseAnswer');
+  //   });
+  // }
 
 
   hide() {
