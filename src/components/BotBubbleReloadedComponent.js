@@ -75,7 +75,7 @@ class BotBubbleReloadedComponent extends React.Component {
       this.totalBotTime += (textApppearTime + 200);
       if(key+1 == texts.length) {
         this.props.tmUpdater(this.totalBotTime);
-        this.props.bubbleFinished({botAnimationDone: this.totalBotTime, answerIndex: this.props.index});
+        this.props.bubbleFinished({botAnimationDone: this.totalBotTime, answerIndex: this.props.index, });
       }
       return <BotSingleBubbleComponent {...props} />
     });

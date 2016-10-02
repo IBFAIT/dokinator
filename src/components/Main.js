@@ -14,12 +14,14 @@ import Conversation from './conversation.json';
 import BotBubbleComponent from './BotBubbleReloadedComponent.js';
 import BotBubblePastComponent from './BotBubblePastReloadedComponent.js';
 // import BotBubblePastComponent from './BotBubbleComponent.js';
-import ClientButtonComponent from './ClientButtonComponent.js';
+// import ClientButtonComponent from './ClientButtonComponent.js';
+// import ClientInputComponent from './ClientInputComponent.js';
+// import ClientDisabledComponent from './ClientDisabledComponent.js';
+
+import ClientAnswerComponent from './ClientAnswerComponent.js';
+
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
-import ClientInputComponent from './ClientInputComponent.js';
-import ClientDisabledComponent from './ClientDisabledComponent.js';
 import ClientInputPastComponent from './ClientInputPastComponent.js';
-import ForwardComponent from './ForwardComponent.js';
 
 /**
  * Main Stateful Componennt
@@ -36,12 +38,15 @@ class AppComponent extends React.Component {
       fieber: null
     };
     this.data = Defaults;
+
     // This property will get the whole Conversation history appended
-    this.data.conversation = [];
+    this.data.conversationLog = [];
     this.botsTime = 0;
     this.botAnimationDone = null;
     this.answerTmId = null;
+    this.answerNodes = null;
     this.Conversation = Conversation;
+    this.answersDelay = 0;
   }
 
   /**
@@ -61,25 +66,97 @@ class AppComponent extends React.Component {
 
 
   render() {
+    let answerProps = {
+      answers: Conversation[this.state.path].user.answers,
+      updatePathState: this.updatePathState.bind(this),
+      handleInputfieldEnter: this.handleInputfieldEnter.bind(this),
+      botsTime: this.botsTime,
+      giveNodes: this.getAnswerNodes.bind(this)
+    }
     return (
       <div className="index">
         <div className="conversation-bubbles">
-          { this.renderPastConversation(this.data.conversation) }
-        <span  ref="activePart">
-          { this.renderBotBubbles(Conversation[this.state.path].bots) }
-        </span>
+          { this.renderPastConversation(this.data.conversationLog) }
+          <span  ref="activePart">
+            { this.renderBotBubbles(Conversation[this.state.path].bots) }
+          </span>
         </div>
         <div className="conversation-part">
-          <div className="user-answers" >
+          <ClientAnswerComponent {...answerProps} />
+          { /*<div className="user-answers" >
             { this.renderClientBubbles(Conversation[this.state.path].user.answers) }
-          </div>
+            </div>*/ }
         </div>
       </div>
     );
   }
+  updateBotsMainTimerCb(timepeice) {
+    this.botsTime += timepeice;
+  }
+    /**
+     * Bot Bubble render
+     */
+    renderBotBubbles(bots) {
+      return bots.map(({id, texts}, key) => {
+        let props = {
+          key,
+          index: key,
+          texts,
+          bots,
+          name: this.state.name,
+          email: this.state.email,
+          data: Defaults,
+          bot: Defaults.botIdentitys[id],
+          tmUpdater: this.updateBotsMainTimerCb.bind(this),
+          bubbleFinished: this.handleBotAnimFinished.bind(this)
+        };
+        return (
+          <BotBubbleComponent key={this.state.path} {...props} />
+        );
+      });
+    }
 
+    handleBotAnimFinished({botAnimationDone, answerIndex}) {
+      let ansType = this.Conversation[this.state.path].user.answers[0].type;
+      if(ansType == 'forward') {
+        if(this.answerTmId !== null) {
+          clearTimeout(this.answerTmId);
+        }
+        this.answerTmId = this.handleForwardTimeout({answerIndex, botAnimationDone, path: this.Conversation[this.state.path].user.answers[0].path});
+        return true;
+      }
+      this.botAnimationDone = botAnimationDone;
+
+      this.setClientAnswerAppear(botAnimationDone);
+    }
+
+    getAnswerNodes(nodes) {
+      this.answerNodes = nodes;
+    }
+
+    setClientAnswerAppear(botAnimationDone) {
+      if(this.answerDelay === 0) {
+        this.answerDelayId = '';
+        this.answerDelay = new Promise((resolve)=>{this.answerDelayId = setTimeout(resolve, botAnimationDone, this)});
+      } else {
+        clearTimeout(this.answerDelayId);
+        this.answerDelay = new Promise((resolve)=>{this.answerDelayId = setTimeout(resolve, botAnimationDone, this)});
+        console.log(this.answerDelay);
+      }
+      this.answerDelay.then(() => {
+        this.answerNodes.comp.classList.remove('nope');
+        this.answerNodes.comp.classList.remove('noDimensions');
+        window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
+        console.log(this.answerNodes);
+      });
+
+    }
+
+      handleForwardTimeout(params) {
+        setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
+      }
   /**
-   * The past Conversation is beeing rendered with the this.data.conversation property
+   * The past Conversation is beeing rendered with the this.data.conversationLog property
    */
   renderPastConversation(conversation) {
     return conversation.map((step, key) => {
@@ -129,42 +206,13 @@ class AppComponent extends React.Component {
         return <div></div>;
     }
   }
-  updateBotsMainTimerCb(timepeice) {
-    this.botsTime += timepeice;
-  }
-    /**
-     * Bot Bubble render
-     */
-    renderBotBubbles(bots) {
-
-      return bots.map(({id, texts}, key) => {
-        let props = {
-          key,
-          index: key,
-          texts,
-          bots,
-          name: this.state.name,
-          email: this.state.email,
-          data: Defaults,
-          bot: Defaults.botIdentitys[id],
-          tmUpdater: this.updateBotsMainTimerCb.bind(this),
-          bubbleFinished: this.announceBubbleFinish.bind(this)
-        };
-        return (
-          <BotBubbleComponent key={this.state.path} {...props} />
-        );
-      });
-    }
-
-
-
 
 
   /**
    * Callbacks for Client Bubbles
    */
   updatePathState(evt, {path, answerIndex = null}) {
-    this.data.conversation.push({
+    this.data.conversationLog.push({
       stateAtPos: JSON.stringify(this.state),
       answerIndex
     });
@@ -176,7 +224,7 @@ class AppComponent extends React.Component {
 
   handleInputfieldEnter(evt, path, answerIndex, changeVal) {
     if(evt.key === 'Enter') {
-      this.data.conversation.push({
+      this.data.conversationLog.push({
         stateAtPos: JSON.stringify(this.state),
         answerIndex
       });
@@ -193,7 +241,8 @@ class AppComponent extends React.Component {
       let props = {
         key,
         index: key, // To be able to give key to the callback
-        butAnimationsDone: this.botAnimationDone
+        butAnimationsDone: this.botAnimationDone,
+        safeAppearWait: 3000
       }
       switch (answer.type) {
         // Button Component
@@ -228,21 +277,8 @@ class AppComponent extends React.Component {
     });
   }
 
-  handleForwardTimeout(params) {
-    setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
-  }
 
-  announceBubbleFinish({botAnimationDone, answerIndex}) {
-    console.log(this.state, botAnimationDone, answerIndex);
-    let ansType = this.Conversation[this.state.path].user.answers[0].type;
-    if(ansType == 'forward') {
-      if(this.answerTmId !== null) {
-        clearTimeout(this.answerTmId);
-      }
-      this.answerTmId = this.handleForwardTimeout({answerIndex, botAnimationDone, path: this.Conversation[this.state.path].user.answers[0].path})
-    }
-    this.botAnimationDone = botAnimationDone;
-  }
+
 
 }
 
