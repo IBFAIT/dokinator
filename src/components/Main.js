@@ -137,9 +137,8 @@ class AppComponent extends React.Component {
           bot: Defaults.botIdentitys[id],
           tmUpdater: this.updateBotsMainTimerCb.bind(this)
         };
-        console.log('mains totalBotTime at itr: '+key, totalBotTime);
         return (
-          <BotBubbleComponent {...props} />
+          <BotBubbleComponent key={this.state.path} {...props} />
         );
       });
     }

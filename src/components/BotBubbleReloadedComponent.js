@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import IconComponent from './IconComponent.js';
 import BotSingleBubbleComponent from './BotChildBubbleReloadedComponent.js';
@@ -11,6 +12,27 @@ class BotBubbleReloadedComponent extends React.Component {
     this.totalBotTime = 0;
   }
 
+
+    // componentDidMount() {
+    // }
+    //
+    shouldComponentUpdate() {
+      // console.log('shouldComponentUpdate: ', ReactDOM.findDOMNode(this.refs.BotBubbleContainer).innerHTML);
+      this.totalBotTime = 0;
+      return true;
+    }
+    // componentWillUnmount() {
+    //   console.log('componentWillUnmount: ', ReactDOM.findDOMNode(this.refs.BotBubbleContainer).innerHTML);
+    // }
+    componentWillUpdate() {
+      this.totalBotTime = 0;
+    }
+    // componentDidUpdate() {
+    //
+    //   console.log('componentDidUpdate: ', ReactDOM.findDOMNode(this.refs.BotBubbleContainer).innerHTML);
+    // }
+
+
   render() {
     return (
       <div className="botbubble-component">
@@ -19,8 +41,9 @@ class BotBubbleReloadedComponent extends React.Component {
           src={this.props.bot.avatar.src}
           alt={this.props.bot.avatar.alt}
           botId={this.props.bot.id}
+          botTime={this.totalBotTime}
         />
-        <div className="botbubble-container">
+        <div className="botbubble-container" ref="BotBubbleContainer">
           {this.renderIndividualBubbles(this.props.texts)}
         </div>
       </div>
@@ -28,7 +51,7 @@ class BotBubbleReloadedComponent extends React.Component {
   }
 
   renderIndividualBubbles(texts) {
-    let waitAccu = 0;
+    // let waitAccu = 0;
     return texts.map((text, key) =>{
       if(Array.isArray(text)) {
         const rand = Math.floor(Math.random()*text.length);
@@ -46,11 +69,11 @@ class BotBubbleReloadedComponent extends React.Component {
         name: this.props.name,
         email: this.props.email,
         textApppearTime,
-        wait: waitAccu
+        wait: this.totalBotTime
       };
-      waitAccu += (textApppearTime + 200);
+      this.totalBotTime += (textApppearTime + 200);
       if(key+1 == texts.length) {
-        this.props.tmUpdater(waitAccu);
+        this.props.tmUpdater(this.totalBotTime);
       }
       return <BotSingleBubbleComponent {...props} />
     });

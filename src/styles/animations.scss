@@ -16,29 +16,51 @@
     transform: translateX(0%);
   }
 }
+
+.nope {
+  display: none;
+}
+.noDimensions {
+  height: 0;
+  width: 0;
+  line-height: 0;
+}
+.initialDimensions {
+  height: initial;
+  width: initial;
+  line-height: initial;
+}
+.raisedWord {
+  display: inline-block;
+  margin-right: 5px;
+  opacity: 1;
+}
+.notYetRaisedWord {
+  display: none;
+  opacity: 0;
+  margin: 0;
+}
 .raiseWord {
   animation-name: raiseWord;
   animation-timing-function: ease-in;
+  display: inline-block;
+  margin: initial 5px initial initial;
 }
 
 @keyframes raiseWord {
   0% {
-
     opacity: 0;
     transform-origin: 0 0;
-    transform: scaleX(0);
   }
   5% {
     display: inline-block;
     opacity: 0;
     transform-origin: 0 0;
-    transform: scaleX(0);
   }
   100% {
       display: inline-block;
       opacity: 1;
       transform-origin: 0 0;
-      transform: scaleX(1);
   }
 }
 
