@@ -43,6 +43,7 @@ class BotChildBubbleReloadedComponent extends React.Component {
 
 
   wordsAppear() {
+    const {email, name, fieber, data} = this.props;
     // const words = ReactDOM.findDOMNode(this.refs.textContainer).childNodes;
     let delay = new Promise((resolve)=>{setTimeout(resolve, this.props.wait)});
     delay.then(()=>{
@@ -79,7 +80,7 @@ class BotChildBubbleReloadedComponent extends React.Component {
         let wordsDelay = word.length * this.props.letterDelay;
 
         this.elms.outer.classList.remove('nope');
-        span.textContent = word;
+        span.textContent = eval('`'+word+'`');
         span.style.animationDelay = delaySum + wordsDelay - 200 + 'ms';
         span.style.animationDuration = '200ms';
         span.classList.add('notYetRaisedWord');

@@ -9,9 +9,10 @@ class BotChildBubbleReloadedComponent extends React.Component {
   }
 
   renderWords(textChunks) {
+    const {email, name, fieber, data} = this.props;
     return textChunks.map((word, key) => {
       return <span key={key} style={{display: 'inline-block', marginRight: '5px'}}>
-        {word}
+        {eval('`'+word+'`')}
       </span>
     });
   }
