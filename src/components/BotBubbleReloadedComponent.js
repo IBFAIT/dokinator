@@ -9,7 +9,7 @@ import BotSingleBubbleComponent from './BotChildBubbleReloadedComponent.js';
 class BotBubbleReloadedComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.totalBotTime = 0;
+    this.totalBotTime = 800;
     this.letterDelay = 50;
   }
 
@@ -43,6 +43,7 @@ class BotBubbleReloadedComponent extends React.Component {
           alt={this.props.bot.avatar.alt}
           botId={this.props.bot.id}
           botTime={this.totalBotTime}
+          present={true}
         />
         <div className="botbubble-container" ref="BotBubbleContainer">
           {this.renderIndividualBubbles(this.props.texts)}

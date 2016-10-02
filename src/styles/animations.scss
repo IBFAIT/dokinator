@@ -1,7 +1,7 @@
+
 .slideInLeft {
   animation-name: slideInLeft;
-  animation-duration: 1000ms;
-  animation-delay: 0;
+  opacity:0;
 }
 @keyframes slideInLeft {
   0% {
@@ -14,6 +14,27 @@
     opacity: 1;
     transform-origin: 0 0;
     transform: translateX(0%);
+  }
+}
+
+.nameApppeared {
+  opacity: 1;
+}
+.nameNotAppeared {
+  opacity:0;
+}
+.nameAppear {
+  animation-name: nameAppear;
+  animation-duration: '900ms';
+  animation-delay: '1200ms';
+  opacity: 0;
+}
+@keyframes nameAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

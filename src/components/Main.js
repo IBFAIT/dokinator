@@ -141,13 +141,11 @@ class AppComponent extends React.Component {
       } else {
         clearTimeout(this.answerDelayId);
         this.answerDelay = new Promise((resolve)=>{this.answerDelayId = setTimeout(resolve, botAnimationDone, this)});
-        console.log(this.answerDelay);
       }
       this.answerDelay.then(() => {
         this.answerNodes.comp.classList.remove('nope');
         this.answerNodes.comp.classList.remove('noDimensions');
         window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
-        console.log(this.answerNodes);
       });
 
     }
