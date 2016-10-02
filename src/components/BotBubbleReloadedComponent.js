@@ -10,6 +10,7 @@ class BotBubbleReloadedComponent extends React.Component {
   constructor(props) {
     super(props);
     this.totalBotTime = 0;
+    this.letterDelay = 50;
   }
 
 
@@ -51,7 +52,6 @@ class BotBubbleReloadedComponent extends React.Component {
   }
 
   renderIndividualBubbles(texts) {
-    // let waitAccu = 0;
     return texts.map((text, key) =>{
       if(Array.isArray(text)) {
         const rand = Math.floor(Math.random()*text.length);
@@ -59,7 +59,7 @@ class BotBubbleReloadedComponent extends React.Component {
         text = text[rand];
       }
       let textChunks = text.split(' ');
-      const textApppearTime =  (text.length-textChunks.length)*100;
+      const textApppearTime =  (text.length-textChunks.length)*this.letterDelay;
       let props = {
         key,
         text,
@@ -69,11 +69,13 @@ class BotBubbleReloadedComponent extends React.Component {
         name: this.props.name,
         email: this.props.email,
         textApppearTime,
-        wait: this.totalBotTime
+        wait: this.totalBotTime,
+        letterDelay: this.letterDelay
       };
       this.totalBotTime += (textApppearTime + 200);
       if(key+1 == texts.length) {
         this.props.tmUpdater(this.totalBotTime);
+        this.props.bubbleFinished({botAnimationDone: this.totalBotTime, answerIndex: this.props.index});
       }
       return <BotSingleBubbleComponent {...props} />
     });

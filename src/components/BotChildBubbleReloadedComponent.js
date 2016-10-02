@@ -69,44 +69,39 @@ class BotChildBubbleReloadedComponent extends React.Component {
 
       this.elms.outer.classList.add('nope');
       this.elms.outer.classList.add('initialDimensions');
-
       this.elms.txtContainer.classList.add('initialDimensions');
-
-      // const txtContainer = ReactDOM.findDOMNode(this.refs.textContainer);
-      // txtContainer.innerHTML = ''; // cleanup possible present elms
-      // const bubble = ReactDOM.findDOMNode(this.refs.bubble);
-      // this.elms.outer.style.animationDuration = '100ms';
-      // this.elms.outer.style.animationDelay = '0ms';
-      // this.elms.outer.classList.add('raiseWord');
       this.elms.outer.style.display = ilb;
       this.elms.container.appendChild(this.elms.outer);
       this.elms.spans = [];
       let delaySum = 0;
       this.props.textChunks.map((word, key) => {
+        let span = document.createElement('span');
+        let wordsDelay = word.length * this.props.letterDelay;
+
         this.elms.outer.classList.remove('nope');
-        let appearDuration = word.length * 100;
-        this.elms.spans[key] = document.createElement('span');
-        this.elms.spans[key].textContent = word;
-        this.elms.spans[key].style.animationDelay = delaySum + 'ms';
-        this.elms.spans[key].style.animationDuration = appearDuration + 'ms';
-        this.elms.spans[key].classList.add('notYetRaisedWord');
-        this.elms.spans[key].classList.add('noDimensions');
-        this.elms.spans[key].classList.add('raiseWord');
-        this.elms.txtContainer.appendChild(this.elms.spans[key]);
-        this.elms.spans[key].addEventListener('animationstart', evt => {
-          // this.elms.txtContainer.classList.add('initialDimensions');
-          this.elms.spans[key].classList.remove('notYetRaisedWord');
-          this.elms.spans[key].classList.remove('noDimensions');
+        span.textContent = word;
+        span.style.animationDelay = delaySum + wordsDelay - 200 + 'ms';
+        span.style.animationDuration = '200ms';
+        span.classList.add('notYetRaisedWord');
+        span.classList.add('noDimensions');
+        span.classList.add('raiseWord');
+        this.elms.txtContainer.appendChild(span);
+
+        // Animation Start Event
+        span.addEventListener('animationstart', evt => {
+          evt.target.classList.remove('notYetRaisedWord');
+          evt.target.classList.remove('noDimensions');
         });
-        this.elms.spans[key].addEventListener('animationend', evt => {
-          // this.elms.spans[key].classList.remove('noDimensions');
-          // this.elms.spans[key].classList.add('initialDimensions');
+
+        // Animation End event
+        span.addEventListener('animationend', evt => {
           evt.target.classList.remove('raiseWord');
           evt.target.classList.add('raisedWord');
+          window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
         });
-        delaySum += appearDuration;
+        this.elms.spans[key] = span;
+        delaySum += wordsDelay; // Update Sum
       });
-
     })
   }
 

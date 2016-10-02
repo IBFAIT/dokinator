@@ -19,6 +19,7 @@ import ClientButtonPastComponent from './ClientButtonPastComponent.js';
 import ClientInputComponent from './ClientInputComponent.js';
 import ClientDisabledComponent from './ClientDisabledComponent.js';
 import ClientInputPastComponent from './ClientInputPastComponent.js';
+import ForwardComponent from './ForwardComponent.js';
 
 /**
  * Main Stateful Componennt
@@ -38,6 +39,9 @@ class AppComponent extends React.Component {
     // This property will get the whole Conversation history appended
     this.data.conversation = [];
     this.botsTime = 0;
+    this.botAnimationDone = null;
+    this.answerTmId = null;
+    this.Conversation = Conversation;
   }
 
   /**
@@ -46,6 +50,12 @@ class AppComponent extends React.Component {
   componentDidUpdate() {
     window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
   }
+
+  shouldComponentUpdate() {
+    this.botsTime = 0;
+    return true;
+  }
+
   componentDidMount() {
   }
 
@@ -114,6 +124,9 @@ class AppComponent extends React.Component {
       case 'input':
         props.valueContent = stateAtPos[answer.changeVal];
         return <ClientInputPastComponent {...props} />;
+      case 'forward':
+        props.text = null;
+        return <div></div>;
     }
   }
   updateBotsMainTimerCb(timepeice) {
@@ -125,7 +138,6 @@ class AppComponent extends React.Component {
     renderBotBubbles(bots) {
 
       return bots.map(({id, texts}, key) => {
-        let totalBotTime = 0;
         let props = {
           key,
           index: key,
@@ -135,7 +147,8 @@ class AppComponent extends React.Component {
           email: this.state.email,
           data: Defaults,
           bot: Defaults.botIdentitys[id],
-          tmUpdater: this.updateBotsMainTimerCb.bind(this)
+          tmUpdater: this.updateBotsMainTimerCb.bind(this),
+          bubbleFinished: this.announceBubbleFinish.bind(this)
         };
         return (
           <BotBubbleComponent key={this.state.path} {...props} />
@@ -179,7 +192,8 @@ class AppComponent extends React.Component {
     return answers.map((answer, key) => {
       let props = {
         key,
-        index: key // To be able to give key to the callback
+        index: key, // To be able to give key to the callback
+        butAnimationsDone: this.botAnimationDone
       }
       switch (answer.type) {
         // Button Component
@@ -199,14 +213,35 @@ class AppComponent extends React.Component {
           );
         // Forwarder
         case 'forward':
-          setTimeout(()=>{this.setState({path:answer.path})}, 2500)
-          break;
+          // this.answerTmId = this.handleForwardTimeout({path: answer.path, answerIndex: key, botAnimationDone: this.botAnimationDone});
+          // this.answerTmId = setTimeout(()=>{this.updatePathState(null, {path: answer.path, answerIndex: key})}, this.botAnimationDone, this, answer, key);
+          // this.handleForward({path: answer.path, answerIndex: key, botAnimationDone: props.botAnimationDone});
+          // props.forwarder = this.handleForward.bind(this);
+          // props.renderMoment = now();
+          // props.botsTime = this.botsTime;
+          // return <ForwardComponent {...props} />
         // the disabled button in context
         case 'disabled':
           props.text = answer.text;
           return <ClientDisabledComponent {...props} />;
       }
     });
+  }
+
+  handleForwardTimeout(params) {
+    setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
+  }
+
+  announceBubbleFinish({botAnimationDone, answerIndex}) {
+    console.log(this.state, botAnimationDone, answerIndex);
+    let ansType = this.Conversation[this.state.path].user.answers[0].type;
+    if(ansType == 'forward') {
+      if(this.answerTmId !== null) {
+        clearTimeout(this.answerTmId);
+      }
+      this.answerTmId = this.handleForwardTimeout({answerIndex, botAnimationDone, path: this.Conversation[this.state.path].user.answers[0].path})
+    }
+    this.botAnimationDone = botAnimationDone;
   }
 
 }
