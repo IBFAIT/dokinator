@@ -93,7 +93,7 @@ class ClientAnswerComponent extends React.Component {
           props.text = answer.text;
           return <ClientDisabledComponent {...props} />;
         default:
-          return <div></div>;
+          return <ClientDisabledComponent {...props} />;
       }
     });
   }
