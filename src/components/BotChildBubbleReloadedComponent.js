@@ -1,8 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React    from 'react';
 import ReactDOM from 'react-dom';
-import Scroll from 'smoothscroll';
+import Scroll   from 'smoothscroll';
 
 require('styles/animations.scss');
 
@@ -34,8 +34,7 @@ class BotChildBubbleReloadedComponent extends React.Component {
       this.elms.txtContainer.removeChild(span);
     });
     this.elms.txtContainer.classList.remove('initialDimensions');
-    this.elms.txtContainer.classList.add('noDimensions');
-    // this.elms.outer.removeChild(this.elms.txtContainer);
+    this.elms.txtContainer.classList.add('noDimensions')
     this.elms.outer.classList.remove('initialDimensions');
     this.elms.outer.classList.add('noDimensions');
     this.elms.container.removeChild(this.elms.outer);
@@ -44,13 +43,14 @@ class BotChildBubbleReloadedComponent extends React.Component {
 
   wordsAppear() {
     const {email, name, fieber, data} = this.props;
-    // const words = ReactDOM.findDOMNode(this.refs.textContainer).childNodes;
-    let delay = new Promise((resolve)=>{setTimeout(resolve, this.props.wait)});
-    delay.then(()=>{
-
+    let delay = new Promise((resolve) => {
+      setTimeout(resolve, this.props.wait)
+    });
+    delay.then(() => {
       const ilb = 'inline-block';
-
-      this.elms.container = (typeof this.elms.container =='undefined') ? ReactDOM.findDOMNode(this.refs.container): this.elms.container;
+      this.elms.container = (typeof this.elms.container == 'undefined')
+                                ? ReactDOM.findDOMNode(this.refs.container)
+                                : this.elms.container;
 
       if(typeof this.elms.txtContainer =='undefined') {
         this.elms.txtContainer = document.createElement('div');
@@ -64,7 +64,6 @@ class BotChildBubbleReloadedComponent extends React.Component {
         this.elms.outer.classList.add('botsinglebubble-component');
         this.elms.outer.appendChild(this.elms.txtContainer);
       } else {
-
         this.elms.outer.classList.remove('noDimensions');
       }
 
@@ -74,11 +73,10 @@ class BotChildBubbleReloadedComponent extends React.Component {
       this.elms.outer.style.display = ilb;
       this.elms.container.appendChild(this.elms.outer);
       this.elms.spans = [];
-      let delaySum = 0;
+      let delaySum    = 0;
       this.props.textChunks.map((word, key) => {
-        let span = document.createElement('span');
+        let span       = document.createElement('span');
         let wordsDelay = word.length * this.props.letterDelay;
-
         this.elms.outer.classList.remove('nope');
         span.textContent = eval('`'+word+'`');
         span.style.animationDelay = delaySum + wordsDelay - 200 + 'ms';

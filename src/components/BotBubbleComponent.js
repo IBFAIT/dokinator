@@ -10,10 +10,10 @@ let BotBubbleComponent = ({
       index,
       bots,
       texts,
-      name='',
-      email='',
-      data='',
-      classNameing='botbubble-component'
+      name  = '',
+      email = '',
+      data  = '',
+      classNameing = 'botbubble-component'
     }) => (
   <div className={classNameing}>
     <IconComponent
@@ -23,14 +23,14 @@ let BotBubbleComponent = ({
     />
     <div className="botbubble-container">
       {
-        texts.map((text, key) =>{
+        texts.map((text, key) => {
           /* If there is more than one text, display random element */
           if(Array.isArray(text)) {
             const rand = Math.floor(Math.random()*text.length);
             bots[index].texts[key] = text[rand];
             text = text[rand];
           }
-          return <BotSingleBubbleComponent key={key} text={text} data={data} name={name} email={email} data={data} />
+            return <BotSingleBubbleComponent {...{key, text, data, name, email}} />
         })
       }
     </div>

@@ -11,14 +11,15 @@ class BotBubblePastReloadedComponent extends React.Component {
   }
 
   render() {
+    const iconProps = {
+      name:  this.props.bot.name,
+      src:   this.props.bot.avatar.src,
+      alt:   this.props.bot.avatar.alt,
+      botId: this.props.bot.id
+    }
     return (
       <div className="botbubble-component">
-        <IconComponent
-          name={this.props.bot.name}
-          src={this.props.bot.avatar.src}
-          alt={this.props.bot.avatar.alt}
-          botId={this.props.bot.id}
-        />
+        <IconComponent {...iconProps} />
         <div className="botbubble-container">
           {this.renderIndividualBubbles(this.props.texts)}
         </div>
@@ -32,9 +33,9 @@ class BotBubblePastReloadedComponent extends React.Component {
       let props = {
         key,
         textChunks,
-        data: this.props.data,
+        data:  this.props.data,
         index: this.props.index,
-        name: this.props.name,
+        name:  this.props.name,
         email: this.props.email
       };
       return <BotSingleBubbleComponent {...props} />
