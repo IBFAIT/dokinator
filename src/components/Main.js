@@ -95,6 +95,7 @@ class Main extends React.Component {
           <span  className="activePart">
             { this.renderBotPart(Conversation[this.state.path].bots) }
           </span>
+          <div className="clientAnswerTarget"></div>
         </div>
         <div className="conversation-part">
           <ClientAnswerComponent {...{

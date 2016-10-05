@@ -69,33 +69,25 @@ class BotChildBubbleReloadedComponent extends React.Component {
         this.elms.outer.classList.add('nope');
         this.elms.outer.classList.add('initialDimensions');
         this.elms.txtContainer.classList.add('initialDimensions');
+
         this.elms.outer.style.display = ilb;
-        this.elms.txtContainer.appendChild(this.elms.dots);
+        // this.elms.txtContainer.appendChild(dotImg);
+        this.elms.loader = document.createElement('div');
+        this.elms.loader.classList.add('loader');
+        this.elms.txtContainer.appendChild(this.elms.loader);
         this.elms.container.appendChild(this.elms.outer);
-
+        this.elms.outer.classList.remove('nope');
+        return new Promise(resolve => {
+          setTimeout(resolve, this.props.textApppearTime)
+        });
+      }).then(() => {
+        this.elms.loader.remove();
+        this.elms.txtContainer.textContent = eval('`'+this.props.text+'`');
       });
   }
 
-  dotsPulse() {
-    let delaySum = 0, counter = 0;
-    const dots   = [
-      this.dots.getElementsByClassName('img_dot_0')[0],
-      this.dots.getElementsByClassName('img_dot_1')[0],
-      this.dots.getElementsByClassName('img_dot_2')[0]
-    ];
-    this.props.textChunks.map((word, key) => {
-      let wordsDelay = word.length * this.props.letterDelay;
-      this.dots.style.animationDelay = delaySum + wordsDelay - 200 + 'ms';
 
 
-      this.elms.dots.addEventListener('animationstart', evt => {
-      });
-      this.elms.dots.addEventListener('animationend', evt => {
-      });
-      delaySum += wordsDelay;
-      counter = (counter < 3) ? counter+1 : 0;
-    });
-  }
 
   wordsAppearOld() {
     this.getDotsSvg();
@@ -173,45 +165,6 @@ class BotChildBubbleReloadedComponent extends React.Component {
     const {name, email, fieber} = this.props;
     return (
       <div className="componentContainer" ref="container">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" ref="dots"  className="svg_dots" viewBox="0 0 744 1052">
-          <defs>
-            <filter
-              height="1.299475"
-              y="-0.1497375"
-              width="1.2818588"
-              x="-0.14092941"
-              id="filter4502"
-              style={{colorInterpolationFilters: 'sRGB'}}
-            >
-              <feGaussianBlur
-                id="feGaussianBlur4504"
-                stdDeviation="2.495625" />
-            </filter>
-          </defs>
-          <g>
-            <ellipse
-              ry="20"
-              rx="21.25"
-              cy="556.32654"
-              cx="238.19643"
-              className="img_dot img_dot_0"
-            />
-            <ellipse
-              ry="20"
-              rx="21.25"
-              cy="556.32654"
-              cx="302.8125"
-              className="img_dot img_dot_1"
-            />
-            <ellipse
-              ry="20"
-              rx="21.25"
-              cy="556.32654"
-              cx="367.42856"
-              className="img_dot img_dot_2"
-            />
-          </g>
-        </svg>
 
       </div>
     );
