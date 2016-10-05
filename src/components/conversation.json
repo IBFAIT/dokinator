@@ -337,26 +337,6 @@
     },
     "title": "Abschluss von Fred"
   },
-  "7": {
-    "bots": [{
-      "id": "fred",
-      "texts": [
-        "Schau, das sind die Leute, die mich gebaut haben:",
-        "${data.persons.flavio.name}: ${data.persons.flavio.image}",
-        "${data.persons.kaspar.name}: ${data.persons.kaspar.image}",
-        "Du kannst sie über info@conversational.today kontaktieren.",
-        "Bis bald!"
-      ]
-    }],
-    "user": {
-      "answers": [{
-        "type": "timeout",
-        "time": 180000,
-        "path": "end"
-      }]
-    },
-    "title": "7"
-  },
   "8": {
     "bots": [{
       "id": "fred",
@@ -382,7 +362,62 @@
         "Gute Besserung!"
       ]
     } ],
-    "user": [],
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Können wir das nochmal besprechen?",
+          "path": "sagsMirNochmal"
+        },{
+          "type": "button",
+          "text": "Ich möchte mehr über Chatbots erfahren!",
+          "path": "1"
+        }
+      ]
+    },
     "title": "The End."
+  },
+  "sagsMirNochmal": {
+    "bots": [{
+      "id": "fred",
+      "texts": [
+        "Sehr schön, ${name}.",
+        "Es schmeichelt mir, das du dich so für mich interessierst.",
+        "Wie kann ich dir nun weiter helfen?"
+      ]
+    }],
+    "user": {
+      "answers": [{
+        "type": "button",
+        "text": "Ich möchte mehr über Chatbots erfahren!",
+        "path": "1"
+      }, {
+        "type": "button",
+        "text": "Zeige mir, was du drauf hast!",
+        "path": "2"
+      }]
+    },
+    "title": "sagsMirNochmal"
+  },
+  "7": {
+    "bots": [{
+      "id": "fred",
+      "texts": [
+        "Schau, das sind die Leute, die mich gebaut haben:",
+        "${data.persons.flavio.name}: ${data.persons.flavio.image}",
+        "${data.persons.kaspar.name}: ${data.persons.kaspar.image}",
+        "Du kannst sie über info@conversational.today kontaktieren.",
+        "Bis bald!"
+      ]
+    }],
+    "user": {
+      "answers": [
+      {
+        "type": "button",
+        "text": "Ich habe noch ein paar Fragen.",
+        "path": "sagsMirNochmal"
+      }]
+    },
+    "title": "7"
   }
 }
