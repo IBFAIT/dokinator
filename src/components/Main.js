@@ -58,9 +58,6 @@ class AppComponent extends React.Component {
         </div>
         <div className="conversation-part">
           <ClientAnswerComponent {...answerProps} />
-          { /*<div className="user-answers" >
-            { this.renderClientBubbles(Conversation[this.state.path].user.answers) }
-            </div>*/ }
         </div>
       </div>
     );
@@ -106,42 +103,46 @@ class AppComponent extends React.Component {
     }
     this.botAnimationDone = botAnimationDone;
 
-    getAnswerNodes(nodes) {
-      this.answerNodes = nodes;
-    }
+    this.setClientAnswerAppear(botAnimationDone);
+  }
 
-    setClientAnswerAppear(botAnimationDone) {
-      if(this.answerDelay === 0) {
-        this.answerDelayId = '';
-        this.answerDelay = new Promise((resolve)=>{this.answerDelayId = setTimeout(resolve, botAnimationDone, this)});
-      } else {
-        clearTimeout(this.answerDelayId);
-        this.answerDelay = new Promise((resolve)=>{this.answerDelayId = setTimeout(resolve, botAnimationDone, this)});
-      }
-      this.answerDelay.then(() => {
-        this.answerNodes.comp.classList.remove('nope');
-        this.answerNodes.comp.classList.remove('noDimensions');
-        this.answerNodes.comp.style.animationDuration = '1700ms';
-        this.answerNodes.comp.style.animationDelay = '0ms';
-        this.answerNodes.comp.classList.add('raiseAnswer');
-        console.log(this.answerNodes.comp);
-        this.answerNodes.comp.addEventListener('animationstart', (evt) => {
-          Scroll(evt.target.firstChild.lastChild);
-          // window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
-        });
-        this.answerNodes.comp.addEventListener('animationend', (evt) => {
-          evt.target.classList.remove('raiseAnswer');
-          evt.target.classList.add('answerRisen');
-          Scroll(evt.target.firstChild.lastChild);
-          // window.scrollBy(0, document.getElementsByTagName('body')[0].scrollHeight);
-        });
+  getAnswerNodes(nodes) {
+    this.answerNodes = nodes;
+  }
 
+  setClientAnswerAppear(botAnimationDone) {
+    if(this.answerDelay === 0) {
+      this.answerDelayId = '';
+      this.answerDelay = new Promise((resolve) => {
+        this.answerDelayId = setTimeout(resolve, botAnimationDone, this);
+      });
+    } else {
+      clearTimeout(this.answerDelayId);
+      this.answerDelay = new Promise((resolve) => {
+        this.answerDelayId = setTimeout(resolve, botAnimationDone, this);
       });
     }
+    this.answerDelay.then(() => {
+      this.answerNodes.comp.classList.remove('nope');
+      this.answerNodes.comp.classList.remove('noDimensions');
+      this.answerNodes.comp.style.animationDuration = '1700ms';
+      this.answerNodes.comp.style.animationDelay    = '0ms';
+      this.answerNodes.comp.classList.add('raiseAnswer');
+      this.answerNodes.comp.addEventListener('animationstart', (evt) => {
+        Scroll(evt.target.firstChild.lastChild);
+      });
+      this.answerNodes.comp.addEventListener('animationend', (evt) => {
+        evt.target.classList.remove('raiseAnswer');
+        evt.target.classList.add('answerRisen');
+        Scroll(evt.target.firstChild.lastChild);
+      });
+    });
+  }
 
-      handleForwardTimeout(params) {
-        setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
-      }
+  handleForwardTimeout(params) {
+    setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
+  }
+
   /**
    * The past Conversation is beeing rendered with the this.data.conversationLog property
    */

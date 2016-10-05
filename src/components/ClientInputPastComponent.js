@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import IconComponent from './IconComponent.js';
-
 const ClientInputPastComponent = ({valueContent, name, avatar}) => (
   <div className="clientinputpast-component">
     <div className="bubble-inner">

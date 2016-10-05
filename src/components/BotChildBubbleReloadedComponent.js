@@ -17,10 +17,6 @@ class BotChildBubbleReloadedComponent extends React.Component {
     return true;
   }
 
-  componentWillUpdate() {
-    // this.cleanup();
-  }
-
   componentDidMount() {
     this.wordsAppear();
   }

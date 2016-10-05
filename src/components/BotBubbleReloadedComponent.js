@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import IconComponent            from './IconComponent.js';
 import BotSingleBubbleComponent from './BotChildBubbleReloadedComponent.js';
@@ -13,26 +12,20 @@ class BotBubbleReloadedComponent extends React.Component {
     this.letterDelay  = 50;
   }
 
+  /**
+   * Reset local Components time counter
+   */
+  shouldComponentUpdate() {
+    this.totalBotTime = 0;
+    return true;
+  }
 
-    // componentDidMount() {
-    // }
-    //
-    shouldComponentUpdate() {
-      // console.log('shouldComponentUpdate: ', ReactDOM.findDOMNode(this.refs.BotBubbleContainer).innerHTML);
-      this.totalBotTime = 0;
-      return true;
-    }
-    // componentWillUnmount() {
-    //   console.log('componentWillUnmount: ', ReactDOM.findDOMNode(this.refs.BotBubbleContainer).innerHTML);
-    // }
-    componentWillUpdate() {
-      this.totalBotTime = 0;
-    }
-    // componentDidUpdate() {
-    //
-    //   console.log('componentDidUpdate: ', ReactDOM.findDOMNode(this.refs.BotBubbleContainer).innerHTML);
-    // }
-
+  /**
+   * Reset local Components time counter
+   */
+  componentWillUpdate() {
+    this.totalBotTime = 0;
+  }
 
   render() {
     return (

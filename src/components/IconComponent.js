@@ -53,6 +53,7 @@ class IconComponent extends React.Component {
     return true;
   }
   imgAppear() {
+    // call hide to make sure a before rendered one is not still beeing there
     this.hide();
     this.elms.img.style.animationDuration = '600ms';
     this.elms.img.style.animationDelay = '0ms';
@@ -76,11 +77,6 @@ class IconComponent extends React.Component {
     this.elms.name.classList.remove('nameNotAppeared');
     this.elms.name.style.animationDuration = '1200ms';
     this.elms.name.style.animationDelay = '1000ms';
-
-    console.log('name appear ran' , this.elms.name);
-    this.elms.name.addEventListener('animationstart', (evt) => {
-
-    });
     this.elms.name.addEventListener('animationend', (evt) => {
       evt.target.classList.remove('nameAppear');
       evt.target.classList.add('nameApppeared');

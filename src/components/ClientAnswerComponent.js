@@ -16,8 +16,6 @@ class ClientAnswerComponent extends React.Component {
     this.els = {};
   }
 
-  componentWillMount() {
-  }
   componentDidMount() {
     this.hide();
     if(typeof this.els.comp == 'undefined') {
