@@ -18,7 +18,7 @@
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook"
   },
   "repository": "git@gitlab.com:4quant/conversational.today.git",
   "keywords": [],
