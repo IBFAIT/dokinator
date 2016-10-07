@@ -2,16 +2,17 @@
 require('normalize.css/normalize.css');
 require('styles/App.scss');
 
-import React  from 'react';
-import Scroll from 'smoothscroll';
+import React    from 'react';
+import ReactDOM from 'react-dom';
+import Scroll   from 'smoothscroll';
 
 // JSON data beeing imported
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotPartComponent        from './BotPartComponent.js';
-import BotPartPastComponent    from './BotPartPastComponent.js';
+import BotPartComponent          from './BotPartComponent.js';
+import BotPartPastComponent      from './BotPartPastComponent.js';
 import ClientAnswerComponent     from './ClientAnswerComponent.js';
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
 import ClientInputPastComponent  from './ClientInputPastComponent.js';
@@ -27,117 +28,65 @@ class Main extends React.Component {
     };
     this.data                 = Defaults;
     this.data.conversationLog = [];
-    this.botsTime             = 0;
-    this.botAnimationDone     = null;
-    this.answerTmId           = null;
-    this.answerNodes          = null;
     this.Conversation         = Conversation;
-    this.answersDelay         = 0;
+    this.elms = {};
   }
 
-  shouldComponentUpdate() {
-    this.botsTime = 0;
-    return true;
+  componentDidUpdate() {
+    const answerPart = ReactDOM.findDOMNode(this.refs.answerPart);
+    Scroll(answerPart.lastChild);
+  }
+
+
+
+  handleForwardTimeout(answerIndex) {
+    const params = {answerIndex, path: this.Conversation[this.state.path].user.answers[0].path};
+    this.forwardTimeoutId = setTimeout(() => {
+      this.updatePathState(null, params)
+    }, 2000, this, params);
   }
 
   render() {
-    let answerProps = {
-      answers:               Conversation[this.state.path].user.answers,
-      updatePathState:       this.updatePathState.bind(this),
-      handleInputfieldEnter: this.handleInputfieldEnter.bind(this),
-      botsTime:              this.botsTime,
-      giveNodes:             this.getAnswerNodes.bind(this)
-    }
     return (
       <div className="index">
         <div className="conversation-bubbles">
-          { this.renderPastConversation(this.data.conversationLog) }
+          { this.renderPastPart(this.data.conversationLog) }
           <span  ref="activePart">
-            { this.renderBotBubbles(Conversation[this.state.path].bots) }
+            { this.renderBotPart(Conversation[this.state.path].bots) }
           </span>
         </div>
-        <div className="conversation-part">
-          <ClientAnswerComponent {...answerProps} />
+        <div className="conversation-part" ref="answerPart">
+          <ClientAnswerComponent {...{
+            answers:               Conversation[this.state.path].user.answers,
+            updatePathState:       this.updatePathState.bind(this),
+            handleInputfieldEnter: this.handleInputfieldEnter.bind(this),
+            handleForwardTimeout:  this.handleForwardTimeout.bind(this)
+          }} />
         </div>
       </div>
     );
   }
-  updateBotsMainTimerCb(timepeice) {
-    this.botsTime += timepeice;
-  }
+
   /**
    * Bot Bubble render
    */
-  renderBotBubbles(bots) {
+  renderBotPart(bots) {
     return bots.map(({id, texts}, key) => {
-      let props = {
-        texts,
-        bots,
-        key:            this.state.path,
-        index:          key,
-        name:           this.state.name,
-        email:          this.state.email,
-        data:           Defaults,
-        bot:            Defaults.botIdentitys[id],
-        tmUpdater:      this.updateBotsMainTimerCb.bind(this),
-        bubbleFinished: this.handleBotAnimFinished.bind(this)
-      };
       return (
-        <BotPartComponent {...props} />
+        <BotPartComponent {...{
+          texts,
+          bots,
+          key:   this.state.path,
+          index: key,
+          name:  this.state.name,
+          email: this.state.email,
+          data:  Defaults,
+          bot:   Defaults.botIdentitys[id]
+        }} />
       );
     });
   }
 
-  handleBotAnimFinished({botAnimationDone, answerIndex}) {
-    let ansType = this.Conversation[this.state.path].user.answers[0].type;
-    if(ansType == 'forward') {
-      if(this.answerTmId !== null) {
-        clearTimeout(this.answerTmId);
-      }
-      this.answerTmId = this.handleForwardTimeout({
-        answerIndex,
-        botAnimationDone,
-        path: this.Conversation[this.state.path].user.answers[0].path
-      });
-      return true;
-    }
-    this.botAnimationDone = botAnimationDone;
-
-    this.setClientAnswerAppear(botAnimationDone);
-  }
-
-  getAnswerNodes(nodes) {
-    this.answerNodes = nodes;
-  }
-
-  setClientAnswerAppear(botAnimationDone) {
-    if(this.answerDelay === 0) {
-      this.answerDelayId = '';
-      this.answerDelay = new Promise((resolve) => {
-        this.answerDelayId = setTimeout(resolve, botAnimationDone, this);
-      });
-    } else {
-      clearTimeout(this.answerDelayId);
-      this.answerDelay = new Promise((resolve) => {
-        this.answerDelayId = setTimeout(resolve, botAnimationDone, this);
-      });
-    }
-    this.answerDelay.then(() => {
-      this.answerNodes.comp.classList.remove('nope');
-      this.answerNodes.comp.classList.remove('noDimensions');
-      this.answerNodes.comp.style.animationDuration = '1700ms';
-      this.answerNodes.comp.style.animationDelay    = '0ms';
-      this.answerNodes.comp.classList.add('raiseAnswer');
-      this.answerNodes.comp.addEventListener('animationstart', (evt) => {
-        Scroll(evt.target.firstChild.lastChild);
-      });
-      this.answerNodes.comp.addEventListener('animationend', (evt) => {
-        evt.target.classList.remove('raiseAnswer');
-        evt.target.classList.add('answerRisen');
-        Scroll(evt.target.firstChild.lastChild);
-      });
-    });
-  }
 
   handleForwardTimeout(params) {
     setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
@@ -146,7 +95,7 @@ class Main extends React.Component {
   /**
    * The past Conversation is beeing rendered with the this.data.conversationLog property
    */
-  renderPastConversation(conversation) {
+  renderPastPart(conversation) {
     return conversation.map((step, key) => {
         let stateAtPos = JSON.parse(step.stateAtPos);
         let clientBubbleParams = {
@@ -156,7 +105,7 @@ class Main extends React.Component {
         };
       return (
         <div className="conversation-part-past" key={key}>
-          { this.renderBotPastBubbles(Conversation[stateAtPos.path].bots, key) }
+          { this.renderBotPartsPast(Conversation[stateAtPos.path].bots, key) }
           <div className="user-answers-past" key={key} >
             { this.renderClientPastBubble(clientBubbleParams, key) }
           </div>
@@ -165,7 +114,7 @@ class Main extends React.Component {
     });
   }
 
-  renderBotPastBubbles(bubbles) {
+  renderBotPartsPast(bubbles) {
     return bubbles.map(({id, texts}, key) => {
       let props = {
         key,
@@ -181,20 +130,25 @@ class Main extends React.Component {
   }
 
   renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
-    let props = {
-      key,
-      name:   this.state.name,
-      avatar: Defaults.user.avatar
-    };
-    switch (answer.type) {
+    const {text, changeVal, type} = answer;
+    switch (type) {
       case 'button':
-        props.text = answer.text;
-        return <ClientButtonPastComponent {...props} />;
+        return <ClientButtonPastComponent {...{
+          key,
+          text,
+          name:   this.state.name,
+          avatar: Defaults.user.avatar
+        }} />;
       case 'input':
-        props.valueContent = stateAtPos[answer.changeVal];
-        return <ClientInputPastComponent {...props} />;
+        return <ClientInputPastComponent {...{
+          key,
+          name:         this.state.name,
+          avatar:       Defaults.user.avatar,
+          valueContent: stateAtPos[changeVal]
+        }} />;
       case 'forward':
-        props.text = null;
+        return <div></div>;
+      default:
         return <div></div>;
     }
   }
@@ -222,40 +176,6 @@ class Main extends React.Component {
       state[changeVal] = evt.target.value;
       this.setState(state);
     }
-  }
-
-  renderClientBubbles(answers) {
-    return answers.map((answer, key) => {
-      let props = {
-        key,
-        index:             key, // To be able to give key to the callback
-        butAnimationsDone: this.botAnimationDone,
-        safeAppearWait:    3000
-      }
-      switch (answer.type) {
-        // Button Component
-        case 'button':
-          props.text            = answer.text;
-          props.path            = answer.path;
-          props.updatePathState = this.updatePathState.bind(this);
-          return <ClientButtonComponent {...props}  />;
-        // Input Component
-        case 'input':
-          props.path                  = answer.path;
-          props.placeholder           = answer.placeholder;
-          props.changeVal             = answer.changeVal;
-          props.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
-          return (
-            <ClientInputComponent {...props} />
-          );
-        // Forwarder
-        case 'forward':
-          break;
-        case 'disabled':
-          props.text = answer.text;
-          return <ClientDisabledComponent {...props} />;
-      }
-    });
   }
 }
 

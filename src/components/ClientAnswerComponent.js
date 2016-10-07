@@ -3,8 +3,6 @@
 import React    from 'react';
 import ReactDOM from 'react-dom';
 
-require('styles/animations.scss');
-
 import ClientButtonComponent   from './ClientButtonComponent.js';
 import ClientInputComponent    from './ClientInputComponent.js';
 import ClientDisabledComponent from './ClientDisabledComponent.js';
@@ -13,48 +11,6 @@ import ClientDisabledComponent from './ClientDisabledComponent.js';
 class ClientAnswerComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.els = {};
-  }
-
-  componentDidMount() {
-    this.hide();
-    if(typeof this.els.comp == 'undefined') {
-      this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
-    }
-    this.props.giveNodes(this.els)
-  }
-
-  componentDidUpdate() {
-    this.hide();
-    if(typeof this.els.comp == 'undefined') {
-      this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
-    }
-    this.props.giveNodes(this.els)
-  }
-
-  shouldComponentUpdate() {
-    this.hide();
-    if(typeof this.els.comp == 'undefined') {
-      this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
-    }
-    this.props.giveNodes(this.els)
-    return true;
-  }
-
-  componentWillUpdate() {
-    this.hide();
-    if(typeof this.els.comp == 'undefined') {
-      this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
-    }
-    this.props.giveNodes(this.els)
-  }
-
-  hide() {
-    if(typeof this.els.comp == 'undefined') {
-      this.els.comp = ReactDOM.findDOMNode(this.refs.comp);
-    }
-    this.els.comp.classList.add('nope');
-    this.els.comp.classList.add('noDimensions');
   }
 
   render() {
@@ -69,8 +25,7 @@ class ClientAnswerComponent extends React.Component {
     return answers.map((answer, key) => {
       let props = {
         key,
-        index:          key,
-        safeAppearWait: 3000
+        index:          key
       }
       switch (answer.type) {
         // Button Component
@@ -78,40 +33,49 @@ class ClientAnswerComponent extends React.Component {
           props.text            = answer.text;
           props.path            = answer.path;
           props.updatePathState = this.props.updatePathState;
-          return <ClientButtonComponent {...props}  />;
+          return (
+            <ClientButtonComponent {...{
+              key,
+              index: key,
+              text: answer.text,
+              path: answer.path,
+              updatePathState: this.props.updatePathState
+            }} />
+          );
         // Input Component
         case 'input':
-          props.path                  = answer.path;
-          props.placeholder           = answer.placeholder;
-          props.changeVal             = answer.changeVal;
-          props.handleInputfieldEnter = this.props.handleInputfieldEnter;
           return (
-            <ClientInputComponent {...props} />
+            <ClientInputComponent {...{
+              key,
+              index: key,
+              path: answer.path,
+              placeholder: answer.placeholder,
+              changeVal: answer.changeVal,
+              handleInputfieldEnter: this.props.handleInputfieldEnter
+            }} />
           );
         case 'disabled':
           props.text = answer.text;
-          return <ClientDisabledComponent {...props} />;
+          return (
+            <ClientDisabledComponent {...{
+              key,
+              index: key,
+              text: answer.text
+            }} />
+          );
+        case 'forward':
+          this.props.handleForwardTimeout(key);
+          break;
         default:
-          return <ClientDisabledComponent {...props} />;
+          return (
+            <ClientDisabledComponent {...{
+              key,
+              index: key,
+              text: ''
+            }} />
+          );
       }
     });
-  }
-
-  handleForwardTimeout(params) {
-    setTimeout(() => {
-      this.updatePathState(null, params)
-    }, 1000 + params.botAnimationDone, this, params);
-  }
-
-  handleBotAnimFinished({botAnimationDone, answerIndex}) {
-    let ansType = this.Conversation[this.state.path].user.answers[0].type;
-    if(ansType == 'forward') {
-      if(this.answerTmId !== null) {
-        clearTimeout(this.answerTmId);
-      }
-      this.answerTmId = this.handleForwardTimeout({answerIndex, botAnimationDone, path: this.Conversation[this.state.path].user.answers[0].path})
-    }
-    this.botAnimationDone = botAnimationDone;
   }
 }
 
