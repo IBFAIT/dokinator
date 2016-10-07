@@ -5,7 +5,7 @@ import React from 'react';
 import IconComponent from './IconComponent.js';
 import BotSingleBubbleComponent from './BotBubblePastComponent.js';
 
-class BotBubblePastReloadedComponent extends React.Component {
+class BotPartPastComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -43,10 +43,10 @@ class BotBubblePastReloadedComponent extends React.Component {
   }
 }
 
-BotBubblePastReloadedComponent.displayName = 'BotBubblePastReloadedComponent';
+BotPartPastComponent.displayName = 'BotPartPastComponent';
 
 // Uncomment properties you need
-// BotBubblePastReloadedComponent.propTypes = {};
-// BotBubblePastReloadedComponent.defaultProps = {};
+// BotPartPastComponent.propTypes = {};
+// BotPartPastComponent.defaultProps = {};
 
-export default BotBubblePastReloadedComponent;
+export default BotPartPastComponent;

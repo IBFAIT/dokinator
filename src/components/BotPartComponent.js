@@ -3,9 +3,9 @@
 import React from 'react';
 
 import IconComponent            from './IconComponent.js';
-import BotSingleBubbleComponent from './BotBubbleComponent.js';
+import BotBubbleComponent from './BotBubbleComponent.js';
 
-class BotBubbleReloadedComponent extends React.Component {
+class BotPartComponent extends React.Component {
   constructor(props) {
     super(props);
     this.totalBotTime = 800;
@@ -79,15 +79,15 @@ class BotBubbleReloadedComponent extends React.Component {
           answerIndex:      this.props.index
         });
       }
-      return <BotSingleBubbleComponent {...props} />
+      return <BotBubbleComponent {...props} />
     });
   }
 }
 
-BotBubbleReloadedComponent.displayName = 'BotBubbleReloadedComponent';
+BotPartComponent.displayName = 'BotPartComponent';
 
 // Uncomment properties you need
-// BotBubbleReloadedComponent.propTypes = {};
-// BotBubbleReloadedComponent.defaultProps = {};
+// BotPartComponent.propTypes = {};
+// BotPartComponent.defaultProps = {};
 
-export default BotBubbleReloadedComponent;
+export default BotPartComponent;

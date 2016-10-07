@@ -6,7 +6,7 @@ import Scroll   from 'smoothscroll';
 
 require('styles/animations.scss');
 
-class BotChildBubbleReloadedComponent extends React.Component {
+class BotBubbleComponent extends React.Component {
   constructor(props) {
     super(props);
     this.elms = {};
@@ -117,10 +117,10 @@ class BotChildBubbleReloadedComponent extends React.Component {
   }
 }
 
-BotChildBubbleReloadedComponent.displayName = 'BotChildBubbleReloadedComponent';
+BotBubbleComponent.displayName = 'BotBubbleComponent';
 
 // Uncomment properties you need
-// BotChildBubbleReloadedComponent.propTypes = {};
-// BotChildBubbleReloadedComponent.defaultProps = {};
+// BotBubbleComponent.propTypes = {};
+// BotBubbleComponent.defaultProps = {};
 
-export default BotChildBubbleReloadedComponent;
+export default BotBubbleComponent;

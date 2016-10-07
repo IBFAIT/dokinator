@@ -10,13 +10,13 @@ import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotBubbleComponent        from './BotPartComponent.js';
-import BotBubblePastComponent    from './BotPartPastComponent.js';
+import BotPartComponent        from './BotPartComponent.js';
+import BotPartPastComponent    from './BotPartPastComponent.js';
 import ClientAnswerComponent     from './ClientAnswerComponent.js';
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
 import ClientInputPastComponent  from './ClientInputPastComponent.js';
 
-class AppComponent extends React.Component {
+class Main extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -83,7 +83,7 @@ class AppComponent extends React.Component {
         bubbleFinished: this.handleBotAnimFinished.bind(this)
       };
       return (
-        <BotBubbleComponent {...props} />
+        <BotPartComponent {...props} />
       );
     });
   }
@@ -176,7 +176,7 @@ class AppComponent extends React.Component {
         classNameing: 'botbubblepast-component',
         bot:          Defaults.botIdentitys[id]
       };
-      return <BotBubblePastComponent {...props} />
+      return <BotPartPastComponent {...props} />
     });
   }
 
@@ -259,4 +259,4 @@ class AppComponent extends React.Component {
   }
 }
 
-export default AppComponent;
+export default Main;
