@@ -10,8 +10,8 @@ import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotBubbleComponent        from './BotBubbleReloadedComponent.js';
-import BotBubblePastComponent    from './BotBubblePastReloadedComponent.js';
+import BotBubbleComponent        from './BotPartComponent.js';
+import BotBubblePastComponent    from './BotPartPastComponent.js';
 import ClientAnswerComponent     from './ClientAnswerComponent.js';
 import ClientButtonPastComponent from './ClientButtonPastComponent.js';
 import ClientInputPastComponent  from './ClientInputPastComponent.js';

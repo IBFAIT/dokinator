@@ -7,7 +7,7 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import BotBubbleReloadedComponent from 'components//BotBubbleReloadedComponent.js';
+import BotBubbleReloadedComponent from 'components//BotPartComponent.js';
 
 describe('BotBubbleReloadedComponent', () => {
   let component;

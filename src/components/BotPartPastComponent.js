@@ -3,7 +3,7 @@
 import React from 'react';
 
 import IconComponent from './IconComponent.js';
-import BotSingleBubbleComponent from './BotChildBubblePastReloadedComponent.js';
+import BotSingleBubbleComponent from './BotBubblePastComponent.js';
 
 class BotBubblePastReloadedComponent extends React.Component {
   constructor(props) {
