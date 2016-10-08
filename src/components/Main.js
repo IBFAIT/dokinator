@@ -87,11 +87,6 @@ class Main extends React.Component {
     });
   }
 
-
-  handleForwardTimeout(params) {
-    setTimeout(()=>{this.updatePathState(null, params)}, 1000 + params.botAnimationDone, this, params);
-  }
-
   /**
    * The past Conversation is beeing rendered with the this.data.conversationLog property
    */
