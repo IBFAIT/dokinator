@@ -37,13 +37,36 @@ class Main extends React.Component {
     Scroll(answerPart.lastChild);
   }
 
-
-
   handleForwardTimeout(answerIndex) {
     const params = {answerIndex, path: this.Conversation[this.state.path].user.answers[0].path};
     this.forwardTimeoutId = setTimeout(() => {
       this.updatePathState(null, params)
     }, 2000, this, params);
+  }
+
+  /**
+   * Callbacks for Client Bubbles
+   */
+  updatePathState(evt, {path, answerIndex = null}) {
+    this.data.conversationLog.push({
+      stateAtPos: JSON.stringify(this.state),
+      answerIndex
+    });
+    this.setState({
+      path: path
+    });
+  }
+
+  handleInputfieldEnter(evt, path, answerIndex, changeVal) {
+    if(evt.key === 'Enter') {
+      this.data.conversationLog.push({
+        stateAtPos: JSON.stringify(this.state),
+        answerIndex
+      });
+      let state = {path};
+      state[changeVal] = evt.target.value;
+      this.setState(state);
+    }
   }
 
   render() {
@@ -145,31 +168,6 @@ class Main extends React.Component {
         return <div></div>;
       default:
         return <div></div>;
-    }
-  }
-
-  /**
-   * Callbacks for Client Bubbles
-   */
-  updatePathState(evt, {path, answerIndex = null}) {
-    this.data.conversationLog.push({
-      stateAtPos: JSON.stringify(this.state),
-      answerIndex
-    });
-    this.setState({
-      path: path
-    });
-  }
-
-  handleInputfieldEnter(evt, path, answerIndex, changeVal) {
-    if(evt.key === 'Enter') {
-      this.data.conversationLog.push({
-        stateAtPos: JSON.stringify(this.state),
-        answerIndex
-      });
-      let state = {path};
-      state[changeVal] = evt.target.value;
-      this.setState(state);
     }
   }
 }
