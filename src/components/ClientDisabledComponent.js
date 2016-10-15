@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-const ClientDisabledComponent = ({text}) => (
-  <div className="clientdisabled-component">
+const ClientDisabledComponent = ({text, className = 'clientdisabled-component'}) => (
+  <div {...{className}}>
     <button>
       {text}
     </button>
@@ -11,9 +11,5 @@ const ClientDisabledComponent = ({text}) => (
 );
 
 ClientDisabledComponent.displayName = 'ClientDisabledComponent';
-
-// Uncomment properties you need
-// ClientDisabledComponent.propTypes = {};
-// ClientDisabledComponent.defaultProps = {};
 
 export default ClientDisabledComponent;

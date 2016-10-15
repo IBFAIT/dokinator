@@ -2,29 +2,29 @@
 
 import React from 'react';
 
-import IconComponent      from './IconComponent.js';
-import BotBubbleComponent from './BotBubbleComponent.js';
+import BotPartComponent   from './BotPartComponent.js';
 
-const BotPartPastComponent = ({bot, texts, templateVars}) => {
-  const {botName, botAvatar, botId} = bot;
+const BotPartPastComponent = ({path, bots, templateVars, botIdentitys, className = 'botpartpast-component'}) => {
   return (
-    <div className="botbubble-component">
-      <IconComponent {...{
-        name: botName,
-        botAvatar,
-        botId
-      }} />
-        <div className="botbubble-container">
-          {texts.map((text, key) =>
-            (<BotBubbleComponent {...{
-              key,
-              text,
-              templateVars
-            }} />)
-          )}
-        </div>
+    <div {...{className}}>
+      { renderBotPartsFromPast({bots, templateVars, botIdentitys, path}) }
     </div>
   );
+}
+
+const renderBotPartsFromPast = ({bots, templateVars, botIdentitys, path}) => {
+  return bots.map(({id, texts}, bubbleKey) => {
+    return (
+      <BotPartComponent key={bubbleKey} {...{
+        texts,
+        key:  path, // because path has to be unique, use path
+        index:        bubbleKey,
+        className: 'botbubblepast-component',
+        botIdentity:  botIdentitys[id],
+        templateVars
+      }} />
+    );
+  });
 }
 
 BotPartPastComponent.displayName = 'BotPartPastComponent';

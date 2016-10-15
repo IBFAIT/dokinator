@@ -2,20 +2,14 @@
 
 import React from 'react';
 
-const ClientButtonPastComponent = ({text,name='DefaultName', avatar}) => (
-  <div className="clientbuttonpast-component">
-    <div className="bubble-inner">
-      <div className="text">
-        { text }
-      </div>
+let ClientButtonPastComponent = ({text, className = 'clientbuttonpast-component'}) => (
+  <div {...{className}}>
+    <div>
+      { text }
     </div>
   </div>
 );
 
 ClientButtonPastComponent.displayName = 'ClientButtonPastComponent';
-
-// Uncomment properties you need
-// ClientButtonComponent.propTypes = {};
-// ClientButtonComponent.defaultProps = {};
 
 export default ClientButtonPastComponent;

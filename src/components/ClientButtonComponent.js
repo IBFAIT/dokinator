@@ -2,18 +2,16 @@
 
 import React from 'react';
 
-let ClientButtonComponent = (props) => (
-  <div className="clientbutton-component">
-    <button onClick={(e)=>props.updatePathState(e,{path: props.path, answerIndex: props.index})}>
-      { props.text }
+let ClientButtonComponent = ({updatePathState, text, index, path, className = 'clientbutton-component'}) => (
+  <div {...{className}}>
+    <button {...{
+      onClick: e => updatePathState(e, {path, index})
+    }}>
+      { text }
     </button>
   </div>
 );
 
 ClientButtonComponent.displayName = 'ClientButtonComponent';
-
-// Uncomment properties you need
-// ClientButtonComponent.propTypes = {};
-// ClientButtonComponent.defaultProps = {};
 
 export default ClientButtonComponent;

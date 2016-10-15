@@ -3,8 +3,8 @@ require('normalize.css/normalize.css');
 require('styles/App.scss');
 
 import React    from 'react';
-import ReactDOM from 'react-dom';
-import Scroll   from 'smoothscroll';
+// import Scroll   from 'smoothscroll';
+import smoothScroll from 'simplesmoothscroll';
 
 // JSON data beeing imported
 import Defaults     from './defaults.json';
@@ -12,10 +12,9 @@ import Conversation from './conversation.json';
 
 // Components
 import BotPartComponent          from './BotPartComponent.js';
-import BotPartPastComponent      from './BotPartComponent.js';
+import BotPartPastComponent      from './BotPartPastComponent.js';
 import ClientAnswerComponent     from './ClientAnswerComponent.js';
-import ClientButtonPastComponent from './ClientButtonPastComponent.js';
-import ClientInputPastComponent  from './ClientInputPastComponent.js';
+import ClientAnswerPastComponent from './ClientAnswerPastComponent.js';
 
 class Main extends React.Component {
 
@@ -26,7 +25,8 @@ class Main extends React.Component {
       templateVars: {
         name:   null,
         email:  null,
-        fieber: null
+        fieber: null,
+        persons: Defaults.persons
       }
     };
     this.conversationLog = [];
@@ -40,14 +40,13 @@ class Main extends React.Component {
 
 
   componentDidUpdate() {
-    // Handle smooth scrolling to the bottom
-    const answerPart = ReactDOM.findDOMNode(this.refs.answerPart);
-    Scroll(answerPart.lastChild);
+    const answerBottom = document.getElementsByClassName('conversation-part')[0];
+    smoothScroll(answerBottom, {offset: -10});
   }
 
-  handleForwardTimeout(answerIndex, time = 2000) {
+  handleForwardTimeout({index, time = 2000}) {
     // create propper path info for the log
-    const params = {answerIndex, path: this.Conversation[this.state.path].user.answers[0].path};
+    const params = {index, path: this.Conversation[this.state.path].user.answers[0].path};
     this.forwardTimeoutId = setTimeout(() => {
       this.updatePathState(null, params)
     }, time, this, params);
@@ -56,49 +55,54 @@ class Main extends React.Component {
   /**
    * Callbacks for Client Bubbles
    */
-  updatePathState(evt, {path, answerIndex = null}) {
+  updatePathState(evt, {path, index = null}) {
     // put the paths actual state to the log
-    this.conversationLog.push({
+    const entry = {
       stateAtPos: JSON.stringify(this.state),
-      answerIndex
-    });
+      index
+    };
+    this.conversationLog.push(entry);
     // trigger next path
     this.setState({path: path});
   }
 
-  handleInputfieldEnter(evt, path, answerIndex, changeVal) {
+  handleInputfieldEnter({evt, path, index, changeVal}) {
     /* ToDo: chrome complains about this enter detection beeing deprecated */
     if(evt.key === 'Enter') {
-      this.conversationLog.push({
-        stateAtPos: JSON.stringify(this.state),
-        answerIndex
-      });
+
       // make the state change dynamicly
       let templateVars = {
         name:   this.state.templateVars.name,
         email:  this.state.templateVars.email,
-        fieber: this.state.templateVars.fieber
+        fieber: this.state.templateVars.fieber,
+        persons: Defaults.persons
       };
       templateVars[changeVal] = evt.target.value;
+      this.conversationLog.push({
+        stateAtPos: JSON.stringify({path: this.state.path, templateVars: this.state.templateVars, usersInput:  evt.target.value}),
+        index
+      });
       this.setState({path, templateVars});
     }
   }
 
   render() {
     return (
-      <div className="index">
+      <div className="Main">
         <div className="conversation-bubbles">
           { this.renderPastPart(this.conversationLog) }
-          <span  ref="activePart">
+          <span  className="activePart">
             { this.renderBotPart(Conversation[this.state.path].bots) }
           </span>
         </div>
-        <div className="conversation-part" ref="answerPart">
+        <div className="conversation-part">
           <ClientAnswerComponent {...{
-            answers:               Conversation[this.state.path].user.answers,
-            updatePathState:       this.updatePathState,
-            handleForwardTimeout:  this.handleForwardTimeout,
-            handleInputfieldEnter: this.handleInputfieldEnter
+            answers: Conversation[this.state.path].user.answers,
+            callbacks: {
+              updatePathState:       this.updatePathState,
+              handleForwardTimeout:  this.handleForwardTimeout,
+              handleInputfieldEnter: this.handleInputfieldEnter
+            }
           }} />
         </div>
       </div>
@@ -127,9 +131,8 @@ class Main extends React.Component {
       /* END Handle random bot text */
 
       return (
-        <BotPartComponent {...{
+        <BotPartComponent key={key} {...{
           texts,
-          key:          this.state.path, // because path has to be unique, use path
           index:        key,
           className:    'botbubble-component',
           botIdentity:  Defaults.botIdentitys[id],
@@ -142,27 +145,26 @@ class Main extends React.Component {
   /**
    * The past Conversation is beeing rendered with the this.conversationLog property
    */
-  renderPastPart(conversation) {
-    return conversation.map((step, key) => {
-      let stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
+  renderPastPart(conversation,  className = 'conversation-part-past') {
+    return conversation.map((step, stepKey) => {
+      const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
       return (
-        <div className="conversation-part-past" {...{key}} >
-          { this.renderBotPartsPast({
-            key: stateAtPos.path, // because path has to be unique, use path
+        <div {...{className}} key={'conv_'+stepKey} >
+          <BotPartPastComponent key={stepKey} {...{
             path:         stateAtPos.path,
-            bubbles:      Conversation[stateAtPos.path].bots,
-            templateVars: stateAtPos.templateVars
-          }) }
-          <div className="user-answers-past" {...{key}} >
-            { this.renderClientPastBubble(
-              {
-                stateAtPos,
-                answer:      this.Conversation[stateAtPos.path].user.answers[step.answerIndex],
-                answerIndex: step.answerIndex
-              },
-              key)
-            }
-          </div>
+            className:    'botpartpast-component',
+            bots:         Conversation[stateAtPos.path].bots,
+            templateVars: stateAtPos.templateVars,
+            botIdentitys: Defaults.botIdentitys
+          }} />
+
+          <ClientAnswerPastComponent key={'client_'+stepKey} {...{
+            stepKey,
+            answer:    this.Conversation[stateAtPos.path].user.answers,
+            index: step.index,
+            stateAtPos,
+            className: 'user-answers-past'
+          }} />
         </div>
       );
     });
@@ -174,38 +176,12 @@ class Main extends React.Component {
         <BotPartPastComponent {...{
           texts,
           templateVars,
-          key:         path,
           index:       key,
           className:   'botbubblepast-component',
           botIdentity: Defaults.botIdentitys[id]
-        }}
-        />
+        }} />
       );
     });
-  }
-
-  renderClientPastBubble({answer, answerIndex, stateAtPos}, key) {
-    const {text, changeVal, type} = answer;
-    switch (type) {
-      case 'button':
-        return <ClientButtonPastComponent {...{
-          key,
-          text,
-          name:   this.state.name,
-          avatar: Defaults.user.avatar
-        }} />;
-      case 'input':
-        return <ClientInputPastComponent {...{
-          key,
-          name:         this.state.name,
-          avatar:       Defaults.user.avatar,
-          valueContent: stateAtPos[changeVal]
-        }} />;
-      case 'forward':
-        return <div {...{key}}></div>;
-      default:
-        return <div {...{key}}></div>;
-    }
   }
 }
 

@@ -2,10 +2,13 @@
 
 import React from 'react';
 
-const ClientInputComponent = ({placeholder, path, index, changeVal, handleInputfieldEnter}) => (
-    <div className="clientinput-component">
+const ClientInputComponent = ({placeholder, path, index, changeVal, handleInputfieldEnter, className = 'clientinput-component'}) => (
+    <div {...{className}}>
       <input
-        {...{ placeholder: placeholder, onKeyPress: (e)=>handleInputfieldEnter(e, path, index, changeVal)}}
+        {...{
+          placeholder: placeholder,
+          onKeyPress: evt => handleInputfieldEnter({evt, path, index, changeVal})
+        }}
       />
     </div>
 );

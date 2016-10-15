@@ -12,7 +12,7 @@ const makerImages = {
 const BotBubbleComponent = ({text, templateVars}) => {
   // ToDo: Template engine implementation
   // for now: vars to fill in with template string in eval
-  const {name, email, fieber} = templateVars;
+  const {name, email, fieber, persons} = templateVars;
   console.log(templateVars);
   return (
     <div className='botsinglebubble-component'>

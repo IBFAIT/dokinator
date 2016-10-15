@@ -12,8 +12,7 @@ const BotPartComponent = ({texts, templateVars, botIdentity, className}) => {
       <IconComponent {...{id, name, avatar}} />
       <div className="botbubble-container">
         {texts.map((text, key) =>
-          (<BotBubbleComponent {...{
-            key,
+          (<BotBubbleComponent key={key} {...{
             text,
             templateVars
           }} />)
