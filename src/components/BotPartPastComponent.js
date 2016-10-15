@@ -2,51 +2,31 @@
 
 import React from 'react';
 
-import IconComponent from './IconComponent.js';
-import BotSingleBubbleComponent from './BotBubblePastComponent.js';
+import IconComponent      from './IconComponent.js';
+import BotBubbleComponent from './BotBubbleComponent.js';
 
-class BotPartPastComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const iconProps = {
-      name:  this.props.bot.name,
-      src:   this.props.bot.avatar.src,
-      alt:   this.props.bot.avatar.alt,
-      botId: this.props.bot.id
-    }
-    return (
-      <div className="botbubble-component">
-        <IconComponent {...iconProps} />
+const BotPartPastComponent = ({bot, texts, templateVars}) => {
+  const {botName, botAvatar, botId} = bot;
+  return (
+    <div className="botbubble-component">
+      <IconComponent {...{
+        name: botName,
+        botAvatar,
+        botId
+      }} />
         <div className="botbubble-container">
-          {this.renderIndividualBubbles(this.props.texts)}
+          {texts.map((text, key) =>
+            (<BotBubbleComponent {...{
+              key,
+              text,
+              templateVars
+            }} />)
+          )}
         </div>
-      </div>
-    );
-  }
-
-  renderIndividualBubbles(texts) {
-    return texts.map((text, key) => {
-      let textChunks = text.split(' ');
-      let props = {
-        key,
-        textChunks,
-        data:  this.props.data,
-        index: this.props.index,
-        name:  this.props.name,
-        email: this.props.email
-      };
-      return <BotSingleBubbleComponent {...props} />
-    });
-  }
+    </div>
+  );
 }
 
 BotPartPastComponent.displayName = 'BotPartPastComponent';
-
-// Uncomment properties you need
-// BotPartPastComponent.propTypes = {};
-// BotPartPastComponent.defaultProps = {};
 
 export default BotPartPastComponent;

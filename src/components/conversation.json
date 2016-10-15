@@ -404,9 +404,9 @@
       "id": "fred",
       "texts": [
         "Schau, das sind die Leute, die mich gebaut haben:",
-        "${data.persons.flavio.name}: ${data.persons.flavio.image}",
-        "${data.persons.kaspar.name}: ${data.persons.kaspar.image}",
-        "Du kannst sie über info@conversational.today kontaktieren.",
+        "${data.persons.flavio.name}: <img src=\"${makerImages['flavio']}\" />",
+        "${data.persons.kaspar.name}: <img src=\"${makerImages['kaspar']}\" />",
+        "Du kannst sie über <a href=\"mailto:info@conversational.today\">info@conversational.today</a> kontaktieren.",
         "Bis bald!"
       ]
     }],

@@ -8,25 +8,23 @@ const avatarImgs = {
   user: require('../images/user.png')
 };
 
-class IconComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.elms = {};
-  }
-
-  render() {
-    return (
-      <div className="icon-component">
-        <div className="name" ref="botName">
-          {this.props.name}
-        </div>
-        <div>
-          <img {...{src: avatarImgs[this.props.botId], alt: this.props.alt, className: 'avatarImg', ref: 'avatarImg'}} />
-        </div>
+const IconComponent = ({id, name, avatar}) => {
+  return (
+    <div className="icon-component">
+      <div className="name">
+        {name}
       </div>
-    );
-
-  }
+      <div>
+        <img {...{
+          src: avatarImgs[id],
+          alt: avatar.alt,
+          title: avatar.title,
+          className: 'avatarImg'
+        }}
+        />
+      </div>
+    </div>
+  );
 }
 
 IconComponent.displayName = 'IconComponent';

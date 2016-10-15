@@ -4,29 +4,26 @@ import React    from 'react';
 import ReactDOM from 'react-dom';
 import Scroll   from 'smoothscroll';
 
+const makerImages = {
+  flavio:  require('../images/docinator.jpg'),
+  kaspar: require('../images/fred.png')
+};
 
-class BotBubbleComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.elms = {};
-  }
-
-  render() {
-    const {name, email, fieber, text} = this.props;
-    return (
-      <div className='botsinglebubble-component' ref="container">
-        <div className='text'>
-          {eval('`' + text + '`')}
-        </div>
+const BotBubbleComponent = ({text, templateVars}) => {
+  // ToDo: Template engine implementation
+  // for now: vars to fill in with template string in eval
+  const {name, email, fieber} = templateVars;
+  console.log(templateVars);
+  return (
+    <div className='botsinglebubble-component'>
+      <div className='text'>
+        {eval('`' + text + '`')}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 BotBubbleComponent.displayName = 'BotBubbleComponent';
 
-// Uncomment properties you need
-// BotBubbleComponent.propTypes = {};
-// BotBubbleComponent.defaultProps = {};
 
 export default BotBubbleComponent;
