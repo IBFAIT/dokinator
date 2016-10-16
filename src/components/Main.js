@@ -4,7 +4,6 @@ require('styles/Main.scss');
 
 import React    from 'react';
 import Scroll   from 'smoothscroll';
-// import smoothScroll from 'simplesmoothscroll';
 
 // JSON data beeing imported
 import Defaults     from './defaults.json';
