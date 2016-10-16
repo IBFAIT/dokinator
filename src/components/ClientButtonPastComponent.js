@@ -2,9 +2,9 @@
 
 import React from 'react';
 
-let ClientButtonPastComponent = ({text, className = 'clientbuttonpast-component'}) => (
+let ClientButtonPastComponent = ({text, className = 'clientbuttonpast-component', subClassNames = { text: 'text'}}) => (
   <div {...{className}}>
-    <div>
+    <div className={subClassNames.text}>
       { text }
     </div>
   </div>

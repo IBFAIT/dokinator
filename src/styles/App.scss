@@ -1,49 +1,4 @@
-$body-background-color: #eee;
-$chat-window-background-color: #eee;
-$bubble-background-color: #fff;
-$bubble-border-color: #000;
-$bubble-shadow-color: rgba(180,180,180,0.5);
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
-
-html {
-  height: 100%;
-  font-family: "Source Sans Pro", sans-serif;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  overflow: scroll;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  align-content: stretch;
-  background: $body-background-color;
-}
-
-#app {
-  flex: 0 1 0;
-  align-self: stretch;
-  flex-basis: auto;
-  background-color: $body-background-color;
-  width: 50rem;
-  max-width: 100%;
-  display: flex;
-}
-
 .Main {
-  flex: 1 0 0;
-  align-self: stretch;
-  flex-basis: auto;
-  background-color: $chat-window-background-color;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  align-content: stretch;
-  max-width: 100%;
-
   .conversation-bubbles,
   .conversation-part {
     display: flex;
@@ -110,7 +65,7 @@ body {
 
       }
 
-    .clientbuttonpast-component,
+
     .clientinputpast-component {
       display: flex;
       flex-direction: row;
@@ -120,14 +75,14 @@ body {
       margin-right: .4rem;
 
     }
-    .botbubblepast-component, .botbubble-component,.clientbuttonpast-component,
+    .botbubblepast-component, .botbubble-component,
     .clientinputpast-component {
       .bubble-inner, .botsinglebubble-component {
         display:flex;
         flex-direction: row;
         justify-content: center;
         max-width: 80%;
-        padding: .6rem .6rem .4rem .8rem;
+        padding: .6rem .8rem;
         background-color: #aaa;
         border-radius: 0.3rem;
         background-color: $bubble-background-color;

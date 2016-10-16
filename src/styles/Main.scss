@@ -1,0 +1,144 @@
+@import "vars";
+@import "injects";
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+html {
+  height: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  overflow: scroll;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  background: $body-background-color;
+}
+
+#app {
+  flex: 0 1 0;
+  align-self: stretch;
+  flex-basis: auto;
+  background-color: $body-background-color;
+  width: 50rem;
+  max-width: 100%;
+  display: flex;
+}
+
+.Main {
+  @extend .inject-column-flex;
+  flex: 1 0 0;
+  background-color: $chat-window-background-color;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+  max-width: 100%;
+
+  .conversation-bubbles {
+    @extend .inject-column-flex;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+
+    .conversation-part-past {
+      .botpartpast-component {
+        .botbubblepast-component {
+          @extend .inject-botbubble-flex;
+          @extend .inject-bubble-margin-padding;
+
+          .icon-component {
+            @extend .inject-icon-component;
+          }
+
+          .botbubble-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 100%;
+
+            .botsinglebubble-component {
+              @extend .inject-bubble-box;
+              align-self: flex-start;
+              // @extend .inject-botsinglebubble-component;
+              .text {
+                @extend .inject-bubble-text;
+              }
+            }
+          }
+        }
+      }
+
+      .user-answers-past {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        @extend .inject-bubble-margin-padding;
+
+        .clientbuttonpast-component {
+          @extend .inject-bubble-box;
+          align-self: flex-end;
+
+          .text {
+            @extend .inject-bubble-text;
+          }
+        }
+      }
+    }
+
+    .activePart {
+      .botbubble-component {
+        @extend .inject-botbubble-flex;
+        @extend .inject-bubble-margin-padding;
+
+        .icon-component {
+          @extend .inject-icon-component;
+        }
+
+        .botbubble-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          width: 100%;
+          max-width: 100%;
+
+          .botsinglebubble-component {
+            @extend .inject-bubble-box;
+            align-self: flex-start;
+
+            .text {
+              @extend .inject-bubble-text;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .conversation-part {
+    @extend .inject-column-flex;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+
+    .user-answers {
+      .clientbutton-component {
+        display: inline-block;
+        min-width: 10%;
+
+        button {
+          @extend .inject-input-or-button;
+        }
+      }
+
+      .clientinput-component {
+        input {
+          @extend .inject-input-or-button;
+        }
+      }
+    }
+  }
+}
