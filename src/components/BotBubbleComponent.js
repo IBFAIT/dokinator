@@ -9,13 +9,13 @@ const makerImages = {
   kaspar: require('../images/fred.png')
 };
 
-const BotBubbleComponent = ({text, templateVars}) => {
+const BotBubbleComponent = ({text, templateVars, className = 'botsinglebubble-component', subClassNames = {txtContainer: 'text'}}) => {
   // ToDo: Template engine implementation
   // for now: vars to fill in with template string in eval
   const {name, email, fieber, persons} = templateVars;
   return (
-    <div className='botsinglebubble-component'>
-      <div className='text'>
+    <div {...{className}}>
+      <div className={subClassNames.txtContainer}>
         {eval('`' + text + '`')}
       </div>
     </div>

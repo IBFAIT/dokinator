@@ -5,29 +5,35 @@ import React    from 'react';
 import ClientButtonPastComponent   from './ClientButtonPastComponent.js';
 
 
-const ClientAnswerPastComponent = (props) => {
-  console.log(props);
+const ClientAnswerPastComponent = ({className = 'user-answers-past', ...props}) => {
   return (
-    <div {...{className: props.className}}>
+    <div {...{className}}>
       { renderClientBubble(props) }
     </div>
   );
 }
 
-const renderClientBubble = ({step, answer, stateAtPos, index, className = 'clientbuttonpast-component'}) => {
+const renderClientBubble = ({
+  answer,
+  stateAtPos,
+  index,
+  subClassNames = {
+    clientButtonPast: 'clientbuttonpast-component'
+  }
+}) => {
   if(answer.length == 1 && answer[0].type == 'forward') {
     return <div></div>;
   }
   if (answer[index].type == 'input') {
     return <ClientButtonPastComponent {...{
-      className,
-      text: stateAtPos.usersInput
+      text: stateAtPos.usersInput,
+      className: subClassNames.clientButtonComponent
     }} />;
   } else {
     return <ClientButtonPastComponent {...{
       index,
-      className,
-      text: answer[index].text
+      text: answer[index].text,
+      className: subClassNames.clientButtonComponent
     }} />;
   }
 }

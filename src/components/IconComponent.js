@@ -8,10 +8,10 @@ const avatarImgs = {
   user: require('../images/user.png')
 };
 
-const IconComponent = ({id, name, avatar}) => {
+const IconComponent = ({id, name, avatar, className = 'icon-component', subClassNames = {img: 'avatarImg', name: 'name'}}) => {
   return (
-    <div className="icon-component">
-      <div className="name">
+    <div {...{className}}>
+      <div className={subClassNames.name}>
         {name}
       </div>
       <div>
@@ -19,7 +19,7 @@ const IconComponent = ({id, name, avatar}) => {
           src: avatarImgs[id],
           alt: avatar.alt,
           title: avatar.title,
-          className: 'avatarImg'
+          className: subClassNames.img
         }}
         />
       </div>

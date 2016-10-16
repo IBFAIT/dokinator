@@ -8,15 +8,23 @@ import ClientDisabledComponent from './ClientDisabledComponent.js';
 
 
 
-const ClientAnswerComponent = ({answers, callbacks, className = 'user-answers'}) => {
+const ClientAnswerComponent = ({className = 'user-answers', ...props}) => {
   return (
     <div {...{className}}>
-      { renderClientBubbles({answers, callbacks}) }
+      { renderClientBubbles(props) }
     </div>
   );
 }
 
-const renderClientBubbles = ({answers, callbacks}) => {
+const renderClientBubbles = ({
+  answers,
+  callbacks,
+  subClassNames = {
+    clientInputComponent: 'clientinput-component',
+    clientButtonComponent: 'clientbutton-component',
+    clientAnswerComponent: 'clientdisabled-component'
+  }
+}) => {
   const {handleInputfieldEnter, handleForwardTimeout, updatePathState} = callbacks;
   return answers.map(({type, text, path, placeholder, changeVal}, key) => {
     switch (type) {
@@ -27,22 +35,24 @@ const renderClientBubbles = ({answers, callbacks}) => {
           text,
           changeVal,
           index: key,
-          handleInputfieldEnter
+          handleInputfieldEnter,
+          className: subClassNames.clientInputComponent
         }} />;
       case 'button':
         return <ClientButtonComponent key={key} {...{
           index: key,
           text,
           path,
-          updatePathState
+          updatePathState,
+          className: subClassNames.clientButtonComponent
         }} />;
       case 'disabled':
         return <ClientDisabledComponent key={key} {...{
           index: key,
-          text
+          text,
+          className: subClassNames.clientAnswerComponent
         }} />;
       case 'forward':
-        console.log('forward ran');
         handleForwardTimeout({answerIndex: key});
         break;
       default:

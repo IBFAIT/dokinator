@@ -3,8 +3,8 @@ require('normalize.css/normalize.css');
 require('styles/App.scss');
 
 import React    from 'react';
-// import Scroll   from 'smoothscroll';
-import smoothScroll from 'simplesmoothscroll';
+import Scroll   from 'smoothscroll';
+// import smoothScroll from 'simplesmoothscroll';
 
 // JSON data beeing imported
 import Defaults     from './defaults.json';
@@ -40,8 +40,9 @@ class Main extends React.Component {
 
 
   componentDidUpdate() {
-    const answerBottom = document.getElementsByClassName('conversation-part')[0];
-    smoothScroll(answerBottom, {offset: -10});
+    const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
+    // smoothScroll(answerBottom, {offset: 10});
+    Scroll(answerBottom);
   }
 
   handleForwardTimeout({index, time = 2000}) {

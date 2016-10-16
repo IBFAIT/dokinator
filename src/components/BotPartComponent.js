@@ -5,16 +5,26 @@ import React from 'react';
 import IconComponent      from './IconComponent.js';
 import BotBubbleComponent from './BotBubbleComponent.js';
 
-const BotPartComponent = ({texts, templateVars, botIdentity, className}) => {
+const BotPartComponent = ({
+  texts,
+  templateVars,
+  botIdentity,
+  className = 'botbubble-component',
+  subClassNames = {
+    bubbles: 'botbubble-container',
+    bubbleComponent: 'botsinglebubble-component'
+  }
+}) => {
   const {id, name, avatar} = botIdentity;
   return (
     <div {...{className}}>
       <IconComponent {...{id, name, avatar}} />
-      <div className="botbubble-container">
+      <div className={subClassNames.bubbles}>
         {texts.map((text, key) =>
           (<BotBubbleComponent key={key} {...{
             text,
-            templateVars
+            templateVars,
+            className: subClassNames.bubbleComponent
           }} />)
         )}
       </div>
