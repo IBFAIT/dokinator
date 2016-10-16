@@ -125,9 +125,11 @@ body {
     max-width: 100%;
 
     .user-answers {
+      div {
+          display: inline-block;
+          min-width: 10%;
+      }
       .clientbutton-component {
-        display: inline-block;
-        min-width: 10%;
 
         button {
           @extend .inject-input-or-button;
@@ -137,6 +139,14 @@ body {
       .clientinput-component {
         input {
           @extend .inject-input-or-button;
+        }
+      }
+
+      .clientdisabled-component {
+        button {
+            @extend .inject-input-or-button;
+            color: rgba(0, 0, 0 , 0.2);
+            box-shadow: 0.03rem 0.07rem 0 0 rgba(180, 180, 180, 0.1);
         }
       }
     }
