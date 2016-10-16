@@ -3,8 +3,6 @@ require('normalize.css/normalize.css');
 require('styles/Main.scss');
 
 import React    from 'react';
-import { Component, Children, PropTypes } from 'react';
-import { Motion, spring, presets } from 'react-motion';
 import Scroll   from 'smoothscroll';
 
 // JSON data beeing imported
@@ -109,28 +107,9 @@ class Main extends React.Component {
           <div className="clientAnswerTarget"></div>
         </div>
         <div className="conversation-part">
-          <Motion style={{x: spring(botHere ? 600 : 0)}}>
-            {({x}) =>
-              <div style={{borderRadius: 4,
-                backgroundColor: '#ccc',
-                position: 'relative',
-                width: 650,
-              height: 50}}>
-                <div style={Object.assign({}, {
-                  position: 'absolute',
-                  width: 50,
-                  height: 50,
-                  borderRadius: 4,
-                  backgroundColor: 'yellow'
-                }, {
-                  WebkitTransform: `translate3d(${x}px, 0, 0)`,
-                  transform: `translate3d(${x}px, 0, 0)`,
-                })} />
-              </div>
-            }
-          </Motion>
           <ClientAnswerComponent {...{
             answers: Conversation[this.state.path].user.answers,
+            botHere,
             callbacks: {
               updatePathState:       this.updatePathState,
               handleForwardTimeout:  this.handleForwardTimeout,
