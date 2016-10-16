@@ -4,5 +4,6 @@
     "es2017",
     "stage-0",
     "react"
-  ]
+  ],
+  "plugins": ["transform-flow-strip-types"]
 }

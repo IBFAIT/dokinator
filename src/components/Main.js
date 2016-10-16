@@ -3,6 +3,8 @@ require('normalize.css/normalize.css');
 require('styles/Main.scss');
 
 import React    from 'react';
+import { Component, Children, PropTypes } from 'react';
+import { Motion, spring, presets } from 'react-motion';
 import Scroll   from 'smoothscroll';
 
 // JSON data beeing imported
@@ -20,6 +22,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      botHere: false,
       path: 'init',
       templateVars: {
         name:   null,
@@ -42,6 +45,13 @@ class Main extends React.Component {
     const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
     // smoothScroll(answerBottom, {offset: 10});
     Scroll(answerBottom);
+
+      setTimeout(()=>{this.setState({botHere: true})}, 3000, this);
+  }
+
+
+  componentDidMount() {
+    setTimeout(()=>{this.setState({botHere: true})}, 3000, this);
   }
 
   handleForwardTimeout({index, time = 2000}) {
@@ -51,6 +61,7 @@ class Main extends React.Component {
       this.updatePathState(null, params)
     }, time, this, params);
   }
+
 
   /**
    * Callbacks for Client Bubbles
@@ -87,16 +98,37 @@ class Main extends React.Component {
   }
 
   render() {
+    const {botHere} = this.state;
     return (
       <div className="Main">
         <div className="conversation-bubbles">
           { this.renderPastPart(this.conversationLog) }
           <span  className="activePart">
-            { this.renderBotPart(Conversation[this.state.path].bots) }
+            { this.renderBotPart({bots: Conversation[this.state.path].bots, botHere}) }
           </span>
           <div className="clientAnswerTarget"></div>
         </div>
         <div className="conversation-part">
+          <Motion style={{x: spring(botHere ? 600 : 0)}}>
+            {({x}) =>
+              <div style={{borderRadius: 4,
+                backgroundColor: '#ccc',
+                position: 'relative',
+                width: 650,
+              height: 50}}>
+                <div style={Object.assign({}, {
+                  position: 'absolute',
+                  width: 50,
+                  height: 50,
+                  borderRadius: 4,
+                  backgroundColor: 'yellow'
+                }, {
+                  WebkitTransform: `translate3d(${x}px, 0, 0)`,
+                  transform: `translate3d(${x}px, 0, 0)`,
+                })} />
+              </div>
+            }
+          </Motion>
           <ClientAnswerComponent {...{
             answers: Conversation[this.state.path].user.answers,
             callbacks: {
@@ -114,7 +146,7 @@ class Main extends React.Component {
   /**
    * Bot Bubble render
    */
-  renderBotPart(bots, subClassnames = { BotPartComponent: 'botbubble-component'}) {
+  renderBotPart({bots, botHere, subClassnames = { BotPartComponent: 'botbubble-component'}}) {
     // map bots - > there can be more than one bot part.
     return bots.map(({id, texts}, key) => {
 
