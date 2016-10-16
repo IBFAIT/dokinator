@@ -114,7 +114,7 @@ class Main extends React.Component {
   /**
    * Bot Bubble render
    */
-  renderBotPart(bots) {
+  renderBotPart(bots, subClassnames = { BotPartComponent: 'botbubble-component'}) {
     // map bots - > there can be more than one bot part.
     return bots.map(({id, texts}, key) => {
 
@@ -135,7 +135,7 @@ class Main extends React.Component {
         <BotPartComponent key={key} {...{
           texts,
           index:        key,
-          className:    'botbubble-component',
+          className:    subClassnames.BotPartComponent,
           botIdentity:  Defaults.botIdentitys[id],
           templateVars: this.state.templateVars
         }} />
@@ -146,14 +146,21 @@ class Main extends React.Component {
   /**
    * The past Conversation is beeing rendered with the this.conversationLog property
    */
-  renderPastPart(conversation,  className = 'conversation-part-past') {
+  renderPastPart(
+    conversation,
+    className = 'conversation-part-past',
+    subClassNames = {
+      BotPartPastComponent: 'botpartpast-component',
+      ClientAnswerPastComponent: 'user-answers-past'
+    }
+  ) {
     return conversation.map((step, stepKey) => {
       const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
       return (
         <div {...{className}} key={'conv_'+stepKey} >
           <BotPartPastComponent key={stepKey} {...{
             path:         stateAtPos.path,
-            className:    'botpartpast-component',
+            className:    subClassNames.BotPartPastComponent,
             bots:         Conversation[stateAtPos.path].bots,
             templateVars: stateAtPos.templateVars,
             botIdentitys: Defaults.botIdentitys
@@ -164,21 +171,28 @@ class Main extends React.Component {
             answer:    this.Conversation[stateAtPos.path].user.answers,
             index: step.index,
             stateAtPos,
-            className: 'user-answers-past'
+            className: subClassNames.ClientAnswerPastComponent
           }} />
         </div>
       );
     });
   }
 
-  renderBotPartsPast({bubbles, path, templateVars}) {
+  renderBotPartsPast({
+    bubbles,
+    path,
+    templateVars,
+    subClassNames = {
+      BotPartPastComponent: 'botbubblepast-component'
+    }
+  }) {
     return bubbles.map(({id, texts}, key) => {
       return (
         <BotPartPastComponent {...{
           texts,
           templateVars,
           index:       key,
-          className:   'botbubblepast-component',
+          className:   subClassNames.BotPartPastComponent,
           botIdentity: Defaults.botIdentitys[id]
         }} />
       );
