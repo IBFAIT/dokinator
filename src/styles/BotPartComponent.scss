@@ -1,0 +1,52 @@
+@import "vars";
+
+
+.bot-part-actual {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  margin-left: .4rem;
+  margin-right: .4rem;
+}
+.bot-bubble-component {
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  opacity:1;
+  align-self: flex-start;
+}
+//
+// .bot-bubble-component {
+//   margin-top: .2rem;
+//   margin-bottom: .2rem;
+//   opacity:1;
+//   align-self: flex-start;
+//   .subbubbles-container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     width: 100%;
+//
+//   }
+//   .bot-bubble-component {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     max-width: 80%;
+//     padding: 0.6rem 0.6rem 0.4rem 0.8rem;
+//     background-color: #aaa;
+//     border-radius: 0.3rem;
+//     background-color: $bubble-background-color;
+//     box-shadow: 0.01rem 0.05rem 0 0 $bubble-shadow-color;
+//     .text {
+//       flex: 1 1 auto;
+//       align-self: stretch;
+//       display: inline-block;
+//       min-width: 5%;
+//       min-height: 30px;
+//       margin: 0;
+//       padding: 0;
+//       display: inline-block;
+//     }
+//   }
+// }

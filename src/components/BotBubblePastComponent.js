@@ -20,7 +20,7 @@ class BotBubblePastComponent extends React.Component {
   render() {
     const {name, email, fieber} = this.props;
     return (
-      <div className="botsinglebubble-component" style={{display: 'inline-block'}}>
+      <div className="bot-part-bubble" style={{display: 'inline-block'}}>
         <div className="text"  style={{display: 'inline-block'}}>
           { this.renderWords(this.props.textChunks) }
         </div>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-let ClientButtonPastComponent = ({text, className = 'clientbuttonpast-component'}) => (
+let ClientButtonPastComponent = ({text, className = 'client-part-past-button'}) => (
   <div {...{className}}>
     <div>
       { text }

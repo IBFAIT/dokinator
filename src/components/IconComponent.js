@@ -2,6 +2,8 @@
 import React    from 'react';
 import ReactDOM from 'react-dom';
 
+// require('styles/IconComponent.scss');
+
 const avatarImgs = {
   doc:  require('../images/docinator.jpg'),
   fred: require('../images/fred.png'),
@@ -10,7 +12,7 @@ const avatarImgs = {
 
 const IconComponent = ({id, name, avatar}) => {
   return (
-    <div className="icon-component">
+    <div className="IconComponent">
       <div className="name">
         {name}
       </div>

@@ -6,9 +6,10 @@ import ClientButtonComponent   from './ClientButtonComponent.js';
 import ClientInputComponent    from './ClientInputComponent.js';
 import ClientDisabledComponent from './ClientDisabledComponent.js';
 
+// require('styles/ClientAnswerComponent.scss');
 
 
-const ClientAnswerComponent = ({answers, callbacks, className = 'user-answers'}) => {
+const ClientAnswerComponent = ({answers, callbacks, className = 'client-answer-component'}) => {
   return (
     <div {...{className}}>
       { renderClientBubbles({answers, callbacks}) }
@@ -27,14 +28,16 @@ const renderClientBubbles = ({answers, callbacks}) => {
           text,
           changeVal,
           index: key,
-          handleInputfieldEnter
+          handleInputfieldEnter,
+          className: 'input-field'
         }} />;
       case 'button':
         return <ClientButtonComponent key={key} {...{
           index: key,
           text,
           path,
-          updatePathState
+          updatePathState,
+          className: 'answer-button'
         }} />;
       case 'disabled':
         return <ClientDisabledComponent key={key} {...{

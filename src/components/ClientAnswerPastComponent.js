@@ -14,7 +14,7 @@ const ClientAnswerPastComponent = (props) => {
   );
 }
 
-const renderClientBubble = ({step, answer, stateAtPos, index, className = 'clientbuttonpast-component'}) => {
+const renderClientBubble = ({step, answer, stateAtPos, index, className = 'client-part-past-button'}) => {
   if(answer.length == 1 && answer[0].type == 'forward') {
     return <div></div>;
   }

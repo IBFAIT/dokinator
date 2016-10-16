@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const ClientDisabledComponent = ({text, className = 'clientdisabled-component'}) => (
+const ClientDisabledComponent = ({text, className = 'client-answer-disabled'}) => (
   <div {...{className}}>
     <button>
       {text}

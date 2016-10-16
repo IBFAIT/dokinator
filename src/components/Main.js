@@ -40,7 +40,7 @@ class Main extends React.Component {
 
 
   componentDidUpdate() {
-    const answerBottom = document.getElementsByClassName('conversation-part')[0];
+    const answerBottom = document.getElementsByClassName('answer-actual')[0];
     smoothScroll(answerBottom, {offset: -10});
   }
 
@@ -89,13 +89,13 @@ class Main extends React.Component {
   render() {
     return (
       <div className="Main">
-        <div className="conversation-bubbles">
+        <div className="conversation-container" id="conversationContainer">
           { this.renderPastPart(this.conversationLog) }
-          <span  className="activePart">
+          <div className="conversation-container-active" id="botPartActive">
             { this.renderBotPart(Conversation[this.state.path].bots) }
-          </span>
+          </div>
         </div>
-        <div className="conversation-part">
+        <div className="answer-now" id="client">
           <ClientAnswerComponent {...{
             answers: Conversation[this.state.path].user.answers,
             callbacks: {
@@ -134,7 +134,7 @@ class Main extends React.Component {
         <BotPartComponent key={key} {...{
           texts,
           index:        key,
-          className:    'botbubble-component',
+          className:    'bot-part',
           botIdentity:  Defaults.botIdentitys[id],
           templateVars: this.state.templateVars
         }} />
@@ -152,7 +152,7 @@ class Main extends React.Component {
         <div {...{className}} key={'conv_'+stepKey} >
           <BotPartPastComponent key={stepKey} {...{
             path:         stateAtPos.path,
-            className:    'botpartpast-component',
+            className:    'bot-past',
             bots:         Conversation[stateAtPos.path].bots,
             templateVars: stateAtPos.templateVars,
             botIdentitys: Defaults.botIdentitys
@@ -163,23 +163,9 @@ class Main extends React.Component {
             answer:    this.Conversation[stateAtPos.path].user.answers,
             index: step.index,
             stateAtPos,
-            className: 'user-answers-past'
+            className: 'client-past'
           }} />
         </div>
-      );
-    });
-  }
-
-  renderBotPartsPast({bubbles, path, templateVars}) {
-    return bubbles.map(({id, texts}, key) => {
-      return (
-        <BotPartPastComponent {...{
-          texts,
-          templateVars,
-          index:       key,
-          className:   'botbubblepast-component',
-          botIdentity: Defaults.botIdentitys[id]
-        }} />
       );
     });
   }

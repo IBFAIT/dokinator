@@ -1,0 +1,36 @@
+@import "vars";
+
+.margins {
+  margin: 0.3rem 0.2rem;
+}
+.paddings {
+  padding: 0.2rem 0.4rem;
+}
+.borders {
+  border-color: $button-border-color;
+  border-width: 1px;
+  border-radius: 0.2rem;
+}
+
+.client-answer-component {
+  text-align: center;
+
+  .input-field {
+    @extend .margins;
+    input {
+      @extend .paddings;
+      @extend .borders;
+    }
+  }
+
+  .answer-button {
+    display: inline-block;
+    @extend .margins;
+
+    button {
+      background-color: $button-background-color;
+      @extend .borders;
+      @extend .paddings;
+    }
+  }
+}

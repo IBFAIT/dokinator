@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const ClientInputComponent = ({placeholder, path, index, changeVal, handleInputfieldEnter, className = 'clientinput-component'}) => (
+const ClientInputComponent = ({placeholder, path, index, changeVal, handleInputfieldEnter, className = 'client-answer-input'}) => (
     <div {...{className}}>
       <input
         {...{

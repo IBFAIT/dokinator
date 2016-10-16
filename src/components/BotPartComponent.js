@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+// require('styles/BotPartComponent.scss');
+
 import IconComponent      from './IconComponent.js';
 import BotBubbleComponent from './BotBubbleComponent.js';
 
@@ -10,11 +12,12 @@ const BotPartComponent = ({texts, templateVars, botIdentity, className}) => {
   return (
     <div {...{className}}>
       <IconComponent {...{id, name, avatar}} />
-      <div className="botbubble-container">
+      <div className="subbubbles-container">
         {texts.map((text, key) =>
           (<BotBubbleComponent key={key} {...{
             text,
-            templateVars
+            templateVars,
+            className: 'bot-bubble-component'
           }} />)
         )}
       </div>
