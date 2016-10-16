@@ -180,7 +180,6 @@ class Main extends React.Component {
 
   renderBotPartsPast({
     bubbles,
-    path,
     templateVars,
     subClassNames = {
       BotPartPastComponent: 'botbubblepast-component'

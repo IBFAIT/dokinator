@@ -1,8 +1,6 @@
 'use strict';
 
 import React    from 'react';
-import ReactDOM from 'react-dom';
-import Scroll   from 'smoothscroll';
 
 const makerImages = {
   flavio:  require('../images/docinator.jpg'),

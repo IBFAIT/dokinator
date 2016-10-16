@@ -1,6 +1,5 @@
 'use strict';
 import React    from 'react';
-import ReactDOM from 'react-dom';
 
 const avatarImgs = {
   doc:  require('../images/docinator.jpg'),
