@@ -14,7 +14,6 @@ const BotBubbleComponent = ({text, templateVars, className = 'bot-bubble-compone
   // ToDo: Template engine implementation
   // for now: vars to fill in with template string in eval
   const {name, email, fieber, persons} = templateVars;
-  console.log(templateVars);
   return (
     <div {...{className}}>
 
