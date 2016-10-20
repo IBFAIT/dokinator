@@ -9,6 +9,7 @@ const BotPartComponent = ({
   texts,
   templateVars,
   botIdentity,
+  style,
   className = 'botbubble-component',
   subClassNames = {
     bubbles: 'botbubble-container',
@@ -17,25 +18,25 @@ const BotPartComponent = ({
 }) => {
   const {id, name, avatar} = botIdentity;
   return (
-    <div {...{className}}>
+    <div {...{className, style}}>
       <IconComponent {...{id, name, avatar}} />
       <div className={subClassNames.bubbles}>
-        {texts.map((text, key) =>
-          (<BotBubbleComponent key={key} {...{
-            text,
-            templateVars,
-            className: subClassNames.bubbleComponent
-          }} />)
-        )}
+        {mapBubbles({texts, templateVars, subClassNames})}
       </div>
     </div>
   );
 }
 
-BotPartComponent.displayName = 'BotPartComponent';
+const mapBubbles = ({texts, templateVars, subClassNames}) => (
+  texts.map((text, key) => (
+    <BotBubbleComponent key={key} {...{
+      text,
+      templateVars,
+      className: subClassNames.bubbleComponent
+    }} />
+  ))
+);
 
-// Uncomment properties you need
-// BotPartComponent.propTypes = {};
-// BotPartComponent.defaultProps = {};
+BotPartComponent.displayName = 'BotPartComponent';
 
 export default BotPartComponent;

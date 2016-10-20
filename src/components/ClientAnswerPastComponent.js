@@ -21,6 +21,7 @@ const renderClientBubble = ({
     clientButtonPast: 'clientbuttonpast-component'
   }
 }) => {
+  if(index === null) { index = 0;}
   if(answer.length == 1 && answer[0].type == 'forward') {
     return <div></div>;
   }

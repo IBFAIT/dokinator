@@ -20,7 +20,6 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      botHere: false,
       path: 'init',
       templateVars: {
         name:   null,
@@ -41,15 +40,14 @@ class Main extends React.Component {
 
   componentDidUpdate() {
     const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
-    // smoothScroll(answerBottom, {offset: 10});
     Scroll(answerBottom);
 
-      setTimeout(()=>{this.setState({botHere: true})}, 3000, this);
+      // setTimeout(()=>{this.setState({botHere: !this.state.botHerea})}, 3000, this);
   }
 
 
   componentDidMount() {
-    setTimeout(()=>{this.setState({botHere: true})}, 3000, this);
+    //setTimeout(()=>{this.setState({botHere: !this.state.botHerea})}, 3000, this);
   }
 
   handleForwardTimeout({index, time = 2000}) {
@@ -102,7 +100,7 @@ class Main extends React.Component {
         <div className="conversation-bubbles">
           { this.renderPastPart(this.conversationLog) }
           <span  className="activePart">
-            { this.renderBotPart({bots: Conversation[this.state.path].bots, botHere}) }
+            { this.renderBotPart({bots: Conversation[this.state.path].bots, style: this.botPartStyle}) }
           </span>
           <div className="clientAnswerTarget"></div>
         </div>
@@ -114,7 +112,8 @@ class Main extends React.Component {
               updatePathState:       this.updatePathState,
               handleForwardTimeout:  this.handleForwardTimeout,
               handleInputfieldEnter: this.handleInputfieldEnter
-            }
+            },
+            style: this.answerStyle
           }} />
         </div>
       </div>
@@ -125,7 +124,7 @@ class Main extends React.Component {
   /**
    * Bot Bubble render
    */
-  renderBotPart({bots, botHere, subClassnames = { BotPartComponent: 'botbubble-component'}}) {
+  renderBotPart({bots, style, subClassnames = { BotPartComponent: 'botbubble-component'}}) {
     // map bots - > there can be more than one bot part.
     return bots.map(({id, texts}, key) => {
 
@@ -148,7 +147,8 @@ class Main extends React.Component {
           index:        key,
           className:    subClassnames.BotPartComponent,
           botIdentity:  Defaults.botIdentitys[id],
-          templateVars: this.state.templateVars
+          templateVars: this.state.templateVars,
+          style
         }} />
       );
     });

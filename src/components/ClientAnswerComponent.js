@@ -2,39 +2,15 @@
 
 import React    from 'react';
 
-import { Component, Children, PropTypes } from 'react';
-import { Motion, spring, presets } from 'react-motion';
-
 import ClientButtonComponent   from './ClientButtonComponent.js';
 import ClientInputComponent    from './ClientInputComponent.js';
 import ClientDisabledComponent from './ClientDisabledComponent.js';
 
 
 
-const ClientAnswerComponent = ({className = 'user-answers', botHere, ...props}) => {
+const ClientAnswerComponent = ({className = 'user-answers', botHere, style, ...props}) => {
   return (
-    <div {...{className}}>
-
-      <Motion style={{x: spring(botHere ? 600 : 0)}}>
-        {({x}) =>
-          <div style={{borderRadius: 4,
-            backgroundColor: '#ccc',
-            position: 'relative',
-            width: 650,
-          height: 50}}>
-            <div style={Object.assign({}, {
-              position: 'absolute',
-              width: 50,
-              height: 50,
-              borderRadius: 4,
-              backgroundColor: 'yellow'
-            }, {
-              WebkitTransform: `translate3d(${x}px, 0, 0)`,
-              transform: `translate3d(${x}px, 0, 0)`,
-            })} />
-          </div>
-        }
-      </Motion>
+    <div {...{className, style}}>
       { renderClientBubbles(props) }
     </div>
   );
@@ -77,7 +53,7 @@ const renderClientBubbles = ({
           className: subClassNames.clientAnswerComponent
         }} />;
       case 'forward':
-        handleForwardTimeout({answerIndex: key});
+        handleForwardTimeout({answerIndex: 0});
         break;
       default:
         return <div key={key}></div>;
