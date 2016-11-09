@@ -1,7 +1,8 @@
 'use strict';
 import React    from 'react';
 
-import Defaults     from './defaults.json';
+// Default settings for bots
+import Defaults from './defaults.json';
 
 const avatarImgs = {
   doc:  require('../images/docinator.jpg'),

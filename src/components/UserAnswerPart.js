@@ -1,9 +1,9 @@
 'use strict';
 
-import React    from 'react';
+import React from 'react';
 
-import UserButton   from './UserButton.js';
-import UserInputField    from './UserInputField.js';
+import UserButton         from './UserButton.js';
+import UserInputField     from './UserInputField.js';
 import UserButtonDisabled from './UserButtonDisabled.js';
 
 

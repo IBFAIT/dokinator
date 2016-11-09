@@ -4,7 +4,7 @@ import React from 'react';
 
 // JSON data beeing imported
 
-import BotPart      from './BotPart.js';
+import BotPart          from './BotPart.js';
 import ClientAnswerPast from './ClientAnswerPast.js';
 
 const PastPart = ({step, stepIndex, conversation}) => {

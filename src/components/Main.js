@@ -2,18 +2,18 @@
 require('normalize.css/normalize.css');
 require('styles/Main.scss');
 
-import React    from 'react';
-import Scroll   from 'smoothscroll';
-import _ from 'lodash';
+import React  from 'react';
+import Scroll from 'smoothscroll';
+import _      from 'lodash';
 
 // JSON data beeing imported
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotPart          from './BotPart.js';
-import PastPart         from './PastPart.js';
-import UserAnswerPart     from './UserAnswerPart.js';
+import BotPart        from './BotPart.js';
+import PastPart       from './PastPart.js';
+import UserAnswerPart from './UserAnswerPart.js';
 
 class Main extends React.Component {
   constructor() {
@@ -31,10 +31,10 @@ class Main extends React.Component {
     this.Conversation    = Conversation;
 
     // bind this to Callbacks
-    this.updatePathState = this.updatePathState.bind(this);
+    this.updatePathState       = this.updatePathState.bind(this);
     this.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
-    this.handleForwardTimeout = this.handleForwardTimeout.bind(this);
-    this.handleRandomBubble = this.handleRandomBubble.bind(this);
+    this.handleForwardTimeout  = this.handleForwardTimeout.bind(this);
+    this.handleRandomBubble    = this.handleRandomBubble.bind(this);
   }
 
   componentDidUpdate() {
@@ -90,29 +90,30 @@ class Main extends React.Component {
   }
 
   render() {
-    const {botHere, path} = this.state;
+    const {botHere, path, templateVars} = this.state;
+    const {bot, user} = this.Conversation[path];
     return (
       <div className="Main">
         <div className="bot-and-past">
-          {this.conversationLog.map((step, stepIndex) => (
+          {this.conversationLog.map((conversationStep, stepIndex) => (
             <PastPart
               key={stepIndex}
               stepIndex={stepIndex}
-              step={step}
+              step={conversationStep}
               conversation={this.Conversation}
             />
           ))}
           <div  className="bot-speaking">
             <BotPart
-              bot={this.Conversation[path].bot}
-              templateVars={this.state.templateVars}
+              bot={bot}
+              templateVars={templateVars}
               handleRandomBubble={this.handleRandomBubble}
             />
           </div>
         </div>
         <div className="conversation-part">
           <UserAnswerPart
-            answers={Conversation[path].user.answers}
+            answers={user.answers}
             botHere={botHere}
             callbacks={{
               updatePathState:       this.updatePathState,
