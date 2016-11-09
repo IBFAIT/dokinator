@@ -3,7 +3,7 @@
 import React from 'react';
 
 const UserButtonDisabled = ({text}) => (
-  <div className="clientdisabled-component">
+  <div className="user-button-disabled">
     <button>
       {text}
     </button>

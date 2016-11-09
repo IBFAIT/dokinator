@@ -3,7 +3,7 @@
 import React from 'react';
 
 let ClientButtonPast = ({text}) => (
-  <div className="clientbuttonpast-component">
+  <div className="user-button-past">
     <div className="text">
       { text }
     </div>

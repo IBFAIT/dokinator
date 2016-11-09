@@ -9,7 +9,7 @@ const avatarImgs = {
 
 const Icon = ({ id, name, avatar }) => {
   return (
-    <div className="icon-component">
+    <div className="icon">
       <div className="name">
         {name}
       </div>

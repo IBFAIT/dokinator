@@ -44,26 +44,26 @@ body {
     max-width: 100%;
 
     .conversation-part-past {
-      .botpartpast-component {
-        .botbubble-component {
+      .bot-part-past {
+        .bot-bubble {
           @extend .inject-botbubble-flex;
           @extend .inject-bubble-margin-padding;
 
-          .icon-component {
-            @extend .inject-icon-component;
+          .icon {
+            @extend .inject-icon;
           }
 
-          .botbubble-container {
+          .bot-container-bubbles {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             width: 100%;
             max-width: 100%;
 
-            .botsinglebubble-component {
+            .bot-bubble {
               @extend .inject-bubble-box;
               align-self: flex-start;
-              // @extend .inject-botsinglebubble-component;
+              // @extend .inject-bot-bubble;
               .text {
                 @extend .inject-bubble-text;
               }
@@ -78,7 +78,7 @@ body {
         justify-content: flex-end;
         @extend .inject-bubble-margin-padding;
 
-        .clientbuttonpast-component {
+        .user-button-past {
           @extend .inject-bubble-box;
           align-self: flex-end;
 
@@ -90,24 +90,24 @@ body {
     }
 
     .bot-speaking {
-      .botbubble-component {
+      .bot-bubble {
         @extend .inject-botbubble-flex;
         @extend .inject-bubble-margin-padding;
 
-        .icon-component {
-          @extend .inject-icon-component;
+        .icon {
+          @extend .inject-icon;
         }
 
-        .botbubble-container {
+        .bot-container-bubbles {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
           width: 100%;
           max-width: 100%;
 
-          .botsinglebubble-component {
+          .bot-bubble {
             @extend .inject-bubble-box;
-            align-self: flex-start;
+            align-self: flex-start;user-button-disabled
 
             .text {
               @extend .inject-bubble-text;
@@ -142,7 +142,7 @@ body {
         }
       }
 
-      .clientdisabled-component {
+      .user-button-disabled {
         button {
             @extend .inject-input-or-button;
             color: rgba(0, 0, 0 , 0.2);

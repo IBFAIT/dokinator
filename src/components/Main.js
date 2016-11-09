@@ -16,7 +16,6 @@ import UserAnswerPart     from './UserAnswerPart.js';
 import ClientAnswerPast from './ClientAnswerPast.js';
 
 class Main extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -37,15 +36,10 @@ class Main extends React.Component {
     this.handleForwardTimeout = this.handleForwardTimeout.bind(this);
   }
 
-
   componentDidUpdate() {
     const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
     Scroll(answerBottom);
 
-  }
-
-
-  componentDidMount() {
   }
 
   handleForwardTimeout({index, time = 2000}) {
@@ -55,7 +49,6 @@ class Main extends React.Component {
       this.updatePathState(null, params)
     }, time, this, params);
   }
-
 
   /**
    * Callbacks for Client Bubbles

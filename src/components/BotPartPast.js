@@ -6,7 +6,7 @@ import BotPart   from './BotPart.js';
 
 const BotPartPast = ({ bot, templateVars, botIdentitys, path }) => {
   return (
-    <div className="botpartpast-component">
+    <div className="bot-part-past">
       {bot.map(({id, texts}, bubbleIndex) => (<BotPart
         key={bubbleIndex}
         texts={texts}
