@@ -95,7 +95,7 @@ class Main extends React.Component {
     const {botHere} = this.state;
     return (
       <div className="Main">
-        <div className="conversation-bubbles">
+        <div className="conversation">
           { this.renderPastPart(this.conversationLog) }
           <span  className="activePart">
             { this.renderBotPart({bots: Conversation[this.state.path].bots, style: this.botPartStyle}) }
@@ -183,26 +183,6 @@ class Main extends React.Component {
             className: subClassNames.ClientAnswerPastComponent
           }} />
         </div>
-      );
-    });
-  }
-
-  renderBotPartsPast({
-    bubbles,
-    templateVars,
-    subClassNames = {
-      BotPartPastComponent: 'botbubblepast-component'
-    }
-  }) {
-    return bubbles.map(({id, texts}, key) => {
-      return (
-        <BotPartPastComponent {...{
-          texts,
-          templateVars,
-          index:       key,
-          className:   subClassNames.BotPartPastComponent,
-          botIdentity: Defaults.botIdentitys[id]
-        }} />
       );
     });
   }

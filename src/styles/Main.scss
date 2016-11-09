@@ -37,7 +37,7 @@ body {
   align-content: stretch;
   max-width: 100%;
 
-  .conversation-bubbles {
+  .conversation {
     @extend .inject-column-flex;
     padding-bottom: 0.5rem;
     width: 100%;
