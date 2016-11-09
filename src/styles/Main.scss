@@ -37,7 +37,7 @@ body {
   align-content: stretch;
   max-width: 100%;
 
-  .conversation {
+  .bot-and-past {
     @extend .inject-column-flex;
     padding-bottom: 0.5rem;
     width: 100%;
@@ -45,7 +45,7 @@ body {
 
     .conversation-part-past {
       .botpartpast-component {
-        .botbubblepast-component {
+        .botbubble-component {
           @extend .inject-botbubble-flex;
           @extend .inject-bubble-margin-padding;
 
@@ -89,7 +89,7 @@ body {
       }
     }
 
-    .activePart {
+    .bot-speaking {
       .botbubble-component {
         @extend .inject-botbubble-flex;
         @extend .inject-bubble-margin-padding;
@@ -129,14 +129,14 @@ body {
           display: inline-block;
           min-width: 10%;
       }
-      .clientbutton-component {
+      .user-button {
 
         button {
           @extend .inject-input-or-button;
         }
       }
 
-      .clientinput-component {
+      .user-input-field {
         input {
           @extend .inject-input-or-button;
         }

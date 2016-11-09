@@ -10,10 +10,10 @@ import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotPartComponent          from './BotPartComponent.js';
-import BotPartPastComponent      from './BotPartPastComponent.js';
-import ClientAnswerComponent     from './ClientAnswerComponent.js';
-import ClientAnswerPastComponent from './ClientAnswerPastComponent.js';
+import BotPart          from './BotPart.js';
+import BotPartPast      from './BotPartPast.js';
+import UserAnswerPart     from './UserAnswerPart.js';
+import ClientAnswerPast from './ClientAnswerPast.js';
 
 class Main extends React.Component {
 
@@ -74,8 +74,7 @@ class Main extends React.Component {
   handleInputfieldEnter({evt, path, index, changeVal}) {
     /* ToDo: chrome complains about this enter detection beeing deprecated */
     if(evt.key === 'Enter') {
-
-      // make the state change dynamicly
+      // make the staBotPartte change dynamicly
       let templateVars = {
         name:   this.state.templateVars.name,
         email:  this.state.templateVars.email,
@@ -92,27 +91,25 @@ class Main extends React.Component {
   }
 
   render() {
-    const {botHere} = this.state;
+    const {botHere, path} = this.state;
     return (
       <div className="Main">
-        <div className="conversation">
+        <div className="bot-and-past">
           { this.renderPastPart(this.conversationLog) }
-          <span  className="activePart">
-            { this.renderBotPart({bots: Conversation[this.state.path].bots, style: this.botPartStyle}) }
+          <span  className="bot-speaking">
+            { this.renderBotPart({bots: Conversation[path].bots}) }
           </span>
-          <div className="clientAnswerTarget"></div>
         </div>
         <div className="conversation-part">
-          <ClientAnswerComponent {...{
-            answers: Conversation[this.state.path].user.answers,
-            botHere,
-            callbacks: {
+          <UserAnswerPart
+            answers={Conversation[path].user.answers}
+            botHere={botHere}
+            callbacks={{
               updatePathState:       this.updatePathState,
               handleForwardTimeout:  this.handleForwardTimeout,
               handleInputfieldEnter: this.handleInputfieldEnter
-            },
-            style: this.answerStyle
-          }} />
+            }}
+          />
         </div>
       </div>
     );
@@ -122,9 +119,10 @@ class Main extends React.Component {
   /**
    * Bot Bubble render
    */
-  renderBotPart({bots, style, subClassnames = { BotPartComponent: 'botbubble-component'}}) {
+  renderBotPart({bots}) {
+    const {path} = this.state;
     // map bots - > there can be more than one bot part.
-    return bots.map(({id, texts}, key) => {
+    return bots.map(({id, texts}, index) => {
 
       /* Handle random bot text */
       texts = texts.map((text, textKey) => {
@@ -133,55 +131,48 @@ class Main extends React.Component {
         } else {  // arrays contain different options for randomness
           // overwrite the Conversation thing with the actual so that
           // the log will render the random choice displaying the past
-          this.Conversation[this.state.path].bots[key].texts[textKey] = text[Math.floor(Math.random()*text.length)];
-          return this.Conversation[this.state.path].bots[key].texts[textKey];
+          this.Conversation[path].bots[index].texts[textKey] = text[Math.floor(Math.random()*text.length)];
+          // verwende leserliche tools, zum beispiel lodash _.sample(text)
+          return this.Conversation[path].bots[index].texts[textKey];
         }
       });
       /* END Handle random bot text */
 
       return (
-        <BotPartComponent key={key} {...{
-          texts,
-          index:        key,
-          className:    subClassnames.BotPartComponent,
-          botIdentity:  Defaults.botIdentitys[id],
-          templateVars: this.state.templateVars,
-          style
-        }} />
-      );
+        <BotPart
+          key={index}
+          texts={texts}
+          index={index}
+          botIdentity={Defaults.botIdentitys[id]}
+          templateVars={this.state.templateVars}
+        />);
     });
   }
 
   /**
    * The past Conversation is beeing rendered with the this.conversationLog property
    */
-  renderPastPart(
-    conversation,
-    className = 'conversation-part-past',
-    subClassNames = {
-      BotPartPastComponent: 'botpartpast-component',
-      ClientAnswerPastComponent: 'user-answers-past'
-    }
-  ) {
-    return conversation.map((step, stepKey) => {
+  renderPastPart(conversation) {
+    return conversation.map((step, stepIndex) => {
       const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
+      const {path, templateVars} = stateAtPos;
       return (
-        <div {...{className}} key={'conv_'+stepKey} >
-          <BotPartPastComponent key={stepKey} {...{
-            path:         stateAtPos.path,
-            className:    subClassNames.BotPartPastComponent,
-            bots:         Conversation[stateAtPos.path].bots,
-            templateVars: stateAtPos.templateVars,
-            botIdentitys: Defaults.botIdentitys
-          }} />
+        <div className="conversation-part-past" key={'conv_'+stepIndex} >
+          <BotPartPast
+            key={stepIndex}
+            path={path}
+            bot={Conversation[path].bots}
+            templateVars={templateVars}
+            botIdentitys={Defaults.botIdentitys}
+          />
 
-          <ClientAnswerPastComponent key={'client_'+stepKey} {...{
-            stepKey,
-            answer:    this.Conversation[stateAtPos.path].user.answers,
-            index: step.index,
-            stateAtPos,
-            className: subClassNames.ClientAnswerPastComponent
-          }} />
+          <ClientAnswerPast
+            key={'client_'+stepIndex}
+            stepIndex={stepIndex}
+            answer={this.Conversation[path].user.answers}
+            index={step.index}
+            stateAtPos={stateAtPos}
+          />
         </div>
       );
     });
