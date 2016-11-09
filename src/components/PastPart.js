@@ -3,9 +3,8 @@
 import React from 'react';
 
 // JSON data beeing imported
-import Defaults     from './defaults.json';
 
-import BotPartPast      from './BotPartPast.js';
+import BotPart      from './BotPart.js';
 import ClientAnswerPast from './ClientAnswerPast.js';
 
 const PastPart = ({step, stepIndex, conversation}) => {
@@ -13,12 +12,9 @@ const PastPart = ({step, stepIndex, conversation}) => {
   const {path, templateVars} = stateAtPos;
   return (
     <div className="conversation-part-past" key={'conv_'+stepIndex} >
-      <BotPartPast
-        key={stepIndex}
-        path={path}
-        bot={conversation[path].bots}
+      <BotPart
+        bot={conversation[path].bot}
         templateVars={templateVars}
-        botIdentitys={Defaults.botIdentitys}
       />
 
       <ClientAnswerPast

@@ -2,26 +2,28 @@
 
 import React from 'react';
 
+
 import Icon      from './Icon.js';
 import BotBubble from './BotBubble.js';
 
-const BotPart = ({ texts, templateVars, botIdentity}) => {
-  const {id, name, avatar} = botIdentity;
+const BotPart = ({ bot, templateVars, handleRandomBubble = null}) => {
   return (
     <div className="bot-part">
-      <Icon
-        id={id}
-        name={name}
-        avatar={avatar}
-      />
+      <Icon id={bot.id} />
       <div className="bot-container-bubbles">
-        {texts.map((text, index) => (
-          <BotBubble
-            key={index}
-            text={text}
-            templateVars={templateVars}
-          />
-        ))}
+        {bot.texts.map((bubbleText, bubbleIndex) => {
+          // if there is multiple bot texts, pick random
+          if(handleRandomBubble) {
+            bubbleText = (Array.isArray(bubbleText)) ? handleRandomBubble(bubbleText, bubbleIndex) : bubbleText;
+          }
+          return (
+            <BotBubble
+              key={bubbleIndex}
+              bubbleText={bubbleText}
+              templateVars={templateVars}
+            />
+          );
+        })}
       </div>
     </div>
   );

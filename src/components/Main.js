@@ -33,12 +33,12 @@ class Main extends React.Component {
     this.updatePathState = this.updatePathState.bind(this);
     this.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
     this.handleForwardTimeout = this.handleForwardTimeout.bind(this);
+    this.handleRandomBubble = this.handleRandomBubble.bind(this);
   }
 
   componentDidUpdate() {
     const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
     Scroll(answerBottom);
-
   }
 
   handleForwardTimeout({index, time = 2000}) {
@@ -112,38 +112,6 @@ class Main extends React.Component {
         </div>
       </div>
     );
-  }
-
-  /**
-   * Bot Bubble render
-   */
-  renderBotPart({bots}) {
-    const {path} = this.state;
-    // map bots - > there can be more than one bot part.
-    return bots.map(({id, texts}, index) => {
-      /* Handle random bot text */
-      texts = texts.map((text, textKey) => {
-        if(!Array.isArray(text)) { // if it isn't an array there is only one option
-          return text;
-        } else {  // arrays contain different options for randomness
-          // overwrite the Conversation thing with the actual so that
-          // the log will render the random choice displaying the past
-          this.Conversation[path].bots[index].texts[textKey] = text[Math.floor(Math.random()*text.length)];
-          // verwende leserliche tools, zum beispiel lodash _.sample(text)
-          return this.Conversation[path].bots[index].texts[textKey];
-        }
-      });
-      /* END Handle random bot text */
-
-      return (
-        <BotPart
-          key={index}
-          texts={texts}
-          index={index}
-          botIdentity={Defaults.botIdentitys[id]}
-          templateVars={this.state.templateVars}
-        />);
-    });
   }
 }
 
