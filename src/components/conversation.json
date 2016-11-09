@@ -1,13 +1,13 @@
 {
   "init": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         ["Hey du!", "Ciao!", "Hi..."],
         "Ich heisse Fred und bin dein Chatbot.",
         "Wie heisst du?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "input",
@@ -19,13 +19,13 @@
     "title": "init"
   },
   "0": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "Freut mich, ${name}.",
         "Wie kann ich dir heute helfen?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -44,7 +44,7 @@
     "title": "0"
   },
   "1": {
-    "bots": [{
+    "bot": {
 
       "id": "fred",
       "texts": [[
@@ -52,7 +52,7 @@
         "Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca"],
         "Möchtest du mehr über Chatbots im Allgemeinen erfahren?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -67,14 +67,14 @@
     "title": "1"
   },
   "2": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "Da gibt’s zum Beispiel ‘Dokinator’.",
         "Dokinator ist ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben und versicherungstechnische Fragen zu beantworten.",
         "Es handelt sich um einen Prototypen. Möchtest du ihn testen?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -89,14 +89,14 @@
     "title": "2"
   },
   "3": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "Cool, dass du dich für Chatbots interessierst. Hier ein paar interessante Fakten...",
         "… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         "Hinterlasse mir doch deine Email-Adresse. So kann ich dich in Zukunft über Neuigkeiten informieren."
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "input",
@@ -109,13 +109,13 @@
     "title": "3"
   },
   "4": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": [
         "Ciao ${name}!",
         "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -130,13 +130,13 @@
     "title": "4"
   },
   "5": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": [
         "Es handelt sich hier um alle in der Schweiz wohnhaften Personen. Wir alle haben das Privileg, bei einer Krankenkasse versichert zu sein.",
         "Jetzt aber weiter…"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "forward",
@@ -146,7 +146,7 @@
     "title": "5"
   },
   "6": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "Alles klar. Stelle dir vor, dass du einen viralen Infekt hast. Das kennst du sicher: Du hast Gliederschmerzen, deine Nase läuft, du hast etwas Fieber und so weiter.",
@@ -154,7 +154,7 @@
         "…",
         "Ok. Es geht los…", "… dann rufe ich mal den Dokinator …"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "forward",
@@ -164,15 +164,14 @@
     "title": "6"
   },
   "docAfterfred": {
-    "bots": [
+    "bot":
       {
         "id": "doc",
         "texts": [
           "Hi ${name}, ich bin Dokinator.",
           "Wie geht es dir heute?"
         ]
-      }
-    ],
+      },
     "user": {
       "answers": [{
         "type": "button",
@@ -186,13 +185,13 @@
     "title": "docAfterfred"
   },
   "gliederschmerzen": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": [
         "Okay, verstehe. Das ist unangenehm.",
         "Wie lange bestehen die Schmerzen bereits?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -209,12 +208,12 @@
     "title": "Gliederschmerzen"
   },
   "hastDuFieber": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": [
         "Hast du Fieber?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -228,10 +227,10 @@
     "title": "Hast Du Fieber"
   },
   "wieHoch": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": ["Wie hoch ist das Fieber?"]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "input",
@@ -243,12 +242,12 @@
     "title": "Wie Hoch ist das Fieber"
   },
   "runningNose": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": [
         "Läuft deine Nase?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -262,10 +261,10 @@
     "title": "Läuft die Nase"
   },
   "viralInfect": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": ["Hmm. Das tönt nach einem viralen Infekt. Könnte dies zutreffen?"]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -279,10 +278,10 @@
     "title": "Viraler Infekt"
   },
   "drink": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": ["Bei viralen Infekten empfiehlt es sich viel zu trinken."]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -293,10 +292,10 @@
     "title": "Viel Trinken"
   },
   "backIn4": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": ["Ich melde mich in 4h wieder bei dir. Ok?"]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -307,10 +306,10 @@
     "title": "Melde mich in 4 Stunden"
   },
   "besserung": {
-    "bots": [{
+    "bot": {
       "id": "doc",
       "texts": ["Ich wünsche dir gute Besserung, ${name}!","Bis Bald!"]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "forward",
@@ -321,14 +320,14 @@
     "title": "Gute Besserung"
   },
   "outro": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "So, da bin ich wieder.",
         "Schön hast du Dokinator kennen gelernt.",
         "Das war jezt natürlich nur ein Beispiel."
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "forward",
@@ -338,10 +337,10 @@
     "title": "Abschluss von Fred"
   },
   "8": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [["Lieben Dank, ${name}.", "Cool!"]]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "forward",
@@ -351,17 +350,33 @@
     "title": "8"
   },
   "end": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": ["Wir wollen jetzt wirklich nichts mehr sagen"]
-    }, {
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "forward",
+          "path": "end2"
+        },{
+          "type": "button",
+          "text": "Ich möchte mehr über Chatbots erfahren!",
+          "path": "1"
+        }
+      ]
+    },
+    "title": "The End Fred."
+  },
+  "end2": {
+    "bot": {
       "id": "doc",
       "texts": [
         "Ja, auch ich habe jetzt grad nichts mehr zu sagen.",
         "Wie besprochen schicke ich dir in 4 Stunden eine Mail.",
         "Gute Besserung!"
       ]
-    } ],
+    },
     "user": {
       "answers": [
         {
@@ -375,17 +390,17 @@
         }
       ]
     },
-    "title": "The End."
+    "title": "The EndEnd."
   },
   "sagsMirNochmal": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "Sehr schön, ${name}.",
         "Es schmeichelt mir, das du dich so für mich interessierst.",
         "Wie kann ich dir nun weiter helfen?"
       ]
-    }],
+    },
     "user": {
       "answers": [{
         "type": "button",
@@ -400,7 +415,7 @@
     "title": "sagsMirNochmal"
   },
   "7": {
-    "bots": [{
+    "bot": {
       "id": "fred",
       "texts": [
         "Schau, das sind die Leute, die mich gebaut haben:",
@@ -409,7 +424,7 @@
         "Du kannst sie über  kontaktieren.",
         "Bis bald!"
       ]
-    }],
+    },
     "user": {
       "answers": [
       {
