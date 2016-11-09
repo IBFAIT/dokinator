@@ -90,7 +90,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const {botHere, path, templateVars} = this.state;
+    const {path, templateVars} = this.state;
     const {bot, user} = this.Conversation[path];
     return (
       <div className="Main">
@@ -114,7 +114,6 @@ class Main extends React.Component {
         <div className="conversation-part">
           <UserAnswerPart
             answers={user.answers}
-            botHere={botHere}
             callbacks={{
               updatePathState:       this.updatePathState,
               handleForwardTimeout:  this.handleForwardTimeout,
