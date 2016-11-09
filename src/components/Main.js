@@ -11,9 +11,8 @@ import Conversation from './conversation.json';
 
 // Components
 import BotPart          from './BotPart.js';
-import BotPartPast      from './BotPartPast.js';
+import PastPart         from './PastPart.js';
 import UserAnswerPart     from './UserAnswerPart.js';
-import ClientAnswerPast from './ClientAnswerPast.js';
 
 class Main extends React.Component {
   constructor() {
@@ -88,10 +87,17 @@ class Main extends React.Component {
     return (
       <div className="Main">
         <div className="bot-and-past">
-          { this.renderPastPart(this.conversationLog) }
-          <span  className="bot-speaking">
+          {this.conversationLog.map((step, stepIndex) => (
+            <PastPart
+              key={stepIndex}
+              stepIndex={stepIndex}
+              step={step}
+              conversation={this.Conversation}
+            />
+          ))}
+          <div  className="bot-speaking">
             { this.renderBotPart({bots: Conversation[path].bots}) }
-          </span>
+          </div>
         </div>
         <div className="conversation-part">
           <UserAnswerPart
@@ -108,7 +114,6 @@ class Main extends React.Component {
     );
   }
 
-
   /**
    * Bot Bubble render
    */
@@ -116,7 +121,6 @@ class Main extends React.Component {
     const {path} = this.state;
     // map bots - > there can be more than one bot part.
     return bots.map(({id, texts}, index) => {
-
       /* Handle random bot text */
       texts = texts.map((text, textKey) => {
         if(!Array.isArray(text)) { // if it isn't an array there is only one option
@@ -139,35 +143,6 @@ class Main extends React.Component {
           botIdentity={Defaults.botIdentitys[id]}
           templateVars={this.state.templateVars}
         />);
-    });
-  }
-
-  /**
-   * The past Conversation is beeing rendered with the this.conversationLog property
-   */
-  renderPastPart(conversation) {
-    return conversation.map((step, stepIndex) => {
-      const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
-      const {path, templateVars} = stateAtPos;
-      return (
-        <div className="conversation-part-past" key={'conv_'+stepIndex} >
-          <BotPartPast
-            key={stepIndex}
-            path={path}
-            bot={Conversation[path].bots}
-            templateVars={templateVars}
-            botIdentitys={Defaults.botIdentitys}
-          />
-
-          <ClientAnswerPast
-            key={'client_'+stepIndex}
-            stepIndex={stepIndex}
-            answer={this.Conversation[path].user.answers}
-            index={step.index}
-            stateAtPos={stateAtPos}
-          />
-        </div>
-      );
     });
   }
 }

@@ -45,7 +45,7 @@ body {
 
     .conversation-part-past {
       .bot-part-past {
-        .bot-bubble {
+        .bot-part {
           @extend .inject-botbubble-flex;
           @extend .inject-bubble-margin-padding;
 
@@ -90,7 +90,7 @@ body {
     }
 
     .bot-speaking {
-      .bot-bubble {
+      .bot-part {
         @extend .inject-botbubble-flex;
         @extend .inject-bubble-margin-padding;
 
