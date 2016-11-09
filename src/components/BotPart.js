@@ -8,28 +8,24 @@ import BotBubble from './BotBubble.js';
 const BotPart = ({ texts, templateVars, botIdentity}) => {
   const {id, name, avatar} = botIdentity;
   return (
-    <div className="bot-bubble">
+    <div className="bot-part">
       <Icon
         id={id}
         name={name}
         avatar={avatar}
       />
       <div className="bot-container-bubbles">
-        {mapBubbles({texts, templateVars})}
+        {texts.map((text, index) => (
+          <BotBubble
+            key={index}
+            text={text}
+            templateVars={templateVars}
+          />
+        ))}
       </div>
     </div>
   );
 }
-
-const mapBubbles = ({texts, templateVars}) => (
-  texts.map((text, index) => (
-    <BotBubble
-      key={index}
-      text={text}
-      templateVars={templateVars}
-    />
-  ))
-);
 
 BotPart.displayName = 'BotPart';
 
