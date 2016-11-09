@@ -44,7 +44,6 @@ body {
     max-width: 100%;
 
     .conversation-part-past {
-      .bot-part-past {
         .bot-part {
           @extend .inject-botbubble-flex;
           @extend .inject-bubble-margin-padding;
@@ -70,7 +69,6 @@ body {
             }
           }
         }
-      }
 
       .user-answers-past {
         display: flex;
