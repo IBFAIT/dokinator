@@ -4,6 +4,7 @@ require('styles/Main.scss');
 
 import React    from 'react';
 import Scroll   from 'smoothscroll';
+import _ from 'lodash';
 
 // JSON data beeing imported
 import Defaults     from './defaults.json';
@@ -82,6 +83,12 @@ class Main extends React.Component {
     }
   }
 
+  handleRandomBubble(bubbleText, bubbleIndex) {
+    // Replace multiple options with random choice in this.Conversation
+    this.Conversation[this.state.path].bot.texts[bubbleIndex] = _.sample(bubbleText);
+    return this.Conversation[this.state.path].bot.texts[bubbleIndex];
+  }
+
   render() {
     const {botHere, path} = this.state;
     return (
@@ -96,7 +103,11 @@ class Main extends React.Component {
             />
           ))}
           <div  className="bot-speaking">
-            { this.renderBotPart({bots: Conversation[path].bots}) }
+            <BotPart
+              bot={this.Conversation[path].bot}
+              templateVars={this.state.templateVars}
+              handleRandomBubble={this.handleRandomBubble}
+            />
           </div>
         </div>
         <div className="conversation-part">
