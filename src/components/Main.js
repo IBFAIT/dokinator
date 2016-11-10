@@ -71,7 +71,7 @@ class Main extends React.Component {
   }
 
   componentDidUpdate() {
-    const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
+    const answerBottom = document.getElementById('scrlTargt').lastChild;
     Scroll(answerBottom);
   }
 
@@ -156,7 +156,7 @@ class Main extends React.Component {
             handleRandomBubble={this.handleRandomBubble}
           />
         </div>
-        <div style={Styl.conversationPart}>
+        <div style={Styl.conversationPart} id='scrlTargt'>
           <UserAnswerPart
             answers={user.answers}
             callbacks={callbacks}
