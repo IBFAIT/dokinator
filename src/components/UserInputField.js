@@ -2,13 +2,15 @@
 
 import React from 'react';
 
+// generic Styles
+import genStyl from '../styles/genStyl.js';
+
 const UserInputField = ({placeholder, path, index, changeVal, handleInputfieldEnter}) => (
-    <div className="user-input-field">
       <input
+        style={genStyl.inputOrButton}
         placeholder={placeholder}
         onKeyPress={evt => {handleInputfieldEnter({evt, path, index, changeVal})}}
       />
-    </div>
 );
 
 UserInputField.displayName = 'UserInputField';
