@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import ClientButtonPast from './ClientButtonPast.js';
+import UserButtonPast from './UserButtonPast.js';
 
 
-const ClientAnswerPast = (props) => {
+const UserAnswerPast = (props) => {
   return (
     <div className="user-answers-past">
       {renderClientBubble(props)}
@@ -19,16 +19,16 @@ const renderClientBubble = ({ answer, stateAtPos, index}) => {
     return <div></div>;
   }
   if (answer[index].type == 'input') {
-    return <ClientButtonPast text={stateAtPos.usersInput} />;
+    return <UserButtonPast text={stateAtPos.usersInput} />;
   } else {
     return (
-      <ClientButtonPast
+      <UserButtonPast
         index={index}
         text={answer[index].text}
       />);
   }
 }
 
-ClientAnswerPast.displayName = 'ClientAnswerPast';
+UserAnswerPast.displayName = 'UserAnswerPast';
 
-export default ClientAnswerPast;
+export default UserAnswerPast;

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-let ClientButtonPast = ({text}) => (
+let UserButtonPast = ({text}) => (
   <div className="user-button-past">
     <div className="text">
       { text }
@@ -10,6 +10,6 @@ let ClientButtonPast = ({text}) => (
   </div>
 );
 
-ClientButtonPast.displayName = 'ClientButtonPast';
+UserButtonPast.displayName = 'UserButtonPast';
 
-export default ClientButtonPast;
+export default UserButtonPast;

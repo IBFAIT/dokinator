@@ -5,7 +5,7 @@ import React from 'react';
 // JSON data beeing imported
 
 import BotPart          from './BotPart.js';
-import ClientAnswerPast from './ClientAnswerPast.js';
+import UserAnswerPast from './UserAnswerPast.js';
 
 const PastPart = ({step, stepIndex, conversation}) => {
   const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
@@ -17,7 +17,7 @@ const PastPart = ({step, stepIndex, conversation}) => {
         templateVars={templateVars}
       />
 
-      <ClientAnswerPast
+      <UserAnswerPast
         key={'client_'+stepIndex}
         stepIndex={stepIndex}
         answer={conversation[path].user.answers}
