@@ -4,10 +4,16 @@ import React from 'react';
 
 import UserButton from './UserButton.js';
 
+const Styl = {
+  component: {
+    display: 'flex',
+    flexDirection: 'column'
+  }
+}
 
 const UserAnswerPast = (props) => {
   return (
-    <div className="user-answers-past">
+    <div style={Styl.component}>
       {renderClientBubble(props)}
     </div>
   );

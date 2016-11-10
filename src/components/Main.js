@@ -1,6 +1,5 @@
 // Styles
 require('normalize.css/normalize.css');
-require('styles/Main.scss');
 
 import React  from 'react';
 import Scroll from 'smoothscroll';

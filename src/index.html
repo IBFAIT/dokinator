@@ -6,6 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+  html {
+    height: 100%;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+  }
+
+  body {
+    min-height: 100%;
+    display: flex;
+    overflow: scroll;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
+    background: #eee;
+  }
+
+  #app {
+    flex: 0 1 0;
+    align-self: stretch;
+    flex-basis: auto;
+    background-color: #eee;
+    width: 50rem;
+    max-width: 100%;
+    display: flex;
+  }
+  </style>
 </head>
 <body>
   <div id="app">APPLICATION CONTENT</div>
