@@ -29,19 +29,19 @@ body {
 }
 
 .Main {
-  @extend .inject-column-flex;
+  /*@extend .inject-column-flex;
   flex: 1 0 0;
   background-color: $chat-window-background-color;
   justify-content: space-between;
   align-items: center;
   align-content: stretch;
-  max-width: 100%;
+  max-width: 100%;*/
 
   .bot-and-past {
-    @extend .inject-column-flex;
+    /*@extend .inject-column-flex;
     padding-bottom: 0.5rem;
     width: 100%;
-    max-width: 100%;
+    max-width: 100%;*/
 
     .conversation-part-past {
         .bot-part {
@@ -89,8 +89,8 @@ body {
 
     .bot-speaking {
       .bot-part {
-        @extend .inject-botbubble-flex;
-        @extend .inject-bubble-margin-padding;
+      /*  @extend .inject-botbubble-flex;
+        @extend .inject-bubble-margin-padding;*/
 
         .icon {
           @extend .inject-icon;
@@ -117,10 +117,10 @@ body {
   }
 
   .conversation-part {
-    @extend .inject-column-flex;
+    /*@extend .inject-column-flex;
     text-align: center;
     width: 100%;
-    max-width: 100%;
+    max-width: 100%;*/
 
     .user-answers {
       div {

@@ -2,13 +2,19 @@
 
 import React from 'react';
 
-
+// Components
 import Icon      from './Icon.js';
 import BotBubble from './BotBubble.js';
 
+// generic styles
+import genStyl from '../styles/genStyl.js';
+
 const BotPart = ({ bot, templateVars, handleRandomBubble = null}) => {
   return (
-    <div className="bot-part">
+    <div
+      className="bot-part"
+      style={{...genStyl.botbubbleFlex, ...genStyl.bubbleMarginPadding}}
+    >
       <Icon id={bot.id} />
       <div className="bot-container-bubbles">
         {bot.texts.map((bubbleText, bubbleIndex) => {

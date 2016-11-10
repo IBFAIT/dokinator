@@ -2,15 +2,25 @@
 
 import React from 'react';
 
+// Components
 import UserButton         from './UserButton.js';
 import UserInputField     from './UserInputField.js';
 import UserButtonDisabled from './UserButtonDisabled.js';
+
+// generic Styles
+import genStyl from '../styles/genStyl.js';
+// Component styles
+const Style = {
+  display: 'inline-block',
+  minWidth: '10%'
+}
+
 
 
 
 const UserAnswerPart = (props) => {
   return (
-    <div className="user-answers">
+    <div className="user-answers" style={Style}>
       { renderClientBubbles(props) }
     </div>
   );

@@ -15,6 +15,37 @@ import BotPart        from './BotPart.js';
 import PastPart       from './PastPart.js';
 import UserAnswerPart from './UserAnswerPart.js';
 
+
+// generic Styles
+import genStyl from '../styles/genStyl.js';
+// Component Styles
+const Style = {
+  main: {
+    ...{
+      flex: '1 0 0',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      alignContent: 'stretch',
+      maxWidth: '100%'
+    },
+    ...genStyl.columnFlex
+  },
+  botAndPast: {
+    paddingBottom: '0.5rem',
+    width: '100%',
+    maxWidth: '100%'
+  },
+  conversationPart: {
+    ...genStyl.columnFlex,
+    ...{
+      textAlign: 'center',
+      width: '100%',
+      maxWidth: '100%'
+    }
+  }
+}
+
+
 class Main extends React.Component {
   constructor() {
     super();
@@ -93,8 +124,14 @@ class Main extends React.Component {
     const {path, templateVars} = this.state;
     const {bot, user} = this.Conversation[path];
     return (
-      <div className="Main">
-        <div className="bot-and-past">
+      <div
+        className="Main"
+        style={Style.main}
+      >
+        <div
+          className="bot-and-past"
+          style={Style.botAndPast}
+        >
           {this.conversationLog.map((conversationStep, stepIndex) => (
             <PastPart
               key={stepIndex}
@@ -111,7 +148,10 @@ class Main extends React.Component {
             />
           </div>
         </div>
-        <div className="conversation-part">
+        <div
+          className="conversation-part"
+          style={Style.conversationPart}
+        >
           <UserAnswerPart
             answers={user.answers}
             callbacks={{
