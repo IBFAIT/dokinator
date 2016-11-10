@@ -5,7 +5,6 @@ import React from 'react';
 // Components
 import UserButton         from './UserButton.js';
 import UserInputField     from './UserInputField.js';
-import UserButtonDisabled from './UserButtonDisabled.js';
 
 // generic Styles
 import genStyl from '../styles/genStyl.js';
@@ -14,9 +13,6 @@ const Style = {
   display: 'inline-block',
   minWidth: '10%'
 }
-
-
-
 
 const UserAnswerPart = (props) => {
   return (
@@ -51,7 +47,8 @@ const renderClientBubbles = ({ answers, callbacks }) => {
         />);
       case 'disabled':
         return (
-          <UserButtonDisabled
+          <UserButton
+            type="disabled"
             key={index}
             index={index}
             text={text}
