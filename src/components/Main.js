@@ -1,11 +1,10 @@
-// Styles
-require('normalize.css/normalize.css');
+'use strict';
 
 import React  from 'react';
 import Scroll from 'smoothscroll';
 import _      from 'lodash';
 
-// JSON data beeing imported
+// JSON data with bot defaults etc
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
@@ -14,14 +13,16 @@ import BotPart        from './BotPart.js';
 import PastPart       from './PastPart.js';
 import UserAnswerPart from './UserAnswerPart.js';
 
-// Component Styles
+// include normalize.css
+require('normalize.css/normalize.css');
+// Component Styls
 const columnFlex = {
   display: 'flex',
   flexDirection: 'column',
   alignSelf: 'stretch',
   flexBasis: 'auto'
 }
-const Style = {
+const Styl = {
   main: {
     ...{
       flex: '1 0 0',
@@ -46,7 +47,6 @@ const Style = {
     }
   }
 }
-
 
 class Main extends React.Component {
   constructor() {
@@ -77,7 +77,10 @@ class Main extends React.Component {
 
   handleForwardTimeout({index, time = 2000}) {
     // create propper path info for the log
-    const params = {index, path: this.Conversation[this.state.path].user.answers[0].path};
+    const params = {
+      index,
+      path: this.Conversation[this.state.path].user.answers[0].path
+    };
     this.forwardTimeoutId = setTimeout(() => {
       this.updatePathState(null, params)
     }, time, this, params);
@@ -88,11 +91,10 @@ class Main extends React.Component {
    */
   updatePathState(evt, {path, index = null}) {
     // put the paths actual state to the log
-    const entry = {
+    this.conversationLog.push({
       stateAtPos: JSON.stringify(this.state),
       index
-    };
-    this.conversationLog.push(entry);
+    });
     // trigger next path
     this.setState({path: path});
   }
@@ -100,6 +102,14 @@ class Main extends React.Component {
   handleInputfieldEnter({evt, path, index, changeVal}) {
     /* ToDo: chrome complains about this enter detection beeing deprecated */
     if(evt.key === 'Enter') {
+      this.conversationLog.push({
+        stateAtPos: JSON.stringify({
+          path: this.state.path,
+          templateVars: this.state.templateVars,
+          usersInput:  evt.target.value
+        }),
+        index
+      });
       // make the staBotPartte change dynamicly
       let templateVars = {
         name:   this.state.templateVars.name,
@@ -108,10 +118,6 @@ class Main extends React.Component {
         persons: Defaults.persons
       };
       templateVars[changeVal] = evt.target.value;
-      this.conversationLog.push({
-        stateAtPos: JSON.stringify({path: this.state.path, templateVars: this.state.templateVars, usersInput:  evt.target.value}),
-        index
-      });
       this.setState({path, templateVars});
     }
   }
@@ -133,8 +139,8 @@ class Main extends React.Component {
     };
 
     return (
-      <div style={Style.main}>
-        <div style={Style.botAndPast}>
+      <div style={Styl.main}>
+        <div style={Styl.botAndPast}>
           {this.conversationLog.map((conversationStep, stepIndex) => (
             <PastPart
               key={stepIndex}
@@ -150,7 +156,7 @@ class Main extends React.Component {
             handleRandomBubble={this.handleRandomBubble}
           />
         </div>
-        <div style={Style.conversationPart}>
+        <div style={Styl.conversationPart}>
           <UserAnswerPart
             answers={user.answers}
             callbacks={callbacks}
