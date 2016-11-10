@@ -6,8 +6,6 @@ import React from 'react';
 import UserButton         from './UserButton.js';
 import UserInputField     from './UserInputField.js';
 
-// generic Styles
-import genStyl from '../styles/genStyl.js';
 // Component styles
 const Style = {
   display: 'inline-block',

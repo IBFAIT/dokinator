@@ -10,16 +10,16 @@ const avatarImgs = {
   user: require('../images/user.png')
 };
 
-const iconLen = 40;
+// generic Styles
+import vals from '../styles/vals.js';
 
 const Styl = {
   component: {
     flex: '0 0 20%',
     alignSelf: 'flex-start',
     disply: 'inline-block',
-    color: 'black',
-    minWidth: (iconLen+4) + 'px',
-    maxWidth: (iconLen+4) + 'px',
+    minWidth: (vals.icon.img.length+4) + 'px',
+    maxWidth: (vals.icon.img.length+4) + 'px',
     marginRight: '.6rem'
   },
   name: {
@@ -27,12 +27,12 @@ const Styl = {
     display: 'inline-block',
     right: '-4rem',
     top: '-1.1rem',
-    fontSize: '.77rem'
+    fontSize: vals.icon.name.font.size
   },
   img: {
     display: 'block',
-    width: iconLen +'px',
-    height: iconLen + 'px',
+    width: vals.icon.img.length +'px',
+    height: vals.icon.img.length + 'px',
     margin: '-1rem auto 0'
   }
 }

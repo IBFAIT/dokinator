@@ -3,9 +3,17 @@
 import React from 'react';
 
 // generic Styles
-import genStyl from '../styles/genStyl.js';
+import vals from '../styles/vals.js';
 
 const typeStyl = {
+  default: {
+    display: 'inline-block',
+    margin: '0.5rem 0.2rem',
+    padding: vals.bubblePadding,
+    borderRadius: vals.bubbleBorderRadius,
+    boxShadow: '0.03rem 0.07rem 0 0 rgba(180, 180, 180, 0.5)',
+    backgroundColor: vals.bubbleBg
+  },
   disabled: {
     color: 'rgba(0,0,0, 0.2)',
     boxShadow: '0.03rem 0.07rem 0 0 rgba(180, 180, 180, 0.1)'
@@ -16,7 +24,7 @@ const typeStyl = {
 }
 
 const UserButton = ({updatePathState, text, index, path, type = null}) => {
-  let Style = genStyl.inputOrButton; // Generic Style
+  let Style = typeStyl.default; // Generic Style
 
   // Styles for disabled buttons
   Style = (type === 'disabled') ? {...Style, ...typeStyl.disabled} : Style;
@@ -25,11 +33,12 @@ const UserButton = ({updatePathState, text, index, path, type = null}) => {
   let dynProps = (type === null) ? {onClick: e => {updatePathState(e, {path, index})}} : {};
 
   return (
-    <button style={Style} {...{...dynProps}}>
+    <div style={Style} {...{...dynProps}}>
       {text}
-    </button>
+    </div>
   );
 }
+
 
 UserButton.displayName = 'UserButton';
 

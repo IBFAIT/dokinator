@@ -8,23 +8,23 @@ const makerImages = {
 };
 
 // generic styles
-import genStyl from '../styles/genStyl.js';
+import vals from '../styles/vals.js';
 
 const Styl = {
   component: {
-    marginTop: '0.2rem',
-    marginBottom: '0.2rem',
-    opacity: 1,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignSelf: 'flex-start',
     maxWidth: '80%',
     minHeight: '30px',
-    padding: '0',
-    borderRadius: '.3rem',
-    backgroundColor: '#fff',
-    boxShadow: '.01rem .05rem 0 0 rgba(180, 180, 180, 0.5)',
-    alignSelf: 'flex-start'
+    padding: 0,
+    marginTop: vals.bubble.margin.top,
+    marginBottom: vals.bubble.margin.bottom,
+    borderRadius: vals.bubble.border.radius,
+    borderColor: vals.bubble.border.color,
+    backgroundColor: vals.bubble.background.color,
+    boxShadow: vals.bubble.boxShadow
   },
   txt: {
     flex: '1 1 auto',
@@ -32,7 +32,7 @@ const Styl = {
     display: 'inline-block',
     minWidth: '5%',
     margin: 0,
-    padding: '.6rem .5rem'
+    padding: vals.bubble.padding.top + ' ' + vals.bubble.padding.right
   }
 }
 

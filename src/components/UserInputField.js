@@ -3,14 +3,31 @@
 import React from 'react';
 
 // generic Styles
-import genStyl from '../styles/genStyl.js';
+import vals from '../styles/vals.js';
+
+const Styl = {
+  component: {
+    display: 'inline-block',
+    backgroundColor: vals.bubble.background.color,
+    borderRadius: vals.bubble.border.radius,
+    boxShadow: vals.bubble.boxShadow,
+    padding: '.3rem',
+    margin: '.5rem .2rem'
+  },
+  input: {
+    padding: '.3rem',
+    border: 'none'
+  }
+}
 
 const UserInputField = ({placeholder, path, index, changeVal, handleInputfieldEnter}) => (
-      <input
-        style={genStyl.inputOrButton}
-        placeholder={placeholder}
-        onKeyPress={evt => {handleInputfieldEnter({evt, path, index, changeVal})}}
-      />
+  <div style={Styl.component}>
+    <input
+      style={Styl.input}
+      placeholder={placeholder}
+      onKeyPress={evt => {handleInputfieldEnter({evt, path, index, changeVal})}}
+    />
+  </div>
 );
 
 UserInputField.displayName = 'UserInputField';

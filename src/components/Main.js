@@ -14,10 +14,13 @@ import BotPart        from './BotPart.js';
 import PastPart       from './PastPart.js';
 import UserAnswerPart from './UserAnswerPart.js';
 
-
-// generic Styles
-import genStyl from '../styles/genStyl.js';
 // Component Styles
+const columnFlex = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignSelf: 'stretch',
+  flexBasis: 'auto'
+}
 const Style = {
   main: {
     ...{
@@ -27,7 +30,7 @@ const Style = {
       alignContent: 'stretch',
       maxWidth: '100%'
     },
-    ...genStyl.columnFlex
+    ...columnFlex
   },
   botAndPast: {
     paddingBottom: '0.5rem',
@@ -35,7 +38,7 @@ const Style = {
     maxWidth: '100%'
   },
   conversationPart: {
-    ...genStyl.columnFlex,
+    ...columnFlex,
     ...{
       textAlign: 'center',
       width: '100%',
