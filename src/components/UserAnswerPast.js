@@ -26,8 +26,8 @@ const renderClientBubble = ({ answer, stateAtPos, index}) => {
   }
   if (answer[index].type == 'input') {
     return <UserButton type="past" text={stateAtPos.usersInput} />;
-      } else {
-      return <UserButton type="past" text={answer[index].text} />;
+  } else {
+    return <UserButton type="past" text={answer[index].text} />;
   }
 }
 
