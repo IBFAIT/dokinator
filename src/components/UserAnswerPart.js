@@ -16,7 +16,7 @@ const Style = {
 
 const UserAnswerPart = (props) => {
   return (
-    <div className="user-answers" style={Style}>
+    <div style={Style}>
       { renderClientBubbles(props) }
     </div>
   );

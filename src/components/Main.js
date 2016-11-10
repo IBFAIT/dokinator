@@ -122,15 +122,16 @@ class Main extends React.Component {
   render() {
     const {path, templateVars} = this.state;
     const {bot, user} = this.Conversation[path];
+    // Callbacks for UserAnswerPart
+    const callbacks = {
+      updatePathState:       this.updatePathState,
+      handleForwardTimeout:  this.handleForwardTimeout,
+      handleInputfieldEnter: this.handleInputfieldEnter
+    };
+
     return (
-      <div
-        className="Main"
-        style={Style.main}
-      >
-        <div
-          className="bot-and-past"
-          style={Style.botAndPast}
-        >
+      <div style={Style.main}>
+        <div style={Style.botAndPast}>
           {this.conversationLog.map((conversationStep, stepIndex) => (
             <PastPart
               key={stepIndex}
@@ -139,30 +140,22 @@ class Main extends React.Component {
               conversation={this.Conversation}
             />
           ))}
-          <div  className="bot-speaking">
-            <BotPart
-              bot={bot}
-              templateVars={templateVars}
-              handleRandomBubble={this.handleRandomBubble}
-            />
-          </div>
+
+          <BotPart
+            bot={bot}
+            templateVars={templateVars}
+            handleRandomBubble={this.handleRandomBubble}
+          />
         </div>
-        <div
-          className="conversation-part"
-          style={Style.conversationPart}
-        >
+        <div style={Style.conversationPart}>
           <UserAnswerPart
             answers={user.answers}
-            callbacks={{
-              updatePathState:       this.updatePathState,
-              handleForwardTimeout:  this.handleForwardTimeout,
-              handleInputfieldEnter: this.handleInputfieldEnter
-            }}
+            callbacks={callbacks}
           />
         </div>
       </div>
-    );
-  }
+      );
+    }
 }
 
 export default Main;

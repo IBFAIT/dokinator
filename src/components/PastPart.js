@@ -11,7 +11,7 @@ const PastPart = ({step, stepIndex, conversation}) => {
   const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
   const {path, templateVars} = stateAtPos;
   return (
-    <div className="conversation-part-past" key={'conv_'+stepIndex} >
+    <div key={'conv_'+stepIndex} >
       <BotPart
         bot={conversation[path].bot}
         templateVars={templateVars}
