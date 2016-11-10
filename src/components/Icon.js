@@ -10,16 +10,43 @@ const avatarImgs = {
   user: require('../images/user.png')
 };
 
+const iconLen = 40;
+
+const Styl = {
+  component: {
+    flex: '0 0 20%',
+    alignSelf: 'flex-start',
+    disply: 'inline-block',
+    color: 'black',
+    minWidth: (iconLen+4) + 'px',
+    maxWidth: (iconLen+4) + 'px',
+    marginRight: '.6rem'
+  },
+  name: {
+    position: 'relative',
+    display: 'inline-block',
+    right: '-4rem',
+    top: '-1.1rem',
+    fontSize: '.77rem'
+  },
+  img: {
+    display: 'block',
+    width: iconLen +'px',
+    height: iconLen + 'px',
+    margin: '-1rem auto 0'
+  }
+}
+
 const Icon = ({ id }) => {
   const {name, avatar} = Defaults.botIdentitys[id];
   return (
-    <div className="icon">
-      <div className="name">
+    <div style={Styl.component}>
+      <div style={Styl.name}>
         {name}
       </div>
       <div>
         <img
-          className="avatarImg"
+          style={Styl.img}
           title={avatar.title}
           alt={avatar.alt}
           src={avatarImgs[id]}
@@ -30,9 +57,5 @@ const Icon = ({ id }) => {
 }
 
 Icon.displayName = 'Icon';
-
-// Uncomment properties you need
-// Icon.propTypes = {};
-// Icon.defaultProps = {};
 
 export default Icon;
