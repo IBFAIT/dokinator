@@ -19,28 +19,38 @@ const Styl = {
     maxWidth: '100%'
   }
 }
+class BotPart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bubbleStep: this.props.bot.texts.length
+    }
+  }
 
-const BotPart = ({ bot, templateVars, handleRandomBubble = null}) => {
-  return (
-    <div style={Styl.component}>
-      <Icon id={bot.id} />
-      <div style={Styl.bubbleContainer}>
-        {bot.texts.map((bubbleText, bubbleIndex) => {
-          // if there is multiple bot texts, pick random
-          if(handleRandomBubble) {
-            bubbleText = (Array.isArray(bubbleText)) ? handleRandomBubble(bubbleText, bubbleIndex) : bubbleText;
-          }
-          return (
-            <BotBubble
-              key={bubbleIndex}
-              bubbleText={bubbleText}
-              templateVars={templateVars}
-            />
-          );
-        })}
+
+
+  render() {
+    return  (
+      <div style={Styl.component}>
+        <Icon id={this.props.bot.id} />
+        <div style={Styl.bubbleContainer}>
+          {this.props.bot.texts.map((bubbleText, bubbleIndex) => {
+            // if there is multiple bot texts, pick random
+            if(this.props.handleRandomBubble) {
+              bubbleText = (Array.isArray(bubbleText)) ? this.props.handleRandomBubble(bubbleText, bubbleIndex) : bubbleText;
+            }
+            return (
+              <BotBubble
+                key={bubbleIndex}
+                bubbleText={bubbleText}
+                templateVars={this.props.templateVars}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 BotPart.displayName = 'BotPart';
