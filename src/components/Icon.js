@@ -25,8 +25,9 @@ const Styl = {
   name: {
     position: 'relative',
     display: 'inline-block',
-    right: '-4rem',
-    top: '-1.1rem',
+    right: '-4.3rem',
+    top: '-1.4rem',
+    color: vals.icon.name.color,
     fontSize: vals.icon.name.font.size
   },
   img: {

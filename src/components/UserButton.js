@@ -12,13 +12,23 @@ const typeStyl = {
     padding: vals.bubble.padding.top,
     borderRadius: vals.bubble.border.radius,
     boxShadow: vals.bubble.boxShadow,
-    backgroundColor: vals.bubble.background.color
+    backgroundColor: vals.bubble.background.color,
+    fontSize: vals.bubble.font.size,
+    lineHeight: vals.bubble.lineHeight,
+    paddingTop: vals.bubble.padding.top,
+    paddingRight: vals.bubble.padding.right,
+    paddingBottom: vals.bubble.padding.bottom,
+    paddingLeft: vals.bubble.padding.left,
+    color: vals.user.button.color,
+    backgroundColor: vals.user.button.background.color
   },
   disabled: {
     color: 'rgba(0,0,0, 0.2)'
   },
   past: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    backgroundColor: vals.bubble.background.color,
+    color: vals.bubble.color
   }
 }
 

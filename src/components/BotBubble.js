@@ -32,7 +32,12 @@ const Styl = {
     display: 'inline-block',
     minWidth: '5%',
     margin: 0,
-    padding: vals.bubble.padding.top + ' ' + vals.bubble.padding.right
+    lineHeight: vals.bubble.lineHeight,
+    paddingTop: vals.bubble.padding.top,
+    paddingBottom: vals.bubble.padding.bottom,
+    paddingRight: vals.bubble.padding.right,
+    paddingLeft: vals.bubble.padding.left,
+    fontSize: vals.bubble.font.size
   }
 }
 
