@@ -51,18 +51,13 @@ const Styl = {
 class Main extends React.Component {
   constructor() {
     super();
-    this.state = {
-      stepId: 'init'
-    };
+    this.state = {stepId: 'init'};
     this.persons = Defaults.persons;
-    this.pastLog = {
-      userInputData: {},
-      conversation: []
-    }
-    this.Conversation    = Conversation;
+    this.pastLog = { userInputData: {}, conversation: [] };
+    this.Conversation = Conversation;
 
     // bind this to Callbacks
-    this.updatestepIdState       = this.updatestepIdState.bind(this);
+    this.updateStepIdState     = this.updateStepIdState.bind(this);
     this.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
     this.handleForwardTimeout  = this.handleForwardTimeout.bind(this);
     this.handleRandomBubble    = this.handleRandomBubble.bind(this);
@@ -77,17 +72,17 @@ class Main extends React.Component {
     const stepsAnswers = this.Conversation[this.state.stepId].user.answers;
     const time = (stepsAnswers.time) ? stepsAnswers.time : 2000;
     this.forwardTimeoutId = setTimeout(() => {
-      this.updatestepIdState({answerIndex:index})
+      this.updateStepIdState({answerIndex:index})
     }, time, this);
   }
 
   /**
    * Callbacks for Client Bubbles
    */
-  updatestepIdState({answerIndex = 0}) {
+  updateStepIdState({answerIndex = 0}) {
     const {stepId} = this.state;
     const answer = this.Conversation[stepId].user.answers[answerIndex];
-    // put the stepIds actual state to the log
+    // put the this.props.userInputDatastepIds actual state to the log
     this.pastLog.conversation.push(Object.assign({}, { stepId, answerIndex, type:answer.type }));
     // trigger next stepId
     this.setState({stepId: this.Conversation[stepId].user.answers[answerIndex].stepId});
@@ -120,7 +115,7 @@ class Main extends React.Component {
     const {bot, user} = this.Conversation[stepId];
     // Callbacks for UserAnswerPart
     const callbacks = {
-      updatestepIdState:       this.updatestepIdState,
+      updateStepIdState:     this.updateStepIdState,
       handleForwardTimeout:  this.handleForwardTimeout,
       handleInputfieldEnter: this.handleInputfieldEnter
     };

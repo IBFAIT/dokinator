@@ -1,10 +1,10 @@
 'use strict';
 import React from 'react';
 
-import Defaults     from './defaults.json';
+import Defaults from './defaults.json';
 
 // Components
-import Icon      from './Icon.js';
+import Icon   from './Icon.js';
 import Bubble from './Bubble.js';
 
 const Styl = {
@@ -35,7 +35,7 @@ class BotPart extends React.Component {
   render() {
     // object definition for for template string
     if(this.props.userInputData) {
-      const varData = {...this.props.userInputData, ...Defaults.persons};
+      const varData = {...this.props.userInputData, ...Defaults};
     }
     return  (
       <div style={Styl.component}>

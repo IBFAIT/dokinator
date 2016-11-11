@@ -9,6 +9,8 @@ import Bubble from './Bubble.js';
 
 const PastPart = ({step, stepIndex, conversation, userInputData}) => {
   const {stepId, answerIndex, type} = step;
+
+  // Getting the text from the right source - desicion by type
   let userBubbleTxt = '';
   switch (type) {
     case 'button':
@@ -20,10 +22,7 @@ const PastPart = ({step, stepIndex, conversation, userInputData}) => {
   }
   return (
     <div key={'conv_'+stepIndex} >
-      <BotPart
-        bot={conversation[stepId].bot}
-        userInputData={userInputData}
-      />
+      <BotPart bot={conversation[stepId].bot} userInputData={userInputData} />
 
       <Bubble key={'user_'+stepIndex} type={step.type} userPast>
         {userBubbleTxt}

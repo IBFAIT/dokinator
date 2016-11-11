@@ -7,27 +7,32 @@ import Bubble from './Bubble.js';
 
 // Component styles
 const Styl = {
-  display: 'inline-block',
-  minWidth: '10%'
+  component: {
+    display: 'inline-block',
+    minWidth: '10%'
+  },
+  input: {
+    border: '0',
+    borderColor: 'transparent',
+    boxShadow: 0
+  }
 }
 
 const UserAnswerPart = ({ answers, callbacks }) => {
   const {handleInputfieldEnter, handleForwardTimeout, updateStepIdState} = callbacks;
   return (
-    <div style={Styl}>
-      {
-        answers.map(({type, text, placeholder}, answerIndex) => {
+    <div style={Styl.component}>
+      {answers.map(({type, text, placeholder}, answerIndex) => {
           switch (type) {
             case 'input':
               return <Bubble key={answerIndex} type={type}>
-                  <input type="text" placeholder={placeholder}
+                  <input style={Styl.input} type="text" placeholder={placeholder}
                     onKeyPress={(evt) => { handleInputfieldEnter({evt}) }} />
                   </Bubble>;
 
             case 'button':
-              return <Bubble key={answerIndex}
-                onClick={evt => {updateStepIdState({evt, answerIndex})}}
-                type={type}>
+              return <Bubble key={answerIndex} type={type}
+                onClick={evt => {updateStepIdState({evt, answerIndex})}}>
                   {text}
                 </Bubble>;
 
@@ -38,10 +43,8 @@ const UserAnswerPart = ({ answers, callbacks }) => {
               handleForwardTimeout({answerIndex: 0});
               break;
           }
-        })
-    }
-    </div>
-  );
+        })}
+    </div>);
 }
 
 UserAnswerPart.displayName = 'UserAnswerPart';

@@ -22,32 +22,40 @@ let StylVariants = {
         marginLeft: '.5rem',
         paddingTop: '.6rem',
         paddingRight: '.7rem',
-        paddingBottom: '.3rem',
+        paddingBottom: '.2rem',
         paddingLeft: '.9rem',
         lineHeight: 1.6,
         backgroundColor: '#fff',
         boxShadow: '0px 1px 1px rgba(0,0,0,0.2)'
     },
     disabled: {
-      display: 'inline-block'
+      display: 'inline-block',
+      backgroundColor: 'rgba(193, 193, 193, 0.5)'
     },
     input: {
       display: 'inline-block'
     },
     userPast: {
-      display: 'inline-block'
+      display: 'inline-block',
+      backgroundColor: '#fff'
+    },
+    button: {
+      display: 'inline-block',
+      backgroundColor: '#008ABC'
     }
 }
 
 const Styl = ({type, userPast}) => {
   if(userPast) {
-    StylVariants.default = {...StylVariants.default, ...StylVariants.userPast};
+    return (type === 'forward') ? {display: 'none'} : {...StylVariants.default, ...StylVariants.userPast};
   }
   switch (type) {
     case 'default':
       return StylVariants.default;
     case 'input':
       return {...StylVariants.default, ...StylVariants.input};
+    case 'button':
+      return {...StylVariants.default, ...StylVariants.button};
     case 'disabled':
       return {...StylVariants.default, ...StylVariants.disabled};
     case 'forward':

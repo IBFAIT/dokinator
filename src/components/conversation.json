@@ -419,8 +419,8 @@
       "id": "fred",
       "texts": [
         "Schau, das sind die Leute, die mich gebaut haben:",
-        "${varData.persons.flavio.name}: ${varData.makerImages.flavio}",
-        "${varData.persons.kaspar.name}: ${varData.makerImages.kaspar}",
+        "Flavio Trolese",
+        "Kaspar Vollenweider",
         "Du kannst sie über  kontaktieren.",
         "Bis bald!"
       ]

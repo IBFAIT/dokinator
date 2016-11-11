@@ -22,8 +22,8 @@ const Styl = {
   name: {
     position: 'relative',
     display: 'inline-block',
-    right: '-4.3rem',
-    top: '-1.4rem',
+    right: '-4.7rem',
+    top: '-1.5rem',
     color: '#888',
     fontSize: '.77rem'
   },
