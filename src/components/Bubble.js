@@ -34,7 +34,9 @@ let StylVariants = {
     },
     userPast: {
       marginTop: '1rem',
-      alignSelf: 'flex-end'
+      alignSelf: 'flex-end',
+      backgroundColor: '#008ABC',
+      color: '#fff',
     },
     button: {
       display: 'inline-block',
