@@ -5,25 +5,29 @@ import React from 'react';
 // JSON data beeing imported
 
 import BotPart          from './BotPart.js';
-import UserAnswerPast from './UserAnswerPast.js';
+import Bubble from './Bubble.js';
 
-const PastPart = ({step, stepIndex, conversation}) => {
-  const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
-  const {path, templateVars} = stateAtPos;
+const PastPart = ({step, stepIndex, conversation, userInputData}) => {
+  const {stepId, answerIndex, type} = step;
+  let userBubbleTxt = '';
+  switch (type) {
+    case 'button':
+      userBubbleTxt = conversation[stepId].user.answers[answerIndex].text;
+      break;
+    case 'input':
+      userBubbleTxt = userInputData[step.inputProperty];
+      break;
+  }
   return (
     <div key={'conv_'+stepIndex} >
       <BotPart
-        bot={conversation[path].bot}
-        templateVars={templateVars}
+        bot={conversation[stepId].bot}
+        userInputData={userInputData}
       />
 
-      <UserAnswerPast
-        key={'client_'+stepIndex}
-        stepIndex={stepIndex}
-        answer={conversation[path].user.answers}
-        index={step.index}
-        stateAtPos={stateAtPos}
-      />
+      <Bubble key={'user_'+stepIndex} type={step.type} userPast>
+        {userBubbleTxt}
+      </Bubble>
     </div>
   );
 }

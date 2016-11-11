@@ -22,7 +22,7 @@
     "bot": {
       "id": "fred",
       "texts": [
-        "Freut mich, ${name}.",
+        "Freut mich, ${varData.name}.",
         "Wie kann ich dir heute helfen?"
       ]
     },
@@ -100,7 +100,7 @@
     "user": {
       "answers": [{
         "type": "input",
-        "changeVal": "email",
+        "inputProperty": "email",
         "value": "",
         "placeholder": "Deine Email-Adresse",
         "path": "8"
@@ -112,7 +112,7 @@
     "bot": {
       "id": "doc",
       "texts": [
-        "Ciao ${name}!",
+        "Ciao ${varData.name}!",
         "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
       ]
     },
@@ -168,7 +168,7 @@
       {
         "id": "doc",
         "texts": [
-          "Hi ${name}, ich bin Dokinator.",
+          "Hi ${varData.name}, ich bin Dokinator.",
           "Wie geht es dir heute?"
         ]
       },
@@ -308,7 +308,7 @@
   "besserung": {
     "bot": {
       "id": "doc",
-      "texts": ["Ich wünsche dir gute Besserung, ${name}!","Bis Bald!"]
+      "texts": ["Ich wünsche dir gute Besserung, ${varData.name}!","Bis Bald!"]
     },
     "user": {
       "answers": [{
@@ -339,7 +339,7 @@
   "8": {
     "bot": {
       "id": "fred",
-      "texts": [["Lieben Dank, ${name}.", "Cool!"]]
+      "texts": [["Lieben Dank, ${varData.name}.", "Cool!"]]
     },
     "user": {
       "answers": [{
@@ -396,7 +396,7 @@
     "bot": {
       "id": "fred",
       "texts": [
-        "Sehr schön, ${name}.",
+        "Sehr schön, ${varData.name}.",
         "Es schmeichelt mir, das du dich so für mich interessierst.",
         "Wie kann ich dir nun weiter helfen?"
       ]
@@ -419,8 +419,8 @@
       "id": "fred",
       "texts": [
         "Schau, das sind die Leute, die mich gebaut haben:",
-        "${persons.flavio.name}: ${makerImages.flavio}",
-        "${persons.kaspar.name}: ${makerImages.kaspar}",
+        "${varData.persons.flavio.name}: ${varData.makerImages.flavio}",
+        "${varData.persons.kaspar.name}: ${varData.makerImages.kaspar}",
         "Du kannst sie über  kontaktieren.",
         "Bis bald!"
       ]

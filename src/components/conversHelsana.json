@@ -12,12 +12,12 @@
       "answers": [{
         "type": "button",
         "text": "Ich möchte wissen, was eine Krankenversicherung kostet.",
-        "path": "Pfad1"
+        "stepId": "Pfad1"
       },
       {
         "type": "button",
         "text": "Ich bin neu in der Schweiz und möchte wissen, wie das hier funktioniert mit den Krankenversicherungen.",
-        "path": "todo"
+        "stepId": "todo"
       }]
     },
     "title": "init"

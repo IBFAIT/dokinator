@@ -3,61 +3,45 @@
 import React from 'react';
 
 // Components
-import UserButton         from './UserButton.js';
-import UserInputField     from './UserInputField.js';
+import Bubble from './Bubble.js';
 
 // Component styles
-const Style = {
+const Styl = {
   display: 'inline-block',
   minWidth: '10%'
 }
 
-const UserAnswerPart = (props) => {
+const UserAnswerPart = ({ answers, callbacks }) => {
+  const {handleInputfieldEnter, handleForwardTimeout, updatestepIdState} = callbacks;
   return (
-    <div style={Style}>
-      { renderClientBubbles(props) }
+    <div style={Styl}>
+      {
+        answers.map(({type, text, placeholder}, answerIndex) => {
+          switch (type) {
+            case 'input':
+              return <Bubble key={answerIndex} type={type}>
+                  <input type="text" placeholder={placeholder}
+                    onKeyPress={(evt) => { handleInputfieldEnter({evt}) }} />
+                  </Bubble>;
+
+            case 'button':
+              return <Bubble key={answerIndex}
+                onClick={evt => {updatestepIdState({evt, answerIndex})}}
+                type={type}>
+                  {text}
+                </Bubble>;
+
+            case 'disabled':
+              return <Bubble key={answerIndex}  type={type}> { text } </Bubble>;
+
+            case 'forward':
+              handleForwardTimeout({answerIndex: 0});
+              break;
+          }
+        })
+    }
     </div>
   );
-}
-
-const renderClientBubbles = ({ answers, callbacks }) => {
-  const {handleInputfieldEnter, handleForwardTimeout, updatePathState} = callbacks;
-  return answers.map(({type, text, path, placeholder, changeVal}, index) => {
-    switch (type) {
-      case 'input':
-        return (
-          <UserInputField
-            key={index}
-            index={index}
-            path={path}
-            text={text}
-            changeVal={changeVal}
-            handleInputfieldEnter={handleInputfieldEnter}
-          />);
-      case 'button':
-        return (
-        <UserButton
-          key={index}
-          index={index}
-          text={text}
-          path={path}
-          updatePathState={updatePathState}
-        />);
-      case 'disabled':
-        return (
-          <UserButton
-            type="disabled"
-            key={index}
-            index={index}
-            text={text}
-          />);
-      case 'forward':
-        handleForwardTimeout({answerIndex: 0});
-        break;
-      default:
-        return <div key={index}></div>;
-    }
-  });
 }
 
 UserAnswerPart.displayName = 'UserAnswerPart';

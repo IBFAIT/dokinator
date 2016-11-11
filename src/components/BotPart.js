@@ -1,16 +1,21 @@
 'use strict';
-
 import React from 'react';
+
+import Defaults     from './defaults.json';
 
 // Components
 import Icon      from './Icon.js';
-import BotBubble from './BotBubble.js';
-
-// generic styles
-import genStyl from '../styles/genStyl.js';
+import Bubble from './Bubble.js';
 
 const Styl = {
-  component: {...genStyl.botbubbleFlex, ...genStyl.bubbleMarginPadding},
+  component: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingTop: '2rem',
+    marginLeft: '0.4rem',
+    marginRight: '0.4rem'
+  },
   bubbleContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -27,9 +32,11 @@ class BotPart extends React.Component {
     }
   }
 
-
-
   render() {
+    // object definition for for template string
+    if(this.props.userInputData) {
+      const varData = {...this.props.userInputData, ...Defaults.persons};
+    }
     return  (
       <div style={Styl.component}>
         <Icon id={this.props.bot.id} />
@@ -40,11 +47,9 @@ class BotPart extends React.Component {
               bubbleText = (Array.isArray(bubbleText)) ? this.props.handleRandomBubble(bubbleText, bubbleIndex) : bubbleText;
             }
             return (
-              <BotBubble
-                key={bubbleIndex}
-                bubbleText={bubbleText}
-                templateVars={this.props.templateVars}
-              />
+              <Bubble key={bubbleIndex}>
+                {eval('`'+bubbleText+'`')}
+              </Bubble>
             );
           })}
         </div>

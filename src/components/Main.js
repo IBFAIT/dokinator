@@ -52,88 +52,75 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      path: 'init',
-      templateVars: {
-        name:   null,
-        email:  null,
-        fieber: null,
-        persons: Defaults.persons
-      }
+      stepId: 'init'
     };
-    this.conversationLog = [];
+    this.persons = Defaults.persons;
+    this.pastLog = {
+      userInputData: {},
+      conversation: []
+    }
     this.Conversation    = Conversation;
 
     // bind this to Callbacks
-    this.updatePathState       = this.updatePathState.bind(this);
+    this.updatestepIdState       = this.updatestepIdState.bind(this);
     this.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
     this.handleForwardTimeout  = this.handleForwardTimeout.bind(this);
     this.handleRandomBubble    = this.handleRandomBubble.bind(this);
   }
 
   componentDidUpdate() {
-    const answerBottom = document.getElementById('scrlTargt').lastChild;
+    const answerBottom = document.getElementById('scrollTarget').lastChild;
     Scroll(answerBottom);
   }
 
-  handleForwardTimeout({index, time = 2000}) {
-    // create propper path info for the log
-    const params = {
-      index,
-      path: this.Conversation[this.state.path].user.answers[0].path
-    };
+  handleForwardTimeout({index}) {
+    const stepsAnswers = this.Conversation[this.state.stepId].user.answers;
+    const time = (stepsAnswers.time) ? stepsAnswers.time : 2000;
     this.forwardTimeoutId = setTimeout(() => {
-      this.updatePathState(null, params)
-    }, time, this, params);
+      this.updatestepIdState({answerIndex:index})
+    }, time, this);
   }
 
   /**
    * Callbacks for Client Bubbles
    */
-  updatePathState(evt, {path, index = null}) {
-    // put the paths actual state to the log
-    this.conversationLog.push({
-      stateAtPos: JSON.stringify(this.state),
-      index
-    });
-    // trigger next path
-    this.setState({path: path});
+  updatestepIdState({answerIndex = 0}) {
+    const {stepId} = this.state;
+    const answer = this.Conversation[stepId].user.answers[answerIndex];
+    // put the stepIds actual state to the log
+    this.pastLog.conversation.push(Object.assign({}, { stepId, answerIndex, type:answer.type }));
+    // trigger next stepId
+    this.setState({stepId: this.Conversation[stepId].user.answers[answerIndex].stepId});
   }
 
-  handleInputfieldEnter({evt, path, index, changeVal}) {
+  handleInputfieldEnter({evt}) {
     /* ToDo: chrome complains about this enter detection beeing deprecated */
     if(evt.key === 'Enter') {
-      this.conversationLog.push({
-        stateAtPos: JSON.stringify({
-          path: this.state.path,
-          templateVars: this.state.templateVars,
-          usersInput:  evt.target.value
-        }),
-        index
-      });
-      // make the staBotPartte change dynamicly
-      let templateVars = {
-        name:   this.state.templateVars.name,
-        email:  this.state.templateVars.email,
-        fieber: this.state.templateVars.fieber,
-        persons: Defaults.persons
-      };
-      templateVars[changeVal] = evt.target.value;
-      this.setState({path, templateVars});
+      const {stepId} = this.state;
+      const answer = this.Conversation[stepId].user.answers[0];
+      this.pastLog.conversation.push(Object.assign({}, {
+        stepId,
+        answerIndex:null,
+        type: answer.type,
+        inputVal: evt.target.value,
+        inputProperty: answer.inputProperty
+      }));
+      this.pastLog.userInputData[answer.inputProperty] = evt.target.value;
+      this.setState({stepId: answer.stepId});
     }
   }
 
   handleRandomBubble(bubbleText, bubbleIndex) {
-    // Replace multiple options with random choice in this.Conversation
-    this.Conversation[this.state.path].bot.texts[bubbleIndex] = _.sample(bubbleText);
-    return this.Conversation[this.state.path].bot.texts[bubbleIndex];
+    this.Conversation[this.state.stepId].bot.texts[bubbleIndex] = _.sample(bubbleText);
+    return this.Conversation[this.state.stepId].bot.texts[bubbleIndex];
   }
 
   render() {
-    const {path, templateVars} = this.state;
-    const {bot, user} = this.Conversation[path];
+    const {stepId} = this.state;
+    const {bot, user} = this.Conversation[stepId];
     // Callbacks for UserAnswerPart
     const callbacks = {
-      updatePathState:       this.updatePathState,
+      updatestepIdState:       this.updatestepIdState,
       handleForwardTimeout:  this.handleForwardTimeout,
       handleInputfieldEnter: this.handleInputfieldEnter
     };
@@ -141,26 +128,20 @@ class Main extends React.Component {
     return (
       <div style={Styl.main}>
         <div style={Styl.botAndPast}>
-          {this.conversationLog.map((conversationStep, stepIndex) => (
-            <PastPart
-              key={stepIndex}
-              stepIndex={stepIndex}
+          {this.pastLog.conversation.map((conversationStep, stepIndex) => (
+            <PastPart key={stepIndex} stepIndex={stepIndex}
               step={conversationStep}
               conversation={this.Conversation}
+              userInputData={this.pastLog.userInputData}
             />
           ))}
-
-          <BotPart
-            bot={bot}
-            templateVars={templateVars}
+          <BotPart bot={bot}
+            userInputData={this.pastLog.userInputData}
             handleRandomBubble={this.handleRandomBubble}
           />
         </div>
-        <div style={Styl.conversationPart} id='scrlTargt'>
-          <UserAnswerPart
-            answers={user.answers}
-            callbacks={callbacks}
-          />
+        <div style={Styl.conversationPart} id='scrollTarget'>
+          <UserAnswerPart answers={user.answers} callbacks={callbacks} />
         </div>
       </div>
       );
