@@ -12,7 +12,7 @@ const Styl = {
 }
 
 const UserAnswerPart = ({ answers, callbacks }) => {
-  const {handleInputfieldEnter, handleForwardTimeout, updatestepIdState} = callbacks;
+  const {handleInputfieldEnter, handleForwardTimeout, updateStepIdState} = callbacks;
   return (
     <div style={Styl}>
       {
@@ -26,7 +26,7 @@ const UserAnswerPart = ({ answers, callbacks }) => {
 
             case 'button':
               return <Bubble key={answerIndex}
-                onClick={evt => {updatestepIdState({evt, answerIndex})}}
+                onClick={evt => {updateStepIdState({evt, answerIndex})}}
                 type={type}>
                   {text}
                 </Bubble>;
