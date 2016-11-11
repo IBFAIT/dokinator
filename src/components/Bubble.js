@@ -10,7 +10,7 @@ let StylVariants = {
         justifyContent: 'center',
         alignSelf: 'flex-start',
         maxWidth: '80%',
-        minHeight: '30px',
+        //minHeight: '30px',
         color: '#000',
         borderRadius: '.3rem',
         borderWidth: '.01rem',
@@ -22,7 +22,7 @@ let StylVariants = {
         marginLeft: '.5rem',
         paddingTop: '.6rem',
         paddingRight: '.7rem',
-        paddingBottom: '.2rem',
+        paddingBottom: '.7rem',
         paddingLeft: '.9rem',
         lineHeight: 1.6,
         backgroundColor: '#fff',
@@ -36,12 +36,16 @@ let StylVariants = {
       display: 'inline-block'
     },
     userPast: {
+      marginTop: '1rem',
       display: 'inline-block',
-      backgroundColor: '#fff'
+      backgroundColor: '#008ABC',
+      color: '#fff',
+      alignSelf: 'flex-end'
     },
     button: {
       display: 'inline-block',
-      backgroundColor: '#008ABC'
+      backgroundColor: '#008ABC',
+      color: '#fff'
     }
 }
 

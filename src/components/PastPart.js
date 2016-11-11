@@ -7,6 +7,11 @@ import React from 'react';
 import BotPart          from './BotPart.js';
 import Bubble from './Bubble.js';
 
+const Styl = {
+  display:'flex',
+  flexDirection: 'column'
+}
+
 const PastPart = ({step, stepIndex, conversation, userInputData}) => {
   const {stepId, answerIndex, type} = step;
 
@@ -21,7 +26,7 @@ const PastPart = ({step, stepIndex, conversation, userInputData}) => {
       break;
   }
   return (
-    <div key={'conv_'+stepIndex} >
+    <div key={'conv_'+stepIndex} style={Styl}>
       <BotPart bot={conversation[stepId].bot} userInputData={userInputData} />
 
       <Bubble key={'user_'+stepIndex} type={step.type} userPast>
