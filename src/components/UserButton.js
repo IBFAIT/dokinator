@@ -8,7 +8,10 @@ import vals from '../styles/vals.js';
 const typeStyl = {
   default: {
     display: 'inline-block',
-    margin: '0.5rem 0.2rem',
+    marginTop: vals.bubble.margin.top,
+    marginRight: vals.bubble.margin.right,
+    marginBottom: vals.bubble.margin.bottom,
+    marginLeft: vals.bubble.margin.left,
     padding: vals.bubble.padding.top,
     borderRadius: vals.bubble.border.radius,
     boxShadow: vals.bubble.boxShadow,

@@ -22,8 +22,10 @@ const vals = {
       left: '.9rem'
     },
     margin: {
-      top: '.2rem',
-      bottom: '.2rem'
+      top: '.5rem',
+      right: '.5rem',
+      bottom: '.5rem',
+      left: '.5rem'
     },
     boxShadow: '0px 1px 1px rgba(0,0,0,0.2)'
   },
