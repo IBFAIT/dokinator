@@ -30,3 +30,4 @@ node_modules
 bower_components/
 dist/
 test/components/BotSpeakingTest.js
+npm-debug.log.*
