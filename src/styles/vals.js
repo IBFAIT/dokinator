@@ -34,6 +34,12 @@ const vals = {
       color: '#fff',
       background: {
         color: '#008ABC'
+      },
+      disabled: {
+        color: 'rgba(217, 217, 217, 0.85)',
+        background: {
+          color: 'rgba(0, 138, 188, 0.52)'
+        }
       }
     }
   },

@@ -26,7 +26,8 @@ const typeStyl = {
     backgroundColor: vals.user.button.background.color
   },
   disabled: {
-    color: 'rgba(0,0,0, 0.2)'
+    color: vals.user.button.disabled.color,
+    backgroundColor: vals.user.button.disabled.background.color
   },
   past: {
     alignSelf: 'flex-end',
