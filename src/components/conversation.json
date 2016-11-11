@@ -56,11 +56,11 @@
     "user": {
       "answers": [{
         "type": "button",
-        "text": "Button: Ja, gerne!",
+        "text": "Ja, gerne!",
         "stepId": "3"
       }, {
         "type": "button",
-        "text": "Button: Nein danke. Zeig mir, was du sonst noch drauf hast.",
+        "text": "Nein danke. Zeig mir, was du sonst noch drauf hast.",
         "stepId": "2"
       }]
     },

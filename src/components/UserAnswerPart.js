@@ -27,6 +27,7 @@ const UserAnswerPart = ({ answers, callbacks }) => {
             case 'input':
               return <Bubble key={answerIndex} type={type}>
                   <input style={Styl.input} type="text" placeholder={placeholder}
+                    autoFocus={true}
                     onKeyPress={(evt) => { handleInputfieldEnter({evt}) }} />
                   </Bubble>;
 
