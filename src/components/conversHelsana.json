@@ -34,15 +34,15 @@
       "answers": [{
         "type": "button",
         "text": "Ich möchte mehr über Chatbots erfahren!",
-        "path": "1"
+        "stepId": "1"
       }, {
         "type": "button",
         "text": "Zeige mir, was du drauf hast!",
-        "path": "2"
+        "stepId": "2"
       }, {
         "type": "button",
         "text": "Wer hat dich gebaut?",
-        "path": "7"
+        "stepId": "7"
       }]
     },
     "title": "0"
@@ -61,11 +61,11 @@
       "answers": [{
         "type": "button",
         "text": "Button: Ja, gerne!",
-        "path": "3"
+        "stepId": "3"
       }, {
         "type": "button",
         "text": "Button: Nein danke. Zeig mir, was du sonst noch drauf hast.",
-        "path": "2"
+        "stepId": "2"
       }]
     },
     "title": "1"
@@ -83,11 +83,11 @@
       "answers": [{
         "type": "button",
         "text": "Ja, gerne | Yep, nichts wie los!",
-        "path": "4"
+        "stepId": "4"
       }, {
         "type": "button",
         "text": "Nein, danke | Nope!",
-        "path": "7"
+        "stepId": "7"
       }]
     },
     "title": "2"
@@ -107,7 +107,7 @@
         "changeVal": "email",
         "value": "",
         "placeholder": "Deine Email-Adresse",
-        "path": "8"
+        "stepId": "8"
       }]
     },
     "title": "3"
@@ -124,11 +124,11 @@
       "answers": [{
         "type": "button",
         "text": "Um was für Versicherte handelt es sich?",
-        "path": "5"
+        "stepId": "5"
       }, {
         "type": "button",
         "text": "Sprich weiter!",
-        "path": "6"
+        "stepId": "6"
       }]
     },
     "title": "4"
@@ -144,7 +144,7 @@
     "user": {
       "answers": [{
         "type": "forward",
-        "path": "6"
+        "stepId": "6"
       }]
     },
     "title": "5"
@@ -162,7 +162,7 @@
     "user": {
       "answers": [{
         "type": "forward",
-        "path": "docAfterfred"
+        "stepId": "docAfterfred"
       }]
     },
     "title": "6"
@@ -180,7 +180,7 @@
       "answers": [{
         "type": "button",
         "text": "Hab starke Gliederschmerzen.",
-        "path": "gliederschmerzen"
+        "stepId": "gliederschmerzen"
       }, {
         "type": "disabled",
         "text": "Mir gehts eigentlich prima."
@@ -200,7 +200,7 @@
       "answers": [{
         "type": "button",
         "text": "4 Stunden",
-        "path": "hastDuFieber"
+        "stepId": "hastDuFieber"
       }, {
         "type": "disabled",
         "text": "8 Stunden"
@@ -222,7 +222,7 @@
       "answers": [{
         "type": "button",
         "text": "Ja",
-        "path": "wieHoch"
+        "stepId": "wieHoch"
       }, {
         "type": "disabled",
         "text": "Nein"
@@ -240,7 +240,7 @@
         "type": "input",
         "changeVal": "fieber",
         "placeholder": "Fieber in °C",
-        "path": "runningNose"
+        "stepId": "runningNose"
       }]
     },
     "title": "Wie Hoch ist das Fieber"
@@ -256,7 +256,7 @@
       "answers": [{
         "type": "button",
         "text": "Ja",
-        "path": "viralInfect"
+        "stepId": "viralInfect"
       }, {
         "type": "disabled",
         "text": "Nein"
@@ -273,7 +273,7 @@
       "answers": [{
         "type": "button",
         "text": "Ja",
-        "path": "drink"
+        "stepId": "drink"
       }, {
         "type": "disabled",
         "text": "Nein"
@@ -290,7 +290,7 @@
       "answers": [{
         "type": "button",
         "text": "OK",
-        "path": "backIn4"
+        "stepId": "backIn4"
       }]
     },
     "title": "Viel Trinken"
@@ -304,7 +304,7 @@
       "answers": [{
         "type": "button",
         "text": "Ja, danke.",
-        "path": "besserung"
+        "stepId": "besserung"
       }]
     },
     "title": "Melde mich in 4 Stunden"
@@ -318,7 +318,7 @@
       "answers": [{
         "type": "forward",
         "text": "Danke!",
-        "path": "outro"
+        "stepId": "outro"
       }]
     },
     "title": "Gute Besserung"
@@ -335,7 +335,7 @@
     "user": {
       "answers": [{
         "type": "forward",
-        "path": "7"
+        "stepId": "7"
       }]
     },
     "title": "Abschluss von Fred"
@@ -348,7 +348,7 @@
     "user": {
       "answers": [{
         "type": "forward",
-        "path": "7"
+        "stepId": "7"
       }]
     },
     "title": "8"
@@ -362,11 +362,11 @@
       "answers": [
         {
           "type": "forward",
-          "path": "end2"
+          "stepId": "end2"
         },{
           "type": "button",
           "text": "Ich möchte mehr über Chatbots erfahren!",
-          "path": "1"
+          "stepId": "1"
         }
       ]
     },
@@ -386,11 +386,11 @@
         {
           "type": "button",
           "text": "Können wir das nochmal besprechen?",
-          "path": "sagsMirNochmal"
+          "stepId": "sagsMirNochmal"
         },{
           "type": "button",
           "text": "Ich möchte mehr über Chatbots erfahren!",
-          "path": "1"
+          "stepId": "1"
         }
       ]
     },
@@ -409,11 +409,11 @@
       "answers": [{
         "type": "button",
         "text": "Ich möchte mehr über Chatbots erfahren!",
-        "path": "1"
+        "stepId": "1"
       }, {
         "type": "button",
         "text": "Zeige mir, was du drauf hast!",
-        "path": "2"
+        "stepId": "2"
       }]
     },
     "title": "sagsMirNochmal"
@@ -434,7 +434,7 @@
       {
         "type": "button",
         "text": "Ich habe noch ein paar Fragen.",
-        "path": "sagsMirNochmal"
+        "stepId": "sagsMirNochmal"
       }]
     },
     "title": "7"
