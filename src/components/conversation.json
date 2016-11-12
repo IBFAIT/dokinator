@@ -140,7 +140,8 @@
     "user": {
       "answers": [{
         "type": "forward",
-        "stepId": "6"
+        "stepId": "6",
+        "time": 6000
       }]
     },
     "title": "5"

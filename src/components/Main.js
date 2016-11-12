@@ -53,10 +53,8 @@ class Main extends React.Component {
     this.Conversation = Conversation;
 
     // bind this to Callbacks
-    this.updateStepIdState     = this.updateStepIdState.bind(this);
-    this.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
-    this.handleForwardTimeout  = this.handleForwardTimeout.bind(this);
-    this.handleRandomBubble    = this.handleRandomBubble.bind(this);
+    this.randomBotTextSample = this.randomBotTextSample.bind(this);
+    this.nextStepCb = this.nextStepCb.bind(this);
   }
 
   componentDidUpdate() {
@@ -64,44 +62,25 @@ class Main extends React.Component {
     Scroll(answerBottom);
   }
 
-  handleForwardTimeout({index}) {
-    const stepsAnswers = this.Conversation[this.state.stepId].user.answers;
-    const time = (stepsAnswers.time) ? stepsAnswers.time : 2000;
-    this.forwardTimeoutId = setTimeout(() => {
-      this.updateStepIdState({answerIndex:index})
-    }, time, this);
-  }
 
-  /**
-   * Callbacks for Client Bubbles
-   */
-  updateStepIdState({answerIndex = 0}) {
+  nextStepCb({answerBtnNo, userTxtInput}) {
+    answerBtnNo = (typeof answerBtnNo === 'undefined') ? 0 : answerBtnNo;
     const {stepId} = this.state;
-    const answer = this.Conversation[stepId].user.answers[answerIndex];
-    // put the this.props.userInputDatastepIds actual state to the log
-    this.pastLog.conversation.push(Object.assign({}, { stepId, answerIndex, type:answer.type }));
-    // trigger next stepId
-    this.setState({stepId: this.Conversation[stepId].user.answers[answerIndex].stepId});
-  }
-
-  handleInputfieldEnter({evt}) {
-    /* ToDo: chrome complains about this enter detection beeing deprecated */
-    if(evt.key === 'Enter') {
-      const {stepId} = this.state;
-      const answer = this.Conversation[stepId].user.answers[0];
-      this.pastLog.conversation.push(Object.assign({}, {
-        stepId,
-        answerIndex:null,
-        type: answer.type,
-        inputVal: evt.target.value,
-        inputProperty: answer.inputProperty
-      }));
-      this.pastLog.userInputData[answer.inputProperty] = evt.target.value;
-      this.setState({stepId: answer.stepId});
+    const answer = this.Conversation[stepId].user.answers[answerBtnNo];
+    let pastLogStep = {
+      stepId,
+      type: answer.type,
+      answerBtnNo,
+      userTxtInput
+    };
+    this.pastLog.conversation.push(Object.assign({}, pastLogStep));
+    if(pastLogStep.type === 'input') {
+      this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
     }
+    this.setState({stepId: answer.stepId});
   }
 
-  handleRandomBubble(bubbleText, bubbleIndex) {
+  randomBotTextSample(bubbleText, bubbleIndex) {
     this.Conversation[this.state.stepId].bot.texts[bubbleIndex] = _.sample(bubbleText);
     return this.Conversation[this.state.stepId].bot.texts[bubbleIndex];
   }
@@ -109,33 +88,24 @@ class Main extends React.Component {
   render() {
     const {stepId} = this.state;
     const {bot, user} = this.Conversation[stepId];
-    // Callbacks for UserAnswerPart
-    const callbacks = {
-      updateStepIdState:     this.updateStepIdState,
-      handleForwardTimeout:  this.handleForwardTimeout,
-      handleInputfieldEnter: this.handleInputfieldEnter
-    };
 
-    return (
-      <div style={Styl.main}>
-        <div style={Styl.botAndPast}>
-          {this.pastLog.conversation.map((conversationStep, stepIndex) => (
-            <PastPart key={stepIndex} stepIndex={stepIndex}
-              step={conversationStep}
-              conversation={this.Conversation}
-              userInputData={this.pastLog.userInputData}
-            />
-          ))}
+    return (<div style={style()}>
+        <div style={style('botAndPast')}>
+          {this.pastLog.conversation.map(
+            (conversationStep, stepIndex) => (
+              <PastPart
+                key={stepIndex} stepIndex={stepIndex} step={conversationStep}
+                conversation={this.Conversation}
+                userTxtInput={this.pastLog.userTxtInput}/>)
+            )}
           <BotPart bot={bot}
-            userInputData={this.pastLog.userInputData}
-            handleRandomBubble={this.handleRandomBubble}
-          />
+            userTxtInput={this.pastLog.userTxtInput}
+            randomBotTextSample={this.randomBotTextSample}/>
         </div>
-        <div style={Styl.conversationPart} id='scrollTarget'>
-          <UserAnswerPart answers={user.answers} callbacks={callbacks} />
+        <div style={style('conversationPart')} id='scrollTarget'>
+          <UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb}/>
         </div>
-      </div>
-      );
+      </div>);
     }
 }
 

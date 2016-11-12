@@ -20,12 +20,12 @@ const Styl = {
   }
 }
 
-const UserInputField = ({placeholder, stepId, index, changeVal, handleInputfieldEnter}) => (
+const UserInputField = ({placeholder, stepId, index, changeVal, handleUserTxtInput}) => (
   <div style={Styl.component}>
     <input
       style={Styl.input}
       placeholder={placeholder}
-      onKeyPress={evt => {handleInputfieldEnter({evt})}}
+      onKeyPress={evt => {handleUserTxtInput({evt})}}
     />
   </div>
 );

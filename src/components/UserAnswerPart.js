@@ -18,30 +18,35 @@ const Styl = {
   }
 }
 
-const UserAnswerPart = ({ answers, callbacks }) => {
-  const {handleInputfieldEnter, handleForwardTimeout, updateStepIdState} = callbacks;
+const UserAnswerPart = ({ answers, nextStepCb }) => {
   return (
     <div style={Styl.component}>
-      {answers.map(({type, text, placeholder}, answerIndex) => {
+      {answers.map(({type, text, placeholder, time}, answerBtnNo) => {
           switch (type) {
             case 'input':
-              return <Bubble key={answerIndex} type={type}>
-                  <input style={Styl.input} type="text" placeholder={placeholder}
-                    autoFocus={true}
-                    onKeyPress={(evt) => { handleInputfieldEnter({evt}) }} />
+              return <Bubble key={answerBtnNo} type={type}>
+                    <input style={Styl.input} type="text"
+                      placeholder={placeholder}
+                      autoFocus={true}
+                      onKeyPress={(evt) => {
+                        if(evt.key ==='Enter') nextStepCb({
+                          userTxtInput: evt.target.value
+                        });
+                      }} />
                   </Bubble>;
 
             case 'button':
-              return <Bubble key={answerIndex} type={type}
-                onClick={evt => {updateStepIdState({evt, answerIndex})}}>
+              return <Bubble key={answerBtnNo} type={type}
+                onClick={() => nextStepCb({answerBtnNo})}>
                   {text}
                 </Bubble>;
 
             case 'disabled':
-              return <Bubble key={answerIndex}  type={type}> { text } </Bubble>;
+              return <Bubble key={answerBtnNo}  type={type}> { text } </Bubble>;
 
             case 'forward':
-              handleForwardTimeout({answerIndex: 0});
+              const timeoutTime = (time) ? time : 2000;
+              setTimeout(()=>{nextStepCb({answerBtnNo})}, timeoutTime, answerBtnNo);
               break;
           }
         })}

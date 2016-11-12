@@ -12,22 +12,22 @@ const Styl = {
   flexDirection: 'column'
 }
 
-const PastPart = ({step, stepIndex, conversation, userInputData}) => {
-  const {stepId, answerIndex, type} = step;
+const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
+  const {stepId, answerBtnNo, type} = step;
 
   // Getting the text from the right source - desicion by type
   let userBubbleTxt = '';
   switch (type) {
     case 'button':
-      userBubbleTxt = conversation[stepId].user.answers[answerIndex].text;
+      userBubbleTxt = conversation[stepId].user.answers[answerBtnNo].text;
       break;
     case 'input':
-      userBubbleTxt = userInputData[step.inputProperty];
+      userBubbleTxt = userTxtInput[step.inputProperty];
       break;
   }
   return (
     <div key={'conv_'+stepIndex} style={Styl}>
-      <BotPart bot={conversation[stepId].bot} userInputData={userInputData} />
+      <BotPart bot={conversation[stepId].bot} userTxtInput={userTxtInput} />
 
       <Bubble key={'user_'+stepIndex} type={step.type} userPast>
         {userBubbleTxt}
