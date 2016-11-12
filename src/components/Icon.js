@@ -15,8 +15,8 @@ const Styl = {
     flex: '0 0 20%',
     alignSelf: 'flex-start',
     disply: 'inline-block',
-    minWidth: '44px',
-    maxWidth: '44px',
+    minWidth: 44,
+    maxWidth: 44,
     marginRight: '.6rem'
   },
   name: {
@@ -29,8 +29,8 @@ const Styl = {
   },
   img: {
     display: 'block',
-    width: '40px',
-    height: '40px',
+    width: 40,
+    height: 40,
     margin: '-1rem auto 0'
   }
 }
