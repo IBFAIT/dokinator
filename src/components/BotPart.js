@@ -37,7 +37,7 @@ class BotPart extends React.Component {
       const varData = {...this.props.userTxtInput, ...Defaults};
     return  (
       <div style={Styl.component}>
-        <Icon id={this.props.bot.id} />
+        <Icon name={this.props.bot.name} />
         <div style={Styl.bubbleContainer}>
           {this.props.bot.texts.map((bubbleText, bubbleIndex) => {
             // if there is multiple bot texts, pick random

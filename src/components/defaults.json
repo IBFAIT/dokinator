@@ -1,16 +1,16 @@
 {
   "botIdentitys": {
     "fred": {
-      "id": "fred",
-      "name": "Fred",
+      "name": "fred",
+      "txtName": "Fred",
       "avatar": {
         "alt": "Freds avatar",
         "title": "Fred"
       }
     },
     "doc": {
-      "id": "doc",
-      "name": "Dokinator",
+      "name": "doc",
+      "txtName": "Dokinator",
       "avatar": {
         "alt": "Dokinator's avatar",
         "title": "Dokinator"

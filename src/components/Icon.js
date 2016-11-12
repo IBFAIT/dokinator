@@ -35,19 +35,19 @@ const Styl = {
   }
 }
 
-const Icon = ({ id }) => {
-  const {name, avatar} = Defaults.botIdentitys[id];
+const Icon = ({ name }) => {
+  const {txtName, avatar} = Defaults.botIdentitys[name];
   return (
     <div style={Styl.component}>
       <div style={Styl.name}>
-        {name}
+        {txtName}
       </div>
       <div>
         <img
           style={Styl.img}
           title={avatar.title}
           alt={avatar.alt}
-          src={avatarImgs[id]}
+          src={avatarImgs[name]}
         />
       </div>
     </div>
