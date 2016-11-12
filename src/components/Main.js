@@ -79,9 +79,9 @@ const Styl = {
 class Main extends React.Component {
   constructor() {
     super();
-    this.state = {stepId: 'init'};
-    this.persons = Defaults.persons;
-    this.pastLog = { userInputData: {}, conversation: [] };
+    this.state        = {stepId: 'init'};
+    this.persons      = Defaults.persons;
+    this.pastLog      = { userTxtInput: {}, conversation: [] };
     this.Conversation = Conversation;
 
     // bind this to Callbacks

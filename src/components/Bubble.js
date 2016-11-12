@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-
 let StylVariants = {
   default: {
         alignSelf: 'flex-start',
@@ -36,7 +35,7 @@ let StylVariants = {
       marginTop: '1rem',
       alignSelf: 'flex-end',
       backgroundColor: '#008ABC',
-      color: '#fff',
+      color: '#fff'
     },
     button: {
       display: 'inline-block',
