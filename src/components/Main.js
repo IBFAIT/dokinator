@@ -16,6 +16,38 @@ import UserAnswerPart from './UserAnswerPart.js';
 // include normalize.css
 require('normalize.css/normalize.css');
 // Component Styls
+const style = (part = null) => {
+  switch (part) {
+    case 'botAndPast':
+      return {
+        paddingBottom: '0.5rem',
+        marginBottom: '4rem',
+        width: '100%',
+        maxWidth: '100%'
+      }
+    case 'conversationPart':
+      return {
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          textAlign: 'center',
+          width: '100%',
+          maxWidth: '100%'
+      }
+    default:
+      return {
+          flex: '1 0 0',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          alignContent: 'stretch',
+          maxWidth: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignSelf: 'stretch',
+          flexBasis: 'auto'
+      }
+  }
+}
 const Styl = {
   main: {
       flex: '1 0 0',
