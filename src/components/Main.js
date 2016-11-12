@@ -103,12 +103,14 @@ class Main extends React.Component {
       stepId,
       type: answer.type,
       answerBtnNo,
-      userTxtInput
+      userTxtInput,
+      inputProperty: answer.inputProperty
     };
-    this.pastLog.conversation.push(Object.assign({}, pastLogStep));
     if(pastLogStep.type === 'input') {
       this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
     }
+    this.pastLog.conversation.push(Object.assign({}, pastLogStep));
+
     this.setState({stepId: answer.stepId});
   }
 
