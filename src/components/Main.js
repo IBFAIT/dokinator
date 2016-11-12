@@ -48,33 +48,6 @@ const style = (part = null) => {
       }
   }
 }
-const Styl = {
-  main: {
-      flex: '1 0 0',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      alignContent: 'stretch',
-      maxWidth: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignSelf: 'stretch',
-      flexBasis: 'auto'
-  },
-  botAndPast: {
-    paddingBottom: '0.5rem',
-    marginBottom: '4rem',
-    width: '100%',
-    maxWidth: '100%'
-  },
-  conversationPart: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      textAlign: 'center',
-      width: '100%',
-      maxWidth: '100%'
-  }
-}
 
 class Main extends React.Component {
   constructor() {
