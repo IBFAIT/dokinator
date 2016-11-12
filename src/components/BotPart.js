@@ -34,17 +34,15 @@ class BotPart extends React.Component {
 
   render() {
     // object definition for for template string
-    if(this.props.userInputData) {
-      const varData = {...this.props.userInputData, ...Defaults};
-    }
+      const varData = {...this.props.userTxtInput, ...Defaults};
     return  (
       <div style={Styl.component}>
         <Icon id={this.props.bot.id} />
         <div style={Styl.bubbleContainer}>
           {this.props.bot.texts.map((bubbleText, bubbleIndex) => {
             // if there is multiple bot texts, pick random
-            if(this.props.handleRandomBubble) {
-              bubbleText = (Array.isArray(bubbleText)) ? this.props.handleRandomBubble(bubbleText, bubbleIndex) : bubbleText;
+            if(this.props.randomBotTextSample) {
+              bubbleText = (Array.isArray(bubbleText)) ? this.props.randomBotTextSample(bubbleText, bubbleIndex) : bubbleText;
             }
             return (
               <Bubble key={bubbleIndex}>
