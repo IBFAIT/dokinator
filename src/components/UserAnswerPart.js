@@ -30,6 +30,7 @@ const UserAnswerPart = ({ answers, nextStepCb }) => {
                       autoFocus={true}
                       onKeyPress={(evt) => {
                         if(evt.key ==='Enter') nextStepCb({
+                          answerBtnNo,
                           userTxtInput: evt.target.value
                         });
                       }} />
