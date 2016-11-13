@@ -1,8 +1,8 @@
 'use strict';
-
 import React  from 'react';
 import Scroll from 'smoothscroll';
-
+// include normalize.css
+require('normalize.css/normalize.css');
 // JSON data with bot defaults etc
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
@@ -12,9 +12,6 @@ import Bubble         from './Bubble.js';
 import BotPart        from './BotPart.js';
 import PastPart       from './PastPart.js';
 import UserAnswerPart from './UserAnswerPart.js';
-
-// include normalize.css
-require('normalize.css/normalize.css');
 
 class Main extends React.Component {
   constructor() {
@@ -32,11 +29,11 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.addNextBotBubble();
+    this.timedNextBotBubble();
   }
 
   componentDidUpdate() {
-    this.addNextBotBubble();
+    this.timedNextBotBubble();
     // ensure scrolling to the bottom on update
     const answerBottom = document.getElementById('scrollTarget').lastChild;
     if(answerBottom) {
@@ -46,44 +43,40 @@ class Main extends React.Component {
     }
   }
 
-  addNextBotBubble() {
+  timedNextBotBubble() {
     const {stepId, stepBotTexts, answer} = this.state;
     const {bot} = this.Conversation[stepId];
     if(stepBotTexts.length < bot.texts.length) {
-      this.updateTmId = setTimeout(() => {this.delayedNextBotBubble({stepBotTexts, bot})}, 1500, this);
+      this.updateTmId = setTimeout(() => {this.showNextBotBubble({stepBotTexts, bot})}, 1500, this);
     } else if(!answer) {
-      this.updateTmId = setTimeout(() => {this.delayedUserAnswers()}, 1500, this);
+      this.updateTmId = setTimeout(() => {this.showUserAnswerBtn()}, 1500, this);
     }
   }
-  delayedNextBotBubble({stepBotTexts, bot}) {
+  showNextBotBubble({stepBotTexts, bot}) {
     this.setState({
       stepBotTexts: [...stepBotTexts, bot.texts[stepBotTexts.length]],
       answer: false
     })
   }
-  delayedUserAnswers() {
-    this.setState({
-      answer: true
-    });
+  showUserAnswerBtn() {
+    this.setState({answer: true});
   }
 
   nextStepCb({answerBtnNo, userTxtInput}) {
     answerBtnNo = (typeof answerBtnNo === 'undefined') ? 0 : answerBtnNo; // most likeley to be removed, just as a quick ensurance for it to be 0
     const {stepId} = this.state;
     const answer = this.Conversation[stepId].user.answers[answerBtnNo];
-    const pastLogStep = {
-      stepId, answerBtnNo, userTxtInput,
-      type: answer.type, inputProperty: answer.inputProperty
-    };
-    if(pastLogStep.type === 'input') {
+    // setup history step Object
+    const pastLogStep = { stepId, answerBtnNo, userTxtInput,
+      type: answer.type, inputProperty: answer.inputProperty };
+    if(pastLogStep.type === 'input') { // on user Input set property, like name for ex.
       this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
     }
+    // Push the step Opbj to the log array with cloning to prevent references
     this.pastLog.conversation.push(Object.assign({}, pastLogStep));
-    clearTimeout(this.updateTmId);
     this.setState({
-      stepId: answer.stepId,
-      stepBotTexts: [this.Conversation[answer.stepId].bot.texts[0]],
-      answer: false
+      stepId: answer.stepId, answer: false,
+      stepBotTexts: [this.Conversation[answer.stepId].bot.texts[0]]
     });
   }
 
@@ -91,7 +84,6 @@ class Main extends React.Component {
     const {stepId, stepBotTexts} = this.state;
     const {bot, user} = this.Conversation[stepId];
     const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
-
     return (
       <div style={style()}>
         <div style={style('botAndPast')}>
@@ -109,14 +101,14 @@ class Main extends React.Component {
           </BotPart>
         </div>
         <div style={style('conversationPart')} id='scrollTarget'>
-          {(this.state.answer===true)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb}/>:null}
+          {(this.state.answer===true)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb} />:null}
         </div>
       </div>
     );
-    }
+  }
 }
 
-// Component Styls
+// Component styles
 const style = (part = null) => {
   switch (part) {
     case 'botAndPast':
@@ -135,19 +127,17 @@ const style = (part = null) => {
           width: '100%',
           maxWidth: '100%'
       }
-    default:
-      return {
-          flex: '1 0 0',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          alignContent: 'stretch',
-          maxWidth: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignSelf: 'stretch',
-          flexBasis: 'auto'
-      }
+  }
+  return {
+      flex: '1 0 0',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      alignContent: 'stretch',
+      maxWidth: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignSelf: 'stretch',
+      flexBasis: 'auto'
   }
 }
-
 export default Main;
