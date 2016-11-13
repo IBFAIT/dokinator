@@ -15,6 +15,109 @@ import UserAnswerPart from './UserAnswerPart.js';
 
 // include normalize.css
 require('normalize.css/normalize.css');
+
+class Main extends React.Component {
+  constructor() {
+    super();
+    this.state  = {
+      stepId: 'init',
+      stepBotTexts: [Conversation['init'].bot.texts[0]],
+      answer: false
+    };
+    this.persons      = Defaults.persons;
+    this.pastLog      = { userTxtInput: {}, conversation: [] };
+    this.Conversation = Conversation;
+    this.nextStepCb = this.nextStepCb.bind(this);
+    this.updateTmId = null;
+  }
+
+  componentDidMount() {
+    this.addNextBotBubble();
+  }
+
+  componentDidUpdate() {
+    this.addNextBotBubble();
+    // ensure scrolling to the bottom on update
+    const answerBottom = document.getElementById('scrollTarget').lastChild;
+    if(answerBottom) {
+      Scroll(answerBottom);
+    } else {
+      Scroll(document.getElementById('scrollTarget'));
+    }
+  }
+
+  addNextBotBubble() {
+    const {stepId, stepBotTexts} = this.state;
+    const {bot, user} = this.Conversation[stepId];
+    if(stepBotTexts.length < bot.texts.length) {
+      if(this.updateTmId === null) clearTimeout(this.updateTmId);
+      this.updateTmId = setTimeout(() => {this.delayedNextBotBubble({stepBotTexts, bot})}, 1500, this);
+    } else {
+      if(this.updateTmId === null) clearTimeout(this.updateTmId);
+      this.updateTmId = setTimeout(() => {this.delayedUserAnswers()}, 3000, this);
+    }
+  }
+  delayedNextBotBubble({stepBotTexts, bot}) {
+    this.setState({
+      stepBotTexts: [...stepBotTexts, bot.texts[stepBotTexts.length]],
+      answer: false
+    })
+  }
+  delayedUserAnswers() {
+    this.setState({
+      answer: true
+    });
+  }
+
+  nextStepCb({answerBtnNo, userTxtInput}) {
+    answerBtnNo = (typeof answerBtnNo === 'undefined') ? 0 : answerBtnNo; // most likeley to be removed, just as a quick ensurance for it to be 0
+    const {stepId} = this.state;
+    const answer = this.Conversation[stepId].user.answers[answerBtnNo];
+    const pastLogStep = {
+      stepId, answerBtnNo, userTxtInput,
+      type: answer.type, inputProperty: answer.inputProperty
+    };
+    if(pastLogStep.type === 'input') {
+      this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
+    }
+    this.pastLog.conversation.push(Object.assign({}, pastLogStep));
+    clearTimeout(this.updateTmId);
+    this.setState({
+      stepId: answer.stepId,
+      stepBotTexts: [],
+      answer: false
+    });
+  }
+
+  render() {
+    const {stepId, stepBotTexts, stepUserAnswers} = this.state;
+    const {bot, user} = this.Conversation[stepId];
+    const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
+
+    return (
+      <div style={style()}>
+        <div style={style('botAndPast')}>
+          {this.pastLog.conversation.map(
+            (conversationStep, stepIndex) => (
+              <PastPart
+                key={stepIndex} stepIndex={stepIndex} step={conversationStep}
+                conversation={this.Conversation}
+                userTxtInput={this.pastLog.userTxtInput}/>)
+            )}
+          <BotPart bot={bot}>
+            { stepBotTexts.map( (botText, botBubbleIndex) => (
+                <Bubble key={botBubbleIndex}>{eval('`' + botText + '`')}</Bubble>
+              )) }
+          </BotPart>
+        </div>
+        <div style={style('conversationPart')} id='scrollTarget'>
+          {(this.state.answer===true)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb}/>:null}
+        </div>
+      </div>
+    );
+    }
+}
+
 // Component Styls
 const style = (part = null) => {
   switch (part) {
@@ -47,86 +150,6 @@ const style = (part = null) => {
           flexBasis: 'auto'
       }
   }
-}
-
-class Main extends React.Component {
-  constructor() {
-    super();
-    this.state  = {
-      stepId: 'init',
-      stepBotTexts: [Conversation['init'].bot.texts[0]]
-    };
-    this.persons      = Defaults.persons;
-    this.pastLog      = { userTxtInput: {}, conversation: [] };
-    this.Conversation = Conversation;
-    // bind this to Callbacks
-    this.nextStepCb = this.nextStepCb.bind(this);
-  }
-
-  componentDidUpdate() {
-    const answerBottom = document.getElementById('scrollTarget').lastChild;
-    Scroll(answerBottom);
-  }
-
-  nextStepCb({answerBtnNo, userTxtInput}) {
-    answerBtnNo = (typeof answerBtnNo === 'undefined') ? 0 : answerBtnNo;
-    const {stepId} = this.state;
-    const answer = this.Conversation[stepId].user.answers[answerBtnNo];
-    const pastLogStep = { stepId, answerBtnNo, userTxtInput,
-      type: answer.type,
-      inputProperty: answer.inputProperty
-    };
-    if(pastLogStep.type === 'input') {
-      this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
-    }
-    this.pastLog.conversation.push(Object.assign({}, pastLogStep));
-    this.setState({
-      stepId: answer.stepId,
-      stepBotTexts: [Conversation[answer.stepId].bot.texts[0]]
-    });
-  }
-
-  renderBotBubbles({stepBotTexts, botTxtFull}) {
-    const varData = {...this.pastLog.userTxtInput, ...Defaults};
-    if(stepBotTexts.length <= botTxtFull.length) {
-      this.setState({
-        stepBotTexts: this.state.stepBotTexts.push(botTxtFull[stepBotTexts.length+1])
-      })
-    }
-    return stepBotTexts.map((botText, botBubbleIndex) => {
-      return (
-        <Bubble
-          key={botBubbleIndex}
-          animated={(botBubbleIndex === stepBotTexts.length) ? true: false}>
-            {eval('`' + botText + '`')}
-        </Bubble>
-      );
-    });
-  }
-
-  render() {
-    const {stepId, stepBotTexts} = this.state;
-    const {bot, user} = this.Conversation[stepId];
-    return (
-      <div style={style()}>
-        <div style={style('botAndPast')}>
-          {this.pastLog.conversation.map(
-            (conversationStep, stepIndex) => (
-              <PastPart
-                key={stepIndex} stepIndex={stepIndex} step={conversationStep}
-                conversation={this.Conversation}
-                userTxtInput={this.pastLog.userTxtInput}/>)
-            )}
-          <BotPart bot={bot}>
-            {this.renderBotBubbles({stepBotTexts, botTxtFull: bot.texts})}
-          </BotPart>
-        </div>
-        <div style={style('conversationPart')} id='scrollTarget'>
-          <UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb}/>
-        </div>
-      </div>
-    );
-    }
 }
 
 export default Main;
