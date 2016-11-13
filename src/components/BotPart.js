@@ -24,36 +24,16 @@ const Styl = {
     maxWidth: '100%'
   }
 }
-class BotPart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bubbleStep: this.props.bot.texts.length
-    }
-  }
 
-  render() {
-    // object definition for for template string
-      const varData = {...this.props.userTxtInput, ...Defaults};
-    return  (
-      <div style={Styl.component}>
-        <Icon name={this.props.bot.name} />
-        <div style={Styl.bubbleContainer}>
-          {this.props.bot.texts.map((bubbleText, bubbleIndex) => {
-            // if there is multiple bot texts, pick random
-            if(this.props.randomBotTextSample) {
-              bubbleText = (Array.isArray(bubbleText)) ? this.props.randomBotTextSample(bubbleText, bubbleIndex) : bubbleText;
-            }
-            return (
-              <Bubble key={bubbleIndex}>
-                {eval('`'+bubbleText+'`')}
-              </Bubble>
-            );
-          })}
-        </div>
+const BotPart = ({bot, children}) => {
+  return  (
+    <div style={Styl.component}>
+      <Icon name={bot.name} />
+      <div style={Styl.bubbleContainer}>
+        {children}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 BotPart.displayName = 'BotPart';

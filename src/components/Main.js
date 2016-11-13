@@ -2,13 +2,13 @@
 
 import React  from 'react';
 import Scroll from 'smoothscroll';
-import _      from 'lodash';
 
 // JSON data with bot defaults etc
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
+import Bubble         from './Bubble.js';
 import BotPart        from './BotPart.js';
 import PastPart       from './PastPart.js';
 import UserAnswerPart from './UserAnswerPart.js';
@@ -52,13 +52,14 @@ const style = (part = null) => {
 class Main extends React.Component {
   constructor() {
     super();
-    this.state        = {stepId: 'init'};
+    this.state  = {
+      stepId: 'init',
+      stepBotTexts: [Conversation['init'].bot.texts[0]]
+    };
     this.persons      = Defaults.persons;
     this.pastLog      = { userTxtInput: {}, conversation: [] };
     this.Conversation = Conversation;
-
     // bind this to Callbacks
-    this.randomBotTextSample = this.randomBotTextSample.bind(this);
     this.nextStepCb = this.nextStepCb.bind(this);
   }
 
@@ -67,36 +68,47 @@ class Main extends React.Component {
     Scroll(answerBottom);
   }
 
-
   nextStepCb({answerBtnNo, userTxtInput}) {
     answerBtnNo = (typeof answerBtnNo === 'undefined') ? 0 : answerBtnNo;
     const {stepId} = this.state;
     const answer = this.Conversation[stepId].user.answers[answerBtnNo];
-    let pastLogStep = {
-      stepId,
+    const pastLogStep = { stepId, answerBtnNo, userTxtInput,
       type: answer.type,
-      answerBtnNo,
-      userTxtInput,
       inputProperty: answer.inputProperty
     };
     if(pastLogStep.type === 'input') {
       this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
     }
     this.pastLog.conversation.push(Object.assign({}, pastLogStep));
-
-    this.setState({stepId: answer.stepId});
+    this.setState({
+      stepId: answer.stepId,
+      stepBotTexts: [Conversation[answer.stepId].bot.texts[0]]
+    });
   }
 
-  randomBotTextSample(bubbleText, bubbleIndex) {
-    this.Conversation[this.state.stepId].bot.texts[bubbleIndex] = _.sample(bubbleText);
-    return this.Conversation[this.state.stepId].bot.texts[bubbleIndex];
+  renderBotBubbles({stepBotTexts, botTxtFull}) {
+    const varData = {...this.pastLog.userTxtInput, ...Defaults};
+    if(stepBotTexts.length <= botTxtFull.length) {
+      this.setState({
+        stepBotTexts: this.state.stepBotTexts.push(botTxtFull[stepBotTexts.length+1])
+      })
+    }
+    return stepBotTexts.map((botText, botBubbleIndex) => {
+      return (
+        <Bubble
+          key={botBubbleIndex}
+          animated={(botBubbleIndex === stepBotTexts.length) ? true: false}>
+            {eval('`' + botText + '`')}
+        </Bubble>
+      );
+    });
   }
 
   render() {
-    const {stepId} = this.state;
+    const {stepId, stepBotTexts} = this.state;
     const {bot, user} = this.Conversation[stepId];
-
-    return (<div style={style()}>
+    return (
+      <div style={style()}>
         <div style={style('botAndPast')}>
           {this.pastLog.conversation.map(
             (conversationStep, stepIndex) => (
@@ -105,14 +117,15 @@ class Main extends React.Component {
                 conversation={this.Conversation}
                 userTxtInput={this.pastLog.userTxtInput}/>)
             )}
-          <BotPart bot={bot}
-            userTxtInput={this.pastLog.userTxtInput}
-            randomBotTextSample={this.randomBotTextSample}/>
+          <BotPart bot={bot}>
+            {this.renderBotBubbles({stepBotTexts, botTxtFull: bot.texts})}
+          </BotPart>
         </div>
         <div style={style('conversationPart')} id='scrollTarget'>
           <UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb}/>
         </div>
-      </div>);
+      </div>
+    );
     }
 }
 

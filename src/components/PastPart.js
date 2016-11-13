@@ -3,6 +3,7 @@
 import React from 'react';
 
 // JSON data beeing imported
+import Defaults from './defaults.json';
 
 import BotPart          from './BotPart.js';
 import Bubble from './Bubble.js';
@@ -25,9 +26,18 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
       userBubbleTxt = userTxtInput[step.inputProperty];
       break;
   }
+  const varData = {...userTxtInput, ...Defaults};
   return (
     <div key={'conv_'+stepIndex} style={Styl}>
-      <BotPart bot={conversation[stepId].bot} userTxtInput={userTxtInput} />
+      <BotPart bot={conversation[stepId].bot}>
+        {conversation[stepId].bot.texts.map((botText, botBubbleIndex) => {
+          return (
+            <Bubble key={botBubbleIndex}>
+              {eval('`' + botText + '`')}
+            </Bubble>
+          );
+        })}
+      </BotPart>
 
       <Bubble key={'user_'+stepIndex} type={step.type} userPast>
         {userBubbleTxt}
