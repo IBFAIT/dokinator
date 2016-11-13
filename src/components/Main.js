@@ -47,14 +47,12 @@ class Main extends React.Component {
   }
 
   addNextBotBubble() {
-    const {stepId, stepBotTexts} = this.state;
-    const {bot, user} = this.Conversation[stepId];
+    const {stepId, stepBotTexts, answer} = this.state;
+    const {bot} = this.Conversation[stepId];
     if(stepBotTexts.length < bot.texts.length) {
-      if(this.updateTmId === null) clearTimeout(this.updateTmId);
       this.updateTmId = setTimeout(() => {this.delayedNextBotBubble({stepBotTexts, bot})}, 1500, this);
-    } else {
-      if(this.updateTmId === null) clearTimeout(this.updateTmId);
-      this.updateTmId = setTimeout(() => {this.delayedUserAnswers()}, 3000, this);
+    } else if(!answer) {
+      this.updateTmId = setTimeout(() => {this.delayedUserAnswers()}, 1500, this);
     }
   }
   delayedNextBotBubble({stepBotTexts, bot}) {
@@ -84,13 +82,13 @@ class Main extends React.Component {
     clearTimeout(this.updateTmId);
     this.setState({
       stepId: answer.stepId,
-      stepBotTexts: [],
+      stepBotTexts: [this.Conversation[answer.stepId].bot.texts[0]],
       answer: false
     });
   }
 
   render() {
-    const {stepId, stepBotTexts, stepUserAnswers} = this.state;
+    const {stepId, stepBotTexts} = this.state;
     const {bot, user} = this.Conversation[stepId];
     const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
 
