@@ -1,6 +1,13 @@
 'use strict';
-
 import React from 'react';
+
+const Bubble = ({children, onClick = 0, type}) => {
+  return <div style={style(type)} onClick={onClick}>
+      {children}
+    </div>;
+}
+
+Bubble.displayName = 'Bubble';
 
 const style = (type) => {
   const basic = {
@@ -23,6 +30,7 @@ const style = (type) => {
         backgroundColor: '#fff',
         boxShadow: '0px 1px 1px rgba(0,0,0,0.2)'
     };
+
   switch (type) {
     case 'input':
       return {...basic, ...{
@@ -51,13 +59,5 @@ const style = (type) => {
   }
   return basic;
 }
-
-const Bubble = ({children, onClick = 0, type}) => {
-  return <div style={style(type)} onClick={onClick}>
-      {children}
-    </div>;
-}
-
-Bubble.displayName = 'Bubble';
 
 export default Bubble;
