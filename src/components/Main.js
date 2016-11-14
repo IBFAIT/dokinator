@@ -81,7 +81,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const {stepId, stepBotTexts} = this.state;
+    const {stepId, stepBotTexts, answer} = this.state;
     const {bot, user} = this.Conversation[stepId];
     const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
     return (
@@ -96,14 +96,17 @@ class Main extends React.Component {
             )}
           <BotPart botIdentity={Defaults.botIdentitys[bot.name]} type="speaking">
             { stepBotTexts.map( (botText, bubbleIndex) => (
-                <Bubble key={bubbleIndex} type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}>
+                <Bubble
+                  key={bubbleIndex}
+                  type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}
+                  answerPresent={answer}>
                   {eval('`' + botText + '`')}
                 </Bubble>
               )) }
           </BotPart>
         </div>
         <div style={style('conversationPart')} id='scrollTarget'>
-          {(this.state.answer===true)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb} />:null}
+          {(answer===true)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb} />:null}
         </div>
       </div>
     );

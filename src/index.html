@@ -41,34 +41,37 @@
 
   @keyframes bubbleAppearOuter {
     0% {
-      transform: translate3d(-20px, 0, 0);
+      transform-origin: left;
+      transform: scaleX(0);
       opacity: 0;
     }
-    10% {
-      opacity: 0.5
-    }
     30% {
-      opacity: 1
+      transform-origin: left;
+      transform: scaleX(0.2);
+      opacity: 1;
     }
     100% {
-      transform: translate3d(0, 0, 0);
+      transform-origin: left;
+      transform: scaleX(1);
       opacity: 1;
     }
   }
   @keyframes bubbleAppearInner {
     0% {
       opacity: 0;
-      transition: width 1s, transform 1s;
-      transform-origin: left;
-      transform: scaleX(0);
+      /*transition: width 1s, transform 1s;*/
+      transform: translate3d(-80%, 0, 0);
     }
-    80% {
+    70% {
+      opacity: 0.3;
+
     }
     100% {
       opacity: 1;
-      transition: width 1s, transform 1s;
+      /*transition: width 1s, transform 1s;
       transform-origin: left;
-      transform: scaleX(1);
+      transform: scaleX(1);*/
+      transform: translate3d(0, 0, 0);
     }
   }
 

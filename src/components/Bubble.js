@@ -1,23 +1,32 @@
 'use strict';
 import React from 'react';
 
-
-const Bubble = ({children, onClick, type}) => {
+const Bubble = ({children, onClick, type, answerPresent}) => {
   return <div style={style(type)} onClick={onClick}>
-      <div style={innerStyle(type)}>
+      <div style={innerStyle({type, answerPresent})}>
         {children}
       </div>
     </div>;
 }
 Bubble.displayName = 'Bubble';
 
-const innerStyle = (type) => {
-  if(type==='speaking') {
+const displayDots = ({type = null, children}) => {
+  if(type === null) {
+    setTimeout(() => {displayDots({type: 1, children})}, 100, displayDots, children);
+    return '...';
+  }
+  if(type === 1) {
+    return children;
+  }
+}
+
+const innerStyle = ({type, answerPresent}) => {
+  if(type==='speaking' && !answerPresent) {
     return {
+      opacity: 0,
       animationName: 'bubbleAppearInner',
-      animationDuration: '500ms',
-      animationDelay: 0,
-      animationTimingFunction: 'cubic-bezier(0.2, 0.4, 1.0, 0.2)'
+      animationDelay: '500ms',
+      animationDuration: '1000ms'
     }
   }
   return {
@@ -76,9 +85,10 @@ const style = (type) => {
       }};
     case 'speaking':
       return {...basic, ...{
+        overflow: 'hidden',
         animationName: 'bubbleAppearOuter',
         animationDelay: 0,
-        animationDuration: '400ms'
+        animationDuration: '1500ms'
       }};
     case 'invisible':
       return {display: 'none'};
