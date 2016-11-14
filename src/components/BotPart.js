@@ -54,7 +54,7 @@ const style = ({part = null, type}) => {
         const nameAnim = (type=='speaking') ? {
             animationName: 'nameAnimation',
             animationDelay: 0,
-            animationDuration: '800ms'
+            animationDuration: '900ms'
           } : {};
         return {
           ...nameAnim,
@@ -69,7 +69,7 @@ const style = ({part = null, type}) => {
         const imgAnim = (type == 'speaking') ? {
             animationName: 'imgAnimation',
             animationDelay: 0,
-            animationDuration: '1500ms'
+            animationDuration: '1100ms'
           } : {};
         return {
           ...imgAnim,

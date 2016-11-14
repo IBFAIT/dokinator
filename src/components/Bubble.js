@@ -1,13 +1,32 @@
 'use strict';
 import React from 'react';
 
+
 const Bubble = ({children, onClick, type}) => {
   return <div style={style(type)} onClick={onClick}>
-      {children}
+      <div style={innerStyle(type)}>
+        {children}
+      </div>
     </div>;
 }
 Bubble.displayName = 'Bubble';
 
+const innerStyle = (type) => {
+  if(type==='speaking') {
+    return {
+      animationName: 'bubbleAppearInner',
+      animationDuration: '500ms',
+      animationDelay: 0,
+      animationTimingFunction: 'cubic-bezier(0.2, 0.4, 1.0, 0.2)'
+    }
+  }
+  return {
+    display: 'block',
+    margin: 0,
+    padding: 0,
+    opacity: 1
+  }
+}
 const style = (type) => {
   const basic = {
         alignSelf: 'flex-start',
@@ -57,9 +76,9 @@ const style = (type) => {
       }};
     case 'speaking':
       return {...basic, ...{
-        animationName: 'slideInLeft',
+        animationName: 'bubbleAppearOuter',
         animationDelay: 0,
-        animationDuration: '1000ms'
+        animationDuration: '400ms'
       }};
     case 'invisible':
       return {display: 'none'};

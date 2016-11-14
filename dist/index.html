@@ -38,6 +38,42 @@
     display: flex;
     padding: .5rem;
   }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translate3d(-120px, 0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5
+    }
+    30% {
+      opacity: 1
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes imgAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes nameAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   input:focus {
     outline: 0
   }
