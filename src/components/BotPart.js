@@ -3,7 +3,7 @@ import React from 'react';
 
 const avatarImgs = {
   doc:  require('../images/docinator.jpg'),
-  fred: require('../images/fred.png'),
+  fred: require('../images/fred.png')
 }
 
 const BotPart = ({children, botIdentity, type}) => {
