@@ -96,7 +96,9 @@ class Main extends React.Component {
             )}
           <BotPart botIdentity={Defaults.botIdentitys[bot.name]}>
             { stepBotTexts.map( (botText, botBubbleIndex) => (
-                <Bubble key={botBubbleIndex}>{eval('`' + botText + '`')}</Bubble>
+                <Bubble key={botBubbleIndex} type="speaking">
+                  {eval('`' + botText + '`')}
+                </Bubble>
               )) }
           </BotPart>
         </div>
