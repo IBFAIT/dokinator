@@ -15,12 +15,12 @@ const Styl = {
 
 const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
   const {stepId, answerBtnNo, type} = step;
-
+  const conversationStep = conversation[stepId];
   // Getting the text from the right source - desicion by type
   let userBubbleTxt = '';
   switch (type) {
     case 'button':
-      userBubbleTxt = conversation[stepId].user.answers[answerBtnNo].text;
+      userBubbleTxt = conversationStep.user.answers[answerBtnNo].text;
       break;
     case 'input':
       userBubbleTxt = userTxtInput[step.inputProperty];
@@ -29,7 +29,7 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
   const varData = {...userTxtInput, ...Defaults};
   return (
     <div key={'conv_'+stepIndex} style={Styl}>
-      <BotPart bot={conversation[stepId].bot}>
+      <BotPart  botIdentity={Defaults.botIdentitys[conversationStep.bot.name]}>
         {conversation[stepId].bot.texts.map((botText, botBubbleIndex) => {
           return (
             <Bubble key={botBubbleIndex}>

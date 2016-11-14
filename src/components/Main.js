@@ -94,7 +94,7 @@ class Main extends React.Component {
                 conversation={this.Conversation}
                 userTxtInput={this.pastLog.userTxtInput}/>)
             )}
-          <BotPart bot={bot}>
+          <BotPart botIdentity={Defaults.botIdentitys[bot.name]}>
             { stepBotTexts.map( (botText, botBubbleIndex) => (
                 <Bubble key={botBubbleIndex}>{eval('`' + botText + '`')}</Bubble>
               )) }
