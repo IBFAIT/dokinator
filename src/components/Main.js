@@ -94,9 +94,9 @@ class Main extends React.Component {
                 conversation={this.Conversation}
                 userTxtInput={this.pastLog.userTxtInput}/>)
             )}
-          <BotPart botIdentity={Defaults.botIdentitys[bot.name]}>
-            { stepBotTexts.map( (botText, botBubbleIndex) => (
-                <Bubble key={botBubbleIndex} type="speaking">
+          <BotPart botIdentity={Defaults.botIdentitys[bot.name]} type="speaking">
+            { stepBotTexts.map( (botText, bubbleIndex) => (
+                <Bubble key={bubbleIndex} type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}>
                   {eval('`' + botText + '`')}
                 </Bubble>
               )) }

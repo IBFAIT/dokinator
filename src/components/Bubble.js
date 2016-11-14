@@ -1,12 +1,11 @@
 'use strict';
 import React from 'react';
 
-const Bubble = ({children, onClick = 0, type}) => {
+const Bubble = ({children, onClick, type}) => {
   return <div style={style(type)} onClick={onClick}>
       {children}
     </div>;
 }
-
 Bubble.displayName = 'Bubble';
 
 const style = (type) => {
@@ -56,6 +55,14 @@ const style = (type) => {
         backgroundColor: '#008ABC',
         color: '#fff'
       }};
+    case 'speaking':
+      return {...basic, ...{
+        animationName: 'slideInLeft',
+        animationDelay: 0,
+        animationDuration: '1000ms'
+      }};
+    case 'invisible':
+      return {display: 'none'};
   }
   return basic;
 }

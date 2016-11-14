@@ -29,7 +29,7 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
   const varData = {...userTxtInput, ...Defaults};
   return (
     <div key={'conv_'+stepIndex} style={Styl}>
-      <BotPart  botIdentity={Defaults.botIdentitys[conversationStep.bot.name]}>
+      <BotPart botIdentity={Defaults.botIdentitys[conversationStep.bot.name]} type="past">
         {conversation[stepId].bot.texts.map((botText, botBubbleIndex) => {
           return (
             <Bubble key={botBubbleIndex}>

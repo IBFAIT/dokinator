@@ -6,24 +6,24 @@ const avatarImgs = {
   fred: require('../images/fred.png'),
 }
 
-const BotPart = ({children, botIdentity}) => {
+const BotPart = ({children, botIdentity, type}) => {
   const {avatar, txtName, name} = botIdentity;
   return  (
-    <div style={style()}>
-      <div style={style('avatarPart')}>
-        <div style={style('botName')}>
+    <div style={style({part: null})}>
+      <div style={style({part: 'avatarPart', type})}>
+        <div style={style({part: 'botName', type})}>
           {txtName}
         </div>
         <div>
           <img
-            style={style('botImg')}
+            style={style({part: 'botImg', type})}
             title={avatar.title}
             alt={avatar.alt}
             src={avatarImgs[name]}
           />
         </div>
       </div>
-      <div style={style('bubbleContainer')}>
+      <div style={style({part: 'bubbleContainer'})}>
         {children}
       </div>
     </div>
@@ -31,8 +31,8 @@ const BotPart = ({children, botIdentity}) => {
 }
 BotPart.displayName = 'BotPart';
 
-const style = (type) => {
-  switch (type) {
+const style = ({part = null, type}) => {
+  switch (part) {
     case 'bubbleContainer':
       return {
           display: 'flex',
@@ -51,7 +51,13 @@ const style = (type) => {
           marginRight: '.6rem'
         };
       case 'botName':
+        const nameAnim = (type=='speaking') ? {
+            animationName: 'nameAnimation',
+            animationDelay: 0,
+            animationDuration: '800ms'
+          } : {};
         return {
+          ...nameAnim,
           position: 'relative',
           display: 'inline-block',
           right: '-4.7rem',
@@ -60,7 +66,13 @@ const style = (type) => {
           fontSize: '.77rem'
         };
       case 'botImg':
+        const imgAnim = (type == 'speaking') ? {
+            animationName: 'imgAnimation',
+            animationDelay: 0,
+            animationDuration: '1500ms'
+          } : {};
         return {
+          ...imgAnim,
           display: 'block',
           width: 40,
           height: 40,
