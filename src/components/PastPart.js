@@ -38,8 +38,7 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
           );
         })}
       </BotPart>
-
-      <Bubble key={'user_'+stepIndex} type="past">
+      <Bubble key={'user_'+stepIndex} type={(type !== 'forward') ? 'past' : 'invisible'}>
         {userBubbleTxt}
       </Bubble>
     </div>
