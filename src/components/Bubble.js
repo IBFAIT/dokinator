@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-let StylVariants = {
-  default: {
+const style = (type) => {
+  const basic = {
         alignSelf: 'flex-start',
         maxWidth: '80%',
         color: '#000',
@@ -22,49 +22,38 @@ let StylVariants = {
         lineHeight: 1.6,
         backgroundColor: '#fff',
         boxShadow: '0px 1px 1px rgba(0,0,0,0.2)'
-    },
-    disabled: {
-      display: 'inline-block',
-      backgroundColor: 'rgba(193, 193, 193, 0.5)'
-    },
-    input: {
-      display: 'inline-block',
-      alignSelf: 'center'
-    },
-    userPast: {
-      marginTop: '1rem',
-      alignSelf: 'flex-end',
-      backgroundColor: '#008ABC',
-      color: '#fff'
-    },
-    button: {
-      display: 'inline-block',
-      backgroundColor: '#008ABC',
-      color: '#fff',
-      alignSelf: 'center'
-    }
-}
-
-const Styl = ({type, userPast}) => {
-  if(type === 'forward') {
-    return {display: 'none'};
-  }
-  if(userPast) {
-    return {...StylVariants.default, ...StylVariants.userPast};
-  }
+    };
   switch (type) {
     case 'input':
-      return {...StylVariants.default, ...StylVariants.input};
-    case 'button':
-      return {...StylVariants.default, ...StylVariants.button};
+      return {...basic, ...{
+        display: 'inline-block',
+        alignSelf: 'center'
+      }};
     case 'disabled':
-      return {...StylVariants.default, ...StylVariants.disabled};
+      return {...basic, ...{
+        display: 'inline-block',
+        backgroundColor: 'rgba(193, 193, 193, 0.5)'
+      }};
+    case 'button':
+      return {...basic, ...{
+        display: 'inline-block',
+        backgroundColor: '#008ABC',
+        color: '#fff',
+        alignSelf: 'center'
+      }};
+    case 'past':
+      return {...basic, ...{
+        marginTop: '1rem',
+        alignSelf: 'flex-end',
+        backgroundColor: '#008ABC',
+        color: '#fff'
+      }};
   }
-  return StylVariants.default;
+  return basic;
 }
 
-const Bubble = ({children, onClick = 0, type = 'default', userPast}) => {
-  return <div style={Styl({userPast, type})} onClick={onClick}>
+const Bubble = ({children, onClick = 0, type}) => {
+  return <div style={style(type)} onClick={onClick}>
       {children}
     </div>;
 }

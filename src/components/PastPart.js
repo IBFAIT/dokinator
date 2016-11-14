@@ -39,7 +39,7 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
         })}
       </BotPart>
 
-      <Bubble key={'user_'+stepIndex} type={step.type} userPast>
+      <Bubble key={'user_'+stepIndex} type="past">
         {userBubbleTxt}
       </Bubble>
     </div>
