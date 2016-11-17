@@ -17,15 +17,8 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
   const {stepId, answerBtnNo, type} = step;
   const conversationStep = conversation[stepId];
   // Getting the text from the right source - desicion by type
-  let userBubbleTxt = '';
-  switch (type) {
-    case 'button':
-      userBubbleTxt = conversationStep.user.answers[answerBtnNo].text;
-      break;
-    case 'input':
-      userBubbleTxt = userTxtInput[step.inputProperty];
-      break;
-  }
+  const userBubbleText = (type === 'input') ? userTxtInput[step.inputProperty] : conversationStep.user.answers[answerBtnNo].text;
+
   const varData = {...userTxtInput, ...Defaults};
   return (
     <div key={'conv_'+stepIndex} style={Styl}>
