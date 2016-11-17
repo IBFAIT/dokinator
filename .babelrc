@@ -5,5 +5,5 @@
     "stage-0",
     "react"
   ],
-  "plugins": ["transform-flow-strip-types", "react-hot-loader/babel"]
+  "plugins": ["transform-flow-strip-types"]
 }
