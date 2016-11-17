@@ -31,16 +31,17 @@ const UserAnswerPart = ({ answers, nextStepCb }) => {
                       placeholder={placeholder}
                       autoFocus={true}
                       onKeyPress={(evt) => {
-                        if(evt.key ==='Enter') nextStepCb({
-                          answerBtnNo,
-                          userTxtInput: evt.target.value
-                        });
+                        if(evt.key ==='Enter') {
+                          nextStepCb({answerBtnNo, userTxtInput: evt.target.value});
+                        }
                       }} />
                   </Bubble>;
 
             case 'button': // Button the user can click - it leads to the next step
               return <Bubble key={answerBtnNo} type={type}
-                onClick={() => nextStepCb({answerBtnNo})}>
+                onClick={() => {
+                  nextStepCb({answerBtnNo})
+                }}>
                   {text}
                 </Bubble>;
 
