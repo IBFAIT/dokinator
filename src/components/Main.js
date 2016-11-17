@@ -64,7 +64,7 @@ class Main extends React.Component {
   }
 
   nextStepCb({answerBtnNo, userTxtInput}) {
-    answerBtnNo = (typeof answerBtnNo === 'undefined') ? 0 : answerBtnNo; // most likeley to be removed, just as a quick ensurance for it to be 0
+    answerBtnNo = answerBtnNo || 0;
     const {stepId} = this.state;
     const answer = this.Conversation[stepId].user.answers[answerBtnNo];
     // setup history step Object
@@ -73,7 +73,7 @@ class Main extends React.Component {
     if(pastLogStep.type === 'input') { // on user Input set property, like name for ex.
       this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
     }
-    // Push the step Opbj to the log array with cloning to prevent references
+    // Push the step Object to the log array with cloning to prevent references
     this.pastLog.conversation.push(Object.assign({}, pastLogStep));
     this.setState({
       stepId: answer.stepId, showAnswer: false,
