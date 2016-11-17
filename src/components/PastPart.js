@@ -5,13 +5,8 @@ import React from 'react';
 // JSON data beeing imported
 import Defaults from './defaults.json';
 
-import BotPart          from './BotPart.js';
-import Bubble from './Bubble.js';
-
-const Styl = {
-  display:'flex',
-  flexDirection: 'column'
-}
+import BotPart from './BotPart.js';
+import Bubble  from './Bubble.js';
 
 const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
   const {stepId, answerBtnNo, type} = step;
@@ -21,7 +16,7 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
 
   const varData = {...userTxtInput, ...Defaults};
   return (
-    <div key={'conv_'+stepIndex} style={Styl}>
+    <div key={'conv_'+stepIndex} style={style()}>
       <BotPart botIdentity={Defaults.botIdentitys[conversationStep.bot.name]} type="past">
         {conversation[stepId].bot.texts.map((botText, botBubbleIndex) => {
           return (
@@ -32,12 +27,17 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
         })}
       </BotPart>
       <Bubble key={'user_'+stepIndex} type={(type !== 'forward') ? 'past' : 'invisible'}>
-        {userBubbleTxt}
+        {userBubbleText}
       </Bubble>
     </div>
   );
 }
-
 PastPart.displayName = 'PastPart';
+
+// Component styles
+const style = () => ({
+  display:'flex',
+  flexDirection: 'column'
+});
 
 export default PastPart;
