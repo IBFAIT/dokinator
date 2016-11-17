@@ -1,211 +1,142 @@
-// Styles
+'use strict';
+import React  from 'react';
+import Scroll from 'smoothscroll';
+// include normalize.css
 require('normalize.css/normalize.css');
-require('styles/Main.scss');
-
-import React    from 'react';
-import Scroll   from 'smoothscroll';
-
-// JSON data beeing imported
+require('../styles/main.scss');
+// JSON data with bot defaults etc
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
 
 // Components
-import BotPartComponent          from './BotPartComponent.js';
-import BotPartPastComponent      from './BotPartPastComponent.js';
-import ClientAnswerComponent     from './ClientAnswerComponent.js';
-import ClientAnswerPastComponent from './ClientAnswerPastComponent.js';
+import Bubble         from './Bubble.js';
+import BotPart        from './BotPart.js';
+import PastPart       from './PastPart.js';
+import UserAnswerPart from './UserAnswerPart.js';
 
 class Main extends React.Component {
-
   constructor() {
     super();
-    this.state = {
-      path: 'init',
-      templateVars: {
-        name:   null,
-        email:  null,
-        fieber: null,
-        persons: Defaults.persons
-      }
+    this.state  = {
+      stepId: 'init',
+      stepBotTexts: [Conversation['init'].bot.texts[0]],  // adding initial first bubble
+      showAnswer: false
     };
-    this.conversationLog = [];
-    this.Conversation    = Conversation;
-
-    // bind this to Callbacks
-    this.updatePathState = this.updatePathState.bind(this);
-    this.handleInputfieldEnter = this.handleInputfieldEnter.bind(this);
-    this.handleForwardTimeout = this.handleForwardTimeout.bind(this);
+    this.persons      = Defaults.persons;
+    this.pastLog      = { userTxtInput: {}, conversation: [] };
+    this.Conversation = Conversation;
+    this.nextStepCallback = this.nextStepCallback.bind(this);
   }
-
-
-  componentDidUpdate() {
-    const answerBottom = document.getElementsByClassName('conversation-part')[0].lastChild;
-    Scroll(answerBottom);
-
-  }
-
 
   componentDidMount() {
+    this.timedNextBotBubble();
   }
 
-  handleForwardTimeout({index, time = 2000}) {
-    // create propper path info for the log
-    const params = {index, path: this.Conversation[this.state.path].user.answers[0].path};
-    this.forwardTimeoutId = setTimeout(() => {
-      this.updatePathState(null, params)
-    }, time, this, params);
-  }
-
-
-  /**
-   * Callbacks for Client Bubbles
-   */
-  updatePathState(evt, {path, index = null}) {
-    // put the paths actual state to the log
-    const entry = {
-      stateAtPos: JSON.stringify(this.state),
-      index
-    };
-    this.conversationLog.push(entry);
-    // trigger next path
-    this.setState({path: path});
-  }
-
-  handleInputfieldEnter({evt, path, index, changeVal}) {
-    /* ToDo: chrome complains about this enter detection beeing deprecated */
-    if(evt.key === 'Enter') {
-
-      // make the state change dynamicly
-      let templateVars = {
-        name:   this.state.templateVars.name,
-        email:  this.state.templateVars.email,
-        fieber: this.state.templateVars.fieber,
-        persons: Defaults.persons
-      };
-      templateVars[changeVal] = evt.target.value;
-      this.conversationLog.push({
-        stateAtPos: JSON.stringify({path: this.state.path, templateVars: this.state.templateVars, usersInput:  evt.target.value}),
-        index
-      });
-      this.setState({path, templateVars});
+  componentDidUpdate() {
+    this.timedNextBotBubble();
+    // ensure scrolling to the bottom on update
+    const answerBottom = document.getElementById('scrollTarget').lastChild;
+    if(answerBottom) {
+      Scroll(answerBottom);
+    } else {
+      Scroll(document.getElementById('scrollTarget'));
     }
   }
 
+  timedNextBotBubble() {
+    const {stepId, stepBotTexts, showAnswer} = this.state;
+    const {bot} = this.Conversation[stepId];
+    if(stepBotTexts.length < bot.texts.length) {
+      setTimeout(() => {
+        this.setState({
+          stepBotTexts: [...stepBotTexts, bot.texts[stepBotTexts.length]],
+          showAnswer: false
+      })}, 1500, this);
+    } else if(!showAnswer) {
+      setTimeout(() => {
+        this.setState({showAnswer: true})
+      }, 1500, this);
+    }
+  }
+
+  nextStepCallback({answerBtnNo, userTxtInput}) {
+    answerBtnNo = answerBtnNo || 0;
+    const {stepId} = this.state;
+    const answer = this.Conversation[stepId].user.answers[answerBtnNo];
+    // setup history step Object
+    const pastLogStep = { stepId, answerBtnNo, userTxtInput,
+      type: answer.type, inputProperty: answer.inputProperty };
+    if(pastLogStep.type === 'input') { // on user Input set property, like name for ex.
+      this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
+    }
+    // Push the step Object to the log array with cloning to prevent references
+    this.pastLog.conversation.push(Object.assign({}, pastLogStep));
+    this.setState({
+      stepId: answer.stepId, showAnswer: false,
+      stepBotTexts: [this.Conversation[answer.stepId].bot.texts[0]]
+    });
+  }
+
   render() {
-    const {botHere} = this.state;
+    const {stepId, stepBotTexts, showAnswer} = this.state;
+    const {bot, user} = this.Conversation[stepId];
+    const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
     return (
-      <div className="Main">
-        <div className="conversation-bubbles">
-          { this.renderPastPart(this.conversationLog) }
-          <span  className="activePart">
-            { this.renderBotPart({bots: Conversation[this.state.path].bots, style: this.botPartStyle}) }
-          </span>
-          <div className="clientAnswerTarget"></div>
+      <div style={style()}>
+        <div style={styleBotAndPast()}>
+          {this.pastLog.conversation.map(
+            (conversationStep, stepIndex) => (
+              <PastPart
+                key={stepIndex} stepIndex={stepIndex} step={conversationStep}
+                conversation={this.Conversation}
+                userTxtInput={this.pastLog.userTxtInput}/>)
+            )}
+          <BotPart botIdentity={Defaults.botIdentitys[bot.name]} type="speaking">
+            { stepBotTexts.map( (botText, bubbleIndex) => (
+                <Bubble
+                  key={bubbleIndex}
+                  type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}
+                  answerPresent={showAnswer}>
+                  {eval('`' + botText + '`')}
+                </Bubble>
+              )) }
+          </BotPart>
         </div>
-        <div className="conversation-part">
-          <ClientAnswerComponent {...{
-            answers: Conversation[this.state.path].user.answers,
-            botHere,
-            callbacks: {
-              updatePathState:       this.updatePathState,
-              handleForwardTimeout:  this.handleForwardTimeout,
-              handleInputfieldEnter: this.handleInputfieldEnter
-            },
-            style: this.answerStyle
-          }} />
+        <div style={styleConversationPart()} id='scrollTarget'>
+          {(showAnswer)?<UserAnswerPart answers={user.answers} nextStepCallback={this.nextStepCallback} />:null}
         </div>
       </div>
     );
   }
-
-
-  /**
-   * Bot Bubble render
-   */
-  renderBotPart({bots, style, subClassnames = { BotPartComponent: 'botbubble-component'}}) {
-    // map bots - > there can be more than one bot part.
-    return bots.map(({id, texts}, key) => {
-
-      /* Handle random bot text */
-      texts = texts.map((text, textKey) => {
-        if(!Array.isArray(text)) { // if it isn't an array there is only one option
-          return text;
-        } else {  // arrays contain different options for randomness
-          // overwrite the Conversation thing with the actual so that
-          // the log will render the random choice displaying the past
-          this.Conversation[this.state.path].bots[key].texts[textKey] = text[Math.floor(Math.random()*text.length)];
-          return this.Conversation[this.state.path].bots[key].texts[textKey];
-        }
-      });
-      /* END Handle random bot text */
-
-      return (
-        <BotPartComponent key={key} {...{
-          texts,
-          index:        key,
-          className:    subClassnames.BotPartComponent,
-          botIdentity:  Defaults.botIdentitys[id],
-          templateVars: this.state.templateVars,
-          style
-        }} />
-      );
-    });
-  }
-
-  /**
-   * The past Conversation is beeing rendered with the this.conversationLog property
-   */
-  renderPastPart(
-    conversation,
-    className = 'conversation-part-past',
-    subClassNames = {
-      BotPartPastComponent: 'botpartpast-component',
-      ClientAnswerPastComponent: 'user-answers-past'
-    }
-  ) {
-    return conversation.map((step, stepKey) => {
-      const stateAtPos = JSON.parse(step.stateAtPos); // get the striggified state from the past
-      return (
-        <div {...{className}} key={'conv_'+stepKey} >
-          <BotPartPastComponent key={stepKey} {...{
-            path:         stateAtPos.path,
-            className:    subClassNames.BotPartPastComponent,
-            bots:         Conversation[stateAtPos.path].bots,
-            templateVars: stateAtPos.templateVars,
-            botIdentitys: Defaults.botIdentitys
-          }} />
-
-          <ClientAnswerPastComponent key={'client_'+stepKey} {...{
-            stepKey,
-            answer:    this.Conversation[stateAtPos.path].user.answers,
-            index: step.index,
-            stateAtPos,
-            className: subClassNames.ClientAnswerPastComponent
-          }} />
-        </div>
-      );
-    });
-  }
-
-  renderBotPartsPast({
-    bubbles,
-    templateVars,
-    subClassNames = {
-      BotPartPastComponent: 'botbubblepast-component'
-    }
-  }) {
-    return bubbles.map(({id, texts}, key) => {
-      return (
-        <BotPartPastComponent {...{
-          texts,
-          templateVars,
-          index:       key,
-          className:   subClassNames.BotPartPastComponent,
-          botIdentity: Defaults.botIdentitys[id]
-        }} />
-      );
-    });
-  }
 }
+
+// Component styles
+const style = () => ({
+  flex: '1 0 0',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  alignContent: 'stretch',
+  maxWidth: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignSelf: 'stretch',
+  flexBasis: 'auto'
+});
+
+const styleBotAndPast = () => ({
+  paddingBottom: '0.5rem',
+  marginBottom: '4rem',
+  width: '100%',
+  maxWidth: '100%'
+});
+
+const styleConversationPart = () => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  textAlign: 'center',
+  width: '100%',
+  maxWidth: '100%'
+});
 
 export default Main;

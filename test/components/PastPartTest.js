@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import BotChildBubbleReloadedComponent from 'components//BotChildBubbleReloadedComponent.js';
+import PastPart from 'components/PastPart.js';
 
-describe('BotChildBubbleReloadedComponent', () => {
+describe('PastPart', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(BotChildBubbleReloadedComponent);
+    component = createComponent(PastPart);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('botchildbubblereloaded-component');
+    expect(component.props.className).to.equal('past-part');
   });
 });

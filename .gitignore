@@ -29,3 +29,7 @@ node_modules
 # Bower
 bower_components/
 dist/
+test/components/BotSpeakingTest.js
+npm-debug.log.*
+package_copy.json
+dist

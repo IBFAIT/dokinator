@@ -1,28 +1,32 @@
 {
   "init": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
-        ["Hey du!", "Ciao!", "Hi..."],
-        "Ich heisse Fred und bin dein Chatbot.",
-        "Wie heisst du?"
+        "Guten Tag, ich bin Beat, Dein virtueller Berater.",
+        "Ich kann Dich zum Beispiel zu unseren Krankenversicherungen beraten und Du kannst bei mir direkt eine Krankenversicherung abschliessen.",
+        "Wie kann ich Dir heute helfen?"
       ]
     },
     "user": {
       "answers": [{
-        "type": "input",
-        "inputProperty": "name",
-        "placeholder": "Dein Name",
-        "stepId": "0"
+        "type": "button",
+        "text": "Ich möchte wissen, was eine Krankenversicherung kostet.",
+        "stepId": "Pfad1"
+      },
+      {
+        "type": "button",
+        "text": "Ich bin neu in der Schweiz und möchte wissen, wie das hier funktioniert mit den Krankenversicherungen.",
+        "stepId": "todo"
       }]
     },
     "title": "init"
   },
-  "0": {
+  "Pfad1" : {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
-        "Freut mich, ${varData.name}.",
+        "Freut mich, ${name}.",
         "Wie kann ich dir heute helfen?"
       ]
     },
@@ -46,7 +50,7 @@
   "1": {
     "bot": {
 
-      "name": "fred",
+      "id": "fred",
       "texts": [[
         "Ok, cool. Schau mal, Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca",
         "Kennst du Matt? Matt Schlicht hat eine wunderbare Zusammenfassung zu Chatbots auf Medium veröffentlicht: https://chatbotsmagazine.com/the-complete-beginner-s-guide-to-chatbots-8280b7b906ca"],
@@ -56,11 +60,11 @@
     "user": {
       "answers": [{
         "type": "button",
-        "text": "Ja, gerne!",
+        "text": "Button: Ja, gerne!",
         "stepId": "3"
       }, {
         "type": "button",
-        "text": "Nein danke. Zeig mir, was du sonst noch drauf hast.",
+        "text": "Button: Nein danke. Zeig mir, was du sonst noch drauf hast.",
         "stepId": "2"
       }]
     },
@@ -68,7 +72,7 @@
   },
   "2": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
         "Da gibt’s zum Beispiel ‘Dokinator’.",
         "Dokinator ist ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben und versicherungstechnische Fragen zu beantworten.",
@@ -90,7 +94,7 @@
   },
   "3": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
         "Cool, dass du dich für Chatbots interessierst. Hier ein paar interessante Fakten...",
         "… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
@@ -100,7 +104,7 @@
     "user": {
       "answers": [{
         "type": "input",
-        "inputProperty": "email",
+        "changeVal": "email",
         "value": "",
         "placeholder": "Deine Email-Adresse",
         "stepId": "8"
@@ -110,9 +114,9 @@
   },
   "4": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": [
-        "Ciao ${varData.name}!",
+        "Ciao ${name}!",
         "Ich bin der Dokinator - ein hochentwickelter Bot, der in der Lage ist, zuverlässige Handlungsempfehlungen an Versicherte mit Bagatell-Krankheiten abzugeben."
       ]
     },
@@ -131,7 +135,7 @@
   },
   "5": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": [
         "Es handelt sich hier um alle in der Schweiz wohnhaften Personen. Wir alle haben das Privileg, bei einer Krankenkasse versichert zu sein.",
         "Jetzt aber weiter…"
@@ -140,15 +144,14 @@
     "user": {
       "answers": [{
         "type": "forward",
-        "stepId": "6",
-        "time": 6000
+        "stepId": "6"
       }]
     },
     "title": "5"
   },
   "6": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
         "Alles klar. Stelle dir vor, dass du einen viralen Infekt hast. Das kennst du sicher: Du hast Gliederschmerzen, deine Nase läuft, du hast etwas Fieber und so weiter.",
         "Ok?",
@@ -167,9 +170,9 @@
   "docAfterfred": {
     "bot":
       {
-        "name": "doc",
+        "id": "doc",
         "texts": [
-          "Hi ${varData.name}, ich bin Dokinator.",
+          "Hi ${name}, ich bin Dokinator.",
           "Wie geht es dir heute?"
         ]
       },
@@ -187,7 +190,7 @@
   },
   "gliederschmerzen": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": [
         "Okay, verstehe. Das ist unangenehm.",
         "Wie lange bestehen die Schmerzen bereits?"
@@ -210,7 +213,7 @@
   },
   "hastDuFieber": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": [
         "Hast du Fieber?"
       ]
@@ -229,13 +232,13 @@
   },
   "wieHoch": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": ["Wie hoch ist das Fieber?"]
     },
     "user": {
       "answers": [{
         "type": "input",
-        "inputProperty": "fieber",
+        "changeVal": "fieber",
         "placeholder": "Fieber in °C",
         "stepId": "runningNose"
       }]
@@ -244,7 +247,7 @@
   },
   "runningNose": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": [
         "Läuft deine Nase?"
       ]
@@ -263,7 +266,7 @@
   },
   "viralInfect": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": ["Hmm. Das tönt nach einem viralen Infekt. Könnte dies zutreffen?"]
     },
     "user": {
@@ -280,7 +283,7 @@
   },
   "drink": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": ["Bei viralen Infekten empfiehlt es sich viel zu trinken."]
     },
     "user": {
@@ -294,7 +297,7 @@
   },
   "backIn4": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": ["Ich melde mich in 4h wieder bei dir. Ok?"]
     },
     "user": {
@@ -308,8 +311,8 @@
   },
   "besserung": {
     "bot": {
-      "name": "doc",
-      "texts": ["Ich wünsche dir gute Besserung, ${varData.name}!","Bis Bald!"]
+      "id": "doc",
+      "texts": ["Ich wünsche dir gute Besserung, ${name}!","Bis Bald!"]
     },
     "user": {
       "answers": [{
@@ -322,7 +325,7 @@
   },
   "outro": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
         "So, da bin ich wieder.",
         "Schön hast du Dokinator kennen gelernt.",
@@ -339,8 +342,8 @@
   },
   "8": {
     "bot": {
-      "name": "fred",
-      "texts": [["Lieben Dank, ${varData.name}.", "Cool!"]]
+      "id": "fred",
+      "texts": [["Lieben Dank, ${name}.", "Cool!"]]
     },
     "user": {
       "answers": [{
@@ -352,7 +355,7 @@
   },
   "end": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": ["Wir wollen jetzt wirklich nichts mehr sagen"]
     },
     "user": {
@@ -371,7 +374,7 @@
   },
   "end2": {
     "bot": {
-      "name": "doc",
+      "id": "doc",
       "texts": [
         "Ja, auch ich habe jetzt grad nichts mehr zu sagen.",
         "Wie besprochen schicke ich dir in 4 Stunden eine Mail.",
@@ -395,9 +398,9 @@
   },
   "sagsMirNochmal": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
-        "Sehr schön, ${varData.name}.",
+        "Sehr schön, ${name}.",
         "Es schmeichelt mir, das du dich so für mich interessierst.",
         "Wie kann ich dir nun weiter helfen?"
       ]
@@ -417,11 +420,11 @@
   },
   "7": {
     "bot": {
-      "name": "fred",
+      "id": "fred",
       "texts": [
         "Schau, das sind die Leute, die mich gebaut haben:",
-        "Flavio Trolese",
-        "Kaspar Vollenweider",
+        "${persons.flavio.name}: ${makerImages.flavio}",
+        "${persons.kaspar.name}: ${makerImages.kaspar}",
         "Du kannst sie über  kontaktieren.",
         "Bis bald!"
       ]
