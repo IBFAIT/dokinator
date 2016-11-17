@@ -5,26 +5,29 @@ import React from 'react';
 import Bubble from './Bubble.js';
 
 // Component styles
-const Styl = {
-  component: {
+const style = (type) => {
+  switch (type) {
+    case 'input':
+      return {
+        border: '0',
+        borderColor: 'transparent',
+        boxShadow: 0
+      }
+  }
+  return {
     display: 'inline-block',
     minWidth: '10%'
-  },
-  input: {
-    border: '0',
-    borderColor: 'transparent',
-    boxShadow: 0
   }
 }
 
 const UserAnswerPart = ({ answers, nextStepCb }) => {
   return (
-    <div style={Styl.component}>
+    <div style={style()}>
       {answers.map(({type, text, placeholder, time}, answerBtnNo) => {
           switch (type) {
             case 'input': // input field for users text input
               return <Bubble key={answerBtnNo} type={type}>
-                    <input style={Styl.input} type="text"
+                    <input style={style('input')} type="text"
                       placeholder={placeholder}
                       autoFocus={true}
                       onKeyPress={(evt) => {
