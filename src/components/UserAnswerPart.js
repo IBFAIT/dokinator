@@ -22,7 +22,7 @@ const UserAnswerPart = ({ answers, nextStepCb }) => {
     <div style={Styl.component}>
       {answers.map(({type, text, placeholder, time}, answerBtnNo) => {
           switch (type) {
-            case 'input':
+            case 'input': // input field for users text input
               return <Bubble key={answerBtnNo} type={type}>
                     <input style={Styl.input} type="text"
                       placeholder={placeholder}
@@ -35,18 +35,20 @@ const UserAnswerPart = ({ answers, nextStepCb }) => {
                       }} />
                   </Bubble>;
 
-            case 'button':
+            case 'button': // Button the user can click - it leads to the next step
               return <Bubble key={answerBtnNo} type={type}
                 onClick={() => nextStepCb({answerBtnNo})}>
                   {text}
                 </Bubble>;
 
-            case 'disabled':
+            case 'disabled': // button with no click handler that is just for presentation
               return <Bubble key={answerBtnNo}  type={type}> { text } </Bubble>;
 
-            case 'forward':
+            case 'forward': // Timout either from json or 2s -> leads to next step
               const timeoutTime = (time) ? time : 2000;
-              setTimeout(()=>{nextStepCb({answerBtnNo})}, timeoutTime, answerBtnNo);
+              setTimeout(() => {
+                nextStepCb({answerBtnNo})
+              }, timeoutTime, answerBtnNo);
               break;
           }
         })}
