@@ -44,22 +44,19 @@ class Main extends React.Component {
   }
 
   timedNextBotBubble() {
-    const {stepId, stepBotTexts, answer} = this.state;
+    const {stepId, stepBotTexts, showAnswer} = this.state;
     const {bot} = this.Conversation[stepId];
     if(stepBotTexts.length < bot.texts.length) {
-      this.updateTmId = setTimeout(() => {this.showNextBotBubble({stepBotTexts, bot})}, 1500, this);
-    } else if(!answer) {
-      this.updateTmId = setTimeout(() => {this.showUserAnswerBtn()}, 1500, this);
+      setTimeout(() => {
+        this.setState({
+          stepBotTexts: [...stepBotTexts, bot.texts[stepBotTexts.length]],
+          showAnswer: false
+      })}, 1500, this);
+    } else if(!showAnswer) {
+      setTimeout(() => {
+        this.setState({showAnswer: true})
+      }, 1500, this);
     }
-  }
-  showNextBotBubble({stepBotTexts, bot}) {
-    this.setState({
-      stepBotTexts: [...stepBotTexts, bot.texts[stepBotTexts.length]],
-      showAnswer: false
-    })
-  }
-  showUserAnswerBtn() {
-    this.setState({showAnswer: true});
   }
 
   nextStepCallback({answerBtnNo, userTxtInput}) {
