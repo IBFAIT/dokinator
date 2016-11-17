@@ -20,7 +20,7 @@ class Main extends React.Component {
     this.state  = {
       stepId: 'init',
       stepBotTexts: [Conversation['init'].bot.texts[0]],
-      answer: false
+      showAnswer: false
     };
     this.persons      = Defaults.persons;
     this.pastLog      = { userTxtInput: {}, conversation: [] };
@@ -56,11 +56,11 @@ class Main extends React.Component {
   showNextBotBubble({stepBotTexts, bot}) {
     this.setState({
       stepBotTexts: [...stepBotTexts, bot.texts[stepBotTexts.length]],
-      answer: false
+      showAnswer: false
     })
   }
   showUserAnswerBtn() {
-    this.setState({answer: true});
+    this.setState({showAnswer: true});
   }
 
   nextStepCb({answerBtnNo, userTxtInput}) {
@@ -76,13 +76,13 @@ class Main extends React.Component {
     // Push the step Opbj to the log array with cloning to prevent references
     this.pastLog.conversation.push(Object.assign({}, pastLogStep));
     this.setState({
-      stepId: answer.stepId, answer: false,
+      stepId: answer.stepId, showAnswer: false,
       stepBotTexts: [this.Conversation[answer.stepId].bot.texts[0]]
     });
   }
 
   render() {
-    const {stepId, stepBotTexts, answer} = this.state;
+    const {stepId, stepBotTexts, showAnswer} = this.state;
     const {bot, user} = this.Conversation[stepId];
     const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
     return (
@@ -100,14 +100,14 @@ class Main extends React.Component {
                 <Bubble
                   key={bubbleIndex}
                   type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}
-                  answerPresent={answer}>
+                  answerPresent={showAnswer}>
                   {eval('`' + botText + '`')}
                 </Bubble>
               )) }
           </BotPart>
         </div>
-        <div style={style('conversationPart')} id='scrollTarget'>
-          {(answer===true)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb} />:null}
+        <div style={styleConversationPart()} id='scrollTarget'>
+          {(showAnswer)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb} />:null}
         </div>
       </div>
     );
