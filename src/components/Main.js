@@ -3,6 +3,7 @@ import React  from 'react';
 import Scroll from 'smoothscroll';
 // include normalize.css
 require('normalize.css/normalize.css');
+require('../styles/main.scss');
 // JSON data with bot defaults etc
 import Defaults     from './defaults.json';
 import Conversation from './conversation.json';
