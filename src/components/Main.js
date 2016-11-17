@@ -19,7 +19,7 @@ class Main extends React.Component {
     super();
     this.state  = {
       stepId: 'init',
-      stepBotTexts: [Conversation['init'].bot.texts[0]],
+      stepBotTexts: [Conversation['init'].bot.texts[0]],  // adding initial first bubble
       showAnswer: false
     };
     this.persons      = Defaults.persons;
