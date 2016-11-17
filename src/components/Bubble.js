@@ -51,36 +51,41 @@ const style = (type) => {
 
   switch (type) {
     case 'input':
-      return {...basic, ...{
+      return {
+        ...basic,
         display: 'inline-block',
         alignSelf: 'center'
-      }};
+      };
     case 'disabled':
-      return {...basic, ...{
+      return {
+        ...basic,
         display: 'inline-block',
         backgroundColor: 'rgba(193, 193, 193, 0.5)'
-      }};
+      };
     case 'button':
-      return {...basic, ...{
+      return {
+        ...basic,
         display: 'inline-block',
         backgroundColor: '#008ABC',
         color: '#fff',
         alignSelf: 'center'
-      }};
+      };
     case 'past':
-      return {...basic, ...{
+      return {
+        ...basic,
         marginTop: '1rem',
         alignSelf: 'flex-end',
         backgroundColor: '#008ABC',
         color: '#fff'
-      }};
+      };
     case 'speaking':
-      return {...basic, ...{
+      return {
+        ...basic,
         overflow: 'hidden',
         animationName: 'bubbleAppearOuter',
         animationDelay: 0,
         animationDuration: '1500ms'
-      }};
+      };
     case 'invisible':
       return {display: 'none'};
   }
