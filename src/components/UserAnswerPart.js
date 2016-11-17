@@ -43,7 +43,21 @@ const UserAnswerPart = ({ answers, nextStepCallback }) => {
         })}
     </div>);
 }
-
 UserAnswerPart.displayName = 'UserAnswerPart';
+
+// Component styles
+const style = (type) => {
+  if(type === 'input' ) {
+    return {
+      border: '0',
+      borderColor: 'transparent',
+      boxShadow: 0
+    }
+  }
+  return {
+    display: 'inline-block',
+    minWidth: '10%'
+  }
+}
 
 export default UserAnswerPart;
