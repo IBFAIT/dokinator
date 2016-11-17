@@ -25,7 +25,7 @@ class Main extends React.Component {
     this.persons      = Defaults.persons;
     this.pastLog      = { userTxtInput: {}, conversation: [] };
     this.Conversation = Conversation;
-    this.nextStepCb = this.nextStepCb.bind(this);
+    this.nextStepCallback = this.nextStepCallback.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class Main extends React.Component {
     this.setState({showAnswer: true});
   }
 
-  nextStepCb({answerBtnNo, userTxtInput}) {
+  nextStepCallback({answerBtnNo, userTxtInput}) {
     answerBtnNo = answerBtnNo || 0;
     const {stepId} = this.state;
     const answer = this.Conversation[stepId].user.answers[answerBtnNo];
@@ -106,7 +106,7 @@ class Main extends React.Component {
           </BotPart>
         </div>
         <div style={styleConversationPart()} id='scrollTarget'>
-          {(showAnswer)?<UserAnswerPart answers={user.answers} nextStepCb={this.nextStepCb} />:null}
+          {(showAnswer)?<UserAnswerPart answers={user.answers} nextStepCallback={this.nextStepCallback} />:null}
         </div>
       </div>
     );
