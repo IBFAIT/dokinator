@@ -26,7 +26,6 @@ class Main extends React.Component {
     this.pastLog      = { userTxtInput: {}, conversation: [] };
     this.Conversation = Conversation;
     this.nextStepCb = this.nextStepCb.bind(this);
-    this.updateTmId = null;
   }
 
   componentDidMount() {

@@ -10,16 +10,6 @@ const Bubble = ({children, onClick, type, answerPresent}) => {
 }
 Bubble.displayName = 'Bubble';
 
-const displayDots = ({type = null, children}) => {
-  if(type === null) {
-    setTimeout(() => {displayDots({type: 1, children})}, 100, displayDots, children);
-    return '...';
-  }
-  if(type === 1) {
-    return children;
-  }
-}
-
 const innerStyle = ({type, answerPresent}) => {
   if(type==='speaking' && !answerPresent) {
     return {
@@ -36,6 +26,7 @@ const innerStyle = ({type, answerPresent}) => {
     opacity: 1
   }
 }
+
 const style = (type) => {
   const basic = {
         alignSelf: 'flex-start',
