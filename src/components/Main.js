@@ -87,7 +87,7 @@ class Main extends React.Component {
     const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
     return (
       <div style={style()}>
-        <div style={style('botAndPast')}>
+        <div style={styleBotAndPast()}>
           {this.pastLog.conversation.map(
             (conversationStep, stepIndex) => (
               <PastPart
@@ -115,35 +115,32 @@ class Main extends React.Component {
 }
 
 // Component styles
-const style = (part = null) => {
-  switch (part) {
-    case 'botAndPast':
-      return {
-        paddingBottom: '0.5rem',
-        marginBottom: '4rem',
-        width: '100%',
-        maxWidth: '100%'
-      }
-    case 'conversationPart':
-      return {
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          textAlign: 'center',
-          width: '100%',
-          maxWidth: '100%'
-      }
-  }
-  return {
-      flex: '1 0 0',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      alignContent: 'stretch',
-      maxWidth: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignSelf: 'stretch',
-      flexBasis: 'auto'
-  }
-}
+const style = () => ({
+  flex: '1 0 0',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  alignContent: 'stretch',
+  maxWidth: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignSelf: 'stretch',
+  flexBasis: 'auto'
+});
+
+const styleBotAndPast = () => ({
+  paddingBottom: '0.5rem',
+  marginBottom: '4rem',
+  width: '100%',
+  maxWidth: '100%'
+});
+
+const styleConversationPart = () => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  textAlign: 'center',
+  width: '100%',
+  maxWidth: '100%'
+});
+
 export default Main;
