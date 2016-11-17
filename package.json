@@ -24,7 +24,6 @@
   "keywords": [],
   "author": "Casaper",
   "devDependencies": {
-    "@kadira/storybook": "^2.21.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.0.0",
@@ -63,15 +62,14 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.0",
-    "webpack-dev-server": "^1.12.0"
+    "webpack-dev-server": "^1.12.0",
+    "@kadira/storybook": "^2.21.0"
   },
   "dependencies": {
     "core-js": "^2.0.0",
     "glob": "^7.1.1",
     "normalize.css": "^4.0.0",
-    "smoothscroll": "^0.2.2"
-  },
-  "peerDependencies": {
+    "smoothscroll": "^0.2.2",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-hot-loader": "1.2.9",
