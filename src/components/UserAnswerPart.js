@@ -11,7 +11,7 @@ const UserAnswerPart = ({ answers, nextStepCallback }) => {
           switch (type) {
             case 'input': // input field for users text input
               return <Bubble key={answerBtnNo} type={type}>
-                    <input style={style('input')} type="text"
+                    <input style={styleInput()} type="text"
                       placeholder={placeholder}
                       autoFocus={true}
                       onKeyPress={(evt) => {
@@ -46,18 +46,22 @@ const UserAnswerPart = ({ answers, nextStepCallback }) => {
 UserAnswerPart.displayName = 'UserAnswerPart';
 
 // Component styles
-const style = (type) => {
-  if(type === 'input' ) {
-    return {
-      border: '0',
-      borderColor: 'transparent',
-      boxShadow: 0
-    }
-  }
-  return {
-    display: 'inline-block',
-    minWidth: '10%'
-  }
-}
+
+// components main style
+const style = () => ({
+  margin: 0,
+  padding: 0,
+  minWidth: '10%',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center'
+});
+
+// User input style
+const styleInput = () => ({
+  border: '0',
+  borderColor: 'transparent',
+  boxShadow: 0
+});
 
 export default UserAnswerPart;

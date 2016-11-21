@@ -131,12 +131,8 @@ const styleBotAndPast = () => ({
 });
 
 const styleConversationPart = () => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
   textAlign: 'center',
-  width: '100%',
-  maxWidth: '100%'
+  width: '100%'
 });
 
 export default Main;
