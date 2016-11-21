@@ -3,6 +3,7 @@
     "bot": {
       "name": "beat",
       "texts": [
+        "Test Tpl <%= beat.txtName %>",
         "Guten Tag, ich bin Beat, Dein virtueller Berater.",
         "Ich kann Dich zum Beispiel zu unseren Krankenversicherungen beraten und Du kannst bei mir direkt eine Krankenversicherung abschliessen.",
         "Wie kann ich Dir heute helfen?"
@@ -318,7 +319,7 @@
       "name": "beat",
       "texts": [
         "Vielen Dank.",
-        "Ein Kollege von mir wird sich innerhalb der nächsten 2 Minuten bei Dir per telefon melden."
+        "Ein Kollege von mir wird sich innerhalb der nächsten 2 Minuten bei Dir per telefon melden. Die Nummer ist <%= userTxtInput.telNummer %>."
       ]
     },
     "user": {

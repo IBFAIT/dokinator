@@ -14,6 +14,9 @@ import BotPart        from './BotPart.js';
 import PastPart       from './PastPart.js';
 import UserAnswerPart from './UserAnswerPart.js';
 
+// Templating Utility
+import templateing from '../actions/templating.js';
+
 class Main extends React.Component {
   constructor() {
     super();
@@ -69,6 +72,9 @@ class Main extends React.Component {
     if(pastLogStep.type === 'input') { // on user Input set property, like name for ex.
       this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
     }
+    if(answer.type === 'button' && answer.input) {
+      this.pastLog.userTxtInput[answer.input.property] = answer.input.value;
+    }
     // Push the step Object to the log array with cloning to prevent references
     this.pastLog.conversation.push(Object.assign({}, pastLogStep));
     this.setState({
@@ -80,7 +86,6 @@ class Main extends React.Component {
   render() {
     const {stepId, stepBotTexts, showAnswer} = this.state;
     const {bot, user} = this.Conversation[stepId];
-    const varData = {...this.pastLog.userTxtInput, ...Defaults}; // For the templates in bot texts
     return (
       <div style={style()}>
         <div style={styleBotAndPast()}>
@@ -97,7 +102,7 @@ class Main extends React.Component {
                   key={bubbleIndex}
                   type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}
                   answerPresent={showAnswer}>
-                  {eval('`' + botText + '`')}
+                  {templateing({template: botText, vars: {...this.pastLog.userTxtInput, ...Defaults.botIdentitys}})}
                 </Bubble>
               )) }
           </BotPart>

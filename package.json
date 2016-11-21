@@ -67,6 +67,7 @@
   "dependencies": {
     "core-js": "^2.0.0",
     "glob": "^7.1.1",
+    "lodash": "^4.17.2",
     "normalize.css": "^4.0.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
