@@ -41,21 +41,37 @@
         {
           "type": "button",
           "text": "Mich",
+          "input": {
+            "property": "insurance",
+            "value": "me"
+          },
           "stepId": "Pfad_1.2"
         },
         {
           "type": "button",
           "text": "Mich und meinen Partner",
+          "input": {
+            "property": "insurance",
+            "value": "meAndPartner"
+          },
           "stepId": "Noch_nicht_abgebildet"
         },
         {
           "type": "button",
           "text": "Meine Familie",
+          "input": {
+            "property": "insurance",
+            "value": "myFamily"
+          },
           "stepId": "Noch_nicht_abgebildet"
         },
         {
           "type": "button",
           "text": "Mein ungeborenes Kind",
+          "input": {
+            "property": "insurance",
+            "value": "myUnborn"
+          },
           "stepId": "Noch_nicht_abgebildet"
         }
       ]
@@ -91,14 +107,26 @@
         {
           "type": "button",
           "text": "33",
-          "stepId": "Pfad 1.4"
+          "input": {
+            "property": "age",
+            "value": 33
+          },
+          "stepId": "Pfad_1.4"
         }, {
           "type": "button",
           "text": "16",
+          "input": {
+            "property": "age",
+            "value": 16
+          },
           "stepId": "Noch_nicht_abgebildet"
         }, {
           "type": "button",
           "text": "115",
+          "input": {
+            "property": "age",
+            "value": 115
+          },
           "stepId": "congrats_grandma"
         }
       ]
@@ -116,16 +144,28 @@
         {
           "type": "button",
           "text": "Standard",
+          "input": {
+            "property": "insuranceType",
+            "value": "standard"
+          },
           "stepId": "Pfad_1.5"
         },
         {
           "type": "button",
           "text": "Hausarzt/Gruppenpraxis (HMO)",
+          "input": {
+            "property": "insuranceType",
+            "value": "HMO"
+          },
           "stepId": "Pfad_1.5"
         },
         {
           "type": "button",
           "text": "Telemedizin",
+          "input": {
+            "property": "insuranceType",
+            "value": "telMed"
+          },
           "stepId": "Pfad_1.5"
         },
         {
@@ -148,31 +188,55 @@
         {
           "type": "button",
           "text": "300",
+          "input": {
+            "property": "franchise",
+            "value": 300
+          },
           "stepId": "Pfad_1.6"
         },
         {
           "type": "button",
           "text": "500",
+          "input": {
+            "property": "franchise",
+            "value": 500
+          },
           "stepId": "Pfad_1.6"
         },
         {
           "type": "button",
           "text": "1000",
+          "input": {
+            "property": "franchise",
+            "value": 1000
+          },
           "stepId": "Pfad_1.6"
         },
         {
           "type": "button",
           "text": "1500",
+          "input": {
+            "property": "franchise",
+            "value": 1500
+          },
           "stepId": "Pfad_1.6"
         },
         {
           "type": "button",
           "text": "2000",
+          "input": {
+            "property": "franchise",
+            "value": 2000
+          },
           "stepId": "Pfad_1.6"
         },
         {
           "type": "button",
           "text": "2500",
+          "input": {
+            "property": "franchise",
+            "value": 2500
+          },
           "stepId": "Pfad_1.6"
         },
         {
@@ -195,11 +259,19 @@
         {
           "type": "button",
           "text": "Nein",
-          "stepId": "Pfad_1.7"
+          "input": {
+            "property": "accidentCoverage",
+            "value": true
+          },
+          "stepId": "Pfad_1.8"
         },
         {
           "type": "button",
           "text": "Ja",
+          "input": {
+            "property": "accidentCoverage",
+            "value": false
+          },
           "stepId": "Pfad_1.8"
         },
         {
