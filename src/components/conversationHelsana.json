@@ -1,0 +1,349 @@
+{
+  "init": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Guten Tag, ich bin Beat, Dein virtueller Berater.",
+        "Ich kann Dich zum Beispiel zu unseren Krankenversicherungen beraten und Du kannst bei mir direkt eine Krankenversicherung abschliessen."
+        "Wie kann ich Dir heute helfen?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Ich möchte wissen, was eine Krankenversicherung kostet.",
+          "stepId": "Pfad_1"
+        },
+        {
+          "type": "button",
+          "text": "Ich bin neu in der Schweiz und möchte wissen, wie das hier funktioniert mit den Krankenversicherungen.",
+          "stepId": "Noch_nicht_abgebildet"
+        },
+        {
+          "type": "button",
+          "text": "Ich habe eine andere Frage.",
+          "stepId": "Pfad_3"
+        }
+      ]
+    }
+  },
+  "Pfad_1": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Wen möchtest Du versichern?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Mich",
+          "stepId": "Pfad_1.2"
+        },
+        {
+          "type": "button",
+          "text": "Mich und meinen Partner",
+          "stepId": "Noch_nicht_abgebildet"
+        },
+        {
+          "type": "button",
+          "text": "Meine Familie",
+          "stepId": "Noch_nicht_abgebildet"
+        },
+        {
+          "type": "button",
+          "text": "Mein ungeborenes Kind",
+          "stepId": "Noch_nicht_abgebildet"
+        }
+      ]
+    }
+  },
+  "Pfad_1.2": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Wo wohnst Du? (PLZ)"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "input",
+          "inputProperty": "PLZ",
+          "placeholder": "Postleitzahl",
+          "stepId": "Pfad_1.3"
+        }
+      ]
+    }
+  },
+  "Pfad_1.3": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Wie alt bist Du?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "33",
+          "stepId": "Pfad 1.4"
+        }, {
+          "type": "button",
+          "text": "16",
+          "stepId": "Noch_nicht_abgebildet"
+        }, {
+          "type": "button",
+          "text": "115",
+          "stepId": "congrats_grandma"
+        }
+      ]
+    }
+  },
+  "Pfad_1.4": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Möchtest Du die Standard-Grundversicherung oder ein alternatives Modell wie Hausarzt/Gruppenpraxis oder Telemedizin?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Standard",
+          "stepId": "Pfad_1.5"
+        },
+        {
+          "type": "button",
+          "text": "Hausarzt/Gruppenpraxis (HMO)",
+          "stepId": "Pfad_1.5"
+        },
+        {
+          "type": "button",
+          "text": "Telemedizin",
+          "stepId": "Pfad_1.5"
+        },
+        {
+          "type": "button",
+          "text": "Weiss nicht. Was ist der Unterschied?",
+          "stepId": "Noch_nicht_abgebildet"
+        }
+      ]
+    }
+  },
+  "Pfad_1.5": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Welche Franchise möchtest Du?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "300",
+          "stepId": "Pfad_1.6"
+        },
+        {
+          "type": "button",
+          "text": "500",
+          "stepId": "Pfad_1.6"
+        },
+        {
+          "type": "button",
+          "text": "1000",
+          "stepId": "Pfad_1.6"
+        },
+        {
+          "type": "button",
+          "text": "1500",
+          "stepId": "Pfad_1.6"
+        },
+        {
+          "type": "button",
+          "text": "2000",
+          "stepId": "Pfad_1.6"
+        },
+        {
+          "type": "button",
+          "text": "2500",
+          "stepId": "Pfad_1.6"
+        },
+        {
+          "type": "button",
+          "text": "Weiss nicht. Was ist der Unterschied?",
+          "stepId": "Noch_nicht_abgebildet"
+        }
+      ]
+    }
+  },
+  "Pfad_1.7": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Benötigst Du eine Unfallversicherung?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Nein",
+          "stepId": "Pfad_1.7"
+        },
+        {
+          "type": "button",
+          "text": "Ja",
+          "stepId": "Pfad_1.8"
+        },
+        {
+          "type": "button",
+          "text": "Weiss nicht. Was ist der Unterschied?",
+          "stepId": "Noch_nicht_abgebildet"
+        }
+      ]
+    }
+  },
+  "Pfad_1.8": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Die zur Dir passende Grundversicherung ist BeneFit PLUS Telemedizin.",
+        "Die monatliche Prämie beträgt CHF 276.50 monatlich bei einer Franchise von CHF 2’500 und mit Unfalldeckung.",
+        "Möchtest Du Deine Eingaben ändern und vergleichen oder möchtest Du mehr Informationen zu dieser Versicherung und zu Optionen für Zusatzversicherungen?"
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Eingaben ändern und vergleichen",
+          "stepId": "Pfad_1.4"
+        },
+        {
+          "type": "button",
+          "text": "Mehr Informationen",
+          "stepId": "Noch_nicht_abgebildet"
+        },
+        {
+          "type": "button",
+          "text": "Diese Versicherung abschliessen",
+          "stepId": "Noch_nicht_abgebildet"
+        },
+        {
+          "type": "button",
+          "text": "Ich habe eine andere Frage",
+          "stepId": "Pfad_3"
+        }
+      ]
+    }
+  },
+  "congrats_grandma": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Herzlichen Glückwunsch, Du bist der älteste Mensch der Schweiz."
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "forward",
+          "stepId": "Pfad_3",
+          "time": 2500
+        }
+      ]
+    }
+  },
+  "Pfad_3": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Dann würde Dich gerne mit einem unserer Berater aus Fleisch und Blut verbinden.",
+        "Ich kann Dich direkt hier im Chat verbinden oder Dich anrufen lassen."
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "Per Chat verbinden",
+          "stepId": "Pfad_3.1"
+        },
+        {
+          "type": "button",
+          "text": "Anrufen",
+          "stepId": "Pfad_3.2"
+        }
+      ]
+    }
+  },
+  "Pfad_3.1": {
+    "bot": {
+      "name": "beat",
+      "texts": ["Noch nicht abgebildet"]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "an den Anfang des Chats zurueck",
+          "stepId": "init"
+        }
+      ]
+    }
+  },
+  "Pfad_3.2": {
+    "bot": {
+      "name": "beat",
+      "texts": ["Wie ist Deine Telefonnummer?"]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "input",
+          "inputProperty": "telNummer",
+          "stepId": "Pfad_3.21"
+        }
+      ]
+    }
+  },
+  "Pfad_3.21": {
+    "bot": {
+      "name": "beat",
+      "texts": [
+        "Vielen Dank.",
+        "Ein Kollege von mir wird sich innerhalb der nächsten 2 Minuten bei Dir per telefon melden."
+      ]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "forward",
+          "stepId": "Noch_nicht_abgebildet",
+          "time": 1500
+        }
+      ]
+    }
+  },
+  "Noch_nicht_abgebildet": {
+    "bot": {
+      "name": "beat",
+      "texts": ["Noch nicht abgebildeter pfad"]
+    },
+    "user": {
+      "answers": [
+        {
+          "type": "button",
+          "text": "an den Anfang des Chats zurueck",
+          "stepId": "init"
+        }
+      ]
+    }
+  }
+}

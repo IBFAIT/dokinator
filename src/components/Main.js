@@ -6,7 +6,7 @@ require('normalize.css/normalize.css');
 require('../styles/main.scss');
 // JSON data with bot defaults etc
 import Defaults     from './defaults.json';
-import Conversation from './conversation.json';
+import Conversation from './conversationHelsana.json';
 
 // Components
 import Bubble         from './Bubble.js';

@@ -15,6 +15,14 @@
         "alt": "Dokinator's avatar",
         "title": "Dokinator"
       }
+    },
+    "beat": {
+      "name": "beat",
+      "txtName": "Beat",
+      "avatar": {
+        "alt": "Beat's Avatar",
+        "title": "Beat"
+      }
     }
   },
   "user": {
