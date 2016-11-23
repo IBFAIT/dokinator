@@ -33,3 +33,5 @@ test/components/BotSpeakingTest.js
 npm-debug.log.*
 package_copy.json
 dist
+cfg/dev.js
+src/stories
