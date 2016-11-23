@@ -41,7 +41,7 @@ class Main extends React.Component {
     const answerBottom = document.getElementById('scrollTarget').lastChild;
     if(answerBottom) {
       Scroll(answerBottom);
-    } else {
+    } else { // if there is no lastChild, scroll to the target itself
       Scroll(document.getElementById('scrollTarget'));
     }
   }
