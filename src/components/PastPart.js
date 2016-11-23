@@ -11,11 +11,11 @@ import Bubble  from './Bubble.js';
 // Templating Utility
 import templateing from '../actions/templating.js';
 
-const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
+const PastPart = ({step, stepIndex, conversation, userInputValues}) => {
   const {stepId, answerBtnNo, type} = step;
   const conversationStep = conversation[stepId];
   // Getting the text from the right source - desicion by type
-  const userBubbleText = (type === 'input') ? userTxtInput[step.inputProperty] : conversationStep.user.answers[answerBtnNo].text;
+  const userBubbleText = (type === 'input') ? userInputValues[step.inputProperty] : conversationStep.user.answers[answerBtnNo].text;
 
   return (
     <div key={'conv_'+stepIndex} style={style()}>
@@ -23,7 +23,7 @@ const PastPart = ({step, stepIndex, conversation, userTxtInput}) => {
         {conversation[stepId].bot.texts.map((botText, botBubbleIndex) => {
           return (
             <Bubble key={botBubbleIndex}>
-              {templateing({template: botText, vars: {...userTxtInput, ...Defaults.botIdentitys}})}
+              {templateing({template: botText, vars: {...userInputValues, ...Defaults.botIdentitys}})}
             </Bubble>
           );
         })}

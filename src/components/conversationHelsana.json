@@ -391,7 +391,7 @@
       "name": "beat",
       "texts": [
         "Vielen Dank.",
-        "Ein Kollege von mir wird sich innerhalb der nächsten 2 Minuten bei Dir per telefon melden. Die Nummer ist <%= userTxtInput.telNummer %>."
+        "Ein Kollege von mir wird sich innerhalb der nächsten 2 Minuten bei Dir per telefon melden. Die Nummer ist <%= userInputValues.telNummer %>."
       ]
     },
     "user": {

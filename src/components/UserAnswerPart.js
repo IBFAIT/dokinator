@@ -16,7 +16,7 @@ const UserAnswerPart = ({ answers, nextStepCallback }) => {
                       autoFocus={true}
                       onKeyPress={(evt) => {
                         if(evt.key ==='Enter') {
-                          nextStepCallback({answerBtnNo, userTxtInput: evt.target.value});
+                          nextStepCallback({answerBtnNo, userInputValues: evt.target.value});
                         }
                       }} />
                   </Bubble>;

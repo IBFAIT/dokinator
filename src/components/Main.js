@@ -26,7 +26,7 @@ class Main extends React.Component {
       showAnswer: false
     };
     this.persons      = Defaults.persons;
-    this.pastLog      = { userTxtInput: {}, conversation: [] };
+    this.pastLog      = { userInputValues: {}, conversation: [] };
     this.Conversation = Conversation;
     this.nextStepCallback = this.nextStepCallback.bind(this);
   }
@@ -62,18 +62,19 @@ class Main extends React.Component {
     }
   }
 
-  nextStepCallback({answerBtnNo, userTxtInput}) {
+  nextStepCallback({answerBtnNo, userInputValues}) {
     answerBtnNo = answerBtnNo || 0;
     const {stepId} = this.state;
     const answer = this.Conversation[stepId].user.answers[answerBtnNo];
     // setup history step Object
-    const pastLogStep = { stepId, answerBtnNo, userTxtInput,
+    const pastLogStep = { stepId, answerBtnNo, userInputValues,
       type: answer.type, inputProperty: answer.inputProperty };
     if(pastLogStep.type === 'input') { // on user Input set property, like name for ex.
-      this.pastLog.userTxtInput[answer.inputProperty] = userTxtInput;
+      this.pastLog.userInputValues[answer.inputProperty] = userInputValues;
     }
+    // set button collected propertys to user input thingie in log
     if(answer.type === 'button' && answer.input) {
-      this.pastLog.userTxtInput[answer.input.property] = answer.input.value;
+      this.pastLog.userInputValues[answer.input.property] = answer.input.value;
     }
     // Push the step Object to the log array with cloning to prevent references
     this.pastLog.conversation.push(Object.assign({}, pastLogStep));
@@ -94,7 +95,7 @@ class Main extends React.Component {
               <PastPart
                 key={stepIndex} stepIndex={stepIndex} step={conversationStep}
                 conversation={this.Conversation}
-                userTxtInput={this.pastLog.userTxtInput}/>)
+                userInputValues={this.pastLog.userInputValues}/>)
             )}
           <BotPart botIdentity={Defaults.botIdentitys[bot.name]} type="speaking">
             { stepBotTexts.map( (botText, bubbleIndex) => (
@@ -102,7 +103,7 @@ class Main extends React.Component {
                   key={bubbleIndex}
                   type={(bubbleIndex === stepBotTexts.length-1) ? 'speaking': 'default'}
                   answerPresent={showAnswer}>
-                  {templateing({template: botText, vars: {...this.pastLog.userTxtInput, ...Defaults.botIdentitys}})}
+                  {templateing({template: botText, vars: {...this.pastLog.userInputValues, ...Defaults.botIdentitys}})}
                 </Bubble>
               )) }
           </BotPart>
